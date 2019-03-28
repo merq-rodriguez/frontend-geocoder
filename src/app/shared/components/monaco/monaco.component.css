@@ -1,0 +1,15 @@
+.image {
+  width: 80%;
+  height: 200px;
+}
+
+monaco-editor {
+  height: 300px;
+  display: block;
+}
+
+.monaco{
+  -webkit-box-shadow: 2px 0px 12px 1px rgba(0,0,0,0.75);
+-moz-box-shadow: 2px 0px 12px 1px rgba(0,0,0,0.75);
+box-shadow: 2px 0px 12px 1px rgba(0,0,0,0.75);
+}

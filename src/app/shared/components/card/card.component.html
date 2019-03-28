@@ -1,0 +1,32 @@
+<mat-card class="card-test">
+  <mat-card-title>
+    <div class="row">
+      <div class="col-10">
+          <p class="title-card">{{ item.name }}</p>
+      </div>
+      <div class="col-1">
+          <mat-checkbox [hidden]="type !== 'test'"></mat-checkbox>
+
+      </div>
+    </div>
+
+  </mat-card-title>
+  <mat-card-subtitle>
+    {{ item.subtitle }}
+  </mat-card-subtitle>
+  <mat-card-content>
+    <img class="img-card" mat-card-lg-image [src]="item.image" />
+    <div class="description-card">
+      <p>
+        {{ item.description }}
+      </p>
+    </div>
+    <hr [hidden]="type !== 'test'">
+    <div class="card-footer" [hidden]="type !== 'test'">
+      Puntuacion: <b>10.000</b>
+      
+    </div>
+  </mat-card-content>
+
+  
+</mat-card>
