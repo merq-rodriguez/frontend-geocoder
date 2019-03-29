@@ -1,0 +1,50 @@
+.map {
+  height: 400px;
+  margin: 0px;
+}
+
+.container-map {
+  margin-top: 70px;
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+mat-slider {
+  width: 100%;
+}
+
+.card-slider {
+  -webkit-box-shadow: 0px 0px 6px 0px rgba(0,0,0,1);
+  -moz-box-shadow: 0px 0px 6px 0px rgba(0,0,0,1);
+  box-shadow: 0px 0px 6px 0px rgba(0,0,0,1);
+}
+
+.example-card {
+  max-width: 300px;
+  height: 200px;
+}
+
+.example-header-image {
+  background-image: url("https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjFpfL-1NHgAhWGg-AKHakUB7gQjRx6BAgBEAU&url=https%3A%2F%2Fkeepcoding.io%2Fes%2Fblog%2Fcaracteristicas-lenguaje-de-programacion-go%2F&psig=AOvVaw13mB9gzQ_hVrPboMd_oX99&ust=1551004693168616");
+  background-size: cover;
+}
+
+
+.image-step1{
+  display: block;
+  width: 50px;
+  margin: auto;
+}
+
+.image-step2{
+  display: block;
+  width: 50px;
+  margin: auto;
+}
+
+.info-label{
+  display: block;
+  margin: auto;
+  
+}
+

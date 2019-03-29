@@ -1,0 +1,148 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item "><a href="#" class="text-success" [routerLink]="['/dashboard']">Home</a></li>
+        <li class="breadcrumb-item "><a href="#" class="text-success" [routerLink]="['/competition']">Competencias</a>
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">Listado de Competencias</li>
+      </ol>
+    </nav>
+    <div class="card">
+      <div class="card-header card-header-success">
+        <h4 class="card-title">Competencias de la Aplicacion</h4>
+        <p class="card-category">Listado de competencias</p>
+      </div>
+      <div class="card-body">
+        <mat-card>
+          <form class="example-form">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-2 pull-right">
+                  <img class="image" src="../../../../../assets/img/compe2.png">
+                </div>
+                <div class="col-md-8 search">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Ingresa el nombre de la competencia...">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2 search">
+                  <button class="btn btn-success pull-right">
+                    Buscar
+                  </button>
+                </div>
+
+              </div>
+            </div>
+          </form>
+        </mat-card>
+        <br>
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+            <!-- id Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.id }}
+              </td>
+            </ng-container>
+
+            <!-- Description Column -->
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef>Descripcion</th>
+              <td mat-cell *matCellDef="let element">{{ element.description | slice:0:30 }}</td>
+            </ng-container>
+
+            <!-- Type competence Column -->
+            <ng-container matColumnDef="type">
+              <th mat-header-cell *matHeaderCellDef>Tipo</th>
+              <td mat-cell *matCellDef="let element">{{ element.type }}</td>
+            </ng-container>
+
+            <!-- Date Init Column -->
+            <ng-container matColumnDef="dateInit">
+              <th mat-header-cell *matHeaderCellDef>Fecha inicio</th>
+              <td mat-cell *matCellDef="let element">{{ element.dateInit }}</td>
+            </ng-container>
+
+            <!-- Hour Init Column -->
+            <ng-container matColumnDef="hourInit">
+              <th mat-header-cell *matHeaderCellDef>Hora inicio</th>
+              <td mat-cell *matCellDef="let element">{{ element.hourInit }}</td>
+            </ng-container>
+
+            <!--State Competence Column -->
+            <ng-container matColumnDef="state">
+              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <td mat-cell *matCellDef="let element">{{ element.state }}</td>
+            </ng-container>
+
+            <!--Actions Column -->
+
+            <ng-container cdkColumnDef="deleteAction">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element">
+
+                <button (click)="selectComp(element)" mat-raised-button color="primary"
+                  [mdePopoverTriggerFor]="appPopover" mdePopoverTriggerOn="click" class="btn pull-right  btn-just-icon">
+                  <i class="material-icons"> dns </i>
+                </button>
+            </ng-container>
+
+
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+        <div class="card-footer">
+          <div class="card-stats"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<mde-popover #appPopover="mdePopover" [mdePopoverOverlapTrigger]="false">
+  <mat-card style="max-width: 300px">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-4">
+          <mat-card-content>
+            <button (click)="updateCompetence()" mat-icon-button color="primary"
+              class="btn-success pull-right  btn-just-icon">
+              <i class="material-icons"> edit </i>
+            </button>
+          </mat-card-content>
+        </div>
+
+        <div class="col-4">
+          <mat-card-content>
+            <button (click)="openDialog()" mat-icon-button color="primary"
+              class="btn-success pull-right  btn-just-icon">
+              <i class="material-icons"> visibility </i>
+            </button>
+          </mat-card-content>
+        </div>
+
+        <div class="col-4">
+          <mat-card-content>
+            <button (click)="deleteCompetence()" mat-icon-button color="primary"
+              class="btn-success pull-right  btn-just-icon">
+              <i class="material-icons"> delete </i>
+            </button>
+          </mat-card-content>
+        </div>
+      </div>
+
+    </div>
+
+  </mat-card>
+</mde-popover>

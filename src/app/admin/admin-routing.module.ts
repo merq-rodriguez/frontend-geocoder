@@ -7,7 +7,8 @@ const routes: Routes = [
     path: '',
     component: AdminComponent,
     children: [
-      { path: 'users', loadChildren: './users/users.module#UsersModule' }
+      { path: 'users',       loadChildren: './users/users.module#UsersModule' },
+      { path: 'competences', loadChildren: './competence/competence.module#CompetenceModule' }
     ]
   }]
 

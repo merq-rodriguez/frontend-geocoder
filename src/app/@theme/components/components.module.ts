@@ -12,11 +12,12 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { CardComponent } from './card/card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-
 import {DragDropModule} from '@angular/cdk/drag-drop';
 import {ScrollingModule} from '@angular/cdk/scrolling';
 import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
+
+import { MdePopoverModule } from '@material-extended/mde';
 
 import {
   MatButtonModule,
@@ -56,6 +57,7 @@ import {
   MatTabsModule,
   MatTreeModule
 } from "@angular/material";
+import { DialogContentExampleDialog } from 'src/app/admin/competence/competitionlist/competence-list.component';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -95,7 +97,8 @@ const MATERIAL_MODULES =[
   MatToolbarModule,
   MatTooltipModule,
   MatTreeModule,
-  MatFormFieldModule
+  MatFormFieldModule,
+  MdePopoverModule // es aparte de material pero usa material XD
 ];
 const CDK_MODULES = [
   DragDropModule,
@@ -109,7 +112,8 @@ const COMPONENTS = [
   SidebarComponent,
   MonacoComponent,
   MapComponent,
-  CardComponent
+  CardComponent,
+  DialogContentExampleDialog
 ];
 
 

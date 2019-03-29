@@ -1,0 +1,461 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item ">
+          <a href="#" class="text-success" [routerLink]="['/dashboard']"
+            >Home</a
+          >
+        </li>
+        <li class="breadcrumb-item">
+          <a href="#" class="text-success" [routerLink]="['/competition']"
+            >Competencias</a
+          >
+        </li>
+        <li class="breadcrumb-item active" aria-current="page">
+          Crear competencias
+        </li>
+      </ol>
+    </nav>
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-success">
+            <h4 class="card-title">Crear una competencia</h4>
+            <p class="card-category">
+              Aqui puedes crear una competencia amiguito.
+            </p>
+          </div>
+          <div class="card-body">
+            <mat-horizontal-stepper linear #stepper>
+              <mat-step [stepControl]="firstFormGroup">
+                <form [formGroup]="firstFormGroup">
+                  <ng-template matStepLabel>Datos de competencia</ng-template>
+
+                  <br />
+                  <mat-card>
+                    <div class="row">
+                      <div class="col-md-2 text-center ">
+                        <img
+                          class="image-step1"
+                          src="../../../../../assets/img/coder2.png"
+                        />
+                      </div>
+
+                      <div class="col-md-10">
+                        <label for="" class="info-label">
+                          Tienes que ingresar los datos necesarios para crear
+                          una competencia, recuerda seleccionar el tipo de
+                          localizacion para asi definir el siguiente paso.
+                        </label>
+                      </div>
+                    </div>
+                  </mat-card>
+                  <br />
+
+                  <mat-card>
+                    <div class="container">
+                      <div class="row">
+                        <div class="col-md-8">
+                          <mat-form-field class="example-full-width">
+                            <input
+                              matInput
+                              formControlName="nameCtrl"
+                              placeholder="Nombre de la competencia"
+                              required
+                            />
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-10">
+                          <mat-form-field class="example-full-width">
+                            <textarea
+                              matInput
+                              formControlName="descriptionCtrl"
+                              placeholder="Descripcion"
+                              rows="3"
+                              required
+                            ></textarea>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <div class="row">
+                        <div class="col-md-11">
+                          <mat-form-field class="example-full-width">
+                            <textarea
+                              matInput
+                              placeholder="Cargar imagen"
+                              rows="1"
+                              required
+                            ></textarea>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-1">
+                          <button
+                            mat-raised-button
+                            matTooltip="Cargar Imagen"
+                            [matTooltipPosition]="'above'"
+                            type="button"
+                            class="btn btn-success pull-right  btn-just-icon"
+                          >
+                            <i class="material-icons">
+                              add_box
+                            </i>
+                          </button>
+                        </div>
+                      </div>
+
+                      <hr />
+
+                      <div class="row">
+                        <div class="col-md-5">
+                          <mat-form-field>
+                            <input
+                              matInput
+                              [matDatepicker]="picker"
+                              placeholder="Elige una fecha para la competencia"
+                            />
+                            <mat-datepicker-toggle
+                              matSuffix
+                              [for]="picker"
+                            ></mat-datepicker-toggle>
+                            <mat-datepicker #picker></mat-datepicker>
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-5">
+                          <mat-form-field>
+                            <mat-select placeholder="Tipo de localizacion">
+                              <mat-option
+                                *ngFor="let food of animals"
+                                [value]="food.name"
+                              >
+                                {{ food.name }}
+                              </mat-option>
+                            </mat-select>
+                          </mat-form-field>
+                        </div>
+                      </div>
+
+                      <hr />
+                      <div class="row">
+                        <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                            <input
+                              type="time"
+                              matInput
+                              placeholder="Hora inicio"
+                              formControlName="inithourCtrl"
+                              required
+                            />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-card>
+
+                  <div>
+                    <button mat-button matStepperNext>Siguiente</button>
+                  </div>
+                </form>
+              </mat-step>
+
+              <mat-step [stepControl]="secondFormGroup" [optional]="isOptional">
+                <form [formGroup]="secondFormGroup">
+                  <ng-template matStepLabel>Datos de localizacion</ng-template>
+
+                  <br />
+                  <mat-card>
+                    <div class="row">
+                      <div class="col-md-2 text-center">
+                        <img
+                          class="image-step2"
+                          src="../../../../../assets/img/globe.png"
+                        />
+                      </div>
+
+                      <div class="col-md-10">
+                        <label for="" class="info-label">
+                          {{
+                            false
+                              ? "Elegiste multiples ubicaciones geograficas, por lo tanto debes elegir las ubicaciones para posteriormente  asignarlas a un test de evaluacion, no olvides especificar los radios de cada coordenada."
+                              : "Elegiste una ubicacion geografica, selecciona la ubicacion geografica deseada a continuacion, no olvides especificar el radio que abarcara las coordenadas de la  competencia."
+                          }}
+                        </label>
+                      </div>
+                    </div>
+                  </mat-card>
+
+                  <br />
+                  <mat-card>
+                    <div class="col">
+                      <div class="row">
+                        <div class="col-md-4">
+                          <mat-form-field class="example-full-width">
+                            <input
+                              matInput
+                              placeholder="Latitud"
+                              type="number"
+                              formControlName="latitudeCtrl"
+                            />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                          <mat-form-field class="example-full-width">
+                            <input
+                              matInput
+                              placeholder="Longitud"
+                              type="number"
+                              formControlName="longitudeCtrl"
+                            />
+                          </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                          <mat-form-field class="example-full-width">
+                            <input
+                              type="number"
+                              matInput
+                              placeholder="Radio"
+                              formControlName="radiusCtrl"
+                            />
+                          </mat-form-field>
+                        </div>
+                      </div>
+                    </div>
+                  </mat-card>
+                  <br />
+
+                  <br />
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-1">
+                        <i class="material-icons">
+                          location_on
+                        </i>
+                      </div>
+                      <div class="col-md-8">
+                        <p class="text-success">
+                          {{
+                            true
+                              ? "Selecciona mediante un click la ubicacion geografica que deseas como lugar de competencia."
+                              : "Selecciona mediante un click cada ubicacion geografica perteneciente a los test y ejercicios de programacion. "
+                          }}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <br />
+                  <app-map></app-map>
+                  <br />
+                  <br />
+
+                  <div class="container">
+                    <div class="row">
+                      <div class="col-md-1">
+                        <i class="material-icons">
+                          location_on
+                        </i>
+                      </div>
+                      <div class="col-md-8">
+                        <p class="text-success">
+                          Debes especificar el radio que quieres abarcar en la
+                          ubicacion deseada
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                  <br />Datos de
+
+                  <mat-card class="">
+                    <div class="row">
+                      <div class="col-md-10">
+                        <mat-slider
+                          thumbLabel
+                          matTooltip="Desliza para generar un radio de competencia"
+                          [displayWith]="formatLabel"
+                          tickInterval="100"
+                          min="1"
+                          max="10000"
+                        ></mat-slider>
+                      </div>
+
+                      <div class="col-md-2">
+                        <button
+                          mat-raised-button
+                          matTooltip="Crear Coordenada"
+                          [matTooltipPosition]="'above'"
+                          type="button"
+                          class="btn btn-success pull-right  btn-just-icon"
+                        >
+                          <i class="material-icons">
+                            add_box
+                          </i>
+                        </button>
+                      </div>
+                    </div>
+                  </mat-card>
+                  <br />
+                  Datos de
+                  <mat-card>
+                    <div class="table-responsive">
+                      <table class="table">
+                        <thead class=" text-primary">
+                          <th>
+                            ID
+                          </th>
+                          <th>
+                            Latitud
+                          </th>
+                          <th>
+                            Longitud
+                          </th>
+                        </thead>
+                        <tbody>
+                          <tr>
+                            <td>
+                              1
+                            </td>
+                            <td>
+                              09.2276762276232323
+                            </td>
+                            <td>
+                              12.3276372823782223
+                            </td>
+
+                            <td class="td-actions text-right">
+                              <button
+                                mat-raised-button
+                                type="button"
+                                matTooltip="Edit Task"
+                                [matTooltipPosition]="'above'"
+                                class="btn btn-primary btn-link btn-sm btn-just-icon"
+                              >
+                                <i class="material-icons">edit</i>
+                              </button>
+                              <button
+                                mat-raised-button
+                                type="button"
+                                matTooltip="Remove"
+                                [matTooltipPosition]="'above'"
+                                class="btn btn-danger btn-link btn-sm btn-just-icon"
+                              >
+                                <i class="material-icons">close</i>
+                              </button>
+                            </td>
+                          </tr>
+                        </tbody>
+                      </table>
+                    </div>
+                  </mat-card>
+                  <div>
+                    <button mat-button matStepperPrevious>Atras</button>
+                    <button mat-button matStepperNext>Siguiente</button>
+                  </div>
+                </form>
+              </mat-step>
+
+              <mat-step>
+                <ng-template matStepLabel>Elegir Test</ng-template>
+                <mat-card>
+                  <div class="row">
+                    <div class="col-md-2 text-center ">
+                      <img
+                        class="image-step1"
+                        src="../../../../../assets/img/programmer.png"
+                      />
+                    </div>
+
+                    <div class="col-10">
+                      <div class="col-8">
+                        <label for="" class="info-label">
+                          Tienes que seleccionar el tipo de test de evaluacion
+                        </label>
+                      </div>
+                      <div class="col-8">
+                        <mat-form-field>
+                          <mat-select
+                            placeholder="Tipo de evaluacion"
+                            [(value)]="selectType"
+                          >
+                            <mat-option
+                              *ngFor="let type of typestest"
+                              [value]="type.value"
+                            >
+                              {{ type.viewValue }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <br />
+
+                    <div class="container " [hidden]="selectType !== '0'">
+                      <div class="row d-flex justify-content-center">
+                        <div class="col" *ngFor="let item of testQuestions">
+                          <app-card [item]="item"></app-card>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="container" [hidden]="selectType !== '1'">
+                      <div class="row d-flex justify-content-center">
+                        <div class="col" *ngFor="let item of testExercise">
+                          <app-card [item]="item"></app-card>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </mat-card>
+                <br />
+
+                <div>
+                  <button mat-button matStepperPrevious>Atras</button>
+                  <button mat-button matStepperNext>Siguiente</button>
+                </div>
+              </mat-step>
+
+              <mat-step>
+                <ng-template matStepLabel>Terminar</ng-template>
+                <mat-card>
+                  <mat-card-title>
+                    Has terminado
+                  </mat-card-title>
+                  <mat-card-content>
+                    <div class="container">
+                      <div class="col-12">
+                        Ya has terminado, ahora guarda los datos de la
+                        competencia para poder crearla.
+                      </div>
+                      <div class="col-12">
+                        <button class="btn btn-success pull-right">
+                          Guardar
+                        </button>
+                      </div>
+                      <br />
+                      <br />
+                    </div>
+                  </mat-card-content>
+                </mat-card>
+                <div>
+                  <button mat-button matStepperPrevious>Atras</button>
+                  <button mat-button (click)="stepper.reset()">
+                    Siguiente
+                  </button>
+                </div>
+              </mat-step>
+            </mat-horizontal-stepper>
+          </div>
+          <div class="card-footer">
+            <div class="card-stats"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
