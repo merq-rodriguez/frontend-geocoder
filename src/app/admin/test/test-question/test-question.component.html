@@ -1,0 +1,329 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <br />
+        <!--
+              Aqui empieza esa baina rara, el steper para preguntas
+            -->
+
+        <mat-horizontal-stepper linear #stepper>
+          <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel>Informacion de la prueba</ng-template>
+              <mat-card>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-7">
+                      <mat-form-field>
+                        <input
+                          matInput
+                          placeholder="Nombre de la prueba"
+                          formControlName="nameTestCtrl"
+                          required
+                        />
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-10">
+                      <mat-form-field class="example-full-width">
+                        <textarea
+                          matInput
+                          placeholder="Descripcion"
+                          formControlName="descriptionTestCtrl"
+                          rows="2"
+                          required
+                        ></textarea>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-11">
+                      <mat-form-field class="example-full-width">
+                        <textarea
+                          matInput
+                          formControlName="urlimageCtrl"
+                          placeholder="Cargar imagen"
+                          rows="1"
+                          required
+                        ></textarea>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-1">
+                      <button
+                        mat-raised-button
+                        matTooltip="Cargar Imagen"
+                        [matTooltipPosition]="'above'"
+                        type="button"
+                        class="btn btn-success pull-right  btn-just-icon"
+                      >
+                        <i class="material-icons">
+                          add_box
+                        </i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-2">
+                      <mat-form-field>
+                        <input
+                          type="number"
+                          matInput
+                          placeholder="Puntuacion"
+                          formControlName="scoreTestCtrl"
+                          required
+                        />
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </mat-card>
+
+              <div>
+                <button mat-button matStepperNext class="fa-pull-right">
+                  Siguiente<i class="material-icons">
+                    chevron_right
+                  </i>
+                </button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+            <form [formGroup]="secondFormGroup">
+              <ng-template matStepLabel>Creacion de preguntas</ng-template>
+              
+                <div class="row">
+                  <div class="col-md-12">
+                    <div class="card">
+                      <div class="card-header card-header-success">
+                        <h4 class="card-title">
+                          Crea una pregunta
+                        </h4>
+                        <p class="card-category">
+                          Aqui puedes crear preguntas de seleccion multiple, ten
+                          en cuenta que puedes anexar codigo de programacion a
+                          tu pregunta.
+                        </p>
+                      </div>
+                      <div class="card-body">
+                        <div class="container">
+                          <div class="row">
+                            <div class="col-md-10">
+                              <mat-form-field class="example-full-width">
+                                <input
+                                  [(ngModel)]="newQuestion.name"
+                                  matInput
+                                  placeholder="Escribe aqui tu pregunta"
+                                  formControlName="nameQuestionCtrl"
+                                  required
+                                />
+                              </mat-form-field>
+                            </div>
+                          </div>
+
+                          <div class="row">
+                            <div class="col-md-8">
+                              <mat-form-field>
+                                <input
+                                  [(ngModel)]="newOption.name"
+                                  matInput
+                                  placeholder="Escribe aqui una de las opciones"
+                                  formControlName="optionQuestionCtrl"
+                                  required
+                                />
+                              </mat-form-field>
+                            </div>
+                            <div class="col-md-2">
+                              <button
+                                (click)="addOptionList()"
+                                mat-raised-button
+                                type="button"
+                                matTooltip="Agregar nuevo"
+                                [matTooltipPosition]="'above'"
+                                class="btn btn-success  btn-link btn-lg btn-just-icon "
+                              >
+                                <i class="material-icons">add_box</i>
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+
+                        <mat-card *ngIf="newQuestion.option.length != 0">
+                          <div class="col-md-12">
+                            <div
+                              class="container d-flex justify-content-center"
+                            >
+                              <mat-card>
+                                <div
+                                  class="col-md-12"
+                                  *ngFor="let option of newQuestion.option"
+                                >
+                                  <mat-checkbox>
+                                    {{ option.name }}
+                                  </mat-checkbox>
+                                </div>
+                              </mat-card>
+                            </div>
+                          </div>
+                        </mat-card>
+                        <br />
+                        <div class="container">
+                          <div class="row">
+                            <mat-slide-toggle
+                              (click)="setModeCoder()"
+                              class="example-margin"
+                              [color]="monacoEditState.color"
+                              [checked]="monacoEditState.checked"
+                              [disabled]="monacoEditState.disabled"
+                            >
+                              <label for="" [hidden]="monacoEditState.checked"
+                                >¿Quieres ingresar codigo de programacion?</label
+                              >
+                              <label for="" [hidden]="!monacoEditState.checked"
+                                >¿Quieres deshabilitar el modo
+                                programador?</label
+                              >
+                            </mat-slide-toggle>
+                          </div>
+                        </div>
+
+                        <br />
+                        <mat-card [hidden]="!monacoEditState.checked">
+                          <app-monaco-code [code]="code"></app-monaco-code>
+                        </mat-card>
+                        <br />
+
+                        <button
+                          (click)="addQuestion()"
+                          mat-raised-button
+                          type="submit"
+                          class="btn btn-success pull-right"
+                        >
+                          Agregar
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr />
+
+                <mat-accordion>
+                  <mat-expansion-panel *ngFor="let question of questionList">
+                    <mat-expansion-panel-header>
+                      <mat-panel-title>
+                        {{ question.name }}
+                      </mat-panel-title>
+                      <mat-panel-description>
+                        
+                          
+                          
+                          <!--   <button
+                              (click)="removeQuestion(question.id)"
+                              mat-raised-button
+                              type="button"
+                              matTooltip="Eliminar"
+                              [matTooltipPosition]="'above'"
+                              class="btn  pull-right btn-link btn-sm btn-just-icon "
+                            >
+                              <i class="material-icons">delete_forever</i>
+                            </button> -->
+                        
+                        
+                      </mat-panel-description>
+                    </mat-expansion-panel-header>
+
+                    
+                      <div class="container">
+                        <div
+                          class="row"
+                          *ngFor="let op of question.option; let i = index"
+                          [hidden]="question.state"
+                        >
+                          <div class="col-md-10">
+                            <mat-form-field>
+                             <div class="row">
+                               <div class="col-1">
+                                {{i + 1}}. 
+                               </div>
+                               <div class="col-9">
+                                <input
+                                  matInput
+                                  placeholder=""
+                                  type="text"
+                                  [value]="op.name"
+                                />
+                               </div>
+                               <div class="col-2">
+                                <mat-checkbox [value]="op.state" ></mat-checkbox>
+                               </div>
+                             </div>
+                              
+                            </mat-form-field>
+                          </div>
+                        </div>
+                      </div>
+                 
+                  </mat-expansion-panel>
+                </mat-accordion>
+
+             
+
+              <br />
+
+              <div>
+                <button mat-button matStepperPrevious>Anterior</button>
+                <button mat-button matStepperNext>Siguiente</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Terminar</ng-template>
+            You are now done.
+            <div>
+              <button mat-button matStepperPrevious>Back</button>
+              <button mat-button (click)="stepper.reset()">Reset</button>
+            </div>
+          </mat-step>
+        </mat-horizontal-stepper>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <div class="row">
+      <div class="col-md-10">
+        <label *ngIf="selectType == '1'">
+          Construye el contenido personalizado del ejercicio practico
+        </label>
+      </div>
+
+      <div class="col-md-2">
+        <!-- Aqui cambiamos el estado del editor de texto html-->
+        <mat-slide-toggle
+          *ngIf="selectType == '1'"
+          (click)="setModeEditHTML()"
+          class="example-margin"
+          [color]="EditHtmlState.color"
+          [checked]="EditHtmlState.checked"
+          [disabled]="EditHtmlState.disabled"
+        >
+          Ver edicion
+        </mat-slide-toggle>
+      </div>
+    </div>
+    <ngx-editor
+      *ngIf="selectType == '1'"
+      [hidden]="EditHtmlState.checked"
+      [state]="!EditHtmlState.checked"
+    >
+    </ngx-editor>
+  </div>
+</div>

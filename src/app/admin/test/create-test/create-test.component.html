@@ -1,0 +1,94 @@
+<div class="main-content">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item "><a  class="text-success" [routerLink]="['/dashboard']">Home</a></li>
+          <li class="breadcrumb-item"> <a class="text-success" [routerLink]="['/test']">Test</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Crear Test</li>
+
+        </ol>
+      </nav>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-success">
+            <h4 class="card-title">
+              Evaluacion de los temas de la aplicacion.
+            </h4>
+            <p class="card-category">
+              En esta seccion debe crear los test de evaluacion con sus
+              respectivas preguntas y respuestas validas
+            </p>
+          </div>
+
+          <div class="card-body">
+            <mat-card>
+              <div class="row">
+                <div class="col-md-9">
+                  <div class="row">
+                    <div class="col-md-1">
+                      <i class="material-icons">
+                        event_note
+                      </i>
+                    </div>
+                    <div class="col-md-10">
+                      <p>
+                        En esta seccion debes especificar el tipo de evaluacion
+                        que vas a utilizar.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <mat-form-field>
+                    <mat-select
+                      placeholder="Tipo de evaluacion"
+                      [(value)]="selectType"
+                    >
+                      <mat-option
+                        *ngFor="let type of typestest"
+                        [value]="type.value"
+                      >
+                        {{ type.viewValue }}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </div>
+              </div>
+            </mat-card>
+
+            <div class="card-body">
+              <app-test-exercise *ngIf="selectType == '1'"></app-test-exercise>
+              <app-test-question *ngIf="selectType == '0'"></app-test-question>
+
+
+       <!--        <div class="container " >
+                <div class="row d-flex justify-content-center">
+                  <div class="col" *ngFor="let item of testQuestions">
+                    <app-card [item]="item" ></app-card>
+                  </div>
+
+                </div>
+              </div>
+
+              <div class="container " >
+                <div class="row d-flex justify-content-center">
+                  <div class="col" *ngFor="let item of testQuestions">
+                    <app-card [item]="item" ></app-card>
+                  </div>
+
+                </div>
+              </div>
+ -->
+
+
+
+              
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

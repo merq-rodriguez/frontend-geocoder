@@ -1,0 +1,12 @@
+
+
+table {
+  width: 100%;
+}
+
+.image {
+  width: 70%;
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+}

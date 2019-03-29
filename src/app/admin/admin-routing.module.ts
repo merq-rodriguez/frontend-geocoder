@@ -8,7 +8,8 @@ const routes: Routes = [
     component: AdminComponent,
     children: [
       { path: 'users',       loadChildren: './users/users.module#UsersModule' },
-      { path: 'competences', loadChildren: './competence/competence.module#CompetenceModule' }
+      { path: 'competences', loadChildren: './competence/competence.module#CompetenceModule' },
+      { path: 'tests',       loadChildren: './test/test.module#TestModule' }
     ]
   }]
 

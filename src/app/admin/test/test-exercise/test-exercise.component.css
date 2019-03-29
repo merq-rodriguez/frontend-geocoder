@@ -1,0 +1,13 @@
+.horizontal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  margin: 0;
+}
+
+.separador {
+  margin-bottom: 10px;
+  background-color: #FCFDFD;
+}
+

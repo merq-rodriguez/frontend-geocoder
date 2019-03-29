@@ -1,0 +1,151 @@
+<div class="row">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-body">
+        <br />
+        <!--
+              Aqui empieza esa baina rara, el steper para preguntas
+            -->
+
+        <mat-horizontal-stepper linear #stepper>
+          <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+            <form [formGroup]="firstFormGroup">
+              <ng-template matStepLabel>Informacion de la prueba</ng-template>
+              <mat-card>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-md-7">
+                      <mat-form-field>
+                        <input
+                          matInput
+                          placeholder="Nombre de la prueba"
+                          formControlName="nameTestCtrl"
+                          required
+                        />
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-10">
+                      <mat-form-field class="example-full-width">
+                        <textarea
+                          matInput
+                          placeholder="Descripcion"
+                          formControlName="descriptionTestCtrl"
+                          rows="2"
+                          required
+                        ></textarea>
+                      </mat-form-field>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-11">
+                      <mat-form-field class="example-full-width">
+                        <textarea
+                          matInput
+                          formControlName="urlimageCtrl"
+                          placeholder="Cargar imagen"
+                          rows="1"
+                          required
+                        ></textarea>
+                      </mat-form-field>
+                    </div>
+
+                    <div class="col-md-1">
+                      <button
+                        mat-raised-button
+                        matTooltip="Cargar Imagen"
+                        [matTooltipPosition]="'above'"
+                        type="button"
+                        class="btn btn-success pull-right  btn-just-icon"
+                      >
+                        <i class="material-icons">
+                          add_box
+                        </i>
+                      </button>
+                    </div>
+                  </div>
+
+                  <div class="row">
+                    <div class="col-md-2">
+                      <mat-form-field>
+                        <input
+                          type="number"
+                          matInput
+                          placeholder="Puntuacion"
+                          formControlName="scoreTestCtrl"
+                          required
+                        />
+                      </mat-form-field>
+                    </div>
+                  </div>
+                </div>
+              </mat-card>
+
+              <div>
+                <button mat-button matStepperNext class="fa-pull-right">
+                  Siguiente<i class="material-icons">
+                    chevron_right
+                  </i>
+                </button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+            <form [formGroup]="secondFormGroup">
+              <ng-template matStepLabel
+                >Seleccion de los ejercicios</ng-template
+              >
+
+              <div class="">
+                  <div class="row">
+                    <div class="col" *ngFor="let item of testExercise">
+                      <app-card [item]="item" [type]="'test'"></app-card>
+                    </div>
+                  </div>
+              </div>
+
+
+              <div>
+                <button mat-button matStepperPrevious>Anterior</button>
+                <button mat-button matStepperNext>Siguiente</button>
+              </div>
+            </form>
+          </mat-step>
+          <mat-step>
+            <ng-template matStepLabel>Terminar</ng-template>
+            
+            <mat-card>
+              <div class="container">
+                <div class="row d-flex justify-content-center">
+
+                  <div class="col-5" >
+                    <img  
+                        style="width: 70%; display: block; margin: auto;" 
+                        src="../../../../../assets/img/finish.png">
+                  </div>
+                  <div class="col-10">
+                      <div class="tim-typo">
+                          <span class="tim-note">Has terminado</span>
+                          <p class="text-primary">
+                            Guarda los datos que has ingresado para crear un test de ejercicios practicos, los cuales podras utilizar en las competencias.
+                          </p>
+                        </div>
+                        <button class="btn btn-success" style="display: block; margin: auto;" > Crear Test</button>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+
+            <div>
+              <button mat-button matStepperPrevious>Atras</button>
+              <button mat-button (click)="stepper.reset()">Borrar pasos</button>
+            </div>
+          </mat-step>
+        </mat-horizontal-stepper>
+      </div>
+    </div>
+  </div>
+</div>
