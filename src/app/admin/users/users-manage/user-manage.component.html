@@ -1,0 +1,275 @@
+<div class="main-content content">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item "><a href="#" class="text-success">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Usuarios</li>
+        </ol>
+      </nav>
+  <div class="container-fluid">
+     
+    <div class="row">
+      <mat-card>
+        <div class="card" *ngIf="isAddUser">
+          <br>
+          <div class="card-header card-header-success" >
+            <h4 class="card-title">Crea un usuario</h4>
+            <p class="card-category">
+              En esta seccion debe crear usuarios.
+            </p>
+          </div>
+          <br />
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="card card-profile">
+                  <div class="card-avatar">
+                    <a href="#">
+                      <img class="img" src="./assets/img/faces/marc.jpg" />
+                    </a>
+                  </div>
+                  <div class="card-body">
+                    <i class="material-icons">edit</i>
+                    <h6 class="card-category text-gray">Rol del usuario</h6>
+                    <h4 class="card-title">Nombre del usuario</h4>
+
+                    <p class="card-description">
+                      Don't be scared of the truth because we need to restart
+                      the human foundation in truth And I love you like Kanye
+                      loves Kanye I love Rick Owens’ bed design but the back
+                      is...
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <br />
+              <br />
+              <div class="col-md-8">
+                <div class="card-body">
+                  <form>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Username" />
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                          <input
+                            matInput
+                            placeholder="Correo electronico"
+                            type="email"
+                          />
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                          <input
+                            matInput
+                            placeholder="Primer nombre"
+                            type="text"
+                          />
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                          <input
+                            matInput
+                            placeholder="Segundo nombre"
+                            type="text"
+                          />
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <hr />
+                    <div class="row">
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                          <input
+                            matInput
+                            placeholder="Nivel de usuario"
+                            type="text"
+                          />
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <mat-form-field>
+                          <mat-select placeholder="Elija un rol">
+                            <mat-option
+                              *ngFor="let food of foods"
+                              [value]="food.value"
+                            >
+                              {{ food.viewValue }}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <hr />
+
+                    <label>Genero</label>
+                    <div class="row">
+                      <div class="col-md-3">
+                        <div class="form-check form-check-radio">
+                          <label class="form-check-label">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="exampleRadios"
+                              id="exampleRadios1"
+                              value="option1"
+                            />
+                            Masculino
+                            <span class="circle">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-check form-check-radio">
+                          <label class="form-check-label">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="exampleRadios"
+                              id="exampleRadios2"
+                              value="option2"
+                              checked
+                            />
+                            Femenino
+                            <span class="circle">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+
+                      <div class="col-md-3">
+                        <div class="form-check form-check-radio disabled">
+                          <label class="form-check-label">
+                            <input
+                              class="form-check-input"
+                              type="radio"
+                              name="exampleRadios1"
+                              id="exampleRadios1"
+                              value="option1"
+                              disabled
+                            />
+                            Otro
+                            <span class="circle">
+                              <span class="check"></span>
+                            </span>
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+
+                    <button
+                      mat-raised-button
+                      type="submit"
+                      class="btn btn-success pull-right"
+                    >
+                      Guardar
+                    </button>
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <br />
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-header card-header-success">
+            <h4 class="card-title">
+              Listado de Usuarios de la aplicacion
+              <!--
+                <button
+                (click)="AddUser()"
+                mat-raised-button
+                matTooltip="Crear usuario"
+                [matTooltipPosition]="'above'"
+                type="button"
+                class="btn btn-success pull-right  btn-just-icon"
+              >
+                <i class="material-icons">
+                  add_box
+                </i>
+              </button>
+              -->
+            </h4>
+            <p class="card-category">
+              En esta seccion puede visualizar los usuarios de la aplicacion.
+            </p>
+          </div>
+          <div class="card-body">
+            <div class="mat-elevation-z8">
+              <table mat-table [dataSource]="dataSource">
+                <!-- Position Column -->
+                <ng-container matColumnDef="position">
+                  <th mat-header-cell *matHeaderCellDef>No.</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.position }}
+                  </td>
+                </ng-container>
+
+                <!-- Name Column -->
+                <ng-container matColumnDef="nombres">
+                  <th mat-header-cell *matHeaderCellDef>Nombres</th>
+                  <td mat-cell *matCellDef="let element">{{ element.nombres }}</td>
+                </ng-container>
+
+                <!-- Weight Column -->
+                <ng-container matColumnDef="apellidos">
+                  <th mat-header-cell *matHeaderCellDef>Apellidos</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.apellidos }}
+                  </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="rol">
+                  <th mat-header-cell *matHeaderCellDef>Rol</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.rol }}
+                  </td>
+                </ng-container>
+
+                <!-- Symbol Column -->
+                <ng-container matColumnDef="nivel">
+                  <th mat-header-cell *matHeaderCellDef>Nivel</th>
+                  <td mat-cell *matCellDef="let element">
+                    {{ element.nivel }}
+                  </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr
+                  mat-row
+                  *matRowDef="let row; columns: displayedColumns"
+                ></tr>
+              </table>
+
+              <mat-paginator
+                [pageSizeOptions]="[5, 10, 20]"
+                showFirstLastButtons
+              ></mat-paginator>
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>
+
+<div class="main-content content-table">
+  <div class="container-fluid">
+    <div class="row"></div>
+  </div>
+</div>
