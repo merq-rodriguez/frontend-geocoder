@@ -1,19 +1,17 @@
 import { NgModule } from '@angular/core';
-
-import { AdminComponent } from './admin.component';
-import { AdminRoutingModule } from './admin-routing.module';
+import { AdminRoutingModule, routedComponents } from './admin-routing.module';
 import { ComponentsModule } from 'src/app/@theme/components/components.module';
-
+import { CKEditorModule } from "ng2-ckeditor";
 
 
 @NgModule({
   imports: [
-    AdminRoutingModule,
     ComponentsModule,
+    AdminRoutingModule,
+    CKEditorModule,
+  
   ],
-  declarations: [
-    AdminComponent
-  ],
+  declarations: [ ...routedComponents ],
 })
 export class AdminModule {
 }

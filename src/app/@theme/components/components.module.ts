@@ -7,8 +7,9 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MonacoComponent } from './monaco/monaco.component';
 import { MapComponent } from './map/map.component';
-import { MonacoEditorModule } from 'ngx-monaco';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+//import { CKEditorModule } from 'ng2-ckeditor';
+//import { MonacoEditorModule } from 'ngx-monaco';
+//import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { CardComponent } from './card/card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -17,7 +18,10 @@ import {ScrollingModule} from '@angular/cdk/scrolling';
 import {CdkTableModule} from '@angular/cdk/table';
 import {CdkTreeModule} from '@angular/cdk/tree';
 
+import { DialogContentExampleDialog } from 'src/app/admin/competence/competitionlist/competence-list.component';
 import { MdePopoverModule } from '@material-extended/mde';
+import { MonacoEditorModule } from 'ngx-monaco';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 import {
   MatButtonModule,
@@ -57,7 +61,8 @@ import {
   MatTabsModule,
   MatTreeModule
 } from "@angular/material";
-import { DialogContentExampleDialog } from 'src/app/admin/competence/competitionlist/competence-list.component';
+import { CKEditorModule } from 'ng2-ckeditor';
+import { EditorComponent } from './editor/editor.component';
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -113,6 +118,7 @@ const COMPONENTS = [
   MonacoComponent,
   MapComponent,
   CardComponent,
+  EditorComponent,
   DialogContentExampleDialog
 ];
 
@@ -123,11 +129,13 @@ const COMPONENTS = [
     ...MATERIAL_MODULES,
     ...CDK_MODULES,
     RouterModule,
+    CKEditorModule,
     MonacoEditorModule.forRoot(),
     LeafletModule.forRoot(),
+    
   ],
-  
+  entryComponents: [ DialogContentExampleDialog ],
   declarations: [ ...COMPONENTS ],
-  exports: [ ...COMPONENTS, ...BASE_MODULES, ...MATERIAL_MODULES, CDK_MODULES ]
+  exports: [ ...COMPONENTS, ...BASE_MODULES, ...MATERIAL_MODULES, ...CDK_MODULES]
 })
 export class ComponentsModule { }

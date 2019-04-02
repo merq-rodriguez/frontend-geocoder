@@ -11,13 +11,11 @@ import { ComponentsModule } from './@theme/components/components.module';
 import { MonacoEditorModule } from "ngx-monaco";
 import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    
-  ],
+  declarations: [ AppComponent ],
   imports: [
     ComponentsModule,
     BrowserAnimationsModule,
@@ -26,8 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     FormsModule,
     HttpClientModule,
     ReactiveFormsModule,
-    LeafletModule.forRoot(),
-    MonacoEditorModule.forRoot(),
+    
+   
   ],
   providers: [ { provide: APP_BASE_HREF, useValue: '/' },],
   bootstrap: [AppComponent]
