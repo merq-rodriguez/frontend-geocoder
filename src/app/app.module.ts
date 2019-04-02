@@ -7,11 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './@theme/components/components.module';
-
-import { MonacoEditorModule } from "ngx-monaco";
-import { LeafletModule } from "@asymmetrik/ngx-leaflet";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CKEditorModule } from 'ng2-ckeditor';
+
 import { CoreModule } from './@core/core.module';
 
 
@@ -19,12 +16,10 @@ import { CoreModule } from './@core/core.module';
   declarations: [ AppComponent ],
   imports: [
     ComponentsModule,
-    BrowserAnimationsModule,
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
-    FormsModule,
     HttpClientModule,
-    ReactiveFormsModule,
     CoreModule.forRoot()
    
   ],

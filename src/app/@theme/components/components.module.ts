@@ -7,9 +7,7 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MonacoComponent } from './monaco/monaco.component';
 import { MapComponent } from './map/map.component';
-//import { CKEditorModule } from 'ng2-ckeditor';
-//import { MonacoEditorModule } from 'ngx-monaco';
-//import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
 import { CardComponent } from './card/card.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -22,6 +20,9 @@ import { DialogContentExampleDialog } from 'src/app/admin/competence/competition
 import { MdePopoverModule } from '@material-extended/mde';
 import { MonacoEditorModule } from 'ngx-monaco';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+
+import { CKEditorModule } from 'ng2-ckeditor';
+import { EditorComponent } from './editor/editor.component';
 
 import {
   MatButtonModule,
@@ -61,8 +62,8 @@ import {
   MatTabsModule,
   MatTreeModule
 } from "@angular/material";
-import { CKEditorModule } from 'ng2-ckeditor';
-import { EditorComponent } from './editor/editor.component';
+
+
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -135,6 +136,8 @@ const MODULES_FOR_ROOT = [
     ...MODULES_FOR_ROOT,
     RouterModule,
     CKEditorModule,
+  
+    
     
   ],
   entryComponents: [ DialogContentExampleDialog ], 
@@ -146,6 +149,7 @@ const MODULES_FOR_ROOT = [
     ...CDK_MODULES, 
     MonacoEditorModule,
     LeafletModule,
+    
   ]
 })
 export class ComponentsModule { }

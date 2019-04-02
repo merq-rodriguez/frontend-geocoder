@@ -1,6 +1,8 @@
-export interface Theme{
-    id: number;
+export interface ITheme{
+    id: string;
     name: string;
     description: string;
-    image: string;
+    content?: string;
+    image?: string;
 }
+

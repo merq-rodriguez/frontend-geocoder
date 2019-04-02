@@ -2,10 +2,10 @@
   <mat-card-title>
     <div class="row">
       <div class="col-10">
-          <p class="title-card">{{ item.name }}</p>
+        <p class="title-card">{{ item.name }}</p>
       </div>
       <div class="col-1">
-          <mat-checkbox [hidden]="type !== 'test'"></mat-checkbox>
+        <mat-checkbox [hidden]="type !== 'test'"></mat-checkbox>
 
       </div>
     </div>
@@ -14,19 +14,49 @@
   <mat-card-subtitle>
     {{ item.subtitle }}
   </mat-card-subtitle>
+  <hr>
   <mat-card-content>
     <img class="img-card" mat-card-lg-image [src]="item.image" />
     <div class="description-card">
       <p>
-        {{ item.description }}
+        {{ (item.description.length > 90) ? (item.description | slice:0:90) + '...' :(item.description)  }}
       </p>
     </div>
-    <hr [hidden]="type !== 'test'">
-    <div class="card-footer" [hidden]="type !== 'test'">
-      Puntuacion: <b>10.000</b>
-      
+    <hr>
+    <div class="card-footer">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-4">
+            <mat-card-content>
+              <button mat-icon-button color="primary" class="btn-success pull-right  btn-just-icon">
+                <i class="material-icons"> edit </i>
+              </button>
+            </mat-card-content>
+          </div>
+
+          <div class="col-4">
+            <mat-card-content>
+              <button mat-icon-button color="primary" class="btn-success pull-right  btn-just-icon">
+                <i class="material-icons"> visibility </i>
+              </button>
+            </mat-card-content>
+          </div>
+
+          <div class="col-4">
+            <mat-card-content>
+              <button mat-icon-button color="primary" class="btn-success pull-right  btn-just-icon">
+                <i class="material-icons"> delete </i>
+              </button>
+            </mat-card-content>
+          </div>
+        </div>
+
+      </div>
+
+
     </div>
   </mat-card-content>
 
-  
+
 </mat-card>

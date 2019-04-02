@@ -1,7 +1,6 @@
-import { Theme } from 'src/app/@core/entities/theme.interface';
 
 
-export const subthemeListPython: Array < Theme > =[
+export const subthemeListPython: Array < any > =[
     {
         id: 1,
         name: 'Condicionales',
@@ -41,7 +40,7 @@ export const subthemeListPython: Array < Theme > =[
 ];
 
 
-export const subthemeListJava: Array<Theme> = [
+export const subthemeListJava: Array<any> = [
     {
         id: 1,
         name: 'Condicionales',
@@ -80,7 +79,7 @@ export const subthemeListJava: Array<Theme> = [
     }
 ];
 
-export const subthemeListC: Array<Theme> = [
+export const subthemeListC: Array<any> = [
     {
         id: 1,
         name: 'Condicionales',
