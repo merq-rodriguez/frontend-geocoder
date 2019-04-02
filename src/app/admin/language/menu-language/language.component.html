@@ -2,14 +2,14 @@
 <div class="main-content">
     <nav aria-label="breadcrumb">
         <ol class="breadcrumb">
-          <li class="breadcrumb-item "><a href="#" class="text-success" [routerLink]="['/dashboard']">Home</a></li>
+          <li class="breadcrumb-item "><a href="#" class="text-success" [routerLink]="['/admin/dashboard']">Home</a></li>
           <li class="breadcrumb-item active" aria-current="page">Lenguajes</li>
         </ol>
       </nav>
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-4">
-        <div class="card" [routerLink]="['/create-language']">
+        <div class="card" >
           <div class="card-header card-header-success">
             <h4 class="card-title">Crear un lenguaje de programacion</h4>
             <p class="card-category">Crea un lenguaje de programacion.</p>
@@ -32,7 +32,7 @@
           </div>
           <div class="card-footer">
             <div class="card-stats">
-              <button mat-raised-button class="btn btn-success">
+              <button mat-raised-button class="btn btn-success" [routerLink]="['/admin/languages/create-language']">
                 Ir <i class="material-icons">play_arrow</i>
               </button>
             </div>
@@ -40,7 +40,7 @@
         </div>
       </div>
       <div class="col-md-4">
-        <div class="card" [routerLink]="['/language-list']">
+        <div class="card" >
           <div class="card-header card-header-success">
             <h4 class="card-title">Ver todos los lenguajes de programacion</h4>
             <p class="card-category">Listado de lenguajes de programacion</p>
@@ -63,7 +63,8 @@
           </div>
           <div class="card-footer">
             <div class="card-stats">
-              <button mat-raised-button class="btn btn-success">
+              <button mat-raised-button class="btn btn-success" 
+              [routerLink]="['/admin/languages/language-list']">
                 Ir <i class="material-icons">play_arrow</i>
               </button>
             </div>

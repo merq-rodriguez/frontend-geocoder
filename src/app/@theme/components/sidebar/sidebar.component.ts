@@ -8,22 +8,14 @@ declare interface RouteInfo {
   class: string;
 }
 export const ROUTES: RouteInfo[] = [
-  { path: "/dashboard", title: "Principal", icon: "dashboard", class: "" },
-  { path: "/language", title: "Lenguajes", icon: "content_paste", class: "" },
-  { path: "/user-manage", title: "Usuarios", icon: "person", class: "" },
-  { path: "/competition", title: "Competencia", icon: "location_on", class: "" },
-  { path: "/test", title: "Evaluacion", icon: "library_books", class: "" },
-  { path: "/exersice", title: "Ejercicios", icon: "layers", class: "" },
-  { path: "/mapa", title: "Mapa", icon: "layers", class: "" }
+  { path: "/admin/dashboard", title: "Principal", icon: "dashboard", class: "" },
+  { path: "/admin/languages/menu-language", title: "Lenguajes", icon: "content_paste", class: "" },
+  { path: "/admin/users/user-manage", title: "Usuarios", icon: "person", class: "" },
+  { path: "/admin/competences/menu-competence", title: "Competencia", icon: "location_on", class: "" },
+  { path: "/admin/tests/menu-test", title: "Evaluacion", icon: "library_books", class: "" },
+  { path: "/admin/exercise", title: "Ejercicios", icon: "layers", class: "" },
+  { path: "/admin/competences/map-competence", title: "Mapa", icon: "layers", class: "" }
 
-  //{ path: '/theme-list', title: 'Lista de temas',  icon: 'dashboard', class: '' },
-
-  //{ path: '/user-profile', title: 'User Profile',  icon:'person', class: '' },
-  /**{ path: '/table-list', title: 'Table List',  icon:'content_paste', class: '' },
-    { path: '/typography', title: 'Typography',  icon:'library_books', class: '' },
-    { path: '/icons', title: 'Icons',  icon:'bubble_chart', class: '' },
-    { path: '/notifications', title: 'Notifications',  icon:'notifications', class: '' },
-    { path: '/upgrade', title: 'Upgrade to PRO',  icon:'unarchive', class: 'active-pro' },  */
 ];
 
 @Component({

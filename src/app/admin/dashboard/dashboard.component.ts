@@ -2,17 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import * as Chartist from "chartist";
 import { Router } from "@angular/router";
 
-import {
-  icon,
-  latLng,
-  marker,
-  polyline,
-  tileLayer,
-  point,
-  Map,
-  circle,
-  polygon
-} from "leaflet";
+
 
 @Component({
   selector: "app-dashboard",
