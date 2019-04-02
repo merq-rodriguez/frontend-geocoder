@@ -5,6 +5,7 @@ import { ChampionListComponent } from './championlist/champion-list.component';
 import { CreateCompetenceComponent } from './create-competition/create-competence.component';
 import { CompetenceComponent } from './competence.component';
 import { CompetenceListComponent } from './competitionlist/competence-list.component';
+import { MapCompetenceComponent } from './map-competence/map-competence.component';
 
 
 const routes: Routes = [{
@@ -15,6 +16,7 @@ const routes: Routes = [{
     { path: 'champion-competence', component: ChampionListComponent }, 
     { path: 'create-competence',   component: CreateCompetenceComponent },
     { path: 'competence-list',     component: CompetenceListComponent },
+    { path: 'map-competence',      component: MapCompetenceComponent },
   ],
 }];
 
@@ -29,5 +31,6 @@ export const routedComponents = [
   CompetenceMenuComponent,
   ChampionListComponent,
   CreateCompetenceComponent,
-  CompetenceListComponent
+  CompetenceListComponent,
+  MapCompetenceComponent
 ];

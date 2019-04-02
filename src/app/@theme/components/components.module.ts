@@ -122,20 +122,30 @@ const COMPONENTS = [
   DialogContentExampleDialog
 ];
 
+const MODULES_FOR_ROOT = [
+  MonacoEditorModule.forRoot(),
+  LeafletModule.forRoot(),
+]
 
 @NgModule({
   imports: [
     ...BASE_MODULES,
     ...MATERIAL_MODULES,
     ...CDK_MODULES,
+    ...MODULES_FOR_ROOT,
     RouterModule,
     CKEditorModule,
-    MonacoEditorModule.forRoot(),
-    LeafletModule.forRoot(),
     
   ],
-  entryComponents: [ DialogContentExampleDialog ],
+  entryComponents: [ DialogContentExampleDialog ], 
   declarations: [ ...COMPONENTS ],
-  exports: [ ...COMPONENTS, ...BASE_MODULES, ...MATERIAL_MODULES, ...CDK_MODULES]
+  exports: [ 
+    ...COMPONENTS, 
+    ...BASE_MODULES, 
+    ...MATERIAL_MODULES, 
+    ...CDK_MODULES, 
+    MonacoEditorModule,
+    LeafletModule,
+  ]
 })
 export class ComponentsModule { }
