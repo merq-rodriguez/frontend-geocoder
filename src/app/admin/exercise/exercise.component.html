@@ -1,0 +1,98 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12">
+        <div class="card">
+          <div class="card-header card-header-success">
+            <h4 class="card-title">Ejercicios de programacion</h4>
+            <p class="card-category">
+              En esta seccion debe crear los ejercicios de programacion.
+            </p>
+          </div>
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-md-8">
+                  <!--
+                  <label>Ingrese el nombre del ejercicio</label>
+
+                  -->
+                  <mat-form-field class="example-full-width">
+                    <input
+                      matInput
+                      placeholder="Ingrese el nombre del ejercicio"
+                      type="text"
+                    />
+                  </mat-form-field>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12">
+                  <div class="row">
+                    <div class="col-md-10">
+                      <label>
+                        Construye el contenido personalizado del ejercicio de
+                        programacion a tratar
+                      </label>
+                    </div>
+
+                    <div class="col-md-2">
+                      <!-- Aqui cambiamos el estado del editor de texto html-->
+                      <mat-slide-toggle
+                        (click)="setModeEditHTML()"
+                        class="example-margin"
+                        [color]="EditHtmlState.color"
+                        [checked]="EditHtmlState.checked"
+                        [disabled]="EditHtmlState.disabled"
+                      >
+                        Ver edicion
+                      </mat-slide-toggle>
+                    </div>
+                  </div>
+                  <ngx-editor
+                    [hidden]="EditHtmlState.checked"
+                    [state]="!EditHtmlState.checked"
+                  ></ngx-editor>
+                </div>
+              </div>
+              <button
+                mat-raised-button
+                type="submit"
+                class="btn btn-success pull-right"
+              >
+                Guardar
+              </button>
+            </form>
+            <!-- Aqui cambiamos el estado del editor de codigo -->
+
+            <div class="container">
+                <div class="col-12">
+                    <mat-slide-toggle
+                    (click)="setModeCoder()"
+                    class="example-margin"
+                    [color]="monacoEditState.color"
+                    [checked]="monacoEditState.checked"
+                    [disabled]="monacoEditState.disabled"
+                  >
+                    ¿Quieres habilitar el modo programador?
+                  </mat-slide-toggle>
+                </div>
+            </div>
+            <br>
+            <br>
+            <app-monaco-code *ngIf="monacoEditState.checked"></app-monaco-code>
+
+            <div class="container ">
+              <div class="row">
+                <div class="col" *ngFor="let item of exerciseList">
+                  <app-card [item]="item"></app-card>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
