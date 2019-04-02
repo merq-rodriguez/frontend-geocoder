@@ -13,8 +13,6 @@ const routes: Routes = [{
   component: TestComponent,
   children: [
     { path: 'menu-test',           component: TestMenuComponent },
-    { path: 'test-exercise',       component: TestExerciseComponent }, 
-    { path: 'test-question',       component: TestQuestionComponent }, 
     { path: 'create-test',         component: CreateTestComponent },
     { path: 'test-list',           component: TestListComponent },
   ],

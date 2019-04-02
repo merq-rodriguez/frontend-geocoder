@@ -9,7 +9,8 @@ const routes: Routes = [
     children: [
       { path: 'users',       loadChildren: './users/users.module#UsersModule' },
       { path: 'competences', loadChildren: './competence/competence.module#CompetenceModule' },
-      { path: 'tests',       loadChildren: './test/test.module#TestModule' }
+      { path: 'tests',       loadChildren: './test/test.module#TestModule' },
+      { path: 'languages',   loadChildren: './language/language.module#LanguageModule' }
       
     ]
   }]

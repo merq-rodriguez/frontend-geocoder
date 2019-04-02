@@ -1,0 +1,10 @@
+.image {
+  width: 50%;
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-blue{
+  background-color: #158BBB;
+}
