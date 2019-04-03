@@ -2,7 +2,7 @@
   <mat-card-title>
     <div class="row">
       <div class="col-10">
-        <p class="title-card">{{ item.name }}</p>
+        <p class="title-card">{{ data.name }}</p>
       </div>
       <div class="col-1">
         <mat-checkbox [hidden]="type !== 'test'"></mat-checkbox>
@@ -12,14 +12,17 @@
 
   </mat-card-title>
   <mat-card-subtitle>
-    {{ item.subtitle }}
+    {{ data.subtitle }}
   </mat-card-subtitle>
   <hr>
   <mat-card-content>
-    <img class="img-card" mat-card-lg-image [src]="item.image" />
+    <img class="img-card" mat-card-lg-image [src]="data.image" />
     <div class="description-card">
       <p>
-        {{ (item.description.length > 90) ? (item.description | slice:0:90) + '...' :(item.description)  }}
+        {{ 
+          (data.description.length > 90) 
+              ? (data.description | slice:0:90) + '...' 
+              :(data.description)  }}
       </p>
     </div>
     <hr>

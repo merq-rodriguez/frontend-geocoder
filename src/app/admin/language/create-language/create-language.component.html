@@ -139,25 +139,42 @@
                         </div>
                       </div>
                       <hr />
+                      <ngx-editor></ngx-editor>
+                      <hr />
                       <div class="row">
                         <div class="col-md-11">
                           <mat-form-field class="example-full-width">
-                            <textarea matInput formControlName="imageThemeCtrl" [(ngModel)]="newTheme.image"
-                              placeholder="Cargar imagen" rows="1" required></textarea>
+                            <textarea 
+                            matInput
+                            formControlName="imageFakeThemeCtrl" 
+                            [(ngModel)]="newTheme.image" 
+                            placeholder="Cargar imagen" 
+                            rows="1">
+                          </textarea>
                           </mat-form-field>
                         </div>
-
                         <div class="col-md-1">
-                          <button mat-raised-button matTooltip="Cargar Imagen" [matTooltipPosition]="'above'"
-                            type="file" class="btn btn-success pull-right  btn-just-icon">
-                            <i class="material-icons">
-                              add_box
-                            </i>
+
+                          <!-- ADD FILE BUTTON -->
+
+                          <input 
+                          hidden 
+                          type="file"
+                          #fileInputTheme 
+                          formControlName="imageThemeCtrl"
+                          [(ngModel)]="newTheme.image" />
+                          <button 
+                          mat-fab 
+                          class="add-file-button mat-warn" 
+                          (click)="fileInputTheme.click()"
+                          aria-label="Add file" 
+                          [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                            <mat-icon>add</mat-icon>
                           </button>
+
                         </div>
 
                       </div>
-                      <br>
                       <div class="row">
                         <button (click)="addTheme()" mat-raised-button matTooltip="Crear Tema"
                           [matTooltipPosition]="'above'" type="button" class="btn btn-success pull-right">
@@ -173,12 +190,13 @@
                   <div class="container">
                     <div class="row">
                       <div *ngFor="let item of arrayTheme">
-                        <app-card [item]="theme" [type]="'theme'"></app-card>
+                        <app-card [item]="item" [type]="'theme'"></app-card>
                       </div>
                     </div>
                   </div>
 
-
+                  <hr>
+                  
 
 
 

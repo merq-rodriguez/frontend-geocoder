@@ -1,4 +1,6 @@
 import { Component, OnInit, Input } from "@angular/core";
+import { ITheme } from 'src/app/@core/entities/theme.interface';
+import { ICardTest, ICardTheme, ICardSubTheme } from './ICard.interface';
 
 
 @Component({
@@ -7,13 +9,24 @@ import { Component, OnInit, Input } from "@angular/core";
   styleUrls: ["./card.component.css"]
 })
 export class CardComponent implements OnInit {
-  @Input('item') item
-  @Input('type') type
-
+  @Input('item') item: ICardTheme | ICardTest | ICardSubTheme
+  @Input('type') type:string
+  public data;
   constructor() {}
 
   ngOnInit() {
-    
+    switch(this.type){
+        case 'test':
+            this.data = this.item;
+        break;
+        case 'theme':
+            this.data = this.item;        
+        break;
+        case 'subtheme':
+            this.data = this.item;
+        break;
+
+      }
   }
 
 }

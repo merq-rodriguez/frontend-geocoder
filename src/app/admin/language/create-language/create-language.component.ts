@@ -11,6 +11,7 @@ import { ITheme } from 'src/app/@core/entities/theme.interface';
 import { v4 as uuid } from 'uuid';
 import {MatSnackBar} from '@angular/material';
 import { fuseAnimations } from 'src/app/@theme/animations';
+import { ICardTheme } from 'src/app/@theme/components/card/ICard.interface';
 
 
 
@@ -29,7 +30,7 @@ export class CreateLanguageComponent implements OnInit {
   isLinear = false;
   valueSlider: number = 0;
   
-  public arrayTheme: ITheme[] = []
+  public arrayTheme: ICardTheme[] = []
   
   public newTheme: ITheme = {
     id: '',
@@ -85,11 +86,13 @@ export class CreateLanguageComponent implements OnInit {
     if(this.emptyTextfieldTheme()){
       this.openSnackBar("Existen campos vacios","Aceptar")
     }else{
-      let _theme: ITheme = {
+      let _theme: ICardTheme = {
         id: uuid(),
         name: this.newTheme.name,
+        subtitle: 'Tema del lenguaje',
         description: this.newTheme.description,
-        image: this.newTheme.image
+        image: '../../../../assets/img/funciones-en-python-t1.jpg'
+      //  image: this.newTheme.image
       }
       this.arrayTheme.push(_theme);
       this.openSnackBar("Has creado un nuevo tema","Aceptar");
@@ -112,14 +115,15 @@ export class CreateLanguageComponent implements OnInit {
       nameLanguageCtrl:         [this.language.name, Validators.required],
       descriptionLanguageCtrl:  [this.language.description, Validators.required],
       imageLanguageCtrl:        ['', Validators.required],
-      imageFakeLanguageCtrl: new FormControl({  value: this.language.image,  disabled: true},[ Validators.required ]
-      )
+      imageFakeLanguageCtrl: new FormControl({  value: this.language.image,  disabled: true},[ Validators.required ])
     });
     
     this.secondFormGroup = this._formBuilder.group({
       nameThemeCtrl: ['', Validators.required],
       descriptionThemeCtrl: ['', Validators.required],
       imageThemeCtrl: ['', Validators.required],
+      imageFakeThemeCtrl: new FormControl({  value: this.language.image,  disabled: true},[ Validators.required ])
+
      
 
     }); 
