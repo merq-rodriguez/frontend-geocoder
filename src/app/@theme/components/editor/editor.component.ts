@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild, Input } from "@angular/core";
 import './ckeditor.loader'; 
 import 'ckeditor';
+import { ContentEditorService } from 'src/app/@core/services/content-editor.service';
 
 @Component({
   selector: 'ngx-editor',
@@ -15,7 +16,8 @@ export class EditorComponent implements OnInit {
   log: string = '';
   @ViewChild("myckeditor") ckeditor: any;
 
-  constructor() {
+  constructor(private readonly  editorService:ContentEditorService ) {
+    this.editorService.setBehaviorView(null);    
     this.mycontent = ``;
   }
 
@@ -29,6 +31,7 @@ export class EditorComponent implements OnInit {
 
   onChange($event: any): void {
     console.log("onChange");
+    this.editorService.setBehaviorView(this.mycontent);
     //this.log += new Date() + "<br />";
   }
 }

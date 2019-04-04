@@ -8,8 +8,10 @@ import {
 } from "@angular/forms";
 import { log } from "util";
 import * as _ from "lodash";
-import { Question } from 'src/app/@core/entities/question.interface';
-import { Option } from 'src/app/@core/entities/option.interface';
+import { IOption } from 'src/app/@core/data/option.data';
+import { IQuestion } from 'src/app/@core/data/question.data';
+import { v4 as uuid } from 'uuid';
+
 
 
 export interface TypeTest {
@@ -102,20 +104,16 @@ testExercise = [
 
 
   //Model of option new
-  public newOption: Option = {
-    id: null,
+  public newOption: IOption = {
     name: "",
     veracity: false
   };
   //Model of question new
 
-  public newQuestion: Question = {
-    id: null,
+  public newQuestion: IQuestion = {
     code: null,
     name: "",
-    option: [],
-    score: 0,
-    state: true
+    options: [],
   };
 
   public countQuestion: number = 0;

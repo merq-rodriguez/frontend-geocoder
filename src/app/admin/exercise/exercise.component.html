@@ -50,10 +50,7 @@
                       </mat-slide-toggle>
                     </div>
                   </div>
-                  <ngx-editor
-                    [hidden]="EditHtmlState.checked"
-                    [state]="!EditHtmlState.checked"
-                  ></ngx-editor>
+                
                 </div>
               </div>
               <button
@@ -81,8 +78,7 @@
             </div>
             <br>
             <br>
-            <app-monaco-code *ngIf="monacoEditState.checked"></app-monaco-code>
-
+            <ngx-editor></ngx-editor>
             <div class="container ">
               <div class="row">
                 <div class="col" *ngFor="let item of exerciseList">

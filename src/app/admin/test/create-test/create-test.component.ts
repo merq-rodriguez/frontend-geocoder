@@ -1,15 +1,16 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
-import { Question } from 'src/app/@core/entities/question.interface';
 import {
   FormControl,
   FormBuilder,
   FormGroup,
   Validators
 } from "@angular/forms";
+import { v4 as uuid } from 'uuid';
 
 import * as _ from "lodash";
-import { Option } from 'src/app/@core/entities/option.interface';
+import { IQuestion } from 'src/app/@core/data/question.data';
+import { IOption } from 'src/app/@core/data/option.data';
 
 export interface TypeTest {
   value: string;
@@ -59,23 +60,19 @@ export class CreateTestComponent implements OnInit {
     "Tomato"
   ];
 
-  public exercisesList: Question[] = [];
+  public exercisesList: IQuestion[] = [];
 
   //Model of option new
-  public newOption: Option = {
-    id: null,
+  public newOption: IOption = {
     name: "",
     veracity: false
   };
   //Model of question new
 
-  public newQuestion: Question = {
-    id: null,
+  public newQuestion: IQuestion = {
     code: null,
     name: "",
-    option: [],
-    score: 0,
-    state: true
+    options: [],
   };
 
   public countQuestion: number = 0;
@@ -98,8 +95,8 @@ export class CreateTestComponent implements OnInit {
   }
 
   addQuestion() {
-    let temp: Question = {
-      id: this.getNextId(),
+   /*  let temp: IQuestion = {
+      id: uuid(),
       name: this.newQuestion.name,
       code: this.newQuestion.code,
       option: this.newQuestion.option,
@@ -115,11 +112,11 @@ export class CreateTestComponent implements OnInit {
     console.log("¡ID!");
     console.log(this.countQuestion);
     console.log("ID QUESTION NEW");
-    console.log(temp.id)
+    console.log(temp.id) */
   }
 
   addOptionList() {
-    let temp: Option = {
+ /*    let temp: Option = {
       id: this.newOption.id,
       name: this.newOption.name,
       veracity: this.newOption.veracity
@@ -133,31 +130,28 @@ export class CreateTestComponent implements OnInit {
       this.newQuestion.option.push(temp);
       this.newOption.name = "";
       console.log(this.newQuestion.option);
-    }
+    } */
   }
 
   clearQuestion() {
-    this.newQuestion = {
-      id: null,
+   /*  this.newQuestion = {
       code: null,
       name: "",
-      option: [],
-      score: 0,
-      state: true
-    };
+      options: [],
+    }; */
   }
 
   clearOption() {
     this.newOption = {
-      id: null,
+      idOption: null,
       name: "",
       veracity: false
     };
   }
 
   setStateQuestion(id: number) {
-    _.forEach(this.exercisesList, function(value: Question) {
-      if (value.id == id) {
+    /* _.forEach(this.exercisesList, function(value: IQuestion) {
+      if (value.idQuestion == id) {
         console.log("Encontrado", value);
         if (value.state === true) {
           value.state = false;
@@ -166,7 +160,7 @@ export class CreateTestComponent implements OnInit {
           value.state = true;
         }
       }
-    });
+    }); */
   }
 
   removeQuestion(id: number) {

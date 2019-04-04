@@ -6,12 +6,12 @@ import {
   FormGroup,
   Validators
 } from "@angular/forms";
-import { ILanguage } from 'src/app/@core/entities/language.interface';
-import { ITheme } from 'src/app/@core/entities/theme.interface';
 import { v4 as uuid } from 'uuid';
 import {MatSnackBar} from '@angular/material';
 import { fuseAnimations } from 'src/app/@theme/animations';
 import { ICardTheme } from 'src/app/@theme/components/card/ICard.interface';
+import { ITheme } from 'src/app/@core/data/theme.data';
+import { ILanguage } from 'src/app/@core/data/language.data';
 
 
 
@@ -41,7 +41,7 @@ export class CreateLanguageComponent implements OnInit {
   };
 
   public language: ILanguage = {
-    id: '',
+    idLanguage: null,
     name: '',
     description: '',
     image: '',

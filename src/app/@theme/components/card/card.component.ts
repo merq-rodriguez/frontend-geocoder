@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from "@angular/core";
-import { ITheme } from 'src/app/@core/entities/theme.interface';
 import { ICardTest, ICardTheme, ICardSubTheme } from './ICard.interface';
 
 

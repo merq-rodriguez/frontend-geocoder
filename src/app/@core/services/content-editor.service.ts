@@ -1,16 +1,19 @@
 import { Injectable } from '@angular/core';
 import { of as observableOf ,Observable, BehaviorSubject } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import { ContentEditorData } from '../data/content-editor.data';
 
 @Injectable()
-export class ContentEditorService {
+export class ContentEditorService implements ContentEditorData {
     public content;
-    public dataStore = new BehaviorSubject(this.content);    
-    data$: Observable<any> = this.dataStore.asObservable();
+    public subject = new BehaviorSubject(this.content);    
+   // data$: Observable<any> = this.subject.asObservable();
 
-    constructor(private http: HttpClient) { }
+    constructor() { }
 
-    loadContent(){
-
+    setBehaviorView(behave: Object) { 
+        this.subject.next(behave); 
+    } 
+    getBehaviorView(): Observable<any> { 
+        return this.subject.asObservable(); 
     }
 }
