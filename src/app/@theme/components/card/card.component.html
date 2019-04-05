@@ -32,7 +32,7 @@
 
           <div class="col-4">
             <mat-card-content>
-              <button mat-icon-button color="primary" class="btn-success pull-right  btn-just-icon">
+              <button (click)="updateItem()" mat-icon-button color="primary" class="btn-success pull-right  btn-just-icon">
                 <i class="material-icons"> edit </i>
               </button>
             </mat-card-content>
@@ -40,7 +40,7 @@
 
           <div class="col-4">
             <mat-card-content>
-              <button mat-icon-button color="primary" class="btn-success pull-right  btn-just-icon">
+              <button (click)="showItem()" mat-icon-button color="primary" class="btn-success pull-right  btn-just-icon">
                 <i class="material-icons"> visibility </i>
               </button>
             </mat-card-content>
@@ -48,7 +48,7 @@
 
           <div class="col-4">
             <mat-card-content>
-              <button mat-icon-button color="primary" class="btn-success pull-right  btn-just-icon">
+              <button (click)="deleteItem()" mat-icon-button color="primary" class="btn-success pull-right  btn-just-icon">
                 <i class="material-icons"> delete </i>
               </button>
             </mat-card-content>

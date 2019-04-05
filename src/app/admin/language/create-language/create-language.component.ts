@@ -96,7 +96,6 @@ export class CreateLanguageComponent implements OnInit {
     }else{
       this.editorService.getBehaviorContent()
           .subscribe(content => this.newTheme.content = content);
-         // .subscribe(content =>  console.log(` Eyyyyyyyy ${content}`));
       let _theme: ICardTheme = {
         id: uuid(),
         name: this.newTheme.name,
@@ -111,13 +110,15 @@ export class CreateLanguageComponent implements OnInit {
       this.openSnackBar("Has creado un nuevo tema","Aceptar");
       this.clearTheme();
       console.log(this.arrayTheme)
-     // this.editorService.setBehaviorView()
     }
     
   }
-saveThemes(){
- 
-}
+
+  getAction($event){
+    console.log($event);
+  }
+
+  saveThemes(){}
 
   saveLanguage(){
     if(this.emptyTextfieldLanguage()){
