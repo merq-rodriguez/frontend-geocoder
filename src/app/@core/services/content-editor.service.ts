@@ -4,16 +4,15 @@ import { ContentEditorData } from '../data/content-editor.data';
 
 @Injectable()
 export class ContentEditorService implements ContentEditorData {
-    public content;
-    public subject = new BehaviorSubject(this.content);    
-   // data$: Observable<any> = this.subject.asObservable();
+    private contentSource = new BehaviorSubject<Object>({});    
+    public content$ = this.contentSource.asObservable();
 
     constructor() { }
 
-    setBehaviorView(behave: Object) { 
-        this.subject.next(behave); 
+    setBehaviorContent(content: Object) { 
+        this.contentSource.next(content); 
     } 
-    getBehaviorView(): Observable<any> { 
-        return this.subject.asObservable(); 
+    getBehaviorContent(): Observable<any> { 
+        return this.content$; 
     }
 }

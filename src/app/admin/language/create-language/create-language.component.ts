@@ -12,6 +12,7 @@ import { fuseAnimations } from 'src/app/@theme/animations';
 import { ICardTheme } from 'src/app/@theme/components/card/ICard.interface';
 import { ITheme } from 'src/app/@core/data/theme.data';
 import { ILanguage } from 'src/app/@core/data/language.data';
+import { ContentEditorService } from 'src/app/@core/services/content-editor.service';
 
 
 
@@ -46,13 +47,20 @@ export class CreateLanguageComponent implements OnInit {
     description: '',
     image: '',
   }
-  constructor(private _formBuilder: FormBuilder, private snackBar: MatSnackBar) {}
+  constructor(
+    private _formBuilder: FormBuilder, 
+    private snackBar: MatSnackBar,
+    private editorService: ContentEditorService
+  ) {
+   // this.editorService.setBehaviorContent('Hola');
+  }
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
     });
   }
+
 
 
   private emptyTextfieldTheme(){
@@ -71,6 +79,7 @@ export class CreateLanguageComponent implements OnInit {
       description: '',
       image: ''
     };
+    this.editorService.setBehaviorContent('');
   }
 
 
@@ -81,32 +90,44 @@ export class CreateLanguageComponent implements OnInit {
     subtitle: ''
   }
 
-  addTheme(){
-    console.log(this.newTheme)
+  public addTheme(){
     if(this.emptyTextfieldTheme()){
       this.openSnackBar("Existen campos vacios","Aceptar")
     }else{
+      this.editorService.getBehaviorContent()
+          .subscribe(content => this.newTheme.content = content);
+         // .subscribe(content =>  console.log(` Eyyyyyyyy ${content}`));
       let _theme: ICardTheme = {
         id: uuid(),
         name: this.newTheme.name,
         subtitle: 'Tema del lenguaje',
         description: this.newTheme.description,
+        content: this.newTheme.content,
         image: '../../../../assets/img/funciones-en-python-t1.jpg'
       //  image: this.newTheme.image
       }
+      console.log(_theme);
       this.arrayTheme.push(_theme);
       this.openSnackBar("Has creado un nuevo tema","Aceptar");
       this.clearTheme();
       console.log(this.arrayTheme)
+     // this.editorService.setBehaviorView()
     }
     
   }
+saveThemes(){
+ 
+}
 
-  getLanguage(){
+  saveLanguage(){
     if(this.emptyTextfieldLanguage()){
       this.openSnackBar("Existen campos vacios","Aceptar");
     }
     console.log(this.language)
+  }
+
+  ngOnDestroy(){
+   
   }
 
   ngOnInit() {

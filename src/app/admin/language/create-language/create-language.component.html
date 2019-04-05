@@ -82,7 +82,7 @@
                             [(ngModel)]="language.image" />
                           <button mat-fab class="add-file-button mat-warn" (click)="fileInput.click()"
                             aria-label="Add file" [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
-                            <mat-icon>add</mat-icon>
+                            <mat-icon>cloud_upload</mat-icon>
                           </button>
 
                         </div>
@@ -93,7 +93,7 @@
                   </mat-card>
 
                   <div>
-                    <button mat-button matStepperNext (click)="getLanguage()">Siguiente</button>
+                    <button mat-button matStepperNext (click)="saveLanguage()">Siguiente</button>
                   </div>
                 </form>
               </mat-step>
@@ -139,17 +139,16 @@
                         </div>
                       </div>
                       <hr />
-                      <ngx-editor></ngx-editor>
+
+                      <!-- EDITOR NGX -->
+                      <ngx-editor [content]="editorService.content$ | async"></ngx-editor>
+                      <!-- END EDITOR NGX -->
                       <hr />
                       <div class="row">
                         <div class="col-md-11">
                           <mat-form-field class="example-full-width">
-                            <textarea 
-                            matInput
-                            formControlName="imageFakeThemeCtrl" 
-                            [(ngModel)]="newTheme.image" 
-                            placeholder="Cargar imagen" 
-                            rows="1">
+                            <textarea matInput formControlName="imageFakeThemeCtrl" [(ngModel)]="newTheme.image"
+                              placeholder="Cargar imagen" rows="1">
                           </textarea>
                           </mat-form-field>
                         </div>
@@ -157,19 +156,11 @@
 
                           <!-- ADD FILE BUTTON -->
 
-                          <input 
-                          hidden 
-                          type="file"
-                          #fileInputTheme 
-                          formControlName="imageThemeCtrl"
-                          [(ngModel)]="newTheme.image" />
-                          <button 
-                          mat-fab 
-                          class="add-file-button mat-warn" 
-                          (click)="fileInputTheme.click()"
-                          aria-label="Add file" 
-                          [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
-                            <mat-icon>add</mat-icon>
+                          <input hidden type="file" #fileInputTheme formControlName="imageThemeCtrl"
+                            [(ngModel)]="newTheme.image" />
+                          <button mat-fab class="add-file-button mat-warn" (click)="fileInputTheme.click()"
+                            aria-label="Add file" [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                            <mat-icon>cloud_upload</mat-icon>
                           </button>
 
                         </div>
@@ -196,7 +187,7 @@
                   </div>
 
                   <hr>
-                  
+
 
 
 

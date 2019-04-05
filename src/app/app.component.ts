@@ -8,7 +8,6 @@ import { UserService } from './@core/services/user.service';
 })
 export class AppComponent {
  
-  constructor(){
-  }
+  constructor(){}
 
 }
