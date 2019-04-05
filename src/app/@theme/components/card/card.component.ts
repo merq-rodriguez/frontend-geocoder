@@ -39,8 +39,8 @@ export class CardComponent implements OnInit {
   updateItem(){
     this.action.emit({action: 'update', item: this.data})
   }
-  showItem(){
+/*   showItem(){
     this.action.emit({action: 'show', item: this.data})
   }
-
+ */
 }
