@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-
+import * as _ from 'lodash';
 import {
   FormControl,
   FormBuilder,
@@ -23,6 +23,7 @@ import { ContentEditorService } from 'src/app/@core/services/content-editor.serv
   styleUrls: ["./create-language.component.css"]
 })
 export class CreateLanguageComponent implements OnInit {
+  isUpdated: boolean = false;
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   isOptional = true;
@@ -83,12 +84,6 @@ export class CreateLanguageComponent implements OnInit {
   }
 
 
-  theme = {
-    name : 'Tipos de funciones',
-    description: 'Estudio de Funciones: Función. FUNCIÓN: En matemáticas, una función f es una relación entre un conjunto dado X (el dominio) y otro conjunto de elementos Y (el codominio) de forma que a cada elemento x del dominio le corresponde un único elemento del codominio f(x).',
-    image: '../../../../assets/img/funciones-en-python-t1.jpg',
-    subtitle: ''
-  }
 
   public addTheme(){
     if(this.emptyTextfieldTheme()){
@@ -105,20 +100,75 @@ export class CreateLanguageComponent implements OnInit {
         image: '../../../../assets/img/funciones-en-python-t1.jpg'
       //  image: this.newTheme.image
       }
-      console.log(_theme);
       this.arrayTheme.push(_theme);
       this.openSnackBar("Has creado un nuevo tema","Aceptar");
       this.clearTheme();
-      console.log(this.arrayTheme)
     }
     
   }
 
-  getAction($event){
-    console.log($event);
+  getAction(event){
+    let action:string = event['action'];
+    let data: ICardTheme = event['item'];
+    
+    switch(action){
+      case 'update':
+        this.isUpdated = true;
+        
+          this.newTheme = {
+            id: data.id,
+            name: data.name,
+            description: data.description,
+            content: data.description,
+          //  image: data.image
+          }
+        
+        console.log(data.content);
+        this.editorService.setBehaviorContent(this.newTheme.content);
+      break;
+      case 'delete':
+        _.remove(this.arrayTheme, (n) =>  n.id === data.id);
+      break;
+    
+      default:
+        console.log("No existe esa opcion")
+    }
+    
   }
 
-  saveThemes(){}
+  public updateTheme(){
+    if(this.emptyTextfieldTheme()){
+      this.openSnackBar("Existen campos vacios","Aceptar")
+    }else{
+      this.editorService.getBehaviorContent()
+          .subscribe(content => this.newTheme.content = content);
+      let _themeUpdated: ICardTheme = {
+        id: this.newTheme.id,
+        name: this.newTheme.name,
+        subtitle: 'Tema',
+        description: this.newTheme.description,
+        content: this.newTheme.content,
+        image: '../../../../assets/img/funciones-en-python-t1.jpg'
+      //  image: this.newTheme.image
+      }
+      console.log(_themeUpdated);
+       //this.arrayTheme.map(theme => theme.id === _themeUpdated.id ? (theme = _themeUpdated): theme ); 
+        this.arrayTheme.map(theme => {
+          if(theme.id === _themeUpdated.id){
+             theme.id = _themeUpdated.id,
+             theme.image = _themeUpdated.image,
+             theme.content = _themeUpdated.content,
+             theme.description = _themeUpdated.description,
+             theme.name = _themeUpdated.name,
+             theme.subtitle = _themeUpdated.subtitle
+          }
+        });
+       console.log(this.arrayTheme);
+       this.isUpdated = false;
+      this.openSnackBar("Has actualizado un tema","Aceptar");
+      this.clearTheme();
+    }
+  }
 
   saveLanguage(){
     if(this.emptyTextfieldLanguage()){
@@ -127,9 +177,7 @@ export class CreateLanguageComponent implements OnInit {
     console.log(this.language)
   }
 
-  ngOnDestroy(){
-   
-  }
+ 
 
   ngOnInit() {
 
@@ -137,14 +185,22 @@ export class CreateLanguageComponent implements OnInit {
       nameLanguageCtrl:         [this.language.name, Validators.required],
       descriptionLanguageCtrl:  [this.language.description, Validators.required],
       imageLanguageCtrl:        ['', Validators.required],
-      imageFakeLanguageCtrl: new FormControl({  value: this.language.image,  disabled: true},[ Validators.required ])
+      imageFakeLanguageCtrl: new FormControl(
+        { 
+           value: this.language.image, disabled: true
+        },[ Validators.required ])
     });
     
     this.secondFormGroup = this._formBuilder.group({
       nameThemeCtrl: ['', Validators.required],
       descriptionThemeCtrl: ['', Validators.required],
       imageThemeCtrl: ['', Validators.required],
-      imageFakeThemeCtrl: new FormControl({  value: this.language.image,  disabled: true},[ Validators.required ])
+      imageFakeThemeCtrl: new FormControl(
+        {  
+          value: '', disabled: false
+        },
+          [ Validators.required ]
+        )
 
      
 

@@ -170,23 +170,14 @@ export class TestQuestionComponent implements OnInit {
   }
 
   removeQuestion(id: number) {
-    console.log(id);
+/*     console.log(id);
     _.remove(this.questionList, question => {
       return (question.id === id);
     });
     console.log("LISTAAAAAAAAAA --");
-    console.log(this.questionList)
+    console.log(this.questionList) */
   }
 
-  getNextId(): number {
-    if (this.countQuestion === 0) {
-      this.countQuestion++;
-      return 1;
-    } else {
-      this.countQuestion++;
-      return this.countQuestion;
-    }
-  }
 
   setModeCoder() {
     this.monacoEditState.checked = this.monacoEditState.checked ? false : true;

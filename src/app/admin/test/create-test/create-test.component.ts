@@ -164,22 +164,22 @@ export class CreateTestComponent implements OnInit {
   }
 
   removeQuestion(id: number) {
-    console.log(id);
+/*     console.log(id);
     _.remove(this.exercisesList, question => {
       return (question.id === id);
     });
     console.log("LISTAAAAAAAAAA --");
-    console.log(this.exercisesList)
+    console.log(this.exercisesList) */
   }
 
-  getNextId(): number {
-    if (this.countQuestion === 0) {
+  getNextId(){
+  /*   if (this.countQuestion === 0) {
       this.countQuestion++;
       return 1;
     } else {
       this.countQuestion++;
       return this.countQuestion;
-    }
+    } */
   }
 
   setModeCoder() {
