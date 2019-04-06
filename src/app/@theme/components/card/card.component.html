@@ -28,25 +28,23 @@
     <hr>
     <div class="card-footer">
       <div class="container">
-        <div class="row">
+        <div class="row d-flex justify-content-center">
 
           <div class="col-4">
             <mat-card-content>
-              <button (click)="updateItem()" mat-icon-button color="primary" class="btn-success pull-right  btn-just-icon">
+              <button 
+              (click)="updateItem()" 
+              mat-icon-button 
+              color="primary" 
+              class="btn-success pull-right  btn-just-icon">
                 <i class="material-icons"> edit </i>
               </button>
             </mat-card-content>
           </div>
 
-     <!--      <div class="col-4">
-            <mat-card-content>
-              <button (click)="showItem()" mat-icon-button color="primary" class="btn-success pull-right  btn-just-icon">
-                <i class="material-icons"> visibility </i>
-              </button>
-            </mat-card-content>
-          </div> -->
 
-          <div class="col-4">
+
+          <div class="col-3">
             <mat-card-content>
               <button (click)="deleteItem()" mat-icon-button color="primary" class="btn-success pull-right  btn-just-icon">
                 <i class="material-icons"> delete </i>

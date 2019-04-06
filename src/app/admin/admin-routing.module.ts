@@ -2,7 +2,6 @@ import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
-import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 import { ExerciseComponent } from './exercise/exercise.component';
 
 const routes: Routes = [
@@ -15,7 +14,7 @@ const routes: Routes = [
       { path: 'users',       loadChildren: './users/users.module#UsersModule' },
       { path: 'competences', loadChildren: './competence/competence.module#CompetenceModule' },
       { path: 'tests',       loadChildren: './test/test.module#TestModule' },
-      { path: 'languages',   loadChildren: './language/language.module#LanguageModule' },
+      { path: 'thematic-content',   loadChildren: './thematic-content/thematic-content.module#ThematicModule' },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: '**', redirectTo: 'dashboard' }
     ]
@@ -32,6 +31,5 @@ export class AdminRoutingModule { }
 export const routedComponents = [
    AdminComponent, 
    DashboardComponent,
-   AdminLayoutComponent,
    ExerciseComponent
   ];

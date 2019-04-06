@@ -1,3 +1,5 @@
+import { ISubtheme } from 'src/app/@core/data/subtheme-data';
+
 export interface  ICardTheme{
     id: string;
     name: string;
@@ -5,6 +7,7 @@ export interface  ICardTheme{
     image: string;
     subtitle: string;
     content?: string;
+    subthemes?: Array<ISubtheme>
 }
 
 

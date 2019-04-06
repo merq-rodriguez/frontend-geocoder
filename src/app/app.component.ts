@@ -1,5 +1,12 @@
 import { Component } from '@angular/core';
-import { UserService } from './@core/services/user.service';
+
+export interface Tile {
+  color: string;
+  cols: number;
+  rows: number;
+  text: string;
+}
+
 
 @Component({
   selector: 'app-root',
@@ -7,7 +14,7 @@ import { UserService } from './@core/services/user.service';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
- 
-  constructor(){}
+
+  constructor() { }
 
 }

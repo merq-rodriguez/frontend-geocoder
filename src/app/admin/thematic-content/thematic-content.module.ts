@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
-import {  routedComponents, LanguageRoutingModule } from './language-routing.module';
+import {  routedComponents, ThematicRoutingModule } from './thematic-routing.module';
 import { ComponentsModule } from 'src/app/@theme/components/components.module';
 import { CKEditorModule } from 'ng2-ckeditor';
+import { ThemeComponent } from './theme/theme.component';
 
 
 @NgModule({
   imports: [
     ComponentsModule,
-    LanguageRoutingModule,
+    ThematicRoutingModule,
     CKEditorModule
   ],
   declarations: [
-    ...routedComponents
+    ...routedComponents,
+    ThemeComponent
   ],
 })
-export class LanguageModule { }
+export class ThematicModule { }

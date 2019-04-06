@@ -1,19 +1,22 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { LanguageComponent } from './language.component';
-import { LanguageMenuComponent } from './menu-language/language.component';
+import {  ThematicContentComponent } from './thematic-content.component';
+import { LanguageMenuComponent } from './menu-language/menu-language.component';
 import { LanguageListComponent } from './language-list/language-list.component';
 import { CreateLanguageComponent } from './create-language/create-language.component';
+import { SubthemeComponent } from './subtheme/subtheme.component';
+import { ThemeComponent } from './theme/theme.component';
+import { ThematicComponent } from './thematic/thematic.component';
 
 
 
 const routes: Routes = [{
   path: '',
-  component: LanguageComponent,
+  component: ThematicContentComponent,
   children: [
     { path: 'menu-language',    component: LanguageMenuComponent   }, 
     { path: 'language-list',    component: LanguageListComponent   },
-    { path: 'create-language',  component: CreateLanguageComponent },
+    { path: 'create-thematic',  component: ThematicComponent },
   ],
 }];
 
@@ -21,11 +24,16 @@ const routes: Routes = [{
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class LanguageRoutingModule { }
+export class ThematicRoutingModule { }
 
 export const routedComponents = [
-  LanguageComponent,
+  ThematicContentComponent,
+  ThematicComponent,
   LanguageMenuComponent,
   LanguageListComponent,
-  CreateLanguageComponent
+  CreateLanguageComponent,
+  SubthemeComponent,
+  ThemeComponent,
+  
+
 ];

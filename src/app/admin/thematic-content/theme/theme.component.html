@@ -1,0 +1,88 @@
+<mat-card>
+  <div class="row">
+    <div class="col-md-2 text-center">
+      <img class="image-step2" src="../../../../../assets/img/coder2.png" />
+    </div>
+
+    <div class="col-md-10">
+      <label for="" class="info-label">
+        Aqui debes crear los temas del lenguaje de programacion deseado, ten en cuenta que los temas
+        se descomponen en subtemas.
+      </label>
+    </div>
+  </div>
+</mat-card>
+
+<br />
+<mat-card>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <mat-form-field class="example-full-width">
+          <input [(ngModel)]="newTheme.name" formControlName="nameThemeCtrl" matInput
+            placeholder="Nombre del tema" required />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10">
+        <mat-form-field class="example-full-width">
+          <textarea matInput formControlName="descriptionThemeCtrl" [(ngModel)]="newTheme.description"
+            placeholder="Descripcion" rows="3" required></textarea>
+        </mat-form-field>
+      </div>
+    </div>
+    <hr />
+
+    <!-- EDITOR NGX -->
+    <ngx-editor [content]="editorService.content$ | async"></ngx-editor>
+    <!-- END EDITOR NGX -->
+    <hr />
+    <div class="row">
+      <div class="col-md-11">
+        <mat-form-field class="example-full-width">
+          <textarea matInput formControlName="imageFakeThemeCtrl" [(ngModel)]="newTheme.image"
+            placeholder="Cargar imagen" rows="1">
+                    </textarea>
+        </mat-form-field>
+      </div>
+      <div class="col-md-1">
+
+        <!-- ADD FILE BUTTON -->
+
+        <input hidden type="file" #fileInputTheme formControlName="imageThemeCtrl" [(ngModel)]="newTheme.image" />
+        <button mat-fab class="add-file-button mat-warn" (click)="fileInputTheme.click()" aria-label="Add file"
+          [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+          <mat-icon>cloud_upload</mat-icon>
+        </button>
+
+      </div>
+
+    </div>
+    <div class="row">
+      <button (click)="addTheme()" mat-raised-button matTooltip="Crear Tema" *ngIf="!isUpdated"
+        [matTooltipPosition]="'above'" type="button" class="btn btn-success pull-right">
+        Añadir
+      </button>
+      <button (click)="updateTheme()" mat-raised-button matTooltip="Crear Tema" *ngIf="isUpdated"
+        [matTooltipPosition]="'above'" type="button" class="btn btn-success pull-right">
+        Actualizar
+      </button>
+    </div>
+
+
+  </div>
+</mat-card>
+<br />
+
+<div class="container">
+  <div class="row">
+    <div *ngFor="let item of arrayTheme">
+      <app-card [item]="item" [type]="'theme'" (action)="getAction($event)"></app-card>
+    </div>
+  </div>
+</div>
+
+<hr>
+

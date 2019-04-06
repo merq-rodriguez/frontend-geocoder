@@ -62,6 +62,7 @@ import {
   MatTabsModule,
   MatTreeModule
 } from "@angular/material";
+import { AdminLayoutComponent } from '../layouts/admin-layout.component';
 
 
 
@@ -120,7 +121,8 @@ const COMPONENTS = [
   MapComponent,
   CardComponent,
   EditorComponent,
-  DialogContentExampleDialog
+  DialogContentExampleDialog,
+  AdminLayoutComponent
 ];
 
 const MODULES_FOR_ROOT = [
