@@ -63,6 +63,7 @@ import {
   MatTreeModule
 } from "@angular/material";
 import { AdminLayoutComponent } from '../layouts/admin-layout.component';
+import { AsideComponent } from './aside/aside.component';
 
 
 
@@ -116,6 +117,7 @@ const CDK_MODULES = [
 const COMPONENTS = [
   FooterComponent,
   NavbarComponent,
+  AsideComponent,
   SidebarComponent,
   MonacoComponent,
   MapComponent,
