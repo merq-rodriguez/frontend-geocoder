@@ -19,7 +19,7 @@
     <div class="row">
       <div class="col-md-8">
         <mat-form-field class="example-full-width">
-          <input [(ngModel)]="newTheme.name" formControlName="nameThemeCtrl" matInput
+          <input [(ngModel)]="newTheme.name"  matInput
             placeholder="Nombre del tema" required />
         </mat-form-field>
       </div>
@@ -28,7 +28,7 @@
     <div class="row">
       <div class="col-md-10">
         <mat-form-field class="example-full-width">
-          <textarea matInput formControlName="descriptionThemeCtrl" [(ngModel)]="newTheme.description"
+          <textarea matInput  [(ngModel)]="newTheme.description"
             placeholder="Descripcion" rows="3" required></textarea>
         </mat-form-field>
       </div>
@@ -42,16 +42,20 @@
     <div class="row">
       <div class="col-md-11">
         <mat-form-field class="example-full-width">
-          <textarea matInput formControlName="imageFakeThemeCtrl" [(ngModel)]="newTheme.image"
-            placeholder="Cargar imagen" rows="1">
-                    </textarea>
+          <textarea 
+          matInput  
+          disabled
+          [(ngModel)]="newTheme.image"
+          placeholder="Cargar imagen" 
+          rows="1">
+          </textarea>
         </mat-form-field>
       </div>
       <div class="col-md-1">
 
         <!-- ADD FILE BUTTON -->
 
-        <input hidden type="file" #fileInputTheme formControlName="imageThemeCtrl" [(ngModel)]="newTheme.image" />
+        <input hidden type="file" #fileInputTheme  [(ngModel)]="newTheme.image" />
         <button mat-fab class="add-file-button mat-warn" (click)="fileInputTheme.click()" aria-label="Add file"
           [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
           <mat-icon>cloud_upload</mat-icon>

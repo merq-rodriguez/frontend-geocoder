@@ -21,12 +21,8 @@ import { ContentEditorService } from 'src/app/@core/services/content-editor.serv
 })
 export class ThemeComponent implements OnInit {
 
-
-  //==============================
-
   isUpdated: boolean = false;
-  firstFormGroup: FormGroup;
-  secondFormGroup: FormGroup;
+
 
   public arrayTheme: ICardTheme[] = []
 
@@ -163,16 +159,6 @@ export class ThemeComponent implements OnInit {
 
 
   ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      nameThemeCtrl: ['', Validators.required],
-      descriptionThemeCtrl: ['', Validators.required],
-      imageThemeCtrl: ['', Validators.required],
-      imageFakeThemeCtrl: new FormControl(
-        {
-          value: '', disabled: true
-        },
-        [Validators.required]
-      )
-    });
+   
   }
 }

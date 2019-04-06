@@ -20,7 +20,7 @@ import { ILanguage } from 'src/app/@core/data/language.data';
   animations: fuseAnimations
 })
 export class CreateLanguageComponent implements OnInit {
-
+  
   isUpdated: boolean = false;
   firstFormGroup: FormGroup;
 
@@ -61,7 +61,7 @@ export class CreateLanguageComponent implements OnInit {
       imageLanguageCtrl: ['', Validators.required],
       imageFakeLanguageCtrl: new FormControl(
         {
-          value: this.language.image, disabled: true
+            value: this.language.image, disabled: true
         }, [Validators.required])
     });
 

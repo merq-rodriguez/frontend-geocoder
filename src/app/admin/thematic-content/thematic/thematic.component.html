@@ -18,14 +18,17 @@
       </ol>
     </nav>
 
+
+
+
+
+
     <div class="row">
       <div class="col-md-12">
         <div class="card">
           <div class="card-header card-header-success">
             <h4 class="card-title">Crear un lenguaje</h4>
-            <p class="card-category">
-              Aqui puedes crear un lenguaje.
-            </p>
+            <p class="card-category"> Aqui puedes crear un lenguaje. </p>
           </div>
           <div class="card-body">
             <mat-horizontal-stepper linear #stepper>
@@ -33,7 +36,11 @@
                 <form [formGroup]="firstFormGroup">
                   <ng-template matStepLabel>Datos del lenguaje</ng-template>
                         <app-create-language></app-create-language>
-                        <button mat-button matStepperNext>Siguiente</button>
+                        <button 
+                            mat-button 
+                            matStepperNext 
+                            (click)="getLanguage()"> Guardar y continuar
+                        </button>
                 </form>
               </mat-step>
 
@@ -41,19 +48,21 @@
                 <form [formGroup]="secondFormGroup">
                   <ng-template matStepLabel>Crear temas </ng-template>
                     <app-theme></app-theme>
-                    <button mat-button matStepperPrevious>Atras</button>
-                    <button mat-button matStepperNext>Continuar & guardar</button>
+                    <button 
+                        mat-button 
+                        matStepperPrevious>Atras
+                    </button>
+                    <button 
+                        mat-button 
+                        matStepperNext
+                        (click)="getThemesArray()">Continuar & guardar
+                    </button>
                 </form>
               </mat-step>
 
               <mat-step>
                 <ng-template matStepLabel> Asignar contenido tematico</ng-template>
-                <app-subthemes></app-subthemes>
-
-
-
-
-
+                      <app-subthemes></app-subthemes>
 
                 <div>
                   <button mat-button matStepperPrevious>Atras</button>

@@ -20,7 +20,7 @@
     <div class="row">
       <div class="col-md-8">
         <mat-form-field class="example-full-width">
-          <input [(ngModel)]="language.name" formControlName="nameLanguageCtrl" matInput
+          <input [(ngModel)]="language.name"  matInput
             placeholder="Nombre del lenguaje" required />
         </mat-form-field>
       </div>
@@ -29,7 +29,7 @@
     <div class="row">
       <div class="col-md-10">
         <mat-form-field class="example-full-width">
-          <textarea [(ngModel)]="language.description" formControlName="descriptionLanguageCtrl" matInput
+          <textarea [(ngModel)]="language.description"  matInput
             placeholder="Descripcion" rows="3" required></textarea>
         </mat-form-field>
       </div>
@@ -38,15 +38,20 @@
     <div class="row">
       <div class="col-md-11">
         <mat-form-field class="example-full-width">
-          <textarea formControlName="imageFakeLanguageCtrl" [(ngModel)]="language.image" matInput
-            placeholder="Cargar imagen" rows="1"></textarea>
+          <textarea  
+            disabled
+            [(ngModel)]="language.image" 
+            matInput 
+            placeholder="Cargar imagen" 
+            rows="1">
+          </textarea>
         </mat-form-field>
       </div>
       <div class="col-md-1">
 
         <!-- ADD FILE BUTTON -->
 
-        <input hidden type="file" #fileInput formControlName="imageLanguageCtrl" [(ngModel)]="language.image" />
+        <input hidden type="file" #fileInput  [(ngModel)]="language.image" />
         <button mat-fab class="add-file-button mat-warn" (click)="fileInput.click()" aria-label="Add file"
           [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
           <mat-icon>cloud_upload</mat-icon>
