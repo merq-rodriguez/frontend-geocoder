@@ -1,19 +1,21 @@
 import { ModuleWithProviders, NgModule, Optional, SkipSelf } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { of as observableOf } from 'rxjs';
 import {  UserService } from './services/user.service';
 import { ServiceDataModule } from './services/services.module';
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { UserData } from './data/user.data';
 import { ContentEditorData } from './data/content-editor.data';
 import { ContentEditorService } from './services/content-editor.service';
+import { ThemeListData } from './data/theme-list.data';
+import { ThemeListService } from './services/themeList.service';
 
 
 
 
 const DATA_SERVICES = [
   { provide: UserData, useClass: UserService },
-  { provide:  ContentEditorData, useClass: ContentEditorService}
+  { provide:  ContentEditorData, useClass: ContentEditorService},
+  { provide:  ThemeListData, useClass: ThemeListService }
   
 ];
 
