@@ -64,6 +64,7 @@ import {
 } from "@angular/material";
 import { AdminLayoutComponent } from '../layouts/admin-layout.component';
 import { AsideComponent } from './aside/aside.component';
+import { CardMiniComponent } from './card-mini/card-mini.component';
 
 
 
@@ -124,6 +125,7 @@ const COMPONENTS = [
   CardComponent,
   EditorComponent,
   DialogContentExampleDialog,
+  CardMiniComponent,
   AdminLayoutComponent
 ];
 

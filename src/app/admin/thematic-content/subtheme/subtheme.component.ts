@@ -21,14 +21,14 @@ export class SubthemeComponent implements OnInit {
     content: 'xxxxxxx',
     description: 'xxxxxxxx',
     id : 'xxxxxxxx',
-    image: '', 
-    name: '',
+    image: '../../../../img/coder2.png', 
+    name: 'xxxxxxxxxxx',
     subtitle: 'Theme'
   } 
   arrayThemes: ICardTheme[] = [
     {
       id: '',
-      name: 'Operaciones de algo',
+      name: 'Operaciones en Observables',
       subtitle: 'sssssss',
       description: 'sssss',
       content: 'ssssss',
@@ -37,17 +37,17 @@ export class SubthemeComponent implements OnInit {
         {
           name: 'Funciones',
           description: '',
-          image: ''
+          image: '../../../../assets/img/cover.jpeg'
         },
         {
           name: 'Operadores logicos',
           description: '',
-          image: ''
+          image: '../../../../assets/img/funciones-en-python-t1.jpg'
         },
         {
           name: 'Clases',
           description: '',
-          image: ''
+          image: '../../../../assets/img/coder2.png'
         }
       ],
     },
@@ -57,8 +57,24 @@ export class SubthemeComponent implements OnInit {
       description: 'sssss',
       content: 'ssssss',
       image: 'ssssssss',
-      subthemes: [],
       name: 'Orientacion a objetos',
+      subthemes: [
+        {
+          name: 'Funciones',
+          description: '',
+          image: '../../../../assets/img/cover.jpeg'
+        },
+        {
+          name: 'Operadores logicos',
+          description: '',
+          image: '../../../../assets/img/funciones-en-python-t1.jpg'
+        },
+        {
+          name: 'Clases',
+          description: '',
+          image: '../../../../assets/img/coder2.png'
+        }
+      ],
     },
     {
       id: 'ssssss',
@@ -66,8 +82,24 @@ export class SubthemeComponent implements OnInit {
       description: 'sssss',
       content: 'ssssss',
       image: 'ssssssss',
-      subthemes: [],
       name: 'ssssssssss',
+      subthemes: [
+        {
+          name: 'Funciones',
+          description: '',
+          image: '../../../../assets/img/cover.jpeg'
+        },
+        {
+          name: 'Operadores logicos',
+          description: '',
+          image: '../../../../assets/img/funciones-en-python-t1.jpg'
+        },
+        {
+          name: 'Clases',
+          description: '',
+          image: '../../../../assets/img/coder2.png'
+        }
+      ],
     },
     {
       id: 'ssssss',
@@ -75,8 +107,24 @@ export class SubthemeComponent implements OnInit {
       description: 'sssss',
       content: 'ssssss',
       image: 'ssssssss',
-      subthemes: [],
       name: 'ssssssssss',
+      subthemes: [
+        {
+          name: 'Funciones',
+          description: '',
+          image: '../../../../assets/img/cover.jpeg'
+        },
+        {
+          name: 'Operadores logicos',
+          description: '',
+          image: '../../../../assets/img/funciones-en-python-t1.jpg'
+        },
+        {
+          name: 'Clases',
+          description: '',
+          image: '../../../../assets/img/coder2.png'
+        }
+      ],
     }
   ]
 

@@ -1,7 +1,13 @@
 .section-heading {
   padding: 5px 10px;
+
   font-size: 15px;
   font-weight: bold;
+}
+
+.add-subtheme{
+  margin-bottom: 15px;
+  background: rgb(159, 162, 165);
 }
  
 .drag-container {
@@ -16,7 +22,7 @@
 }
  
 .item-list {
-  min-height: 60px;
+  min-height: 80px;
   border-radius: 4px;
   display: block;
 }
@@ -35,6 +41,7 @@
   background: white;
   font-size: 14px;
   border-radius: 20px;
+  min-height: 80px;
 }
  
 .cdk-drag-preview {

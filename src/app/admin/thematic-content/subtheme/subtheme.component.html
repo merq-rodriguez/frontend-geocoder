@@ -35,21 +35,44 @@
 
 
 <div class="container">
-  <div class="row">
+  <div class="row ">
     <div class="col-md-4" *ngFor="let theme of arrayThemes; let i=index">
-        <div class="drag-container" >
-            <div class="section-heading">{{ theme.name }}</div>
-        
-            <div 
-            cdkDropList 
-            #pendingList="cdkDropList" 
-            [cdkDropListData]="theme.subthemes" 
-            [cdkDropListConnectedTo]="[pendingList]"
-              class="item-list" (cdkDropListDropped)="drop($event)">
-              <div class="item-box" *ngFor="let item of theme.subthemes" cdkDrag>{{item.name}}</div>
-            </div>
+
+      <div class="drag-container">
+        <!--    -->
+        <div class="section-heading">
+          <div class="container">
+           <div class="row">
+              <div class="col-10">
+                  <p>{{ theme.name }}</p>
+                </div>
+                <div class="col-1">
+                  <button mat-icon-button color="primary" class="btn-success  btn-just-icon add-subtheme">
+                    <i class="material-icons"> add_circle </i>
+                  </button>
+                </div>
+           </div>
+          </div>
+
         </div>
+
+        <div cdkDropList #pendingList="cdkDropList" [cdkDropListData]="theme.subthemes"
+          [cdkDropListConnectedTo]="[pendingList]" class="item-list" (cdkDropListDropped)="drop($event)">
+          <!-- class="item-box" -->
+          <div *ngFor="let subtheme of theme.subthemes" cdkDrag>
+            <!--
+
+                LEER: HAY QUE HACER UNA NUEVA CARD BIEN CHIDA Y MAS PEQUEÑA
+                PARA PONERLA AQUI...
+                PD: ESTA DESALINEADO, HAY QUE CORREGIRLO...
+              -->
+
+            <app-card-mini [item]="subtheme" [type]="'theme'"></app-card-mini>
+
+          </div>
+        </div>
+      </div>
     </div>
-  
+
   </div>
 </div>
