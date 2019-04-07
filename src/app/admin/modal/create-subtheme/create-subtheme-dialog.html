@@ -2,17 +2,25 @@
 <div mat-dialog-content>
   <div class="container">
     <div class="row">
-      <div class="col-8">
-        <mat-form-field>
-          <input matInput [(ngModel)]="data.name" placeholder="Nombre del contenido tematico">
-        </mat-form-field>
-      </div>
-      <div class="col-8">
-        <mat-form-field>
-          <textarea matInput [(ngModel)]="data.description" placeholder="Descripcion" rows="3"></textarea>
-        </mat-form-field>
-      </div>
+     <div class="col-8">
+        <div class="col-8">
+            <mat-form-field>
+              <input matInput [(ngModel)]="data.name" placeholder="Nombre del contenido tematico">
+            </mat-form-field>
+          </div>
+          <div class="col-8">
+            <mat-form-field>
+              <textarea matInput [(ngModel)]="data.description" placeholder="Descripcion" rows="3"></textarea>
+            </mat-form-field>
+          </div>
+          
+     </div>
 
+     <div class="col-4">
+        <div class="image-container">
+          <img src="../../../../assets/img/">
+        </div>
+      </div>
       <div class="col-12">
         <div class="row">
           <div class="col-md-11">
@@ -45,6 +53,18 @@
           </div>
         </div>
       </div>
+
+      <div class="col-12" *ngIf="data.addVideo">
+         <div class="col-9">
+            <mat-form-field>
+                <input type="text" matInput placeholder="Pega aqui la url del video de youtube"> 
+            </mat-form-field>
+         </div>
+
+         <div class="col-12">
+            <youtube-player [videoId]="id" (ready)="savePlayer($event)" (change)="onStateChange($event)"></youtube-player>
+         </div>
+        </div>
 
       <div class="col-12">
         <ngx-editor></ngx-editor>

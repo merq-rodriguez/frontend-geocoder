@@ -33,7 +33,6 @@
     </div>
 </div> -->
 
-<button mat-raised-button (click)="openDialog()">Pick one</button>
 <div class="container">
   <div class="row ">
     <div class="col-md-4" *ngFor="let theme of arrayThemes; let i=index">
@@ -47,7 +46,7 @@
                   <p>{{ theme.name }}</p>
                 </div>
                 <div class="col-1">
-                  <button mat-icon-button color="primary" class="btn-success  btn-just-icon add-subtheme">
+                  <button mat-icon-button color="primary" class="btn-success  btn-just-icon add-subtheme" (click)="openDialog()">
                     <i class="material-icons"> add_circle </i>
                   </button>
                 </div>

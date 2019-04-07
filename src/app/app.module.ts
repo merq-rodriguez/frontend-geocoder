@@ -7,8 +7,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ComponentsModule } from './@theme/components/components.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
+import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { CoreModule } from './@core/core.module';
 
 
@@ -20,7 +19,8 @@ import { CoreModule } from './@core/core.module';
     BrowserAnimationsModule,
     AppRoutingModule,
     HttpClientModule,
-    CoreModule.forRoot()
+    CoreModule.forRoot(),
+    
    
   ],
   providers: [ { provide: APP_BASE_HREF, useValue: '/' },],
