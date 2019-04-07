@@ -1,32 +1,38 @@
-<h1 mat-dialog-title>Crear contenido</h1>
+<h1 mat-dialog-title>Crear contenido tematico</h1>
 <div mat-dialog-content>
   <div class="container">
-    <div class="row">
-     <div class="col-8">
-        <div class="col-8">
-            <mat-form-field>
-              <input matInput [(ngModel)]="data.name" placeholder="Nombre del contenido tematico">
-            </mat-form-field>
-          </div>
-          <div class="col-8">
-            <mat-form-field>
-              <textarea matInput [(ngModel)]="data.description" placeholder="Descripcion" rows="3"></textarea>
-            </mat-form-field>
-          </div>
-          
-     </div>
 
-     <div class="col-4">
-        <div class="image-container">
-          <img src="../../../../assets/img/">
+
+    <div class="row">
+      <div class="col-8">
+        <div class="col-12">
+          <mat-form-field>
+            <input matInput [(ngModel)]="data.name" placeholder="Nombre del contenido tematico">
+          </mat-form-field>
+        </div>
+        <div class="col-12">
+          <mat-form-field>
+            <textarea matInput [(ngModel)]="data.description" placeholder="Descripcion" rows="3"></textarea>
+          </mat-form-field>
         </div>
       </div>
+      <div class="col-4">
+        <div class="image-container">
+          <img src="../../../../assets/img/deadpool2.png" style="width: 100%; height: 100%;">
+        </div>
+      </div>
+    </div>
+
+    <br>
+    <br>
+
+    <div class="row">
       <div class="col-12">
         <div class="row">
           <div class="col-md-11">
             <mat-form-field class="example-full-width">
               <textarea matInput disabled [(ngModel)]="data.image" placeholder="Cargar imagen" rows="1">
-                  </textarea>
+                      </textarea>
             </mat-form-field>
           </div>
           <div class="col-md-1">
@@ -43,6 +49,9 @@
 
         </div>
       </div>
+    </div>
+
+    <div class="row">
       <div class="col-10">
         <div class="row">
           <div class="col-5">
@@ -53,23 +62,34 @@
           </div>
         </div>
       </div>
+    </div>
 
+    <div class="row">
       <div class="col-12" *ngIf="data.addVideo">
-         <div class="col-9">
-            <mat-form-field>
-                <input type="text" matInput placeholder="Pega aqui la url del video de youtube"> 
-            </mat-form-field>
-         </div>
-
-         <div class="col-12">
-            <youtube-player [videoId]="id" (ready)="savePlayer($event)" (change)="onStateChange($event)"></youtube-player>
-         </div>
+        <div class="col-9">
+          <mat-form-field>
+            <input type="text" [(ngModel)]="id" matInput placeholder="Pega aqui la url del video de youtube" (change)="getDestroy()">
+          </mat-form-field>
         </div>
 
+        <div class="col-12">
+            <youtube-player
+            *ngIf="_destroy"
+            [videoId]="id"
+            (ready)="savePlayer($event)"
+            (change)="onStateChange($event)"
+          ></youtube-player>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="col-12">
         <ngx-editor></ngx-editor>
       </div>
+    </div>
 
+    <div class="row">
       <div class="col-10">
         <div class="row">
           <div class="col-7">
@@ -80,10 +100,16 @@
           </div>
         </div>
       </div>
+    </div>
+
+
+    <div class="row">
       <div class="col-12" *ngIf="data.addCode">
         <app-monaco-code></app-monaco-code>
       </div>
     </div>
+
+
   </div>
 </div>
 <div mat-dialog-actions>

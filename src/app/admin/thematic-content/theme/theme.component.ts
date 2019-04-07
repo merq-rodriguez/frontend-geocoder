@@ -57,7 +57,7 @@ export class ThemeComponent implements OnInit {
       description: '',
       image: ''
     };
-    this.editorService.setBehaviorContent('');
+    this.editorService.setBehaviorContent(null);
   }
 
 

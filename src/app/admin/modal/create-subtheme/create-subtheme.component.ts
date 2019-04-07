@@ -1,6 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { ISubtheme } from 'src/app/@core/data/subtheme-data';
+import { fuseAnimations } from 'src/app/@theme/animations';
 
 export interface ISubthemeDialog{
   idSubtheme?: string;
@@ -19,6 +19,7 @@ export interface ISubthemeDialog{
 @Component({
   selector: 'create-subtheme-dialog',
   templateUrl: 'create-subtheme-dialog.html',
+  animations: fuseAnimations
 })
 export class CreateSubthemeDialog {
 
@@ -29,7 +30,7 @@ export class CreateSubthemeDialog {
   onNoClick(): void {
     this.dialogRef.close();
   }
-
+  _destroy = true;
   player: YT.Player;
   private id: string = 'qDuKsiwS5xw';
  
@@ -39,6 +40,10 @@ export class CreateSubthemeDialog {
   }
   onStateChange(event) {
     console.log('player state', event.data);
+  }
+  getDestroy(){
+    this._destroy = !this._destroy;
+    console.log(this._destroy)
   }
 
 }
