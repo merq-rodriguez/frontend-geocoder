@@ -1,0 +1,72 @@
+<h1 mat-dialog-title>Crear contenido</h1>
+<div mat-dialog-content>
+  <div class="container">
+    <div class="row">
+      <div class="col-8">
+        <mat-form-field>
+          <input matInput [(ngModel)]="data.name" placeholder="Nombre del contenido tematico">
+        </mat-form-field>
+      </div>
+      <div class="col-8">
+        <mat-form-field>
+          <textarea matInput [(ngModel)]="data.description" placeholder="Descripcion" rows="3"></textarea>
+        </mat-form-field>
+      </div>
+
+      <div class="col-12">
+        <div class="row">
+          <div class="col-md-11">
+            <mat-form-field class="example-full-width">
+              <textarea matInput disabled [(ngModel)]="data.image" placeholder="Cargar imagen" rows="1">
+                  </textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-md-1">
+
+            <!-- ADD FILE BUTTON -->
+
+            <input hidden type="file" #fileInputTheme [(ngModel)]="data.image" />
+            <button mat-fab class="add-file-button mat-warn" (click)="fileInputTheme.click()"
+              aria-label="Agregar imagen" [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+              <mat-icon>cloud_upload</mat-icon>
+            </button>
+
+          </div>
+
+        </div>
+      </div>
+      <div class="col-10">
+        <div class="row">
+          <div class="col-5">
+            <p> ¿Deseas agregar un video? </p>
+          </div>
+          <div class="col-2">
+            <mat-slide-toggle [(ngModel)]="data.addVideo"> {{ data.addVideo ? 'Si' : 'No' }} </mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <ngx-editor></ngx-editor>
+      </div>
+
+      <div class="col-10">
+        <div class="row">
+          <div class="col-7">
+            <p> ¿Deseas agregar un codigo de programacion? </p>
+          </div>
+          <div class="col-2">
+            <mat-slide-toggle [(ngModel)]="data.addCode"> {{ data.addCode ? 'Si' : 'No' }} </mat-slide-toggle>
+          </div>
+        </div>
+      </div>
+      <div class="col-12" *ngIf="data.addCode">
+        <app-monaco-code></app-monaco-code>
+      </div>
+    </div>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Aceptar</button>
+</div>

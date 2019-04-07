@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ExerciseComponent } from './exercise/exercise.component';
+import { CreateSubthemeDialog } from './modal/create-subtheme/create-subtheme.component';
 
 const routes: Routes = [
   {
@@ -31,5 +32,6 @@ export class AdminRoutingModule { }
 export const routedComponents = [
    AdminComponent, 
    DashboardComponent,
-   ExerciseComponent
+   ExerciseComponent,
+   CreateSubthemeDialog
   ];

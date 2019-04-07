@@ -10,7 +10,12 @@ import { ITheme } from 'src/app/@core/data/theme.data';
 import { ContentEditorService } from 'src/app/@core/services/content-editor.service';
 import { Observable } from 'rxjs';
 import { ThemeListService } from 'src/app/@core/services/themeList.service';
-
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
+import { CreateSubthemeDialog } from '../../modal/create-subtheme/create-subtheme.component';
+export interface DialogData {
+  animal: string;
+  name: string;
+}
 
 
 @Component({
@@ -23,6 +28,26 @@ export class SubthemeComponent implements OnInit {
   public observerArrayTheme: Observable<any>;
   public arrayThemes: ICardTheme[] = []
 
+
+  animal: string;
+  name: string;
+
+ 
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(CreateSubthemeDialog, {
+      width: '900px',
+      data: {name: this.name, animal: this.animal}
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      this.animal = result;
+    });
+  }
+
+
+  
  /** arrayThemes: ICardTheme[] = [
     {
       id: '',
@@ -128,25 +153,7 @@ export class SubthemeComponent implements OnInit {
  */
 
  
-  todo = [
-    'Get to work',
-    'Pick up groceries',
-    'Go home',
-    'Fall asleep'
-  ];
- 
-  done = [
-    'Get up',
-    'Brush teeth',
-    'Take a shower',
-    'Check e-mail',
-    'Walk dog'
-  ];
- 
-  review = [
-    'Take bath',
-    'Wash car',
-  ];
+
  
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
@@ -164,7 +171,8 @@ export class SubthemeComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private editorService: ContentEditorService,
-    private themeListService: ThemeListService
+    private themeListService: ThemeListService,
+    public dialog: MatDialog
   ) {
   }
 
