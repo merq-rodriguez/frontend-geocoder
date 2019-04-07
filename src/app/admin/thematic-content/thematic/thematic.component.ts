@@ -6,6 +6,7 @@ import { CreateLanguageComponent } from '../create-language/create-language.comp
 import { ILanguage } from 'src/app/@core/data/language.data';
 import { ICardTheme } from 'src/app/@theme/components/card/ICard.interface';
 import { ThemeComponent } from '../theme/theme.component';
+import { ThemeListService } from 'src/app/@core/services/themeList.service';
 
 @Component({
   selector: 'app-thematic',
@@ -15,18 +16,33 @@ import { ThemeComponent } from '../theme/theme.component';
 export class ThematicComponent implements OnInit, AfterViewInit  {
   
   @ViewChild(CreateLanguageComponent) childRefCreateLanguage;
-  @ViewChild(ThemeComponent) childRefThemeComponent;
+  //@ViewChild(ThemeComponent) childRefThemeComponent;
   isLinear = false;
   
   private language: ILanguage;
-  private arrayTheme: ICardTheme[];
+  //public arrayTheme: ICardTheme[];
 
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
+  
+
+  constructor(  
+    private _formBuilder: FormBuilder, 
+    public themeListService: ThemeListService 
+    ) {}
 
   ngAfterViewInit(){
     this.language = this.childRefCreateLanguage.language;
-    this.arrayTheme = this.childRefThemeComponent.arrayTheme;
+    //this.arrayTheme = this.childRefThemeComponent.arrayTheme;
+  }
+
+  ngOnInit() {
+    this.firstFormGroup = this._formBuilder.group({
+      firstCtrl: ['', Validators.required]
+    });
+    this.secondFormGroup = this._formBuilder.group({
+      secondCtrl: ['', Validators.required]
+    });
   }
 
 
@@ -35,22 +51,10 @@ export class ThematicComponent implements OnInit, AfterViewInit  {
   }
 
   getThemesArray(){
-    console.log(this.arrayTheme);
-    
-  }
-
-  
-
-  constructor(  private _formBuilder: FormBuilder ) {}
-
-  
-  ngOnInit() {
-    this.firstFormGroup = this._formBuilder.group({
-      firstCtrl: ['', Validators.required]
-    });
-    this.secondFormGroup = this._formBuilder.group({
-      secondCtrl: ['', Validators.required]
-    });
+    //console.log(this.arrayTheme);
+    this.themeListService.getListTheme().subscribe(res => {
+      console.log(res)
+    })
   }
 
 }

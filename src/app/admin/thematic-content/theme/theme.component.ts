@@ -1,17 +1,13 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
 import * as _ from 'lodash';
-import {
-  FormControl,
-  FormBuilder,
-  FormGroup,
-  Validators
-} from "@angular/forms";
+
 import { v4 as uuid } from 'uuid';
 import { MatSnackBar } from '@angular/material';
 import { fuseAnimations } from 'src/app/@theme/animations';
 import { ICardTheme } from 'src/app/@theme/components/card/ICard.interface';
 import { ITheme } from 'src/app/@core/data/theme.data';
 import { ContentEditorService } from 'src/app/@core/services/content-editor.service';
+import { ThemeListService } from 'src/app/@core/services/themeList.service';
 
 @Component({
   selector: 'app-theme',
@@ -22,9 +18,7 @@ import { ContentEditorService } from 'src/app/@core/services/content-editor.serv
 export class ThemeComponent implements OnInit {
 
   isUpdated: boolean = false;
-
-
-  public arrayTheme: ICardTheme[] = []
+  arrayTheme: ICardTheme[] = [];
 
   public newTheme: ITheme = {
     id: '',
@@ -35,12 +29,10 @@ export class ThemeComponent implements OnInit {
   };
 
   constructor(
-    private _formBuilder: FormBuilder,
     private snackBar: MatSnackBar,
-    private editorService: ContentEditorService
-  ) {
-    // this.editorService.setBehaviorContent('Hola');
-  }
+    private editorService: ContentEditorService,
+    private themeListService: ThemeListService
+  ) {}
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -73,8 +65,7 @@ export class ThemeComponent implements OnInit {
     if (this.emptyTextfieldTheme()) {
       this.openSnackBar("Existen campos vacios", "Aceptar")
     } else {
-      this.editorService.getBehaviorContent()
-        .subscribe(content => this.newTheme.content = content);
+      this.editorService.getBehaviorContent().subscribe(content => this.newTheme.content = content);
       let _theme: ICardTheme = {
         id: uuid(),
         name: this.newTheme.name,
@@ -85,10 +76,10 @@ export class ThemeComponent implements OnInit {
         //  image: this.newTheme.image
       }
       this.arrayTheme.push(_theme);
+      this.themeListService.addTheme(_theme);
       this.openSnackBar("Has creado un nuevo tema", "Aceptar");
       this.clearTheme();
     }
-
   }
 
   getAction(event) {
@@ -112,6 +103,7 @@ export class ThemeComponent implements OnInit {
         break;
       case 'delete':
         _.remove(this.arrayTheme, (n) => n.id === data.id);
+        this.themeListService.deleteTheme(data.id);
         break;
 
       default:
@@ -148,6 +140,7 @@ export class ThemeComponent implements OnInit {
         }
       });
       console.log(this.arrayTheme);
+      this.themeListService.updateTheme(_themeUpdated);
       this.isUpdated = false;
       this.openSnackBar("Has actualizado un tema", "Aceptar");
       this.clearTheme();
@@ -158,7 +151,5 @@ export class ThemeComponent implements OnInit {
 
 
 
-  ngOnInit() {
-   
-  }
+  ngOnInit() {}
 }

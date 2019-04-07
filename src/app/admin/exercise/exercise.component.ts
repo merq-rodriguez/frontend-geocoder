@@ -25,15 +25,7 @@ export class ExerciseComponent implements OnInit {
     disabled: false
   };
 
-  toppings = new FormControl();
-  toppingList: string[] = [
-    "Extra cheese",
-    "Mushroom",
-    "Onion",
-    "Pepperoni",
-    "Sausage",
-    "Tomato"
-  ];
+
 
   exerciseList = [
     {
