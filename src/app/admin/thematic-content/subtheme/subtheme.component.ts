@@ -8,6 +8,8 @@ import { fuseAnimations } from 'src/app/@theme/animations';
 import { ICardTheme } from 'src/app/@theme/components/card/ICard.interface';
 import { ITheme } from 'src/app/@core/data/theme.data';
 import { ContentEditorService } from 'src/app/@core/services/content-editor.service';
+import { Observable } from 'rxjs';
+import { ThemeListService } from 'src/app/@core/services/themeList.service';
 
 
 
@@ -17,15 +19,11 @@ import { ContentEditorService } from 'src/app/@core/services/content-editor.serv
   styleUrls: ['./subtheme.component.css']
 })
 export class SubthemeComponent implements OnInit {
-  itemCard: ICardTheme = {
-    content: 'xxxxxxx',
-    description: 'xxxxxxxx',
-    id : 'xxxxxxxx',
-    image: '../../../../img/coder2.png', 
-    name: 'xxxxxxxxxxx',
-    subtitle: 'Theme'
-  } 
-  arrayThemes: ICardTheme[] = [
+
+  public observerArrayTheme: Observable<any>;
+  public arrayThemes: ICardTheme[] = []
+
+ /** arrayThemes: ICardTheme[] = [
     {
       id: '',
       name: 'Operaciones en Observables',
@@ -127,7 +125,7 @@ export class SubthemeComponent implements OnInit {
       ],
     }
   ]
-
+ */
 
  
   todo = [
@@ -165,16 +163,17 @@ export class SubthemeComponent implements OnInit {
   
   constructor(
     private snackBar: MatSnackBar,
-    private editorService: ContentEditorService
+    private editorService: ContentEditorService,
+    private themeListService: ThemeListService
   ) {
   }
 
 
-
-
   ngOnInit() {
-   
+   this.observerArrayTheme = this.themeListService.getListTheme();
+   this.observerArrayTheme.subscribe(res => this.arrayThemes = res);
   }
+
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {

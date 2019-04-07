@@ -3,6 +3,7 @@ import './ckeditor.loader';
 import 'ckeditor';
 import { ContentEditorService } from 'src/app/@core/services/content-editor.service';
 import { Content } from '@angular/compiler/src/render3/r3_ast';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -10,33 +11,23 @@ import { Content } from '@angular/compiler/src/render3/r3_ast';
   templateUrl: './editor.component.html'
 })
 export class EditorComponent implements OnInit {
-  @Input() content;
+  public content;
+  public observerEditor: Observable<any>;
+  
   ckeConfig: any;
-  log: string = '';
   @ViewChild("myckeditor") ckeditor: any;
 
-  constructor(private readonly  editorService:ContentEditorService ) {
-   // this.content = '';
-  }
+  constructor(private readonly  editorService:ContentEditorService ) { }
 
   ngOnInit() {
+    this.observerEditor =  this.editorService.getBehaviorContent();
+    this.observerEditor.subscribe(res => this.content = res);
     this.ckeConfig = {
       allowedContent: true,
       extraPlugins: 'divarea',
       forcePasteAsPlainText: true
     };
   }
-
-  completed(){
-   // this.onComplete.emit()
-
-  }
-  
-
-  ngOnDestroy(){
-   // this.editorService.destroy();
-  }
- 
 
 
   onChange($event: any): void {

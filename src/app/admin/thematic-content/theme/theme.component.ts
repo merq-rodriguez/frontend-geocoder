@@ -8,6 +8,7 @@ import { ICardTheme } from 'src/app/@theme/components/card/ICard.interface';
 import { ITheme } from 'src/app/@core/data/theme.data';
 import { ContentEditorService } from 'src/app/@core/services/content-editor.service';
 import { ThemeListService } from 'src/app/@core/services/themeList.service';
+import { Subscriber, Subscription, Observable } from 'rxjs';
 
 @Component({
   selector: 'app-theme',
@@ -16,7 +17,7 @@ import { ThemeListService } from 'src/app/@core/services/themeList.service';
   animations: fuseAnimations
 })
 export class ThemeComponent implements OnInit {
-
+  public observerEditor: Observable<any>
   isUpdated: boolean = false;
   arrayTheme: ICardTheme[] = [];
 
@@ -65,7 +66,7 @@ export class ThemeComponent implements OnInit {
     if (this.emptyTextfieldTheme()) {
       this.openSnackBar("Existen campos vacios", "Aceptar")
     } else {
-      this.editorService.getBehaviorContent().subscribe(content => this.newTheme.content = content);
+      this.observerEditor.subscribe(content => this.newTheme.content = content);
       let _theme: ICardTheme = {
         id: uuid(),
         name: this.newTheme.name,
@@ -151,5 +152,8 @@ export class ThemeComponent implements OnInit {
 
 
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.observerEditor = this.editorService.getBehaviorContent();
+
+  }
 }
