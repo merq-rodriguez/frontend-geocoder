@@ -51,8 +51,22 @@ export class SubthemeComponent implements OnInit {
   }//780ZStdM9gNY
 
   clearObservables(){
-    this.monacoService.setContentMonaco(null);
-    this.editorService.setBehaviorContent(null);
+    this.monacoService.setContentMonaco('');
+    this.editorService.setBehaviorContent('');
+  }
+
+  deleteSubtheme(idTheme: string, idSubTheme: string){
+    this.arrayThemes.forEach(
+        theme => (theme.id === idTheme) 
+            ? _.remove(theme.subthemes, (sub: ICardSubTheme ) => sub.id === idSubTheme)
+            : theme        
+    )
+    //
+  }
+
+
+  getAction(event){
+    console.log(event)
   }
 
   openDialog(idTheme: string): void {
@@ -65,6 +79,8 @@ export class SubthemeComponent implements OnInit {
     //Despues de cerrar el dialog
     dialogRef.afterClosed().subscribe((result:ISubthemeDialog) => {
       console.log('Dialog cerrado');
+      if(this.data.name.trim() === '' || this.data.description.trim() ===''){
+
       this.editorService.content$.subscribe(content => this.data.contentEditor = content);
       this.monacoService.content$.subscribe(content => this.data.contentCode = content);
       
@@ -84,10 +100,9 @@ export class SubthemeComponent implements OnInit {
       this.clearObservables();
       this.clearDataDialog();
       console.log(this.arrayThemes)
+      }
     });
   }
-
- 
 
  
   drop(event: CdkDragDrop<string[]>) {
@@ -95,29 +110,12 @@ export class SubthemeComponent implements OnInit {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(
-              event.previousContainer.data,
-              event.container.data,
-              event.previousIndex,
-              event.currentIndex
+          event.previousContainer.data,
+          event.container.data,
+          event.previousIndex,
+          event.currentIndex
       );
     }
-  }
-
-
-  
-  constructor(
-    private snackBar: MatSnackBar,
-    private editorService: ContentEditorService,
-    private monacoService: MonacoService,
-    private themeListService: ThemeListService,
-    public dialog: MatDialog
-  ) {
-  }
-
-
-  ngOnInit() {
-   this.observerArrayTheme = this.themeListService.getListTheme();
-   this.observerArrayTheme.subscribe(res => this.arrayThemes = res);
   }
 
 
@@ -127,9 +125,18 @@ export class SubthemeComponent implements OnInit {
     });
   }
 
-  
+  constructor(
+    private snackBar: MatSnackBar,
+    private editorService: ContentEditorService,
+    private monacoService: MonacoService,
+    private themeListService: ThemeListService,
+    public dialog: MatDialog
+  ) {}
 
 
-
+  ngOnInit() {
+    this.observerArrayTheme = this.themeListService.getListTheme();
+    this.observerArrayTheme.subscribe(res => this.arrayThemes = res);
+   }
 
 }

@@ -1,13 +1,11 @@
 .section-heading {
-  padding: 5px 10px;
-
   font-size: 15px;
   font-weight: bold;
 }
 
 .add-subtheme{
   margin-bottom: 15px;
-  background: rgb(159, 162, 165);
+  background: rgb(34, 185, 127);
 }
  
 .drag-container {

@@ -14,9 +14,7 @@ export class CardMiniComponent implements OnInit {
   public data;
  
 
-  constructor() {
-  //  this.action.emit('action')
-  }
+  constructor() {}
 
   ngOnInit() {
     switch(this.type){
@@ -36,11 +34,9 @@ export class CardMiniComponent implements OnInit {
   deleteItem(){
     this.action.emit({action: 'delete', item: this.data})
   }
+
   updateItem(){
     this.action.emit({action: 'update', item: this.data})
   }
-/*   showItem(){
-    this.action.emit({action: 'show', item: this.data})
-  }
- */
+
 }

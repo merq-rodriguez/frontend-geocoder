@@ -49,7 +49,7 @@
                   <button 
                       mat-icon-button 
                       color="primary" 
-                      class="btn-success  btn-just-icon add-subtheme" 
+                      class="btn  btn-just-icon add-subtheme" 
                       (click)="openDialog(theme.id)">
                     <i class="material-icons"> add_circle </i>
                   </button>
@@ -58,19 +58,18 @@
           </div>
 
         </div>
+        <hr>
 
         <div cdkDropList #pendingList="cdkDropList" [cdkDropListData]="theme.subthemes"
           [cdkDropListConnectedTo]="[pendingList]" class="item-list" (cdkDropListDropped)="drop($event)">
           <!-- class="item-box" -->
           <div *ngFor="let subtheme of theme.subthemes" cdkDrag>
-            <!--
 
-                LEER: HAY QUE HACER UNA NUEVA CARD BIEN CHIDA Y MAS PEQUEÑA
-                PARA PONERLA AQUI...
-                PD: ESTA DESALINEADO, HAY QUE CORREGIRLO...
-              -->
 
-            <app-card-mini [item]="subtheme" [type]="'theme'"></app-card-mini>
+            <app-card-mini 
+                  (action)="getAction($event)"
+                  [item]="subtheme" 
+                  [type]="'theme'"></app-card-mini>
 
           </div>
         </div>
