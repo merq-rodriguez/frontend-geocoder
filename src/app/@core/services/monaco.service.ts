@@ -6,7 +6,7 @@ import { MonacoData } from '../data/monaco.data';
 export class MonacoService implements MonacoData {
     private content = '';
     private contentSource = new BehaviorSubject<any>(null);    
-    public content$ = this.contentSource.asObservable();
+    public  content$ = this.contentSource.asObservable();
 
     constructor() { }
 

@@ -13,6 +13,8 @@ import { ThemeListService } from 'src/app/@core/services/themeList.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { CreateSubthemeDialog } from '../../modal/create-subtheme/create-subtheme.component';
 import { ISubthemeDialog } from '../../modal/create-subtheme/create-subtheme.component'
+import { MonacoService } from 'src/app/@core/services/monaco.service';
+import { ICardSubTheme } from 'src/app/@theme/components/card-mini/ICard.interface';
 
 @Component({
   selector: 'app-subthemes',
@@ -20,7 +22,7 @@ import { ISubthemeDialog } from '../../modal/create-subtheme/create-subtheme.com
   styleUrls: ['./subtheme.component.css']
 })
 export class SubthemeComponent implements OnInit {
-
+  public idThemeSelected: string;
   public observerArrayTheme: Observable<any>;
   public arrayThemes: ICardTheme[] = []
 
@@ -31,128 +33,59 @@ export class SubthemeComponent implements OnInit {
     contentCode: '',
     image: '',
     addVideo: false,
-    url_video: '80ZStdM9gNY',
+    url_video: '',
     addCode: false,
   }
  
+  clearDataDialog(){
+    this.data = {
+      name: '',
+      description: '',
+      contentEditor: '',
+      contentCode: '',
+      image: '',
+      addVideo: false,
+      url_video: '',
+      addCode: false,
+    }
+  }//780ZStdM9gNY
 
-  openDialog(): void {
+  clearObservables(){
+    this.monacoService.setContentMonaco(null);
+    this.editorService.setBehaviorContent(null);
+  }
+
+  openDialog(idTheme: string): void {
+    this.idThemeSelected = idTheme; 
     const dialogRef = this.dialog.open(CreateSubthemeDialog, {
       width: '900px',
       data: this.data
     });
 
-    dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
+    //Despues de cerrar el dialog
+    dialogRef.afterClosed().subscribe((result:ISubthemeDialog) => {
+      console.log('Dialog cerrado');
+      this.editorService.content$.subscribe(content => this.data.contentEditor = content);
+      this.monacoService.content$.subscribe(content => this.data.contentCode = content);
+      
+     let _subtheme = {
+          id: uuid(),
+          name: this.data.name,
+          description: this.data.description,
+          image: this.data.image,
+          content: this.data.contentEditor,
+          contentCode: this.data.contentCode,
+          subtitle: 'Subtheme'
+      } as ICardSubTheme 
+      
+      //Se procede a insertar el subthema en en el tema al que pertenece 
+      //haciendo uso del id para encontrarlo.
+      this.arrayThemes.forEach(theme => (theme.id === this.idThemeSelected) ? theme.subthemes.push(_subtheme): theme);
+      this.clearObservables();
+      this.clearDataDialog();
+      console.log(this.arrayThemes)
     });
   }
-
-
-  
- /** arrayThemes: ICardTheme[] = [
-    {
-      id: '',
-      name: 'Operaciones en Observables',
-      subtitle: 'sssssss',
-      description: 'sssss',
-      content: 'ssssss',
-      image: 'ssssssss',
-      subthemes: [
-        {
-          name: 'Funciones',
-          description: '',
-          image: '../../../../assets/img/cover.jpeg'
-        },
-        {
-          name: 'Operadores logicos',
-          description: '',
-          image: '../../../../assets/img/funciones-en-python-t1.jpg'
-        },
-        {
-          name: 'Clases',
-          description: '',
-          image: '../../../../assets/img/coder2.png'
-        }
-      ],
-    },
-    {
-      id: 'ssssss',
-      subtitle: 'sssssss',
-      description: 'sssss',
-      content: 'ssssss',
-      image: 'ssssssss',
-      name: 'Orientacion a objetos',
-      subthemes: [
-        {
-          name: 'Funciones',
-          description: '',
-          image: '../../../../assets/img/cover.jpeg'
-        },
-        {
-          name: 'Operadores logicos',
-          description: '',
-          image: '../../../../assets/img/funciones-en-python-t1.jpg'
-        },
-        {
-          name: 'Clases',
-          description: '',
-          image: '../../../../assets/img/coder2.png'
-        }
-      ],
-    },
-    {
-      id: 'ssssss',
-      subtitle: 'sssssss',
-      description: 'sssss',
-      content: 'ssssss',
-      image: 'ssssssss',
-      name: 'ssssssssss',
-      subthemes: [
-        {
-          name: 'Funciones',
-          description: '',
-          image: '../../../../assets/img/cover.jpeg'
-        },
-        {
-          name: 'Operadores logicos',
-          description: '',
-          image: '../../../../assets/img/funciones-en-python-t1.jpg'
-        },
-        {
-          name: 'Clases',
-          description: '',
-          image: '../../../../assets/img/coder2.png'
-        }
-      ],
-    },
-    {
-      id: 'ssssss',
-      subtitle: 'sssssss',
-      description: 'sssss',
-      content: 'ssssss',
-      image: 'ssssssss',
-      name: 'ssssssssss',
-      subthemes: [
-        {
-          name: 'Funciones',
-          description: '',
-          image: '../../../../assets/img/cover.jpeg'
-        },
-        {
-          name: 'Operadores logicos',
-          description: '',
-          image: '../../../../assets/img/funciones-en-python-t1.jpg'
-        },
-        {
-          name: 'Clases',
-          description: '',
-          image: '../../../../assets/img/coder2.png'
-        }
-      ],
-    }
-  ]
- */
 
  
 
@@ -161,10 +94,12 @@ export class SubthemeComponent implements OnInit {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
-      transferArrayItem(event.previousContainer.data,
-                        event.container.data,
-                        event.previousIndex,
-                        event.currentIndex);
+      transferArrayItem(
+              event.previousContainer.data,
+              event.container.data,
+              event.previousIndex,
+              event.currentIndex
+      );
     }
   }
 
@@ -173,6 +108,7 @@ export class SubthemeComponent implements OnInit {
   constructor(
     private snackBar: MatSnackBar,
     private editorService: ContentEditorService,
+    private monacoService: MonacoService,
     private themeListService: ThemeListService,
     public dialog: MatDialog
   ) {

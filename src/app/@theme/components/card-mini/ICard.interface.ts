@@ -17,7 +17,8 @@ export interface  ICardSubTheme{
     description: string;
     image: string;
     subtitle: string;
-    content?: string;
+    contentEditor?: string;
+    contentCode?: string;
 }
 
 export interface  ICardTest{

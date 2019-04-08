@@ -86,7 +86,8 @@
       </div>
     </div>
 
-
+<br>
+<br>
     <div class="row">
       <div class="col-10">
         <div class="row">
@@ -108,7 +109,7 @@
           </mat-form-field>
         </div>
 
-        <div class="col-12 d-flex justify-content-center">
+        <div class="col-12 d-flex justify-content-center" *ngIf="data.url_video.length > 0">
             <app-video [id]="data.url_video" *ngIf="_destroy" ></app-video>
         </div>
       </div>

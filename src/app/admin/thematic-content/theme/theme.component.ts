@@ -73,7 +73,8 @@ export class ThemeComponent implements OnInit {
         subtitle: 'Tema del lenguaje',
         description: this.newTheme.description,
         content: this.newTheme.content,
-        image: '../../../../assets/img/funciones-en-python-t1.jpg'
+        image: '../../../../assets/img/funciones-en-python-t1.jpg',
+        subthemes: []
         //  image: this.newTheme.image
       }
       this.arrayTheme.push(_theme);

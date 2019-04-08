@@ -46,7 +46,11 @@
                   <p>{{ theme.name }}</p>
                 </div>
                 <div class="col-1">
-                  <button mat-icon-button color="primary" class="btn-success  btn-just-icon add-subtheme" (click)="openDialog()">
+                  <button 
+                      mat-icon-button 
+                      color="primary" 
+                      class="btn-success  btn-just-icon add-subtheme" 
+                      (click)="openDialog(theme.id)">
                     <i class="material-icons"> add_circle </i>
                   </button>
                 </div>
