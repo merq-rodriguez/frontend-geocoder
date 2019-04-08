@@ -12,11 +12,7 @@ import { Observable } from 'rxjs';
 import { ThemeListService } from 'src/app/@core/services/themeList.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { CreateSubthemeDialog } from '../../modal/create-subtheme/create-subtheme.component';
-export interface DialogData {
-  animal: string;
-  name: string;
-}
-
+import { ISubthemeDialog } from '../../modal/create-subtheme/create-subtheme.component'
 
 @Component({
   selector: 'app-subthemes',
@@ -28,21 +24,27 @@ export class SubthemeComponent implements OnInit {
   public observerArrayTheme: Observable<any>;
   public arrayThemes: ICardTheme[] = []
 
-
-  animal: string;
-  name: string;
-
+  data: ISubthemeDialog = {
+    name: '',
+    description: '',
+    contentEditor: '',
+    contentCode: '',
+    image: '',
+    addVideo: false,
+    url_video: '80ZStdM9gNY',
+    addCode: false,
+  }
  
 
   openDialog(): void {
     const dialogRef = this.dialog.open(CreateSubthemeDialog, {
       width: '900px',
-      data: {name: this.name, animal: this.animal}
+      data: this.data
     });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log('The dialog was closed');
-      this.animal = result;
+      console.log(result);
     });
   }
 

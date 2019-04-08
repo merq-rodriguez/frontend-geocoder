@@ -104,17 +104,12 @@
       <div class="col-12" *ngIf="data.addVideo">
         <div class="col-9">
           <mat-form-field>
-            <input type="text" [(ngModel)]="id" matInput placeholder="Pega aqui la url del video de youtube" (change)="getDestroy()">
+            <input type="text" [(ngModel)]="data.url_video" matInput placeholder="Pega aqui la url del video de youtube" (change)="getDestroy()">
           </mat-form-field>
         </div>
 
         <div class="col-12 d-flex justify-content-center">
-            <youtube-player
-            *ngIf="_destroy"
-            [videoId]="id"
-            (ready)="savePlayer($event)"
-            (change)="onStateChange($event)"
-          ></youtube-player>
+            <app-video [id]="data.url_video" *ngIf="_destroy" ></app-video>
         </div>
       </div>
     </div>
