@@ -3,13 +3,14 @@ import { CommonModule } from '@angular/common';
 import { UserService } from './user.service';
 import { ContentEditorService } from './content-editor.service';
 import { ThemeListService } from './themeList.service';
+import { MonacoService } from './monaco.service';
 
 
 const SERVICES = [
   UserService,
   ContentEditorService,
-  ThemeListService
-  
+  ThemeListService,
+  MonacoService
 ];
 
 @NgModule({

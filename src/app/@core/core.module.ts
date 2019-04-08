@@ -8,6 +8,8 @@ import { ContentEditorData } from './data/content-editor.data';
 import { ContentEditorService } from './services/content-editor.service';
 import { ThemeListData } from './data/theme-list.data';
 import { ThemeListService } from './services/themeList.service';
+import { MonacoService } from './services/monaco.service';
+import { MonacoData } from './data/monaco.data';
 
 
 
@@ -15,7 +17,8 @@ import { ThemeListService } from './services/themeList.service';
 const DATA_SERVICES = [
   { provide: UserData, useClass: UserService },
   { provide:  ContentEditorData, useClass: ContentEditorService},
-  { provide:  ThemeListData, useClass: ThemeListService }
+  { provide:  ThemeListData, useClass: ThemeListService },
+  { provide:  MonacoData, useClass: MonacoService }
   
 ];
 
