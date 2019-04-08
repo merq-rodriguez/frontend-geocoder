@@ -35,10 +35,7 @@
     </div>
     <hr />
 
-    <!-- EDITOR NGX -->
-    <ngx-editor></ngx-editor>
-    <!-- END EDITOR NGX -->
-    <hr />
+    
     <div class="row">
       <div class="col-md-11">
         <mat-form-field class="example-full-width">
@@ -60,10 +57,14 @@
           [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
           <mat-icon>cloud_upload</mat-icon>
         </button>
-
       </div>
-
     </div>
+
+    <!-- EDITOR NGX -->
+    <ngx-editor></ngx-editor>
+    <!-- END EDITOR NGX -->
+    <hr />
+
     <div class="row">
       <button (click)="addTheme()" mat-raised-button matTooltip="Crear Tema" *ngIf="!isUpdated"
         [matTooltipPosition]="'above'" type="button" class="btn btn-success pull-right">
