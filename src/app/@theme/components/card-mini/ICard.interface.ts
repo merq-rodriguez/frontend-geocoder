@@ -8,6 +8,7 @@ export interface  ICardTheme{
     subtitle: string;
     content?: string;
     subthemes?: Array<ISubtheme>
+    idTheme?: string;
 }
 
 

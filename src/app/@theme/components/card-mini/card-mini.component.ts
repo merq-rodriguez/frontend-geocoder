@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { ICardTest, ICardTheme, ICardSubTheme } from './ICard.interface';
+import { ICardSubTheme } from '../card/ICard.interface';
 
 
 @Component({
@@ -9,26 +9,14 @@ import { ICardTest, ICardTheme, ICardSubTheme } from './ICard.interface';
 })
 export class CardMiniComponent implements OnInit {
   @Output() action = new EventEmitter<any>();
-  @Input('item') item: ICardTheme | ICardTest | ICardSubTheme
-  @Input('type') type:string
-  public data;
+  @Input() idTheme: string
+  @Input('item') data:any;
  
 
   constructor() {}
 
   ngOnInit() {
-    switch(this.type){
-        case 'test':
-            this.data = this.item;
-        break;
-        case 'theme':
-            this.data = this.item;        
-        break;
-        case 'subtheme':
-            this.data = this.item;
-        break;
-
-      }
+   this.data.idTheme = this.idTheme;
   }
 
   deleteItem(){

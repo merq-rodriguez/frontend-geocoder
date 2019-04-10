@@ -15,6 +15,7 @@ import { CreateSubthemeDialog } from '../../modal/create-subtheme/create-subthem
 import { ISubthemeDialog } from '../../modal/create-subtheme/create-subtheme.component'
 import { MonacoService } from 'src/app/@core/services/monaco.service';
 import { ICardSubTheme } from 'src/app/@theme/components/card-mini/ICard.interface';
+import { ISubtheme } from 'src/app/@core/data/subtheme-data';
 
 @Component({
   selector: 'app-subthemes',
@@ -66,7 +67,16 @@ export class SubthemeComponent implements OnInit {
 
 
   getAction(event){
-    console.log(event)
+    const {item, action} = event;
+    console.log(item)
+     switch(action){
+      case 'update':  
+        
+      break;
+      case 'delete':
+        this.deleteSubtheme(item.idTheme, item.id) //id -> Theme, id -> Subtheme
+      break;
+    } 
   }
 
   openDialog(idTheme: string): void {
@@ -79,7 +89,8 @@ export class SubthemeComponent implements OnInit {
     //Despues de cerrar el dialog
     dialogRef.afterClosed().subscribe((result:ISubthemeDialog) => {
       console.log('Dialog cerrado');
-      if(this.data.name.trim() === '' || this.data.description.trim() ===''){
+      if(this.data.name.trim() !== '' || this.data.description.trim() !== ''){
+        console.log(this.data);
 
       this.editorService.content$.subscribe(content => this.data.contentEditor = content);
       this.monacoService.content$.subscribe(content => this.data.contentCode = content);

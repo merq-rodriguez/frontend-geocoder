@@ -41,20 +41,17 @@
         <!--    -->
         <div class="section-heading">
           <div class="container">
-           <div class="row">
+            <div class="row">
               <div class="col-10">
-                  <p>{{ theme.name }}</p>
-                </div>
-                <div class="col-1">
-                  <button 
-                      mat-icon-button 
-                      color="primary" 
-                      class="btn  btn-just-icon add-subtheme" 
-                      (click)="openDialog(theme.id)">
-                    <i class="material-icons"> add_circle </i>
-                  </button>
-                </div>
-           </div>
+                <p>{{ theme.name }}</p>
+              </div>
+              <div class="col-1">
+                <button mat-icon-button color="primary" class="btn  btn-just-icon add-subtheme"
+                  (click)="openDialog(theme.id)">
+                  <i class="material-icons"> add_circle </i>
+                </button>
+              </div>
+            </div>
           </div>
 
         </div>
@@ -66,10 +63,8 @@
           <div *ngFor="let subtheme of theme.subthemes" cdkDrag>
 
 
-            <app-card-mini 
-                  (action)="getAction($event)"
-                  [item]="subtheme" 
-                  [type]="'theme'"></app-card-mini>
+            <app-card-mini (action)="getAction($event)" [item]="subtheme" [idTheme]="theme.id">
+            </app-card-mini>
 
           </div>
         </div>
