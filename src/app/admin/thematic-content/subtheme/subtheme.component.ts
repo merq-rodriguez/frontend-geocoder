@@ -24,10 +24,13 @@ import { ISubtheme } from 'src/app/@core/data/subtheme-data';
 })
 export class SubthemeComponent implements OnInit {
   public idThemeSelected: string;
-  public observerArrayTheme: Observable<any>;
+  public subscriberArrayTheme: any;
+  public subscriberContendEditor: any;
+  public subscriberContentCode: any;
   public arrayThemes: ICardTheme[] = []
 
   data: ISubthemeDialog = {
+    id: '',
     name: '',
     description: '',
     contentEditor: '',
@@ -36,84 +39,142 @@ export class SubthemeComponent implements OnInit {
     addVideo: false,
     url_video: '',
     addCode: false,
+    action: ''
   }
  
   clearDataDialog(){
     this.data = {
+      id: '',
       name: '',
       description: '',
       contentEditor: '',
       contentCode: '',
       image: '',
-      addVideo: false,
       url_video: '',
+      addVideo: false,
       addCode: false,
+      action: ''
     }
   }//780ZStdM9gNY
 
+  //Limpiamos los observables de monaco editor y el editor de html
   clearObservables(){
     this.monacoService.setContentMonaco('');
     this.editorService.setBehaviorContent('');
   }
 
+  //Metodo para eliminar un subtheme
   deleteSubtheme(idTheme: string, idSubTheme: string){
-    this.arrayThemes.forEach(
-        theme => (theme.id === idTheme) 
+    this.arrayThemes.forEach( theme => (theme.id === idTheme) 
             ? _.remove(theme.subthemes, (sub: ICardSubTheme ) => sub.id === idSubTheme)
             : theme        
     )
     //
   }
 
-
-  getAction(event){
+  //Metodo que interactua con el emisor de card-mi (elimina, actualiza)
+  getActionCardMini(event){
     const {item, action} = event;
+    console.log("Esto viene de la card mini")
     console.log(item)
      switch(action){
       case 'update':  
-        
+
+      if(item.contentCode){
+        if(item.contentCode.trim() !== ""){
+          this.data.addCode = true;
+        }else{
+          this.data.addCode = false;
+        }
+      }else{
+        this.data.addCode = false;
+      }
+
+      if(item.url_video){
+        if(item.url_video.trim() !== ""){
+          this.data.addVideo = true;
+        }else{
+          this.data.addVideo = false
+        }
+      }else{
+        this.data.addVideo = false;
+      }
+       this.data = {
+         id: item.idSubtheme,
+         name: item.name,
+         contentCode: item.contentCode,
+         description: item.description,
+         image: item.image,
+         url_video: item.url_video,
+         contentEditor: item.contentEditor,
+         action: 'update'
+          
+       };
+       if(this.data.contentCode){
+        this.monacoService.setContentMonaco(this.data.contentCode);
+       }
+
+       if(this.data.contentEditor){
+         this.editorService.setBehaviorContent(this.data.contentEditor);
+      }
+
+       this.openDialog(item.idTheme, 'update');
       break;
       case 'delete':
-        this.deleteSubtheme(item.idTheme, item.id) //id -> Theme, id -> Subtheme
+       this.deleteSubtheme(item.idTheme, item.id) //id -> Theme, id -> Subtheme
       break;
     } 
   }
+  
+  updateSubtheme(){
+  // Esta vaina va a traer lo que hay en el editor HTML y monaco
+  this.editorService.content$.subscribe(content => this.data.contentEditor = content);
+  this.monacoService.content$.subscribe(content => this.data.contentCode = content);
+  this.arrayThemes.forEach((theme: ICardTheme ) => {
+    if(theme.id === this.idThemeSelected){
+      theme.subthemes.forEach((subtheme: ISubtheme) => {
+        if(subtheme.idSubtheme === this.data.id){
+          
+          subtheme.idSubtheme = this.data.id;
+          subtheme.name = this.data.name;
+          subtheme.description = this.data.description;
+          subtheme.image = this.data.image;
+          subtheme.contentEditor = this.data.contentEditor;
+          subtheme.contentCode = this.data.contentCode;
+          subtheme.url_video = this.data.url_video;
+          console.log("Encontrado y actualizado");
+        }
+      })
+    }
+  })
+            
+  this.clearObservables();
+  this.clearDataDialog();
+}
 
-  openDialog(idTheme: string): void {
-    this.idThemeSelected = idTheme; 
-    const dialogRef = this.dialog.open(CreateSubthemeDialog, {
-      width: '900px',
-      data: this.data
-    });
 
-    //Despues de cerrar el dialog
-    dialogRef.afterClosed().subscribe((result:ISubthemeDialog) => {
-      console.log('Dialog cerrado');
-      if(this.data.name.trim() !== '' || this.data.description.trim() !== ''){
-        console.log(this.data);
 
-      this.editorService.content$.subscribe(content => this.data.contentEditor = content);
-      this.monacoService.content$.subscribe(content => this.data.contentCode = content);
-      
-     let _subtheme = {
-          id: uuid(),
-          name: this.data.name,
-          description: this.data.description,
-          image: this.data.image,
-          content: this.data.contentEditor,
-          contentCode: this.data.contentCode,
-          subtitle: 'Subtheme'
-      } as ICardSubTheme 
-      
-      //Se procede a insertar el subthema en en el tema al que pertenece 
-      //haciendo uso del id para encontrarlo.
-      this.arrayThemes.forEach(theme => (theme.id === this.idThemeSelected) ? theme.subthemes.push(_subtheme): theme);
-      this.clearObservables();
-      this.clearDataDialog();
-      console.log(this.arrayThemes)
-      }
-    });
+
+  addSubtheme(){
+    let _subtheme: ISubtheme = {
+      idSubtheme: uuid(),
+      name: this.data.name,
+      description: this.data.description,
+      image: this.data.image,
+      contentEditor: this.data.contentEditor,
+      contentCode: this.data.contentCode,
+      url_video: this.data.url_video
   }
+
+//Se procede a insertar el subthema en en el tema al que pertenece 
+//haciendo uso del id para encontrarlo.
+  this.arrayThemes.forEach(theme => (theme.id === this.idThemeSelected) 
+            ? theme.subthemes.push(_subtheme)
+            : theme);
+  this.clearObservables();
+  this.clearDataDialog();
+  }
+
 
  
   drop(event: CdkDragDrop<string[]>) {
@@ -127,6 +188,46 @@ export class SubthemeComponent implements OnInit {
           event.currentIndex
       );
     }
+  }
+
+
+
+  openDialog(idTheme: string, action: string): void {
+    this.idThemeSelected = idTheme; 
+    this.data.action = action;
+    console.log("Iniciando la modal")
+    console.log(this.data)
+    const dialogRef = this.dialog.open(CreateSubthemeDialog, {
+      width: '900px',
+      data: this.data
+    });
+
+    //Despues de cerrar el dialog
+    dialogRef.afterClosed().subscribe((result:ISubthemeDialog) => {
+      console.log('Dialog cerrado');
+    //if(this.data.name.trim() !== '' || this.data.description.trim() !== ''){
+        console.log("DATOS:")
+        console.log(this.data);
+      
+        if(this.data.name  || this.data.description){
+          switch(this.data.action){
+            case 'create':
+              this.addSubtheme()
+            break;
+            case 'update':
+              this.updateSubtheme();
+            break;
+          }
+        }else{
+          console.error('Ocurrio algo malo, algo muy malo ... D:')
+
+        }
+
+     
+       
+      
+      console.log(this.arrayThemes)
+    });
   }
 
 
@@ -146,8 +247,11 @@ export class SubthemeComponent implements OnInit {
 
 
   ngOnInit() {
-    this.observerArrayTheme = this.themeListService.getListTheme();
-    this.observerArrayTheme.subscribe(res => this.arrayThemes = res);
+    
+    this.subscriberArrayTheme = this.themeListService.themesObservable$.subscribe(themes => this.arrayThemes = themes);
+    this.subscriberContendEditor = this.editorService.content$.subscribe(content => this.data.contentEditor = content);
+    this.monacoService.content$.subscribe(content => this.data.contentCode = content);
+  
    }
 
 }

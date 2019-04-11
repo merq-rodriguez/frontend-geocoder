@@ -47,7 +47,32 @@
 
     <div class="row">
       <div class="col-12">
-        <div class="row">
+        <div class="row" *ngIf="data.action === 'create'">
+          <div class="col-md-11">
+            <mat-form-field class="example-full-width">
+              <textarea 
+                    matInput 
+                    disabled 
+                    [(ngModel)]="data.image" 
+                    placeholder="Cargar imagen" 
+                    rows="1">
+              </textarea>
+            </mat-form-field>
+          </div>
+          <div class="col-md-1">
+
+            <!-- ADD FILE BUTTON -->
+
+            <input hidden type="file" #fileInputTheme [(ngModel)]="data.image" />
+            <button mat-fab class="add-file-button mat-warn" (click)="fileInputTheme.click()"
+              aria-label="Agregar imagen" [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+              <mat-icon>cloud_upload</mat-icon>
+            </button>
+
+          </div>
+
+        </div>
+        <div class="row" *ngIf="data.action === 'update'">
           <div class="col-md-11">
             <mat-form-field class="example-full-width">
               <textarea 
@@ -95,7 +120,7 @@
       </div>
     </div>
 
-
+    {{ data.addCode }}
     <div class="row">
       <div class="col-12" *ngIf="data.addCode">
         <app-monaco-code></app-monaco-code>
@@ -121,7 +146,8 @@
       <div class="col-12" *ngIf="data.addVideo">
         <div class="col-9">
           <mat-form-field>
-            <input type="text" [(ngModel)]="data.url_video" matInput placeholder="Pega aqui la url del video de youtube" (change)="getDestroy()">
+            <input type="text" [(ngModel)]="data.url_video"
+             matInput placeholder="Pega aqui la url del video de youtube" (change)="getDestroy()">
           </mat-form-field>
         </div>
 

@@ -4,9 +4,10 @@ export interface ISubtheme{
   idSubtheme?: string;
   name: string;
   description: string;
-  content?: string;
+  contentEditor?: string;
   contentCode?: string;
   image?: string;
+  url_video?: string;
   idTheme?: number;
 }
 

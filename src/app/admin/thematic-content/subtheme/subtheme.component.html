@@ -47,7 +47,7 @@
               </div>
               <div class="col-1">
                 <button mat-icon-button color="primary" class="btn  btn-just-icon add-subtheme"
-                  (click)="openDialog(theme.id)">
+                  (click)="openDialog(theme.id, 'create')">
                   <i class="material-icons"> add_circle </i>
                 </button>
               </div>
@@ -63,7 +63,7 @@
           <div *ngFor="let subtheme of theme.subthemes" cdkDrag>
 
 
-            <app-card-mini (action)="getAction($event)" [item]="subtheme" [idTheme]="theme.id">
+            <app-card-mini (action)="getActionCardMini($event)" [item]="subtheme" [idTheme]="theme.id">
             </app-card-mini>
 
           </div>

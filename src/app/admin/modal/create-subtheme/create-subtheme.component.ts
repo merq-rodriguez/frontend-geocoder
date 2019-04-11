@@ -7,14 +7,16 @@ import {MatSnackBar} from '@angular/material';
 import { Observable } from 'rxjs';
 
 export interface ISubthemeDialog{
+  id?: string;
   name: string;
   description: string;
   contentEditor?: string;
   contentCode?: string;
   image?: string;
-  addVideo: boolean;
+  addVideo?: boolean;
   url_video: string;
-  addCode: boolean;
+  addCode?: boolean;
+  action?: string;
 }
 
 
@@ -28,8 +30,8 @@ export class CreateSubthemeDialog {
   _destroy = true;
   subscribeMonaco$: any;
   subscribeEditor$: any;
-  contentMonaco: string;
-  contentEditor: string;
+  contentMonaco: string = '';
+  contentEditor: string = '';
 
   constructor(
     private snackBar: MatSnackBar,
@@ -66,12 +68,14 @@ export class CreateSubthemeDialog {
         this._saveData = true;
       }
 
+     if(this.contentEditor){
       if(this.contentEditor.trim() === ''){
         this.openSnackBar('Debes construir el contenido en el editor','Aceptar');
         this._saveData = false;
       }else{
         this._saveData = true;
       }
+     }
 
       if(this.data.addCode){ //Primero verificamos que la persona haya anexado codigo (Esto es opcional, no es obligatorio añadir codigo para un subtema)
         if(this.contentMonaco.trim() === ''){ // Si añadio codigo validamos que no esté vacio
