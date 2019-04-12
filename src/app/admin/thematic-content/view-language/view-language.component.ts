@@ -1,20 +1,31 @@
-import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { CreateLanguageComponent } from '../create-language/create-language.component';
+import { Component, OnInit, Input } from "@angular/core";
+import * as _ from 'lodash';
+import {
+  FormControl,
+  FormBuilder,
+  FormGroup,
+  Validators
+} from "@angular/forms";
+import { MatSnackBar } from '@angular/material';
+import { fuseAnimations } from 'src/app/@theme/animations';
 import { ILanguage } from 'src/app/@core/data/language.data';
 import { ThemeListService } from 'src/app/@core/services/themeList.service';
 
+
+
 @Component({
-  selector: 'app-thematic',
-  templateUrl: './thematic.component.html',
-  styleUrls: ['./thematic.component.css']
+  selector: "app-language",
+  templateUrl: "./view-language.component.html",
+  styleUrls: ["./view-language.component.css"],
+  animations: fuseAnimations
 })
-export class ThematicComponent implements OnInit, AfterViewInit  {
-  
-  @ViewChild(CreateLanguageComponent) childRefCreateLanguage;
+export class ViewLanguageComponent implements OnInit {
+ 
   isLinear = false;
   
   private language: ILanguage;
+  //public arrayTheme: ICardTheme[];
+
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   
@@ -24,10 +35,7 @@ export class ThematicComponent implements OnInit, AfterViewInit  {
     public themeListService: ThemeListService 
     ) {}
 
-  ngAfterViewInit(){
-    this.language = this.childRefCreateLanguage.language;
-  }
-
+ 
   ngOnInit() {
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]

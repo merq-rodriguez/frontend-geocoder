@@ -28,6 +28,7 @@ export interface ISubthemeDialog{
 export class CreateSubthemeDialog {
   _saveData= true;
   _destroy = true;
+  selectedFile: File = null;
   subscribeMonaco$: any;
   subscribeEditor$: any;
   contentMonaco: string = '';
@@ -41,6 +42,13 @@ export class CreateSubthemeDialog {
     @Inject(MAT_DIALOG_DATA) public data: ISubthemeDialog) {
       this.subscribeMonaco$ = this.monacoService.content$.subscribe(content => this.contentMonaco = content );
       this.subscribeEditor$ = this.editorService.content$.subscribe(content => this.contentEditor = content );
+    }
+
+    onFileSelected(event){
+      console.log(event)
+      console.log(<File>event.target.files[0])
+        this.selectedFile = <File>event.target.files[0];
+        console.log(this.selectedFile)
     }
 
     onNoClick(): void {

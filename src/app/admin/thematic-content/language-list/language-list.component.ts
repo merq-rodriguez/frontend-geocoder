@@ -38,7 +38,7 @@ export class LanguageListComponent implements OnInit {
   ngOnInit() {}
 
 
-  getRouteTheme(id: number) {
-    this.router.navigate(["/theme", {id: id}]);
+  getRouteTheme(id: number) {//[routerLink]="['/admin/thematic-content/language']"
+    this.router.navigate(["/admin/thematic-content/language", {id: id}]);
   }
 }

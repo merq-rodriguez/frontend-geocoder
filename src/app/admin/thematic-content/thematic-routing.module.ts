@@ -7,6 +7,7 @@ import { CreateLanguageComponent } from './create-language/create-language.compo
 import { SubthemeComponent } from './subtheme/subtheme.component';
 import { ThemeComponent } from './theme/theme.component';
 import { ThematicComponent } from './thematic/thematic.component';
+import { ViewLanguageComponent } from './view-language/view-language.component';
 
 
 
@@ -17,6 +18,7 @@ const routes: Routes = [{
     { path: 'menu-language',    component: LanguageMenuComponent   }, 
     { path: 'language-list',    component: LanguageListComponent   },
     { path: 'create-thematic',  component: ThematicComponent },
+    { path: 'language',         component: ViewLanguageComponent },
   ],
 }];
 
@@ -34,6 +36,6 @@ export const routedComponents = [
   CreateLanguageComponent,
   SubthemeComponent,
   ThemeComponent,
-  
+  ViewLanguageComponent
 
 ];
