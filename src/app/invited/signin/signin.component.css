@@ -1,15 +1,22 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500);
-html {
-  background-color: #f1f1f1;
-  font-family: "Roboto";
+.content-signin{
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background: url(../../../assets/img/background-signin.jpg) no-repeat center center fixed;
+  background-size: 100% 100%; 
+  background-position: center center;
+  position: absolute;
 }
+
 
 /* BOX LOGIN */
 .box {
+  display: block;
   position: relative;
   margin: auto;
-  height: 410px;
-  top: 40px;
+  height: 450px;
+  top: 100px;
   left: 0;
   z-index: 200;
   right: 0;
@@ -20,6 +27,8 @@ html {
   margin-bottom: 100px;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.19), 0 6px 6px rgba(0, 0, 0, 0.23);
   overflow: hidden;
+  
+  
 }
 
 #header {
@@ -410,3 +419,4 @@ body {
 a:link, a:visited {
   text-decoration: none;
 }
+
