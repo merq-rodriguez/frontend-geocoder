@@ -1,0 +1,50 @@
+  <div mat-dialog-content>
+    <div class="container">
+
+
+      <mat-card class="card-info-subtheme">
+        <div class="row">
+          <div class="col-9">
+              <div class="col-auto">
+                <label> Nombre del subtema:</label>
+                <p>Funciones lambda</p>
+              </div>
+
+              <div class="col-12">
+                <label> Descripcion:</label>
+                <p> {{ subthemeSelected.description }} </p>
+              </div>
+
+            </div>
+            <div class="col-3">
+              <img [src]="subthemeSelected.image" class="image-subtheme">
+            </div>
+          </div>
+      </mat-card>
+
+      <br>
+      <mat-card class="card-info-subtheme">
+        <div class="row">
+          <div class="col-12">
+            <div [innerHTML]="subthemeSelected.contentEditor">
+            </div>
+          </div>
+        </div>
+      </mat-card>
+      <hr>
+      <div class="row">
+        <div class="col-12">
+          <app-monaco-code [code]="subthemeSelected.contentCode"></app-monaco-code>
+        </div>
+      </div>
+
+      <br>
+      <div class="row">
+        <div class="col-12 d-flex justify-content-center" *ngIf="subthemeSelected.url_video.length > 0">
+          <app-video [id]="subthemeSelected.url_video"></app-video>
+        </div>
+      </div>
+    </div>
+  </div>
+
+

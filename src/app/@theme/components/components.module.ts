@@ -67,6 +67,7 @@ import { AsideComponent } from './aside/aside.component';
 import { CardMiniComponent } from './card-mini/card-mini.component';
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { VideoComponent } from './video/video.component';
+import { ShowSubthemeDialog } from 'src/app/admin/modal/show-subtheme/show-subtheme.component';
 
 
 
@@ -127,6 +128,7 @@ const COMPONENTS = [
   CardComponent,
   EditorComponent,
   DialogContentExampleDialog,
+  //ShowSubthemeDialog,
   CardMiniComponent,
   VideoComponent,
   AdminLayoutComponent

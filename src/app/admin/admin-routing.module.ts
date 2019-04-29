@@ -4,6 +4,7 @@ import { AdminComponent } from './admin.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { ExerciseComponent } from './exercise/exercise.component';
 import { CreateSubthemeDialog } from './modal/create-subtheme/create-subtheme.component';
+import { ShowSubthemeDialog } from './modal/show-subtheme/show-subtheme.component';
 
 const routes: Routes = [
   {
@@ -33,5 +34,6 @@ export const routedComponents = [
    AdminComponent, 
    DashboardComponent,
    ExerciseComponent,
-   CreateSubthemeDialog
+   CreateSubthemeDialog,
+   ShowSubthemeDialog
   ];

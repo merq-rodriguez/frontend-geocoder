@@ -9,6 +9,7 @@ import { ICardSubTheme } from '../card/ICard.interface';
 })
 export class CardMiniComponent implements OnInit {
   @Output() action = new EventEmitter<any>();
+  @Input() option:string;
   @Input() idTheme: string
   @Input('item') data:any;
  

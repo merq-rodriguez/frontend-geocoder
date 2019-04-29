@@ -8,6 +8,7 @@ import { SubthemeComponent } from './subtheme/subtheme.component';
 import { ThemeComponent } from './theme/theme.component';
 import { ThematicComponent } from './thematic/thematic.component';
 import { ViewLanguageComponent } from './view-language/view-language.component';
+import { ViewSubthemeComponent } from './view-subtheme/view-subtheme.component';
 
 
 
@@ -36,6 +37,7 @@ export const routedComponents = [
   CreateLanguageComponent,
   SubthemeComponent,
   ThemeComponent,
-  ViewLanguageComponent
+  ViewLanguageComponent,
+  ViewSubthemeComponent
 
 ];

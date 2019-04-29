@@ -4,6 +4,7 @@ import { Routes, RouterModule, ExtraOptions } from '@angular/router';
 const routes: Routes = [
  
   { path: 'admin', loadChildren: './admin/admin.module#AdminModule'},
+  { path: 'home', loadChildren: './invited/invited.module#InvitedModule'},
   { path: '', redirectTo: 'admin', pathMatch: 'full' },
   { path: '**', redirectTo: 'admin' }
 ];

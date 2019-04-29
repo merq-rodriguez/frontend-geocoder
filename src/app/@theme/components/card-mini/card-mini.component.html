@@ -18,7 +18,8 @@
       <div class="col-2">
         <div class="col">
           
-            <button 
+            <button
+                  *ngIf="option !== 'view'"
                   (click)="updateItem()" 
                   mat-icon-button 
                   color="primary"
@@ -30,7 +31,10 @@
 
         <div class="col">
          
-            <button (click)="deleteItem()" mat-icon-button color="primary"
+            <button 
+              *ngIf="option !== 'view'"
+              (click)="deleteItem()" 
+              mat-icon-button color="primary"
               class="btn-success pull-right  btn-just-icon">
               <i class="material-icons"> delete </i>
             </button>

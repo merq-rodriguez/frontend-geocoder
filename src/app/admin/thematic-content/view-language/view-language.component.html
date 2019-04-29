@@ -13,7 +13,7 @@
           <a href="#" class="text-success" [routerLink]="['/admin/languages/menu-language']">Lenguajes</a>
         </li>
         <li class="breadcrumb-item active" aria-current="page">
-           Lenguaje
+          Lenguaje
         </li>
       </ol>
     </nav>
@@ -31,55 +31,105 @@
             <p class="card-category"> Aqui puedes ver los detalles del lenguaje. </p>
           </div>
           <div class="card-body">
-            <mat-horizontal-stepper linear #stepper>
-              <mat-step [stepControl]="firstFormGroup" [optional]="true">
-                <form [formGroup]="firstFormGroup">
-                  <ng-template matStepLabel>Datos del lenguaje</ng-template>
-                        <app-create-language></app-create-language>
-                        <button 
-                            mat-button 
-                            matStepperNext 
-                            (click)="getLanguage()"> Guardar y continuar
-                        </button>
-                </form>
-              </mat-step>
-
-              <mat-step [stepControl]="secondFormGroup" [optional]="true">
-                <form [formGroup]="secondFormGroup">
-                  <ng-template matStepLabel>Temas </ng-template>
-                    <app-theme></app-theme>
-                    <button 
-                        mat-button 
-                        matStepperPrevious>Atras
-                    </button>
-                    <button 
-                        mat-button 
-                        matStepperNext
-                        (click)="getThemesArray()">Continuar & guardar
-                    </button>
-                </form>
-              </mat-step>
-
-              <mat-step>
-                <ng-template matStepLabel> Subtemas</ng-template>
-                      <app-subthemes></app-subthemes>
-
-                <div>
-                  <button mat-button matStepperPrevious>Atras</button>
-                  <button mat-button (click)="stepper.reset()">
-                    Siguiente
-                  </button>
+            <mat-card>
+              <div class="row">
+                <div class="col-md-2 text-center ">
+                  <img class="image-step1" src="../../../../../assets/img/coder-traits.png" />
                 </div>
-              </mat-step>
 
-        
-            </mat-horizontal-stepper>
+                <div class="col-md-10">
+                  <label for="" class="info-label">
+                    Aqui podras observar el contenido tematicos perteneciente a el lenguaje de programacion
+                    seleccionado.
+                  </label>
+                </div>
+              </div>
+            </mat-card>
+            <br />
+
+            <mat-card>
+              <div class="container container-language">
+                <mat-card class="card-language">
+                  <mat-card-title>
+                    <div class="row">
+                      <div class="col-10">
+                        <p class="title-card">{{ language.name }}</p>
+                      </div>
+
+                    </div>
+
+                  </mat-card-title>
+                  <mat-card-subtitle>
+
+                  </mat-card-subtitle>
+                  <hr>
+                  <mat-card-content>
+                    <img class="img-card" mat-card-lg-image [src]="language.image" />
+                    <div class="description-card">
+                      <label> Descripcion</label>
+                      <p> {{ language.description }}</p>
+                    </div>
+
+                  </mat-card-content>
+                </mat-card>
+
+
+
+
+                <div class="container">
+                  <div   class="row" *ngIf="showSubtheme">
+                    <app-subtheme-view></app-subtheme-view>
+                  </div>
+
+
+                  <div class="row"  *ngIf="!showSubtheme">
+                    <div class="col-md-4" *ngFor="let theme of arrayThemes; let i=index">
+                      <div class="drag-container">
+                        <div class="section-heading">
+                          <div class="container">
+                            <div class="row">
+                              <div class="col-10">
+                                <p>{{ theme.name }}</p>
+                              </div>
+                              <div class="col-1">
+                                <button mat-icon-button color="primary" class="btn  btn-just-icon add-subtheme"
+                                  (click)="openDialog(theme.id)">
+                                  <i class="material-icons"> remove_red_eye </i>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+
+                        </div>
+                        <hr>
+
+                        <div cdkDropList #pendingList="cdkDropList" [cdkDropListData]="theme.subthemes"
+                          [cdkDropListConnectedTo]="[pendingList]" class="item-list"
+                          (cdkDropListDropped)="drop($event)">
+                          <!-- class="item-box" -->
+                          <div *ngFor="let subtheme of theme.subthemes" cdkDrag>
+
+
+                            <app-card-mini (click)="openDialog(subtheme)" [item]="subtheme" [idTheme]="theme.id"
+                              [option]="'view'">
+                            </app-card-mini>
+
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </mat-card>
+
+
+
           </div>
-          <div class="card-footer">
-            <div class="card-stats"></div>
-          </div>
+
         </div>
       </div>
     </div>
+
   </div>
 </div>
