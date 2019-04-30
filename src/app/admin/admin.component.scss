@@ -1,10 +1,11 @@
    .main {
     
-    background: #4e7a7a;
+    background: #93a8ad;
    }
  
    #main {
-    min-height: 800px;
+position: absolute;
+    min-height: 700px;
     margin: 0px;
     padding: 0px;
     display: -webkit-flex;
@@ -52,18 +53,18 @@
   
    header {
     display: block;
-    min-height: 60px;
     background: #2a3332;
     }
     
    footer {
     display: block;
-    margin: 4px;
-    padding: 5px;
+    width: 100%;
     min-height: 60px;
     border: 1px solid #ffffff;
     border-radius: 7pt;
     background: #ffffff;
+  z-index: 999;
+
     }
   
    /* Too narrow to support three columns */
