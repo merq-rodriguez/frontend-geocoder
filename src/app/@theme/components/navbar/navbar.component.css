@@ -1,0 +1,107 @@
+@import url(https://fonts.googleapis.com/css?family=Quicksand);
+
+
+#header {
+  height: 60px;
+  width: 100%;
+  margin: 0;
+  
+}
+
+#header h1 {
+  display: table;
+  color: #999;
+  font-weight: 400;
+  text-align: center;
+  margin: auto;
+  padding: 50px 50px 0 50px;
+  font-size: 55px;
+}
+
+#header p {
+  display: table;
+  color: #999;
+  font-weight: 400;
+  text-align: center;
+  margin: auto;
+  padding: 10px;
+  font-size: 20px;
+}
+
+#menuwrap {
+  float: left;
+  background: #fff;
+  width: 100%;
+  position: absolute;
+  margin: 0 auto 20px auto;
+  padding: 0;
+  height: 60px;
+  
+}
+
+#menu {
+  position: absolute;
+  width: 100%;
+  height: 60px;
+  margin: auto;
+  background: #0c7d99;
+  background: linear-gradient(to right, #26d3ca, #07353d) no-repeat 0 0 / cover ;
+  z-index: 99;
+  position: fixed;
+}
+
+#menu span {
+  display: table;
+  color: #fff;
+  text-align: center;
+  margin: auto;
+  padding: 20px 0;
+  font-size: 20px;
+}
+
+#menu:before {
+  position: absolute;
+  content: '';
+  display: inline-block;
+  left: 0;
+  top: 0;
+  height: 60px;
+  width: 80px;
+  margin: 0;
+  text-align: center;
+  background: #444;
+}
+
+#menu:after {
+  position: absolute;
+  content: '\f015';
+  display: inline-block;
+  font-family: FontAwesome;
+  left: 0;
+  top: 0;
+  height: 60px;
+  line-height: 60px;
+  width: 80px;
+  margin: 0;
+  text-align: center;
+  color: #fff;
+  font-size: 20px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#menu.fixed {
+  position: fixed;
+  top: 0;
+  z-index: 99;
+}
+/* Back to top */
