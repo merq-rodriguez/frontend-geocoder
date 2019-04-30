@@ -1,27 +1,8 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
-import {
-  FormControl,
-  FormBuilder,
-  FormGroup,
-  Validators
-} from "@angular/forms";
-import { log } from "util";
-
 import * as _ from "lodash";
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 
-export interface TypeTest {
-  value: string;
-  viewValue: string;
-}
 
-export interface PeriodicElement {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
-}
 
 @Component({
   selector: "app-test-menu",
@@ -37,9 +18,8 @@ export class TestMenuComponent implements OnInit {
     { value: "2", viewValue: "Otros" }
   ];
 
-  
-
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
+  
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -47,10 +27,7 @@ export class TestMenuComponent implements OnInit {
   public hiddenTestList: boolean = false;
   public hiddenCreateTest: boolean = false;
 
-  constructor(
-    private router: ActivatedRoute,
-    private _formBuilder: FormBuilder
-  ) { }
+  constructor(  ) { }
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
   }
@@ -66,7 +43,17 @@ export class TestMenuComponent implements OnInit {
   }
 
 }
+export interface TypeTest {
+  value: string;
+  viewValue: string;
+}
 
+export interface PeriodicElement {
+  name: string;
+  position: number;
+  weight: number;
+  symbol: string;
+}
 
 const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1, name: 'Nombre de un test', weight: 1.0079, symbol: 'H' },

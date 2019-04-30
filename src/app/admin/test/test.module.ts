@@ -11,8 +11,6 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
     ComponentsModule,
     TestRoutingModule,
     CKEditorModule,
- //   MonacoEditorModule.forRoot(),
-  //  LeafletModule.forRoot()
   ],
   declarations: [
     ...routedComponents

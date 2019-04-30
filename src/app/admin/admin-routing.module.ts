@@ -15,8 +15,8 @@ const routes: Routes = [
       { path: 'exercise', component: ExerciseComponent },
       { path: 'users',       loadChildren: './users/users.module#UsersModule' },
       { path: 'competences', loadChildren: './competence/competence.module#CompetenceModule' },
-      { path: 'tests',       loadChildren: './test/test.module#TestModule' },
       { path: 'thematic-content',   loadChildren: './thematic-content/thematic-content.module#ThematicModule' },
+      { path: 'tests',       loadChildren: './test/test.module#TestModule' },
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: '**', redirectTo: 'dashboard' }
     ]

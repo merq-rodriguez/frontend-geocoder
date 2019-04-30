@@ -99,12 +99,12 @@
 </nav> -->
 
 <ul class="sidebar">
-    <li class="centrar">
-        <a [routerLink]="['/admin/dashboard']" >
-          <i class="material-icons">apps</i>
+    <li class="centrar" *ngFor="let item of menuItems">
+        <a routerLink={{item.path}} >
+          <i class="material-icons">{{ item.icon }}</i>
         </a>
     </li>
-     <li class="centrar">
+    <!--  <li class="centrar">
         <a [routerLink]="['/admin/users/user-manage']">
           <i class="material-icons">supervised_user_circle</i>
         </a>
@@ -128,5 +128,5 @@
         <a [routerLink]="['/admin/competences/map-competence']">
           <i class="material-icons">public</i>
         </a>
-    </li>
+    </li> -->
   </ul>

@@ -74,12 +74,11 @@ export class TestQuestionComponent implements OnInit {
   public newQuestion: IQuestion = {
     code: null,
     name: "",
-    options: null
+    options: []
   };
 
   public countQuestion: number = 0;
   constructor(
-    private router: ActivatedRoute,
     private _formBuilder: FormBuilder
   ) {}
 

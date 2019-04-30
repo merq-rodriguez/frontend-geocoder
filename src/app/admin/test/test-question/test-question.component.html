@@ -153,7 +153,7 @@
                           </div>
                         </div>
 
-                        <mat-card *ngIf="newQuestion.option.length != 0">
+                        <mat-card *ngIf="newQuestion.options.length != 0">
                           <div class="col-md-12">
                             <div
                               class="container d-flex justify-content-center"
@@ -161,7 +161,7 @@
                               <mat-card>
                                 <div
                                   class="col-md-12"
-                                  *ngFor="let option of newQuestion.option"
+                                  *ngFor="let option of newQuestion.options"
                                 >
                                   <mat-checkbox>
                                     {{ option.name }}
@@ -322,7 +322,6 @@
     <ngx-editor
       *ngIf="selectType == '1'"
       [hidden]="EditHtmlState.checked"
-      [state]="!EditHtmlState.checked"
     >
     </ngx-editor>
   </div>
