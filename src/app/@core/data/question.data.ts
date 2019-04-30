@@ -7,6 +7,7 @@ export interface IQuestion{
     name: string;
     options: Array<IOption>;
     code?: ICode;
+    state?: boolean;
 }
 
 
