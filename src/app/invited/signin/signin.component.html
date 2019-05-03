@@ -13,13 +13,13 @@
         <div class="row d-flex justify-content-center">
           <div class="col-10">
             <mat-form-field class="">
-              <input matInput placeholder="Nombre de usuario" value="">
+              <input matInput placeholder="Nombre de usuario" [(ngModel)]="username">
             </mat-form-field>
           </div>
   
           <div class="col-10">
             <mat-form-field class="">
-              <input  type="password" matInput placeholder="Contraseña" value="">
+              <input  type="password" matInput placeholder="Contraseña" [(ngModel)]="password">
             </mat-form-field>
           </div>
         </div>
@@ -38,12 +38,12 @@
         <span class="bar"></span>
         <label>Contraseña</label>
       </div> -->
-      <button id="buttonlogintoregister" type="submit">Iniciar Sesion</button>
+      <button id="buttonlogintoregister" type="submit" [routerLink]="['/admin/thematic-content/menu-language']">Iniciar Sesion</button>
     </form>
     <div id="footer-box">
       <p class="footer-text">
         ¿No tienes una cuenta?
-        <span class="sign-up"> Registrate ahora</span></p>
+        <span class="sign-up" [routerLink]="['/home/signup']"> Registrate ahora</span></p>
     </div>
   </div>
 </div>
