@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 
 
 export interface Food {
@@ -41,10 +42,17 @@ export class UserManageComponent implements OnInit {
     console.log(this.isAddUser);
     return this.isAddUser = (this.isAddUser == true) ? false : true;
   }
-
+  public getRoutesItem(){
+    console.log(ROUTES_THEMATIC);
+     return ROUTES_THEMATIC; 
+  }
 }
 
 
+const ROUTES_THEMATIC: RouteInfo[] = [
+  { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
+  {  icon: "school", title: "Administrar Usuarios", class: "", active: false },
+];
 const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1,  nombres: 'Hydrogen',          apellidos: 'xxxxxxxxx',rol: 'sadasdasH'  , nivel:  'assdfggfgfghdsfsf'},
   { position: 2,  nombres: 'Helium',            apellidos: 'xxxxxxxxx',rol: 'sadasdasHe' , nivel:  'assdfggfgfghdsfsf'},

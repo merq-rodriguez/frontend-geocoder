@@ -1,12 +1,7 @@
 <div class="main-content content">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item "><a href="#" class="text-success">Home</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Usuarios</li>
-        </ol>
-      </nav>
   <div class="container-fluid">
-     
+    
+    <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
     <div class="row">
       <mat-card>
         <div class="card" *ngIf="isAddUser">

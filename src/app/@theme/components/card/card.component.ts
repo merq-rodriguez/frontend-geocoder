@@ -31,6 +31,8 @@ export class CardComponent implements OnInit {
         break;
 
       }
+      console.log("==================================")
+      console.log(this.data)
   }
 
   deleteItem(){

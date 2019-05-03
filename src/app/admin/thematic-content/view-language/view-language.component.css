@@ -1,9 +1,16 @@
   
-  
+  .content {
+    position: relative;
+  }
   
   .info-label{
     display: block;
-    margin: auto;
+    margin-top: 3.5%;
+  }
+
+  .info{
+    background: rgba(239, 241, 241, 0.623);
+
   }
   
   .image-step1{
@@ -56,3 +63,11 @@
     font-size: 15px;
     font-weight: inherit;
   }
+
+
+
+
+
+
+
+

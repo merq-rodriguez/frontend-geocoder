@@ -1,22 +1,6 @@
 <div class="main-content">
   <div class="container-fluid">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item ">
-          <a href="#" class="text-success" [routerLink]="['/dashboard']"
-            >Home</a
-          >
-        </li>
-        <li class="breadcrumb-item">
-          <a href="#" class="text-success" [routerLink]="['/competition']"
-            >Competencias</a
-          >
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">
-          Crear competencias
-        </li>
-      </ol>
-    </nav>
+   <app-navroutes [itemsRoutes]="getRoutesItem()" ></app-navroutes>
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -395,10 +379,10 @@
                     </div>
                     <br />
 
-                    <div class="container " [hidden]="selectType !== '0'">
+                  <!--   <div class="container " [hidden]="selectType !== '0'">
                       <div class="row d-flex justify-content-center">
                         <div class="col" *ngFor="let item of testQuestions">
-                          <app-card [item]="item"></app-card>
+                          <app-card [item]="item" type="'test'"></app-card>
                         </div>
                       </div>
                     </div>
@@ -409,7 +393,7 @@
                           <app-card [item]="item"></app-card>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </mat-card>
                 <br />

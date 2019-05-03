@@ -11,6 +11,7 @@ import { v4 as uuid } from 'uuid';
 import * as _ from "lodash";
 import { IQuestion } from 'src/app/@core/data/question.data';
 import { IOption } from 'src/app/@core/data/option.data';
+import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 
 export interface TypeTest {
   value: string;
@@ -190,3 +191,9 @@ export class CreateTestComponent implements OnInit {
     this.EditHtmlState.checked = this.EditHtmlState.checked ? false : true;
   }
 }
+
+const ROUTES_TEST: RouteInfo[] = [
+  { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
+  { path: '/admin/tests/menu-test', icon: "school", title: "Tests", class: "", active: true },
+  { icon: "", title: "Evaluacion", class: "", active: false },
+];

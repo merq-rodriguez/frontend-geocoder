@@ -1,11 +1,6 @@
 
 <div class="main-content">
-    <nav >
-        <ol>
-          <li ><a href="#" class=" item-li" [routerLink]="['/admin/dashboard']">Home</a></li>
-          <li class="active" >Lenguajes</li>
-        </ol>
-      </nav>
+  <app-navroutes [itemsRoutes]="getRoutesItem()" ></app-navroutes>
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-4">

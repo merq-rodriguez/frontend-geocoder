@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material';
 import { ISubthemeDialog, CreateSubthemeDialog } from '../../modal/create-subtheme/create-subtheme.component';
 import { ShowSubthemeDialog } from '../../modal/show-subtheme/show-subtheme.component';
 import { ISubtheme } from 'src/app/@core/data/subtheme-data';
+import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 
 
 
@@ -15,8 +16,9 @@ import { ISubtheme } from 'src/app/@core/data/subtheme-data';
   styleUrls: ["./view-language.component.css"],
 })
 export class ViewLanguageComponent implements OnInit {
+  
   public subscriberArrayTheme: any;
- 
+
   public arrayThemes: ICardTheme[] = [
     {
       id: '1',
@@ -168,8 +170,16 @@ export class ViewLanguageComponent implements OnInit {
     }
   }
 
-
-
- 
-
+  public getRoutesItem(){
+    console.log(ROUTES_THEMATIC);
+     return ROUTES_THEMATIC; 
+  }
 }
+
+
+const ROUTES_THEMATIC: RouteInfo[] = [
+  { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
+  { path: '/admin/thematic-content/menu-language', icon: "school", title: "Menu Lenguajes", class: "", active: true },
+  { path: '/admin/thematic-content/language-list', icon: "school", title: "Listado de Lenguajes", class: "", active: true },
+  { icon: "", title: "Lenguaje", class: "", active: false },
+];

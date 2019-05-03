@@ -17,6 +17,8 @@ import {
   FormGroup,
   Validators
 } from "@angular/forms";
+import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
+import { IQuestion } from 'src/app/@core/data/question.data';
 
 export interface Animal {
   name: string;
@@ -51,8 +53,9 @@ export class CreateCompetenceComponent implements OnInit {
   ];
 //Con esto vamos a mostrar y ocultar las listas de test
 
-  testQuestions = [
+  testQuestions  = [
   {
+
     name: 'Estructuras de datos con Python',
     subtitle: 'Subtitulo del test',
     description: 'Esta es la descripcion del test, es una descripcion muy detallada del ejercicio o lo que sea.',
@@ -218,4 +221,13 @@ testExercise = [
       radiusCtrl: ''
     });
   }
+  public getRoutesItem(){
+    return ROUTES_COMPETENCE; 
+  }
+
 }
+const ROUTES_COMPETENCE: RouteInfo[] = [
+  { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
+  { path: '/admin/competences/menu-competence', icon: "school", title: "Menu Competencias", class: "", active: true },
+  { path: '', icon: "school", title: "Crear Competencia", class: "", active: false },
+];

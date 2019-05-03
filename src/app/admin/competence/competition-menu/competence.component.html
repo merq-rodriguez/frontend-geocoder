@@ -1,11 +1,10 @@
 <div class="main-content">
   <div class="container-fluid">
-      <nav aria-label="breadcrumb">
-          <ol class="breadcrumb">
-            <li class="breadcrumb-item "><a href="#" class="text-success" [routerLink]="['/admin/dashboard']">Home</a></li>
-            <li class="breadcrumb-item active" aria-current="page">Competencias</li>
-          </ol>
-        </nav>
+      <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
+
+
+
+
     <div class="row">
       <div class="col-md-4">
         <div class="card" [routerLink]="['/admin/competences/create-competence']">
@@ -72,7 +71,7 @@
 
 
       <div class="col-md-4">
-        <div class="card" [routerLink]="['/admin/competences/champion-list']">
+        <div class="card" [routerLink]="['/admin/competences/champion-competence']">
           <div class="card-header card-header-success">
             <h4 class="card-title">Campeones</h4>
             <p class="card-category">Listado de mejores jugadores </p>

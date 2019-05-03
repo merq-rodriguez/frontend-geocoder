@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
 import { log } from "util";
+import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 
 @Component({
   selector: "app-language-list",
@@ -41,4 +42,13 @@ export class LanguageListComponent implements OnInit {
   getRouteTheme(id: number) {//[routerLink]="['/admin/thematic-content/language']"
     this.router.navigate(["/admin/thematic-content/language", {id: id}]);
   }
+  public getRoutesItem(){
+    return ROUTES_LANGUAJELIST; 
+  }
 }
+
+const ROUTES_LANGUAJELIST: RouteInfo[] = [
+  { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
+  { path: '/admin/thematic-content/menu-language', icon: "school", title: "Menu Lenguaje", class: "", active: true },
+  { path: '', icon: "school", title: "Listado de Lenguajes", class: "", active: false },
+];

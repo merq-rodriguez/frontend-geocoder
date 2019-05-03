@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 
 import { FooterComponent } from './footer/footer.component';
-import { NavbarComponent } from './navbar/navbar.component';
+import { NavbarComponent, BottomSheetOverviewExampleSheet } from './navbar/navbar.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { MonacoComponent } from './monaco/monaco.component';
 import { MapComponent } from './map/map.component';
@@ -68,6 +68,7 @@ import { CardMiniComponent } from './card-mini/card-mini.component';
 import { NgxYoutubePlayerModule } from 'ngx-youtube-player';
 import { VideoComponent } from './video/video.component';
 import { ShowSubthemeDialog } from 'src/app/admin/modal/show-subtheme/show-subtheme.component';
+import { NavRoutesComponent } from './navroutes/navroutes.component';
 
 
 
@@ -128,9 +129,10 @@ const COMPONENTS = [
   CardComponent,
   EditorComponent,
   DialogContentExampleDialog,
-  //ShowSubthemeDialog,
+  BottomSheetOverviewExampleSheet,
   CardMiniComponent,
   VideoComponent,
+  NavRoutesComponent,
   AdminLayoutComponent
 ];
 
@@ -152,7 +154,7 @@ const MODULES_FOR_ROOT = [
     
     
   ],
-  entryComponents: [ DialogContentExampleDialog ], 
+  entryComponents: [ DialogContentExampleDialog, BottomSheetOverviewExampleSheet ], 
   declarations: [ ...COMPONENTS ],
   exports: [ 
     ...COMPONENTS, 

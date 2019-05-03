@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CreateLanguageComponent } from '../create-language/create-language.component';
 import { ILanguage } from 'src/app/@core/data/language.data';
 import { ThemeListService } from 'src/app/@core/services/themeList.service';
+import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 
 @Component({
   selector: 'app-thematic',
@@ -43,10 +44,18 @@ export class ThematicComponent implements OnInit, AfterViewInit  {
   }
 
   getThemesArray(){
-    //console.log(this.arrayTheme);
     this.themeListService.getListTheme().subscribe(res => {
       console.log(res)
     })
   }
 
+  public getRoutesItem(){
+    return ROUTES_THEMATIC; 
+  }
+
 }
+const ROUTES_THEMATIC: RouteInfo[] = [
+  { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
+  { path: '/admin/thematic-content/menu-language', icon: "school", title: "Menu Lenguaje", class: "", active: true },
+  {  icon: "school", title: "Crear Lenguaje", class: "", active: false },
+];

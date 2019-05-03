@@ -1,0 +1,22 @@
+<mat-nav-list class="nav">
+    <a  mat-list-item (click)="openLink($event)" [routerLink]="['admin/users/user-profile']">
+        <i class="material-icons">
+            exit_to_app
+            </i>
+      <span mat-line>Perfil de Usuario</span>
+      <!-- <span mat-line>Mira tu perfil</span> -->
+    </a>
+  
+  
+  
+    <a  mat-list-item (click)="openLink($event)" [routerLink]="['home/signin']">
+        <i class="material-icons">
+            person
+            </i>
+      <span mat-line>Salir</span>
+      <!-- <span mat-line>Salir de la aplicacion</span> -->
+    </a>
+  
+ 
+  </mat-nav-list>
+  

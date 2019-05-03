@@ -16,6 +16,7 @@ import { ISubthemeDialog } from '../../modal/create-subtheme/create-subtheme.com
 import { MonacoService } from 'src/app/@core/services/monaco.service';
 import { ICardSubTheme } from 'src/app/@theme/components/card-mini/ICard.interface';
 import { ISubtheme } from 'src/app/@core/data/subtheme-data';
+import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 
 @Component({
   selector: 'app-subthemes',
@@ -253,5 +254,14 @@ export class SubthemeComponent implements OnInit {
     this.monacoService.content$.subscribe(content => this.data.contentCode = content);
   
    }
-
+   public getRoutesItem(){
+    return ROUTES_SUBTHEME; 
+  }
 }
+
+const ROUTES_SUBTHEME: RouteInfo[] = [
+  { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
+  { path: '/admin/thematic-content/menu-language', icon: "school", title: "Menu Lenguaje", class: "", active: true },
+  { path: '/admin/thematic-content/language-list', icon: "school", title: "Listado de Lenguajes", class: "", active: true },
+  {  icon: "school", title: "Ver Lenguaje", class: "", active: false },
+];

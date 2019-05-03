@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
+import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 
 
 
@@ -18,7 +19,16 @@ export class ChampionListComponent implements OnInit {
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
   }
+  public getRoutesItem(){
+    return ROUTES_COMPETENCE; 
+  }
+
 }
+const ROUTES_COMPETENCE: RouteInfo[] = [
+  { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
+  { path: '/admin/competences/menu-competence', icon: "school", title: "Menu Competencias", class: "", active: true },
+  { path: '', icon: "school", title: "Campeones", class: "", active: false },
+];
 
 export interface PeriodicElement {
   name: string;
