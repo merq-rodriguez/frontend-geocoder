@@ -28,7 +28,7 @@ export class CreateLanguageComponent implements OnInit {
     idLanguage: null,
     name: '',
     description: '',
-    image: '',
+    image: '../../../../assets/img/image-default.png',
   }
   constructor( private _formBuilder: FormBuilder, private snackBar: MatSnackBar) {}
 
