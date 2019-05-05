@@ -1,0 +1,26 @@
+.item-li{
+  font-size: 7px;
+}
+
+.card{
+  width: 330px;
+}
+
+table {
+  width: 100%;
+}
+
+.image {
+  width: 70%;
+  display:block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.card-header{
+  background: linear-gradient(to right, #1ea7a0, #0b4e5a) no-repeat 0 0 / cover ;
+}
+
+.card-button{
+  background: linear-gradient(to right, #1ea7a0, #0b4e5a) no-repeat 0 0 / cover ;
+}

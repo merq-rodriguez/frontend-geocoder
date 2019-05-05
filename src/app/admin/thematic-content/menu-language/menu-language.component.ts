@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
+import { ICardMenu } from 'src/app/@theme/components/card-menu/card-menu.component';
 
 
 @Component({
@@ -10,6 +11,26 @@ import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.compone
 })
 export class LanguageMenuComponent implements OnInit {
 
+  menuArray: ICardMenu[] = [
+    {
+      name: 'Crear un lenguaje',
+      subtitle: 'Lenguajes',
+      image: '../../../../assets/img/Prog.png',
+      description: 'Animate y crea un lenguaje de programacion.',
+    },
+    {
+      name: 'Ver todos los lenguajes',
+      subtitle: 'Lenguajes',
+      description: 'Crea un lenguaje de programacion.',
+      image: '../../../../assets/img/Developer-icon.png',
+    },
+    {
+      name: 'Estadisticas',
+      subtitle: 'Lenguajes',
+      description: 'Crea un lenguaje de programacion.',
+      image: '../../../../assets/img/compe2.png',
+    }
+  ];
 
   constructor() { }
   

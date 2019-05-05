@@ -1,0 +1,29 @@
+<div class="card m-4" >
+    <div class="card-header card-header-default">
+      <h4 class="card-title">{{ data.name}}</h4>
+      <p class="card-category">{{ data.subtitle }}</p>
+    </div>
+    <div class="card-body">
+      <img class="image" src="" alt="" />
+      <div class="container">
+        <img
+          class="image"
+          [src]="data.image"
+          alt=""
+        />
+      </div>
+      <p class="card-category">
+        <span class="text-success"
+          ><i class="fa fa-long-arrow-up"></i>
+        </span>
+        {{ data.description }}
+      </p>
+    </div>
+    <div class="card-footer">
+      <div class="card-stats">
+        <button mat-raised-button class="btn btn-success card-button" [routerLink]="['/admin/thematic-content/create-thematic']">
+          Ir <i class="material-icons">play_arrow</i>
+        </button>
+      </div>
+    </div>
+  </div>

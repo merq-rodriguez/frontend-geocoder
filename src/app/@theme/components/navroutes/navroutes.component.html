@@ -1,20 +1,7 @@
-<!-- <nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item ">
-            <a href="#" class="text-success" [routerLink]="['/admin/dashboard']">Home</a>
-        </li>
-        <li class="breadcrumb-item">
-            <a href="#" class="text-success" [routerLink]="['/admin/languages/menu-language']">Lenguajes</a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">
-            Lenguaje
-        </li>
-    </ol>
-</nav> -->
 
 
-<nav aria-label="breadcrumb">
-    <ol class="breadcrumb">
+<nav aria-label="breadcrumb ">
+    <ol class="breadcrumb ">
         <div *ngFor="let item of itemsRoutes">
             <li class="breadcrumb-item" *ngIf="item.active">
                 <a class="text" routerLink={{item.path}}>{{ item.title}} </a> / 
