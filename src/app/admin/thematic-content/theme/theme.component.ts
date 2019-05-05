@@ -26,7 +26,7 @@ export class ThemeComponent implements OnInit {
     name: '',
     content: '',
     description: '',
-    image: ''
+    image: '../../../../assets/img/image-default.png'
   };
 
   constructor(
