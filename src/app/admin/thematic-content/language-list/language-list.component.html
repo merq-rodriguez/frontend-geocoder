@@ -4,12 +4,12 @@
     <div class="row">
       <div class="col-md-4" *ngFor="let lang of languageList">
         <div class="card">
-          <div class="card-header card-header-{{ lang.color }}">
+          <div class="card-header card-header-default card-button">
             <h4 class="card-title">{{ lang.name }}</h4>
             <p class="card-category">Lenguaje de Programacion</p>
           </div>
           <div class="card-body">
-            <img class="image" src="{{ lang.img }}" alt="" />
+            <img class="image" [src]="lang.image" alt="" />
 
             <p class="card-category">
               <span class="text-success"><i class="fa fa-long-arrow-up"></i>
@@ -19,7 +19,7 @@
           </div>
           <div class="card-footer">
             <div class="card-stats">
-              <button (click)="getRouteTheme(lang.id) " mat-raised-button class="btn btn-{{ lang.color }}">
+              <button (click)="getRouteTheme(lang.id) " mat-raised-button class="btn card-button">
                 Empezar <i class="material-icons">play_arrow</i>
               </button>
             </div>

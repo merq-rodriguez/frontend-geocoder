@@ -8,7 +8,7 @@ export class Api {
 
 	constructor(private http: HttpClient) { }
 
-	public get(controller: string) {
+	public get(controller: string, params?:Array<any>) {
 		return this.http.get( 
 			`${environment.api + controller}`
 		);

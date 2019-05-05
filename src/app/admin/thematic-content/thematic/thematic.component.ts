@@ -49,6 +49,15 @@ export class ThematicComponent implements OnInit, AfterViewInit  {
     })
   }
 
+  getData(){
+    console.log("================= languaje ================");
+    
+    console.log(this.language);
+    this.themeListService.getListTheme().subscribe(res => {
+      console.log(res)
+    })
+  }
+
   public getRoutesItem(){
     return ROUTES_THEMATIC; 
   }

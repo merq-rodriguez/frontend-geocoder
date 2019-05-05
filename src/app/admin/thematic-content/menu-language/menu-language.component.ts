@@ -17,21 +17,24 @@ export class LanguageMenuComponent implements OnInit {
       subtitle: 'Lenguajes',
       image: '../../../../assets/img/Prog.png',
       description: 'Animate y crea un lenguaje de programacion.',
+      routeLink: '/admin/thematic-content/create-thematic'
     },
     {
       name: 'Ver todos los lenguajes',
       subtitle: 'Lenguajes',
       description: 'Crea un lenguaje de programacion.',
       image: '../../../../assets/img/Developer-icon.png',
+      routeLink: '/admin/thematic-content/language-list'
     },
     {
       name: 'Estadisticas',
       subtitle: 'Lenguajes',
       description: 'Crea un lenguaje de programacion.',
       image: '../../../../assets/img/compe2.png',
+      routeLink: '/admin/thematic-content/language-list'
     }
   ];
-
+  
   constructor() { }
   
   ngOnInit() {}

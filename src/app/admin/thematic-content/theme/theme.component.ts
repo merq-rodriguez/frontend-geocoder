@@ -20,7 +20,7 @@ export class ThemeComponent implements OnInit {
   public observerEditor: Observable<any>
   isUpdated: boolean = false;
   arrayTheme: ICardTheme[] = [];
-
+  image = "";
   public newTheme: ITheme = {
     id: '',
     name: '',

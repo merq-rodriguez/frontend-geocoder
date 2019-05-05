@@ -10,3 +10,13 @@
     margin: auto;
   }
   
+  .button-add{
+    background: linear-gradient(to right, #1ea7a0, #0b4e5a) no-repeat 0 0 / cover ;
+  }
+  
+
+  .image-finish{
+    -webkit-box-shadow: 4px 4px 8px -1px rgba(0,0,0,0.75);
+    -moz-box-shadow: 4px 4px 8px -1px rgba(0,0,0,0.75);
+    box-shadow: 4px 4px 8px -1px rgba(0,0,0,0.75);
+  }

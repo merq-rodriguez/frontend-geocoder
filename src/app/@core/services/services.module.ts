@@ -4,13 +4,17 @@ import { UserService } from './user.service';
 import { ContentEditorService } from './content-editor.service';
 import { ThemeListService } from './themeList.service';
 import { MonacoService } from './monaco.service';
+import { LanguageService } from './language.service';
+import { Api } from './api.service';
 
 
 const SERVICES = [
   UserService,
   ContentEditorService,
   ThemeListService,
-  MonacoService
+  MonacoService,
+  LanguageService,
+  Api
 ];
 
 @NgModule({

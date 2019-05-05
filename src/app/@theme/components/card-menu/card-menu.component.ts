@@ -6,6 +6,7 @@ export interface ICardMenu {
   description: string;
   subtitle: string;
   image: string;
+  routeLink: string;
 }
 
 @Component({

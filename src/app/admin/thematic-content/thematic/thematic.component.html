@@ -1,7 +1,7 @@
 <div class="main-content">
   <div class="container-fluid">
 
-      <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
+    <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
 
 
 
@@ -22,34 +22,26 @@
               <mat-step [stepControl]="firstFormGroup" [optional]="true">
                 <form [formGroup]="firstFormGroup">
                   <ng-template matStepLabel>Datos del lenguaje</ng-template>
-                        <app-create-language></app-create-language>
-                        <button 
-                            mat-button 
-                            matStepperNext 
-                            (click)="getLanguage()"> Guardar y continuar
-                        </button>
+                  <app-create-language></app-create-language>
+                  <button mat-button matStepperNext (click)="getLanguage()"> Guardar y continuar
+                  </button>
                 </form>
               </mat-step>
 
               <mat-step [stepControl]="secondFormGroup" [optional]="true">
                 <form [formGroup]="secondFormGroup">
                   <ng-template matStepLabel>Crear temas </ng-template>
-                    <app-theme></app-theme>
-                    <button 
-                        mat-button 
-                        matStepperPrevious>Atras
-                    </button>
-                    <button 
-                        mat-button 
-                        matStepperNext
-                        (click)="getThemesArray()">Continuar & guardar
-                    </button>
+                  <app-theme></app-theme>
+                  <button mat-button matStepperPrevious>Atras
+                  </button>
+                  <button mat-button matStepperNext (click)="getThemesArray()">Continuar & guardar
+                  </button>
                 </form>
               </mat-step>
 
               <mat-step>
                 <ng-template matStepLabel> Asignar contenido tematico</ng-template>
-                      <app-subthemes></app-subthemes>
+                <app-subthemes></app-subthemes>
 
                 <div>
                   <button mat-button matStepperPrevious>Atras</button>
@@ -61,12 +53,25 @@
 
               <mat-step>
                 <ng-template matStepLabel>Terminar</ng-template>
-                You are now done.
+                <div class="container">
+                  <div class="row d-flex justify-content-center">
+                    <img class="image-finish" src="../../../../assets/img/thanos.gif">
+                  </div>
+                  <br>
+                  <div class="row d-flex justify-content-center">
+                      <button  
+                      (click)="getData()"
+                      mat-raised-button matTooltip="Terminar la creacion del lenguaje" 
+                      [matTooltipPosition]="'above'" type="button" class="btn btn-default pull-right button-add">
+                      Terminar
+                    </button>
+                  </div>
+                </div>
                 <div>
-                  <button mat-button matStepperPrevious>Atras</button>
+                  <!-- <button mat-button matStepperPrevious>Atras</button>
                   <button mat-button (click)="stepper.reset()">
                     Siguiente
-                  </button>
+                  </button> -->
                 </div>
               </mat-step>
             </mat-horizontal-stepper>

@@ -23,7 +23,7 @@ export class CreateLanguageComponent implements OnInit {
   //@Input() action: string | 'update' | 'view'
   isUpdated: boolean = false;
   firstFormGroup: FormGroup;
-
+  image: string = "";
   public language: ILanguage = {
     idLanguage: null,
     name: '',

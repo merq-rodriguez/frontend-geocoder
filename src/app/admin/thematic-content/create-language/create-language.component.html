@@ -44,7 +44,7 @@
     <div class="row">
       <div class="col-md-11">
         <mat-form-field class="example-full-width">
-          <textarea disabled [(ngModel)]="language.image" matInput placeholder="Cargar imagen" rows="1">
+          <textarea disabled  matInput placeholder="Cargar imagen" rows="1" [(ngModel)]="language.image">
           </textarea>
         </mat-form-field>
       </div>
@@ -52,7 +52,7 @@
 
         <!-- ADD FILE BUTTON -->
 
-        <input hidden type="file" #fileInput [(ngModel)]="language.image" />
+        <input hidden type="file" #fileInput [(ngModel)]="image" />
         <button mat-fab class="add-file-button mat-warn" (click)="fileInput.click()" aria-label="Add file"
           [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
           <mat-icon>cloud_upload</mat-icon>

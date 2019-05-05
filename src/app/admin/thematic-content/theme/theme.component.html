@@ -72,7 +72,7 @@
 
         <!-- ADD FILE BUTTON -->
 
-        <input hidden type="file" #fileInputTheme  [(ngModel)]="newTheme.image" />
+        <input hidden type="file" #fileInputTheme  [(ngModel)]="image" />
         <button mat-fab class="add-file-button mat-warn" (click)="fileInputTheme.click()" aria-label="Add file"
           [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
           <mat-icon>cloud_upload</mat-icon>
