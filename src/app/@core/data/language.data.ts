@@ -10,7 +10,7 @@ export interface ILanguage{
 }
 
 export abstract class LanguageData {
-    abstract getLanguages():   Observable<any[]>;
+    abstract getLanguages(idUser: number):   Observable<any[]>;
     abstract findLanguage(idLanguage: number):   Observable<any>;
     abstract createLanguage(language: ILanguage): Observable<any>;
     abstract updateLanguage(language: ILanguage): Observable<any>;

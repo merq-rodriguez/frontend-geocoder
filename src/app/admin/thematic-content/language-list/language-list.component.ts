@@ -1,8 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { log } from "util";
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 import { LanguageService } from 'src/app/@core/services/language.service';
+import { log } from 'util';
 
 @Component({
   selector: "app-language-list",
@@ -10,16 +10,20 @@ import { LanguageService } from 'src/app/@core/services/language.service';
   styleUrls: ["./language-list.component.css"]
 })
 export class LanguageListComponent implements OnInit {
+
   public languageList = [];
+
   constructor(
     private router: Router,
     private languageService: LanguageService  
   ) {
-     this.languageService.getLanguages().subscribe(res => {
-       this.languageList = res;
-     
+    let idUser = 3;
+     this.languageService.getLanguages(idUser).subscribe(res => {
+     this.languageList = res;
     });
-    
+
+    this.languageService.getLanguagesWithThematic(idUser).subscribe(res => console.log(res));
+            
   }
   ngOnInit() {}
 
@@ -27,6 +31,7 @@ export class LanguageListComponent implements OnInit {
   getRouteTheme(id: number) {
     this.router.navigate(["/admin/thematic-content/language", {id: id}]);
   }
+
   public getRoutesItem(){
     return ROUTES_LANGUAJELIST; 
   }

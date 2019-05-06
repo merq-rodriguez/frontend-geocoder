@@ -12,6 +12,10 @@ import { MonacoService } from './services/monaco.service';
 import { MonacoData } from './data/monaco.data';
 import { LanguageService } from './services/language.service';
 import { LanguageData } from './data/language.data';
+import { ThemeService } from './services/theme.service';
+import { ThemeData } from './data/theme.data';
+import { SubthemeService } from './services/subtheme.service';
+import { SubthemeData } from './data/subtheme-data';
 
 
 
@@ -19,9 +23,11 @@ import { LanguageData } from './data/language.data';
 const DATA_SERVICES = [
   { provide: UserData, useClass: UserService },
   { provide:  ContentEditorData, useClass: ContentEditorService},
+  { provide:  MonacoData, useClass: MonacoService },
   { provide:  ThemeListData, useClass: ThemeListService },
+  { provide:  ThemeData, useClass: ThemeService },
+  { provide:  SubthemeData, useClass: SubthemeService },
   { provide:  LanguageData, useClass: LanguageService },
-  { provide:  MonacoData, useClass: MonacoService }
   
 ];
 

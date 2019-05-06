@@ -6,15 +6,19 @@ import { ThemeListService } from './themeList.service';
 import { MonacoService } from './monaco.service';
 import { LanguageService } from './language.service';
 import { Api } from './api.service';
+import { ThemeService } from './theme.service';
+import { SubthemeService } from './subtheme.service';
 
 
 const SERVICES = [
+  Api,
   UserService,
   ContentEditorService,
   ThemeListService,
   MonacoService,
   LanguageService,
-  Api
+  ThemeService,
+  SubthemeService
 ];
 
 @NgModule({
