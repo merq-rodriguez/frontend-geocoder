@@ -1,0 +1,16 @@
+.card-blue{
+    background: linear-gradient(to right, #1ea7a0, #0b4e5a) no-repeat 0 0 / cover ;
+  }
+
+  .info{
+    background: rgba(239, 241, 241, 0.623);
+
+  }
+
+  .image-step1{
+    display: block;
+    width: 60px;
+    margin: auto;
+  }
+
+  

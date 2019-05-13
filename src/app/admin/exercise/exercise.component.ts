@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 
-import { FormControl } from "@angular/forms";
 
 @Component({
   selector: "app-exercise",
@@ -93,4 +93,12 @@ export class ExerciseComponent implements OnInit {
   setModeEditHTML() {
     this.EditHtmlState.checked = this.EditHtmlState.checked ? false : true;
   }
+  public getRoutesItem(){
+    return ROUTES_COMPETENCE; 
+  }
+
 }
+const ROUTES_COMPETENCE: RouteInfo[] = [
+  { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
+  { path: '', icon: "school", title: "Ejercicios", class: "", active: false },
+];

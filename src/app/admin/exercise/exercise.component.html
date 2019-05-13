@@ -1,94 +1,77 @@
-<div class="main-content">
+
+
+<div class="main-content ml-5">
   <div class="container-fluid">
+    <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
+
+
+
+
     <div class="row">
-      <div class="col-md-12">
-        <div class="card">
-          <div class="card-header card-header-success">
-            <h4 class="card-title">Ejercicios de programacion</h4>
-            <p class="card-category">
-              En esta seccion debe crear los ejercicios de programacion.
-            </p>
-          </div>
-          <div class="card-body">
-            <form>
-              <div class="row">
-                <div class="col-md-8">
-                  <!--
-                  <label>Ingrese el nombre del ejercicio</label>
 
-                  -->
-                  <mat-form-field class="example-full-width">
-                    <input
-                      matInput
-                      placeholder="Ingrese el nombre del ejercicio"
-                      type="text"
-                    />
-                  </mat-form-field>
-                </div>
-              </div>
 
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="row">
-                    <div class="col-md-10">
-                      <label>
-                        Construye el contenido personalizado del ejercicio de
-                        programacion a tratar
-                      </label>
-                    </div>
+      <div class="card">
+        <div class="card-header card-header-default card-blue">
+          <h4 class="card-title">Ejercicios de programacion</h4>
+          <p class="card-category">
+            En esta seccion debe crear los ejercicios de programacion.
+          </p>
+        </div>
+        <div class="card-body">
 
-                    <div class="col-md-2">
-                      <!-- Aqui cambiamos el estado del editor de texto html-->
-                      <mat-slide-toggle
-                        (click)="setModeEditHTML()"
-                        class="example-margin"
-                        [color]="EditHtmlState.color"
-                        [checked]="EditHtmlState.checked"
-                        [disabled]="EditHtmlState.disabled"
-                      >
-                        Ver edicion
-                      </mat-slide-toggle>
-                    </div>
+            <mat-card class="info">
+                <div class="row">
+                  <div class="col-md-2 text-center ">
+                    <img class="image-step1" src="../../../../../assets/img/deadpool.png" />
                   </div>
-                
+                  <div class="col-md-2 text-center ">
+                    <img class="image-step1" src="../../../../../assets/img/icon_programador.png" />
+                  </div>
+                  <div class="col-md-2 text-center ">
+                    <img class="image-step1" src="../../../../../assets/img/termi.jpg" />
+                  </div>
+                  <div class="col-md-2 text-center ">
+                    <img class="image-step1" src="../../../../../assets/img/mundo.png" />
+                  </div>
+                  <div class="col-md-2 text-center ">
+                    <img class="image-step1" src="../../../../../assets/img/main.png" />
+                  </div>
+                  <div class="col-md-2 text-center ">
+                    <img class="image-step1" src="../../../../../assets/img/deadpool2.png" />
+                  </div>
+  
+  
                 </div>
-              </div>
-              <button
-                mat-raised-button
-                type="submit"
-                class="btn btn-success pull-right"
-              >
-                Guardar
-              </button>
-            </form>
-            <!-- Aqui cambiamos el estado del editor de codigo -->
+              </mat-card>
 
-            <div class="container">
-                <div class="col-12">
-                    <mat-slide-toggle
-                    (click)="setModeCoder()"
-                    class="example-margin"
-                    [color]="monacoEditState.color"
-                    [checked]="monacoEditState.checked"
-                    [disabled]="monacoEditState.disabled"
-                  >
-                    ¿Quieres habilitar el modo programador?
-                  </mat-slide-toggle>
-                </div>
-            </div>
-            <br>
-            <br>
-            <ngx-editor></ngx-editor>
-            <div class="container ">
-              <div class="row">
-                <div class="col" *ngFor="let item of exerciseList">
-                  <app-card [item]="item"></app-card>
-                </div>
+          <form>
+            <div class="row">
+              <div class="col-12">
+                <form>
+                  <mat-form-field>
+                    <input matInput placeholder="Nombre del ejercicio">
+                  </mat-form-field>
+
+                  <mat-form-field>
+                    <textarea matInput placeholder="Descripcion"></textarea>
+                  </mat-form-field>
+                </form>
+
               </div>
             </div>
-          </div>
+
+
+            <button mat-raised-button type="submit" class="btn btn-success pull-right card-blue">
+              Guardar
+            </button>
+          </form>
+
+
+
         </div>
       </div>
+
+
     </div>
   </div>
 </div>
