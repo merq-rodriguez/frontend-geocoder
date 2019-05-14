@@ -190,6 +190,10 @@ export class CreateTestComponent implements OnInit {
   setModeEditHTML() {
     this.EditHtmlState.checked = this.EditHtmlState.checked ? false : true;
   }
+  public getRoutesItem(){
+    return ROUTES_TEST; 
+  }
+
 }
 
 const ROUTES_TEST: RouteInfo[] = [

@@ -1,6 +1,7 @@
 import { Input } from '@angular/core';
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
+import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 
 
 @Component({
@@ -21,7 +22,17 @@ export class TestListComponent implements OnInit {
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
   }
+  public getRoutesItem(){
+    return ROUTES_TEST; 
+  }
+
 }
+
+const ROUTES_TEST: RouteInfo[] = [
+  { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
+  { path: '/admin/tests/menu-test', icon: "school", title: "Tests", class: "", active: true },
+  { icon: "", title: "Listado", class: "", active: false },
+];
 
 export interface PeriodicElement {
   name: string;

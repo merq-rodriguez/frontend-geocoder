@@ -1,17 +1,11 @@
 <div class="main-content">
-    <nav aria-label="breadcrumb">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item "><a  class="text-success" [routerLink]="['/admin/dashboard']">Home</a></li>
-          <li class="breadcrumb-item"> <a class="text-success" [routerLink]="['/admin/tests/menu-test']">Test</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Crear Test</li>
 
-        </ol>
-      </nav>
+  <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12">
         <div class="card">
-          <div class="card-header card-header-success">
+          <div class="card-header card-header-default">
             <h4 class="card-title">
               Evaluacion de los temas de la aplicacion.
             </h4>
@@ -41,14 +35,8 @@
                 </div>
                 <div class="col-md-3">
                   <mat-form-field>
-                    <mat-select
-                      placeholder="Tipo de evaluacion"
-                      [(value)]="selectType"
-                    >
-                      <mat-option
-                        *ngFor="let type of typestest"
-                        [value]="type.value"
-                      >
+                    <mat-select placeholder="Tipo de evaluacion" [(value)]="selectType">
+                      <mat-option *ngFor="let type of typestest" [value]="type.value">
                         {{ type.viewValue }}
                       </mat-option>
                     </mat-select>
@@ -62,7 +50,7 @@
               <app-test-question *ngIf="selectType == '0'"></app-test-question>
 
 
-       <!--        <div class="container " >
+              <!--        <div class="container " >
                 <div class="row d-flex justify-content-center">
                   <div class="col" *ngFor="let item of testQuestions">
                     <app-card [item]="item" ></app-card>
@@ -83,7 +71,7 @@
 
 
 
-              
+
 
             </div>
           </div>

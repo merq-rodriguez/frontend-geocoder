@@ -1,84 +1,74 @@
 <div class="main-content">
-    <nav aria-label="breadcrumb" [hidden]="hiddenNavActve">
-        <ol class="breadcrumb">
-          <li class="breadcrumb-item "><a  class="text-success" [routerLink]="['/admin/dashboard']">Home</a></li>
-          <li class="breadcrumb-item"> <a class="text-success" [routerLink]="['/admin/tests/menu-test']">Test</a></li>
-          <li class="breadcrumb-item active" aria-current="page">Listado de Test</li>
-
-        </ol>
-      </nav>
+  <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
   <div class="container-fluid">
-      <div class="card">
-        <div class="card-header card-header-success">
-          <h4 class="card-title">Test de la aplicacion</h4>
-          <p class="card-category">Listado de test</p>
-        </div>
-        <div class="card-body">
-          <mat-card>
-            <form class="example-form">
-              <div class="container">
-                    <div class="row">
-                            <div class="col-md-2 pull-right">
-                                    <img class="image" src="../../../../../assets/img/coder2.png">
-                                </div>
-                            <div class="col-md-8 search">
-                                  <mat-form-field class="example-full-width">
-                                          <input matInput placeholder="Ingresa el nombre del test...">
-                                  </mat-form-field>
-                            </div>
-                            <div class="col-md-2 search">
-                                <button class="btn btn-success pull-right">
-                                    Buscar
-                                </button>
-                            </div>
-                           
-                        </div>
+    <div class="card">
+      <div class="card-header card-header-default">
+        <h4 class="card-title">Test de la aplicacion</h4>
+        <p class="card-category">Listado de test</p>
+      </div>
+      <div class="card-body">
+        <mat-card>
+          <form class="example-form">
+            <div class="container">
+              <div class="row">
+                <div class="col-md-2 pull-right">
+                  <img class="image" src="../../../../../assets/img/coder2.png">
+                </div>
+                <div class="col-md-8 search">
+                  <mat-form-field class="example-full-width">
+                    <input matInput placeholder="Ingresa el nombre del test...">
+                  </mat-form-field>
+                </div>
+                <div class="col-md-2 search">
+                  <button class="btn btn-default pull-right card-button">
+                    Buscar
+                  </button>
+                </div>
+
               </div>
-            </form>
-          </mat-card>
-          <br>
-          <div class="mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource">
-              <!-- Position Column -->
-              <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef>No.</th>
-                <td mat-cell *matCellDef="let element">
-                  {{ element.position }}
-                </td>
-              </ng-container>
+            </div>
+          </form>
+        </mat-card>
+        <br>
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+            <!-- Position Column -->
+            <ng-container matColumnDef="position">
+              <th mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.position }}
+              </td>
+            </ng-container>
 
-              <!-- Name Column -->
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef>Name</th>
-                <td mat-cell *matCellDef="let element">{{ element.name }}</td>
-              </ng-container>
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+              <th mat-header-cell *matHeaderCellDef>Name</th>
+              <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+            </ng-container>
 
-              <!-- Weight Column -->
-              <ng-container matColumnDef="weight">
-                <th mat-header-cell *matHeaderCellDef>Weight</th>
-                <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
-              </ng-container>
+            <!-- Weight Column -->
+            <ng-container matColumnDef="weight">
+              <th mat-header-cell *matHeaderCellDef>Weight</th>
+              <td mat-cell *matCellDef="let element">{{ element.weight }}</td>
+            </ng-container>
 
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="symbol">
-                <th mat-header-cell *matHeaderCellDef>Symbol</th>
-                <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
-              </ng-container>
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="symbol">
+              <th mat-header-cell *matHeaderCellDef>Symbol</th>
+              <td mat-cell *matCellDef="let element">{{ element.symbol }}</td>
+            </ng-container>
 
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
-            </table>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
 
-            <mat-paginator
-              [pageSizeOptions]="[5, 10, 20]"
-              showFirstLastButtons
-            ></mat-paginator>
-          </div>
-          <div class="card-footer">
-            <div class="card-stats"></div>
-          </div>
+          <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+        <div class="card-footer">
+          <div class="card-stats"></div>
         </div>
       </div>
-    
+    </div>
+
   </div>
 </div>
