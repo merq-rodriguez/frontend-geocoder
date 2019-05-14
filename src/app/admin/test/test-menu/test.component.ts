@@ -88,7 +88,7 @@ export interface PeriodicElement {
 
 const ROUTES_COMPETENCE: RouteInfo[] = [
   { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
-  { path: '', icon: "school", title: "Menu Competencias", class: "", active: false },
+  { path: '', icon: "school", title: "Menu Test", class: "", active: false },
 ];
 
 const ELEMENT_DATA: PeriodicElement[] = [

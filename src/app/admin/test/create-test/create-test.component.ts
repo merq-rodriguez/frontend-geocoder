@@ -198,6 +198,6 @@ export class CreateTestComponent implements OnInit {
 
 const ROUTES_TEST: RouteInfo[] = [
   { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
-  { path: '/admin/tests/menu-test', icon: "school", title: "Tests", class: "", active: true },
+  { path: '/admin/tests/menu-test', icon: "school", title: "Menu Test", class: "", active: true },
   { icon: "", title: "Evaluacion", class: "", active: false },
 ];

@@ -30,8 +30,8 @@ export class TestListComponent implements OnInit {
 
 const ROUTES_TEST: RouteInfo[] = [
   { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
-  { path: '/admin/tests/menu-test', icon: "school", title: "Tests", class: "", active: true },
-  { icon: "", title: "Listado", class: "", active: false },
+  { path: '/admin/tests/menu-test', icon: "school", title: "Menu Test", class: "", active: true },
+  { icon: "", title: "Listado de test", class: "", active: false },
 ];
 
 export interface PeriodicElement {
