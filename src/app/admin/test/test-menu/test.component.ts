@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from "@angular/core";
 import * as _ from "lodash";
 import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { ICardMenu } from 'src/app/@theme/components/card-menu/card-menu.component';
+import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 
 
 
@@ -11,6 +13,33 @@ import { MatPaginator, MatTableDataSource } from '@angular/material';
 })
 export class TestMenuComponent implements OnInit {
   public selectType = "";
+  public hiddenTestList: boolean = false;
+  public hiddenCreateTest: boolean = false;
+
+  menuArray: ICardMenu[] = [
+    {
+      name: 'Crear una test de evaluacion',
+      subtitle: 'Evaluacion',
+      image: '../../../../assets/img/coderninja.png',
+      description: '¡Animate! entra aqui y crea un test de preguntas o ejercicios.',
+      routeLink: '/admin/tests/create-test'
+    },
+    {
+      name: 'Lista de test de evaluacion',
+      subtitle: 'Evaluacion',
+      description: ' Entra aqui si quieres ver todos los competencias.',
+      image: '../../../../../assets/img/Prog.png',
+      routeLink: '/admin/tests/test-list'
+    },
+    {
+      name: 'Estadisticas',
+      subtitle: 'Evaluacion',
+      description: 'Crea un lenguaje de programacion.',
+      image: '../../../../../assets/img/estadistica.png',
+      routeLink: ''
+    }
+  ];
+  
 
   typestest: TypeTest[] = [
     { value: "0", viewValue: "Preguntas seleccion multiple" },
@@ -19,13 +48,10 @@ export class TestMenuComponent implements OnInit {
   ];
 
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  
   dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
-
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
-  public hiddenTestList: boolean = false;
-  public hiddenCreateTest: boolean = false;
+  
 
   constructor(  ) { }
   ngOnInit() {
@@ -41,8 +67,13 @@ export class TestMenuComponent implements OnInit {
     this.hiddenCreateTest = (this.hiddenCreateTest) ? false : true;
 
   }
+  public getRoutesItem(){
+    return ROUTES_COMPETENCE; 
+  }
 
 }
+
+
 export interface TypeTest {
   value: string;
   viewValue: string;
@@ -54,6 +85,11 @@ export interface PeriodicElement {
   weight: number;
   symbol: string;
 }
+
+const ROUTES_COMPETENCE: RouteInfo[] = [
+  { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
+  { path: '', icon: "school", title: "Menu Competencias", class: "", active: false },
+];
 
 const ELEMENT_DATA: PeriodicElement[] = [
   { position: 1, name: 'Nombre de un test', weight: 1.0079, symbol: 'H' },
