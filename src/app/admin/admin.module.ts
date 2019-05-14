@@ -11,6 +11,7 @@ import { ShowSubthemeDialog } from './modal/show-subtheme/show-subtheme.componen
     ComponentsModule,
     AdminRoutingModule,
     CKEditorModule,
+    
   
   ],
   declarations: [ ...routedComponents ],
