@@ -1,15 +1,10 @@
 <div class="main-content">
   <div class="container-fluid">
-    <nav aria-label="breadcrumb">
-      <ol class="breadcrumb">
-        <li class="breadcrumb-item "><a href="#" class="text-success" [routerLink]="['/dashboard']">Home</a></li>
-        <li class="breadcrumb-item "><a href="#" class="text-success" [routerLink]="['/competition']">Competencias</a>
-        </li>
-        <li class="breadcrumb-item active" aria-current="page">Listado de Competencias</li>
-      </ol>
-    </nav>
+
+  <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
+
     <div class="card">
-      <div class="card-header card-header-success">
+      <div class="card-header card-header-default card-header">
         <h4 class="card-title">Competencias de la Aplicacion</h4>
         <p class="card-category">Listado de competencias</p>
       </div>
@@ -27,7 +22,7 @@
                   </mat-form-field>
                 </div>
                 <div class="col-md-2 search">
-                  <button class="btn btn-success pull-right">
+                  <button class="btn btn-default card-button pull-right">
                     Buscar
                   </button>
                 </div>
@@ -117,7 +112,7 @@
         <div class="col-4">
           <mat-card-content>
             <button (click)="updateCompetence()" mat-icon-button color="primary"
-              class="btn-success pull-right  btn-just-icon">
+              class="btn-default card-header pull-right  btn-just-icon">
               <i class="material-icons"> edit </i>
             </button>
           </mat-card-content>
@@ -126,7 +121,7 @@
         <div class="col-4">
           <mat-card-content>
             <button (click)="openDialog()" mat-icon-button color="primary"
-              class="btn-success pull-right  btn-just-icon">
+              class="btn-default card-header pull-right  btn-just-icon">
               <i class="material-icons"> visibility </i>
             </button>
           </mat-card-content>
@@ -135,7 +130,7 @@
         <div class="col-4">
           <mat-card-content>
             <button (click)="deleteCompetence()" mat-icon-button color="primary"
-              class="btn-success pull-right  btn-just-icon">
+              class="btn-default card-header pull-right  btn-just-icon">
               <i class="material-icons"> delete </i>
             </button>
           </mat-card-content>

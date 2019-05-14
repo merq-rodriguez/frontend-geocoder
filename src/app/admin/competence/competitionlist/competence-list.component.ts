@@ -1,6 +1,7 @@
 import {Component, OnInit, ViewChild, Input} from '@angular/core';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {MatDialog} from '@angular/material';
+import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 
 
 
@@ -75,9 +76,14 @@ export class CompetenceListComponent implements OnInit {
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
+    
   }
-
-
+    public getRoutesItem(){
+      return ROUTES; 
+    }
+  
+  
+  
   openDialog() {
     const dialogRef = this.dialog.open(DialogContentExampleDialog);
 
@@ -106,3 +112,9 @@ export interface CompetenceElement {
   hourInit: string;
   state: string;
 }
+
+const ROUTES: RouteInfo[] = [
+  { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
+  { path: '/admin/competences/menu-competence', icon: "school", title: "Menu Competencias", class: "", active: true },
+  { icon: "", title: "Listado de competencias", class: "", active: false },
+];
