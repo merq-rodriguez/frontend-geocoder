@@ -1,13 +1,12 @@
+<div class="main-content">
+  <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
+  <div class="container-fluid">
+    <div class="row d-flex justify-content-center">
 
- <div class="main-content">
-    <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
-    <div class="container-fluid">
-      <div class="row d-flex justify-content-center">
-  
-        <div *ngFor="let item of menuArray" class="col-4">
-          <app-card-menu [item]="item"></app-card-menu>
-        </div>
-  
+      <div *ngFor="let item of menuArray" class="col-4">
+        <app-card-menu [item]="item"></app-card-menu>
       </div>
+
     </div>
   </div>
+</div>
