@@ -1,106 +1,13 @@
-<div class="main-content">
-  <div class="container-fluid">
-      <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
 
-
-
-
-    <div class="row">
-      <div class="col-md-4">
-        <div class="card" [routerLink]="['/admin/competences/create-competence']">
-          <div class="card-header card-header-success">
-            <h4 class="card-title">Crear una competencia</h4>
-            <p class="card-category">Crea una competencia de programacion.</p>
-          </div>
-          <div class="card-body">
-            <img class="image" src="" alt="" />
-            <div class="container">
-              <img
-                class="image"
-                src="../../../../../assets/img/compe.png"
-                alt=""
-              />
-            </div>
-            <p class="card-category">
-              <span class="text-success"
-                ><i class="fa fa-long-arrow-up"></i>
-              </span>
-              ¡Animate! entra aqui y crea una competencia.
-            </p>
-          </div>
-          <div class="card-footer">
-            <div class="card-stats">
-              <button mat-raised-button class="btn btn-success">
-                Ir <i class="material-icons">play_arrow</i>
-              </button>
-            </div>
-          </div>
+ <div class="main-content">
+    <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
+    <div class="container-fluid">
+      <div class="row d-flex justify-content-center">
+  
+        <div *ngFor="let item of menuArray" class="col-4">
+          <app-card-menu [item]="item"></app-card-menu>
         </div>
-      </div>
-      <div class="col-md-4">
-        <div class="card" [routerLink]="['/admin/competences/competence-list']">
-          <div class="card-header card-header-success">
-            <h4 class="card-title">Ver todos los competencia</h4>
-            <p class="card-category">Lista de competencias de programacion</p>
-          </div>
-          <div class="card-body">
-            <img class="image" src="" alt="" />
-            <div class="container">
-              <img
-                class="image"
-                src="../../../../../assets/img/mundo.png"
-                alt=""
-              />
-            </div>
-            <p class="card-category">
-              <span class="text-success"
-                ><i class="fa fa-long-arrow-up"></i>
-              </span>
-              Entra aqui si quieres ver todos los competencia
-            </p>
-          </div>
-          <div class="card-footer">
-            <div class="card-stats">
-              <button mat-raised-button class="btn btn-success">
-                Ir <i class="material-icons">play_arrow</i>
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="col-md-4">
-        <div class="card" [routerLink]="['/admin/competences/champion-competence']">
-          <div class="card-header card-header-success">
-            <h4 class="card-title">Campeones</h4>
-            <p class="card-category">Listado de mejores jugadores </p>
-          </div>
-          <div class="card-body">
-            <img class="image" src="" alt="" />
-            <div class="container">
-              <img
-                class="image"
-                src="../../../../../assets/img/competencia.png"
-                alt=""
-              />
-            </div>
-            <p class="card-category">
-              <span class="text-success"
-                ><i class="fa fa-long-arrow-up"></i>
-              </span>
-              Entra aqui si quieres ver todos los campeones de las competencias.
-            </p>
-          </div>
-          <div class="card-footer">
-            <div class="card-stats">
-              <button mat-raised-button class="btn btn-success">
-                Ir <i class="material-icons">play_arrow</i>
-              </button>
-            </div>
-          </div>
-        </div>
+  
       </div>
     </div>
   </div>
-</div>
