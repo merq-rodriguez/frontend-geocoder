@@ -16,8 +16,8 @@ const routes: Routes = [
       { path: 'competences', loadChildren: './competence/competence.module#CompetenceModule' },
       { path: 'thematic-content',   loadChildren: './thematic-content/thematic-content.module#ThematicModule' },
       { path: 'tests',       loadChildren: './test/test.module#TestModule' },
-      { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
-      { path: '**', redirectTo: 'dashboard' }
+      { path: '', redirectTo: 'thematic-content', pathMatch: 'full' },
+      { path: '**', redirectTo: 'thematic-content' }
     ]
   }]
 

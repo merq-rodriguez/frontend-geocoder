@@ -69,25 +69,28 @@
             </div>
           </div>
 
-          <hr />
-          <div class="row">
-            <div class="col-md-11">
-              <mat-form-field class="example-full-width">
-                <textarea disabled matInput placeholder="Cargar imagen" rows="1" [(ngModel)]="image">
-              </textarea>
-              </mat-form-field>
-            </div>
-            <div class="col-md-1">
-
-              <!-- ADD FILE BUTTON -->
-
-              <input hidden type="file" #fileInput [(ngModel)]="image" />
-              <button mat-fab class="add-file-button mat-warn" (click)="fileInput.click()" aria-label="Add file"
-                [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
-                <mat-icon>cloud_upload</mat-icon>
-              </button>
+          <br />
+          <div class="container">
+            <div class="row">
+              <div class="col-md-11">
+                <mat-form-field class="example-full-width">
+                  <textarea disabled matInput placeholder="Cargar imagen" rows="1" [(ngModel)]="image">
+                </textarea>
+                </mat-form-field>
+              </div>
+              <div class="col-md-1">
+  
+                <!-- ADD FILE BUTTON -->
+  
+                <input hidden type="file" #fileInput [(ngModel)]="image" />
+                <button mat-fab class="add-file-button mat-warn" (click)="fileInput.click()" aria-label="Add file"
+                  [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+                  <mat-icon>cloud_upload</mat-icon>
+                </button>
+              </div>
             </div>
           </div>
+
 
           <div class="container">
             <div class="row">
@@ -100,18 +103,24 @@
 
 
 
-      <div class="container">
-        <div class="row">
-          <div class="col-12">
-            <button mat-raised-button type="submit" class="btn btn-default pull-right card-blue">
-              Guardar
-            </button>
+          <div class="container">
+            <div class="row">
+              <div class="col-12">
+                <button mat-raised-button type="submit" class="btn btn-default pull-right card-blue">
+                  Guardar
+                </button>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <hr>
+          <hr>
 
-
+          <div class="container">
+              <div class="row">
+              <div *ngFor="let item of exerciseList">
+                <app-card [item]="item" [type]="'exercise'"></app-card>
+              </div>
+              </div>
+          </div>
 
         </div>
       </div>

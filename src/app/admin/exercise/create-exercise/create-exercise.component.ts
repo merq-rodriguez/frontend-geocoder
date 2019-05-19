@@ -1,12 +1,14 @@
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
+import { fuseAnimations } from 'src/app/@theme/animations';
 
 
 @Component({
   selector: "create-exercise",
-  templateUrl: "./exercise.component.html",
-  styleUrls: ["./exercise.component.css"]
+  templateUrl: "./create-exercise.component.html",
+  styleUrls: ["./create-exercise.component.css"],
+  animations: fuseAnimations
 })
 export class CreateExerciseComponent implements OnInit {
   public id: number = 1;

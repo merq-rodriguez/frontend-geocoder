@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { ICardTest, ICardTheme, ICardSubTheme } from './ICard.interface';
+import { ICardTest, ICardTheme, ICardSubTheme, ICardExercise } from './ICard.interface';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { ICardTest, ICardTheme, ICardSubTheme } from './ICard.interface';
 })
 export class CardComponent implements OnInit {
   @Output() action = new EventEmitter<any>();
-  @Input('item') item: ICardTheme | ICardTest | ICardSubTheme
+  @Input('item') item: ICardTheme | ICardTest | ICardSubTheme | ICardExercise;
   @Input('type') type:string
   public data;
  
@@ -29,7 +29,9 @@ export class CardComponent implements OnInit {
         case 'subtheme':
             this.data = this.item;
         break;
-
+        case 'exercise':
+          this.data = this.item;
+      break;
       }
       console.log("==================================")
       console.log(this.data)

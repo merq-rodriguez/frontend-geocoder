@@ -29,3 +29,13 @@ export interface  ICardTest{
     subtitle: string;
     content?: string;
 }
+
+export interface  ICardExercise{
+    id: string;
+    name: string;
+    description: string;
+    image: string;
+    subtitle: string;
+    content?: string;
+}
+
