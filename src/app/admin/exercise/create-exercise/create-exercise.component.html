@@ -46,15 +46,13 @@
           <div class="container">
             <div class="row">
               <div class="col-12">
-                <form>
                   <mat-form-field>
-                    <input matInput placeholder="Nombre del ejercicio">
+                    <input matInput placeholder="Nombre del ejercicio" [(ngModel)]="exercise.name">
                   </mat-form-field>
 
                   <mat-form-field>
-                    <textarea matInput placeholder="Descripcion"></textarea>
+                    <textarea matInput placeholder="Descripcion" [(ngModel)]="exercise.description"></textarea>
                   </mat-form-field>
-                </form>
 
               </div>
             </div>
@@ -79,9 +77,9 @@
                 </mat-form-field>
               </div>
               <div class="col-md-1">
-  
+
                 <!-- ADD FILE BUTTON -->
-  
+
                 <input hidden type="file" #fileInput [(ngModel)]="image" />
                 <button mat-fab class="add-file-button mat-warn" (click)="fileInput.click()" aria-label="Add file"
                   [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
@@ -115,11 +113,11 @@
           <hr>
 
           <div class="container">
-              <div class="row">
+            <div class="row">
               <div *ngFor="let item of exerciseList">
                 <app-card [item]="item" [type]="'exercise'"></app-card>
               </div>
-              </div>
+            </div>
           </div>
 
         </div>

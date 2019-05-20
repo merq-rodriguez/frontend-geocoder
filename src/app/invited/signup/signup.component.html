@@ -1,11 +1,3 @@
-<!--  Design Inspiration  -->
-
-<!-- This Design is made by Brad Traversy Media -->
-
-<!-- Github URL: https://github.com/bradtraversy -->
-
-
-
 
 <div class="container" id="container">
   <div class="form-container sign-up-container">
@@ -16,24 +8,25 @@
         <a href="#" class="social"> <i class="fab fa-linkedin-in"></i> </a>
       </div>
 
-     <app-card></app-card>
+     
       <button> Registrate </button>
   </div>
 
   <div class="form-container sign-in-container">
     <form action="#">
       <h1> ¡Registrate! </h1>
-      <div class="social-container">
+      <!-- <div class="social-container">
         <a href="#" class="social"> <i class="fab fa-facebook-f"></i> </a>
         <a href="#" class="social"> <i class="fab fa-google-plus-g"></i> </a>
-  <!--       <a href="#" class="social"> <i class="fab fa-linkedin-in"></i> </a> -->
-      </div>
+        <a href="#" class="social"> <i class="fab fa-linkedin-in"></i> </a> 
+      </div> -->
       <span> Adelante, crea tu cuenta... </span>
-
-      <input type="text" placeholder="Nombres" [(ngModel)]="names" name="names" />
-      <input type="email" placeholder="Correo"  [(ngModel)]="email" name="email"/>
-      <input type="password" placeholder="Contraseña" [(ngModel)]="password" name="password"/>
-      <button (click)="validateEmail()">Registrarme </button>
+      <input type="text" placeholder="Nombres" [(ngModel)]="user.names" name="names" />
+      <input type="text" placeholder="Nombre de usuario" [(ngModel)]="user.username" name="username" />
+      <input type="number" placeholder="Telefono"  [(ngModel)]="user.phone" name="phone"/>      
+      <input type="email" placeholder="Correo"  [(ngModel)]="user.email" name="email"/>
+      <input type="password" placeholder="Contraseña" [(ngModel)]="user.password" name="password"/>
+      <button (click)="signUp()">Registrarme </button>
 
     </form>
   </div>

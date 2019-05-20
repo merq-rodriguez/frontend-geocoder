@@ -5,7 +5,7 @@ import { Api } from './api.service';
 
 @Injectable()
 export class UserService  extends UserData{
-  private controller: string = "/users";
+  private controller: string = "users";
   private users: IUser[] = [
     {idUser: 1, username: 'Pepa', email: 'judro@gmail.com', names: 'xx', lastnames: 'yyy', idRole: ERole.STUDENT},
     {idUser: 2, username: 'Luisa', email: 'judro@gmail.com', names: 'xx', lastnames: 'yyy', idRole: ERole.STUDENT},
@@ -23,7 +23,7 @@ export class UserService  extends UserData{
     return observableOf(this.users);
   }
   createUser(user: IUser): Observable<any> {
-    return observableOf(this.users);
+    return this.apiService.post('auth', 'signup', user);
   }
   updateUser(user: IUser): Observable<any> {
     return observableOf(this.users);

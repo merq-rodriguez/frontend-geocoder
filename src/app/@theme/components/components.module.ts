@@ -72,7 +72,6 @@ import { NavRoutesComponent } from './navroutes/navroutes.component';
 import { CardMenuComponent } from './card-menu/card-menu.component';
 
 
-
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
 const MATERIAL_MODULES =[
@@ -135,7 +134,7 @@ const COMPONENTS = [
   VideoComponent,
   NavRoutesComponent,
   AdminLayoutComponent,
-  CardMenuComponent
+  CardMenuComponent,
 ];
 
 const MODULES_FOR_ROOT = [

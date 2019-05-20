@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from 'src/app/@core/services/user.service';
+import { IUser } from 'src/app/@core/data/user.data';
+import { SnackBarService } from 'src/app/@core/services/snackbar.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'signUp',
@@ -7,39 +11,69 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SignUp implements OnInit {
 
-  public names:string = "";
-  public email:string = "";
-  public password:string = "";
 
-  constructor() {}
-  ngOnInit() {}
 
-  
+  public user: IUser = {
+    names: '',
+    email: '',
+    password: '',
+    lastnames: '',
+    phone: '',
+    username: '',
+    idRole: 2
+  }
+
+
+  constructor(
+    private userService: UserService,
+    private snackService: SnackBarService,
+    private router: Router
+  ) { }
+
+  ngOnInit() { }
+
+
   public validate() {
-    if(this.names.trim() === '' || this.email.trim() === '' || this.password.trim() === ''){
+    if (
+      this.user.names.trim() === '' ||
+      this.user.email.trim() === '' ||
+      this.user.password.trim() === '' ||
+      this.user.username.trim() === ''
+    ) {
       return false;
     }
     return true;
-    
+
   }
 
-  public validateEmail(){
-    let patron=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
-    if(this.email.search(patron) == 0){
-      console.log("Si es un correo");
+  public validateEmail() {
+    let patron = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+    if (this.user.email.search(patron) == 0) {
       return true;
-    }else{
-      console.log("No es un correo");
+    } else {
+
       return false;
     }
   }
 
-  signUp(){
-    if(this.validate()){
-      console.log("Enviado usuario al backend");
-    }else{
-      console.log("Campos vacios");
-      
+  public signUp() {
+    if (this.validate()) {
+      if (this.validateEmail()) { //Se envia el usuario al backend
+        this.userService.createUser(this.user).subscribe(res => {
+          if (res.status) {
+            if (res.status === 400) {
+              this.snackService.openSnackBar('Ohhh Ohhh verifica tu correo o nombre de usuario', 'Aceptar');
+            }
+          }else{
+            this.router.navigate(['admin/thematic-content/menu-language'])
+          }
+        });
+      } else {
+        this.snackService.openSnackBar('Tu correo no es valido', 'Aceptar');
+      }
+    } else {
+      this.snackService.openSnackBar('Existen campos vacios', 'Aceptar');
+
     }
   }
 

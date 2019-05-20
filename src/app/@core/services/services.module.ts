@@ -8,6 +8,7 @@ import { LanguageService } from './language.service';
 import { Api } from './api.service';
 import { ThemeService } from './theme.service';
 import { SubthemeService } from './subtheme.service';
+import { SnackBarService } from './snackbar.service';
 
 
 const SERVICES = [
@@ -18,7 +19,8 @@ const SERVICES = [
   MonacoService,
   LanguageService,
   ThemeService,
-  SubthemeService
+  SubthemeService,
+  SnackBarService
 ];
 
 @NgModule({

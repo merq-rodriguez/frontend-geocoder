@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 import { fuseAnimations } from 'src/app/@theme/animations';
+import { IExercise } from 'src/app/@core/data/exercise.data';
 
 
 @Component({
@@ -27,6 +28,15 @@ export class CreateExerciseComponent implements OnInit {
     disabled: false
   };
 
+  public exercise: IExercise = {
+    content: '',
+    description: '',
+    idExercise: null,
+    idUser: null,
+    name: '',
+    input: '',
+    output: ''
+  };
 
 
   exerciseList = [

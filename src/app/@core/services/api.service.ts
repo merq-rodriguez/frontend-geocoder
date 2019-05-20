@@ -31,7 +31,7 @@ export class Api {
 
 	public post(controller: string, path: string, params: any) {
 		return this.http.post(
-			`${environment.api + controller + path}`, params
+			`${environment.api + controller +'/'+ path}`, params
 		);
 	}
 }
