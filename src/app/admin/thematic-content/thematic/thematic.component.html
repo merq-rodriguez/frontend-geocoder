@@ -23,7 +23,7 @@
                 <form [formGroup]="firstFormGroup">
                   <ng-template matStepLabel>Datos del lenguaje</ng-template>
                   <app-create-language></app-create-language>
-                  <button mat-button matStepperNext (click)="getLanguage()"> Guardar y continuar
+                  <button mat-button matStepperNext> Guardar y continuar
                   </button>
                 </form>
               </mat-step>
@@ -52,7 +52,7 @@
               </mat-step>
 
               <mat-step>
-                <ng-template matStepLabel>Terminar</ng-template>
+                <ng-template matStepLabel >Terminar</ng-template>
                 <div class="container">
                   <div class="row d-flex justify-content-center">
                     <img class="image-finish" src="../../../../assets/img/thanos.gif">

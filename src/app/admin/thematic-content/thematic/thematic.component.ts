@@ -4,6 +4,10 @@ import { CreateLanguageComponent } from '../create-language/create-language.comp
 import { ILanguage } from 'src/app/@core/data/language.data';
 import { ThemeListService } from 'src/app/@core/services/themeList.service';
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
+import { ICardTheme } from 'src/app/@theme/components/card/ICard.interface';
+import { Observable } from 'rxjs';
+import { LanguageService } from 'src/app/@core/services/language.service';
+import { ThemeService } from 'src/app/@core/services/theme.service';
 
 @Component({
   selector: 'app-thematic',
@@ -14,15 +18,19 @@ export class ThematicComponent implements OnInit, AfterViewInit  {
   
   @ViewChild(CreateLanguageComponent) childRefCreateLanguage;
   isLinear = false;
-  
+  private subscribeTheme: any;
   private language: ILanguage;
+  private listThemes: ICardTheme[]
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   
-
+//SI NOS COMPLICAMOS MUCHO HACIENDO FORKJOIN MANDAMOS TODO EL HPTA ARRAY CON EL TEMA
+// Y QUE EL BACKEND SE ENCARGUE DE TODO
+//(DECIDIDO) TODO PAL BACKEND
   constructor(  
     private _formBuilder: FormBuilder, 
-    public themeListService: ThemeListService 
+    public themeListService: ThemeListService,
+    private languageService: LanguageService,
     ) {}
 
   ngAfterViewInit(){
@@ -30,6 +38,7 @@ export class ThematicComponent implements OnInit, AfterViewInit  {
   }
 
   ngOnInit() {
+    this.getThemesArray();
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
@@ -39,23 +48,28 @@ export class ThematicComponent implements OnInit, AfterViewInit  {
   }
 
 
-  getLanguage(){
-    console.log(this.language);
-  }
 
   getThemesArray(){
-    this.themeListService.getListTheme().subscribe(res => {
-      console.log(res)
+    this.themeListService.getListTheme().subscribe(themes => {
+      this.listThemes = themes;
     })
+  }
+
+
+  saveData(){
+    Object.assign(this.language, { themes:  this.listThemes});
+    console.log(this.language);
+    
+    this.languageService.saveLanguageAndThemes(this.language).subscribe(res => console.log(res));
   }
 
   getData(){
     console.log("================= languaje ================");
-    
     console.log(this.language);
-    this.themeListService.getListTheme().subscribe(res => {
-      console.log(res)
-    })
+    console.log("================= Lista de temas con subtemas ================");
+    console.log(this.listThemes);
+    this.saveData()
+    
   }
 
   public getRoutesItem(){

@@ -23,8 +23,16 @@ export class UserService  extends UserData{
     return observableOf(this.users);
   }
   createUser(user: IUser): Observable<any> {
+    return this.apiService.post(this.controller, 'createUser', user);
+  }
+  signUp(user: IUser): Observable<any> {
     return this.apiService.post('auth', 'signup', user);
   }
+  
+  signIn(username: string, password: string): Observable<any> {
+    return this.apiService.post('auth', 'signin', {username, password});
+  }
+
   updateUser(user: IUser): Observable<any> {
     return observableOf(this.users);
   }
