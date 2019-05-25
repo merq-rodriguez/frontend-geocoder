@@ -41,6 +41,9 @@ export class ThemeComponent implements OnInit {
     });
   }
 
+  getFile(event){
+    console.log(event);
+  }
 
 
   private emptyTextfieldTheme() {

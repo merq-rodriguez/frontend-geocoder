@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import * as _ from 'lodash';
 import {
   FormControl,
@@ -20,7 +20,10 @@ import { ILanguage } from 'src/app/@core/data/language.data';
   animations: fuseAnimations
 })
 export class CreateLanguageComponent implements OnInit {
-  //@Input() action: string | 'update' | 'view'
+  
+  
+
+
   isUpdated: boolean = false;
   firstFormGroup: FormGroup;
   image: string = "";
@@ -39,6 +42,11 @@ export class CreateLanguageComponent implements OnInit {
     });
   }
 
+  getFile(event){
+    console.log(event);
+    
+
+  }
 
   private emptyTextfieldLanguage() {
     return (this.language.name.trim() === '' || this.language.description.trim() === '' || this.language.image === '') ? true : false;

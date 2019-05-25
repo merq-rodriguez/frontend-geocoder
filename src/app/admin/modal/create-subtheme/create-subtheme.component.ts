@@ -44,6 +44,10 @@ export class CreateSubthemeDialog {
       this.subscribeEditor$ = this.editorService.content$.subscribe(content => this.contentEditor = content );
     }
 
+    getFile(event){
+      console.log(event)
+    }
+
     onFileSelected(event){
       console.log(event)
       console.log(<File>event.target.files[0])

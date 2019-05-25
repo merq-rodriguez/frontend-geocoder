@@ -16,7 +16,7 @@
 <br />
 <mat-card>
   <div class="container">
-  <!--   <div class="row">
+    <!--   <div class="row">
       <div class="col-md-8">
         <mat-form-field class="example-full-width">
           <input [(ngModel)]="newTheme.name"  matInput
@@ -33,7 +33,7 @@
         </mat-form-field>
       </div>
     </div> -->
-    
+
 
     <div class="row">
       <div class="col-12">
@@ -45,40 +45,13 @@
         </mat-form-field>
       </div>
 
-      <div class="container">
-        <div class="row d-flex justify-content-center">
-          <div class="col-12">
-            <img class="image-upload" [src]="newTheme.image">
-          </div>
-        </div>
-      </div>
-
-    </div>
-
     
-    <div class="row">
-      <div class="col-md-11">
-        <mat-form-field class="example-full-width">
-          <textarea 
-          matInput  
-          disabled
-          [(ngModel)]="newTheme.image"
-          placeholder="Cargar imagen" 
-          rows="1">
-          </textarea>
-        </mat-form-field>
-      </div>
-      <div class="col-md-1">
 
-        <!-- ADD FILE BUTTON -->
-
-        <input hidden type="file" #fileInputTheme  [(ngModel)]="image" />
-        <button mat-fab class="add-file-button mat-warn" (click)="fileInputTheme.click()" aria-label="Add file"
-          [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
-          <mat-icon>cloud_upload</mat-icon>
-        </button>
-      </div>
     </div>
+    <!-- IMAGE-PREVIE  -->
+    <image-preview (onChange)="getFile($event)"></image-preview>
+    <!-- END IMAGE-PREVIE  -->
+
 
     <!-- EDITOR NGX -->
     <ngx-editor></ngx-editor>
@@ -110,4 +83,3 @@
 </div>
 
 <hr>
-

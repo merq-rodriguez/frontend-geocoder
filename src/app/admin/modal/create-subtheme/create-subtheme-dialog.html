@@ -27,86 +27,16 @@
           </mat-form-field>
         </div>
       </div>
-      <div class="col-3">
-        <div class="image-container">
-          <img [src]="data.image" 
-              style="
-                  width: 100%;
-                  height: 100%;
-                  background-color:rgb(185, 178, 178);
-                  border-style: dotted; 
-  	              border-width: 3px; 
-  	              border-color: 660033; 
-                  opacity:0.2;" >
-        </div>
-      </div>
+    
     </div>
 
     <br>
     <br>
 
-    <div class="row">
-      <div class="col-12">
-        <div class="row" *ngIf="data.action === 'create'">
-          <div class="col-md-11">
-            <mat-form-field class="example-full-width">
-              <textarea 
-                    matInput 
-                    disabled 
-                    [(ngModel)]="data.image" 
-                    placeholder="Cargar imagen" 
-                    rows="1">
-              </textarea>
-            </mat-form-field>
-          </div>
-          <div class="col-md-1">
-
-            <!-- ADD FILE BUTTON -->
-
-            <input hidden type="file" #fileInputTheme [(ngModel)]="data.image" />
-            <button mat-fab class="add-file-button mat-warn" (click)="fileInputTheme.click()"
-              aria-label="Agregar imagen" [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
-              <mat-icon>cloud_upload</mat-icon>
-            </button>
-
-          </div>
-
-        </div>
-        <div class="row" *ngIf="data.action === 'update'">
-          <div class="col-md-11">
-            <mat-form-field class="example-full-width">
-              <textarea 
-                    matInput 
-                    disabled 
-                    [(ngModel)]="data.image" 
-                    placeholder="Cargar imagen" 
-                    rows="1">
-              </textarea>
-            </mat-form-field>
-          </div>
-          <div class="col-md-1">
-
-            <!-- ADD FILE BUTTON -->
-
-            <input 
-                hidden 
-                #fileInputTheme 
-                type="file" 
-                [(ngModel)]="data.image" 
-                (change)="onFileSelected($event)"/>
-            <button 
-                mat-fab 
-                class="add-file-button mat-warn" 
-                (click)="fileInputTheme.click()"
-                aria-label="Agregar imagen" [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
-              <mat-icon>cloud_upload</mat-icon>
-            </button>
-
-          </div>
-
-        </div>
-      </div>
-    </div>
+       <!-- IMAGE-PREVIE  -->
+       <image-preview (onChange)="getFile($event)"></image-preview>
+       <!-- END IMAGE-PREVIE  -->
+   
 
 
     <div class="row">

@@ -70,6 +70,7 @@ import { VideoComponent } from './video/video.component';
 import { ShowSubthemeDialog } from 'src/app/admin/modal/show-subtheme/show-subtheme.component';
 import { NavRoutesComponent } from './navroutes/navroutes.component';
 import { CardMenuComponent } from './card-menu/card-menu.component';
+import { MtImagePreviewComponent } from './image-preview/image-preview.component';
 
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
@@ -135,6 +136,7 @@ const COMPONENTS = [
   NavRoutesComponent,
   AdminLayoutComponent,
   CardMenuComponent,
+  MtImagePreviewComponent
 ];
 
 const MODULES_FOR_ROOT = [

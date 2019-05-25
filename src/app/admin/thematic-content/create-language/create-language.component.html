@@ -27,37 +27,10 @@
         </mat-form-field>
       </div>
 
-      <div class="container">
-        <div class="row d-flex justify-content-center">
-          <div class="col-12">
-            <img class="image-upload" [src]="language.image">
-          </div>
-        </div>
-      </div>
 
     </div>
 
-    <div class="row">
-
-    </div>
-    <hr />
-    <div class="row">
-      <div class="col-md-11">
-        <mat-form-field class="example-full-width">
-          <textarea disabled  matInput placeholder="Cargar imagen" rows="1" [(ngModel)]="language.image">
-          </textarea>
-        </mat-form-field>
-      </div>
-      <div class="col-md-1">
-
-        <!-- ADD FILE BUTTON -->
-
-        <input hidden type="file" #fileInput [(ngModel)]="image" />
-        <button mat-fab class="add-file-button mat-warn" (click)="fileInput.click()" aria-label="Add file"
-          [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
-          <mat-icon>cloud_upload</mat-icon>
-        </button>
-      </div>
-    </div>
+    <image-preview (onChange)="getFile($event)"></image-preview>
+    <br>
   </div>
 </mat-card>

@@ -1,0 +1,19 @@
+.image-upload{
+    border-style: dotted ;
+    border-width: 4px;
+    border-color: rgb(211, 211, 210);
+    width: 30%;
+    display:block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .add-file-button {
+    background: linear-gradient(to right, #1ea7a0, #0b4e5a) no-repeat 0 0 / cover ;
+    display: block;
+    margin: auto;
+    margin-top: 10px; 
+    width: 90px;
+    height: 90px;
+
+  }
