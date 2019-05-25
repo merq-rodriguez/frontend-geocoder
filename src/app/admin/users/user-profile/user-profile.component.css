@@ -1,9 +1,15 @@
 .container-profile{
     margin-left: 30px;
     margin-right: 30px;
-    margin-top: 70px;
+    margin-top: 40px;
+    
 }
 
+.avatar{
+  border-style: solid;
+    border-width: 3px;
+    border-color: #128397;
+}
 
 .card-header{
     background: linear-gradient(to right, #1ea7a0, #0b4e5a) no-repeat 0 0 / cover ;

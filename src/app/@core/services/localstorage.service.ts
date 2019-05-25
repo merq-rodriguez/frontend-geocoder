@@ -16,7 +16,7 @@ export class LocalstorageService {
 
     getLocalstorage(key: string){
         if(this.isCompatible()){
-            JSON.parse(localStorage.getItem(key));
+            return JSON.parse(localStorage.getItem(key));
         }
     }
     

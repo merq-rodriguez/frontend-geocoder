@@ -1,171 +1,95 @@
+<div class="container-profile">
 
-    <div class="container-profile">
-
-      <div class="col-md-12">
-        <div class="card">
-          <div class="main-content">
-            <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-4">
-                  <div class="card card-profile card-header">
-                    <div class="card-avatar">
-                      <a href="#pablo">
-                        <img class="img" src="./assets/img/faces/marc.jpg" />
-                      </a>
-                    </div>
-                    <div class="card-body">
-                      <i class="material-icons">edit</i>
-                      <h6 class="card-category text-gray">Rol del usuario</h6>
-                      <h4 class="card-title">Nombre del usuario</h4>
-                      
-                      <p class="card-description">
-                        Soy un estudiante de Ing de Sistemas estuciaste de la programacion funcional.
-                      </p>
-                    </div>
-                  </div>
+  <div class="col-md-12">
+    <div class="card">
+      <div class="main-content">
+        <div class="container-fluid">
+          <div class="row">
+            <div class="col-md-4">
+              <div class="card card-profile ">
+                <div class="card-avatar avatar">
+                  <a>
+                    <img class="img" src="./assets/img/default.jpg" />
+                  </a>
                 </div>
-                
-                <div class="col-md-8">
-                  
-                  <div class="card">
-                    <br>
-                    
-                    
-                    <div class="card-body">
-                      <form>
-                        <div class="row">
-                          
-                          
-                          <div class="col-md-6">
-                            <mat-form-field class="example-full-width">
-                              <input matInput placeholder="Username" />
-                            </mat-form-field>
-                          </div>
-                          <div class="col-md-6">
-                            <mat-form-field class="example-full-width">
-                              <input matInput placeholder="Correo electronico" type="email" />
-                            </mat-form-field>
-                          </div>
-                        </div>
-                        <div class="row">
-                          <div class="col-md-6">
-                            <mat-form-field class="example-full-width">
-                              <input matInput placeholder="Primer nombre" type="text" />
-                            </mat-form-field>
-                          </div>
-                          <div class="col-md-6">
-                            <mat-form-field class="example-full-width">
-                              <input matInput placeholder="Segundo nombre" type="text" />
-                            </mat-form-field>
-                          </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                          <div class="col-md-6">
-                            <mat-form-field class="example-full-width">
-                              <input
-                              matInput
-                              placeholder="Nivel de usuario"
-                              type="text"
-                              />
-                            </mat-form-field>
-                          </div>
-                        </div>
-                        <hr>
-                        
-                        <div class="row">
-                          <div class="col-md-12">
-                            <label>Genero</label>
-                            <div class="form-check form-check-radio">
-                              <label class="form-check-label">
-                                <input
-                                class="form-check-input"
-                                type="radio"
-                                name="exampleRadios"
-                                id="exampleRadios1"
-                                value="option1"
-                                />
-                                Masculino
-                                <span class="circle">
-                                  <span class="check"></span>
-                                </span>
-                              </label>
-                            </div>
-                            <div class="form-check form-check-radio">
-                              <label class="form-check-label">
-                                <input
-                                class="form-check-input"
-                                type="radio"
-                                name="exampleRadios"
-                                id="exampleRadios2"
-                                value="option2"
-                                checked
-                                />
-                                Femenino
-                                <span class="circle">
-                                  <span class="check"></span>
-                                </span>
-                              </label>
-                            </div>
-                            
-                            <div class="form-check form-check-radio disabled">
-                              <label class="form-check-label">
-                                <input
-                                class="form-check-input"
-                                type="radio"
-                                name="exampleRadios1"
-                                id="exampleRadios1"
-                                value="option1"
-                                disabled
-                                />
-                                Otro
-                                <span class="circle">
-                                  <span class="check"></span>
-                                </span>
-                              </label>
-                            </div>
-                          </div>
-                        </div>
-                        <hr>
-                        <div class="row">
-                          <div class="col-md-12">
-                            <label>Estado</label>
-                            <mat-form-field class="example-full-width">
-                              <textarea
-                              matInput
-                              placeholder="Ingresa un estado para compartir"
-                              ></textarea>
-                            </mat-form-field>
-                            <!-- <div class="form-group">
-                              
-                              <div class="form-group">
-                                <label class="bmd-label-floating"> Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo.</label>
-                                <textarea class="form-control" rows="5"></textarea>
-                              </div>
-                            </div> -->
-                          </div>
-                        </div>
-                        <button
-                        mat-raised-button
-                        type="submit"
-                        class="btn btn-danger pull-right"
-                        >
-                        Guardar
-                      </button>
-                      <div class="clearfix"></div>
-                    </form>
+                <div class="card-body">
+                  <i class="material-icons">edit</i>
+                  <h6 class="card-category text-gray">Rol {{ user.role }}</h6>
+                  <h4 class="card-title">{{ user.names }}</h4>
+
+                  <p class="card-description">
+                    {{ user.about }}
+                  </p>
+
+                  <div>
+                    <h2><b>PUNTOS</b></h2>
+                    <h2> {{ user.points }} </h2>
                   </div>
                 </div>
               </div>
             </div>
-            
-            
-            
+
+            <div class="col-md-8">
+
+              <div class="card">
+                <br>
+
+
+                <div class="card-body">
+                  <form>
+                    <div class="row">
+
+
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Username" [(ngModel)]="user.username" name='username' />
+                        </mat-form-field>
+                      </div>
+                      <div class="col-md-6">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Correo electronico" type="email" [(ngModel)]="user.email"
+                            name='email' />
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="row">
+
+                      <div class="col-md-8">
+                        <mat-form-field class="example-full-width">
+                          <input matInput placeholder="Nombres" type="text" [(ngModel)]="user.names" name='names' />
+                        </mat-form-field>
+                      </div>
+                    </div>
+                    <hr>
+
+
+             
+                    <div class="row">
+                      <div class="col-md-12">
+                        <label>Estado</label>
+                        <mat-form-field class="example-full-width">
+                          <textarea matInput placeholder="Ingresa un estado para compartir" [(ngModel)]="user.about" name='about'></textarea>
+                        </mat-form-field>
+                      
+                      </div>
+                    </div>
+                    <button mat-raised-button type="submit" class="btn btn-default pull-right card-button">
+                      Guardar
+                    </button>
+                    <div class="clearfix"></div>
+                  </form>
+                </div>
+              </div>
+            </div>
           </div>
+
+
+
         </div>
       </div>
     </div>
-    
-    
-    
   </div>
+
+
+
+</div>

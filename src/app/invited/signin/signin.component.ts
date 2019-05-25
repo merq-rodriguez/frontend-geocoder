@@ -34,7 +34,7 @@ export class SignIn implements OnInit {
         if(user.accessTocken){
           this.userService.setUser(user); //Guardamos el usuario autenticado en el behaviorSubject
           this.localstorageService.saveLocalstorage('user', user); //Guardamos el usuario el localstoraje por si las moscas XD
-          this.router.navigate(['/admin/thematic-content/menu-language'])
+          this.router.navigate(['/admin/thematic-content/menu-language']); //Redireccionar a menu-language
         }else 
           this.snackService.openSnackBar('Hiugston Tenemos un problema', 'Joder todo el sistema');
       }) 
