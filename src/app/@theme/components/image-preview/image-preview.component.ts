@@ -3,10 +3,13 @@ import {
   Output,
   EventEmitter,
 } from '@angular/core';
+import { fuseAnimations } from '../../animations';
 @Component({
   selector: 'image-preview',
   styleUrls: ['./image-preview.component.css'],
-  templateUrl: './image-preview.component.html'
+  templateUrl: './image-preview.component.html',
+  animations: fuseAnimations
+
 })
 export class MtImagePreviewComponent {
 

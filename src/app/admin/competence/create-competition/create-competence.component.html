@@ -1,6 +1,6 @@
 <div class="main-content">
   <div class="container-fluid">
-   <app-navroutes [itemsRoutes]="getRoutesItem()" ></app-navroutes>
+    <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -11,7 +11,7 @@
             </p>
           </div>
           <div class="card-body">
-            <mat-horizontal-stepper linear #stepper>
+            <mat-horizontal-stepper linear #stepper [linear]="isOptional">
               <mat-step [stepControl]="firstFormGroup">
                 <form [formGroup]="firstFormGroup">
                   <ng-template matStepLabel>Datos de competencia</ng-template>
@@ -20,10 +20,7 @@
                   <mat-card>
                     <div class="row">
                       <div class="col-md-2 text-center ">
-                        <img
-                          class="image-step1"
-                          src="../../../../../assets/img/coder2.png"
-                        />
+                        <img class="image-step1" src="../../../../../assets/img/coder2.png" />
                       </div>
 
                       <div class="col-md-10">
@@ -42,103 +39,59 @@
                       <div class="row">
                         <div class="col-md-8">
                           <mat-form-field class="example-full-width">
-                            <input
-                              matInput
-                              formControlName="nameCtrl"
-                              placeholder="Nombre de la competencia"
-                              required
-                            />
+                            <input matInput formControlName="nameCtrl" placeholder="Nombre de la competencia"
+                              required />
                           </mat-form-field>
                         </div>
                       </div>
 
                       <div class="row">
-                        <div class="col-md-10">
+                        <div class="col-md-12">
                           <mat-form-field class="example-full-width">
-                            <textarea
-                              matInput
-                              formControlName="descriptionCtrl"
-                              placeholder="Descripcion"
-                              rows="3"
-                              required
-                            ></textarea>
+                            <textarea matInput formControlName="descriptionCtrl" placeholder="Descripcion" rows="4"
+                              required></textarea>
                           </mat-form-field>
                         </div>
                       </div>
 
-                      <div class="row">
-                        <div class="col-md-11">
-                          <mat-form-field class="example-full-width">
-                            <textarea
-                              matInput
-                              placeholder="Cargar imagen"
-                              rows="1"
-                              required
-                            ></textarea>
-                          </mat-form-field>
-                        </div>
+                      <image-preview (onChange)="getFile($event)"></image-preview>
 
-                        <div class="col-md-1">
-                          <button
-                            mat-raised-button
-                            matTooltip="Cargar Imagen"
-                            [matTooltipPosition]="'above'"
-                            type="button"
-                            class="btn btn-default pull-right  btn-just-icon card-button"
-                          >
-                            <i class="material-icons">
-                              add_box
-                            </i>
-                          </button>
-                        </div>
-                      </div>
 
                       <hr />
 
                       <div class="row">
                         <div class="col-md-5">
                           <mat-form-field>
-                            <input
-                              matInput
-                              [matDatepicker]="picker"
-                              placeholder="Elige una fecha para la competencia"
-                            />
-                            <mat-datepicker-toggle
-                              matSuffix
-                              [for]="picker"
-                            ></mat-datepicker-toggle>
+                            <input matInput [matDatepicker]="picker"
+                              placeholder="Elige una fecha para la competencia" />
+                            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                             <mat-datepicker #picker></mat-datepicker>
                           </mat-form-field>
                         </div>
-
+                        <div class="col-md-3">
+                          <mat-form-field class="example-full-width">
+                            <input type="time" matInput placeholder="Hora inicio" formControlName="inithourCtrl"
+                              required />
+                          </mat-form-field>
+                        </div>
+                        <!-- 
                         <div class="col-md-5">
                           <mat-form-field>
                             <mat-select placeholder="Tipo de localizacion">
                               <mat-option
-                                *ngFor="let food of animals"
+                                *ngFor="let food of type_competence"
                                 [value]="food.name"
                               >
                                 {{ food.name }}
                               </mat-option>
                             </mat-select>
                           </mat-form-field>
-                        </div>
+                        </div> -->
+
                       </div>
 
                       <hr />
-                      <div class="row">
-                        <div class="col-md-3">
-                          <mat-form-field class="example-full-width">
-                            <input
-                              type="time"
-                              matInput
-                              placeholder="Hora inicio"
-                              formControlName="inithourCtrl"
-                              required
-                            />
-                          </mat-form-field>
-                        </div>
-                      </div>
+
                     </div>
                   </mat-card>
 
@@ -156,10 +109,7 @@
                   <mat-card>
                     <div class="row">
                       <div class="col-md-2 text-center">
-                        <img
-                          class="image-step2"
-                          src="../../../../../assets/img/globe.png"
-                        />
+                        <img class="image-step2" src="../../../../../assets/img/globe.png" />
                       </div>
 
                       <div class="col-md-10">
@@ -180,34 +130,19 @@
                       <div class="row">
                         <div class="col-md-4">
                           <mat-form-field class="example-full-width">
-                            <input
-                              matInput
-                              placeholder="Latitud"
-                              type="number"
-                              formControlName="latitudeCtrl"
-                            />
+                            <input matInput placeholder="Latitud" type="number" formControlName="latitudeCtrl" [(ngModel)]="newCoordinate.lat" />
                           </mat-form-field>
                         </div>
 
                         <div class="col-md-4">
                           <mat-form-field class="example-full-width">
-                            <input
-                              matInput
-                              placeholder="Longitud"
-                              type="number"
-                              formControlName="longitudeCtrl"
-                            />
+                            <input matInput placeholder="Longitud" type="number" formControlName="longitudeCtrl" [(ngModel)]="newCoordinate.lng"/>
                           </mat-form-field>
                         </div>
 
                         <div class="col-md-4">
                           <mat-form-field class="example-full-width">
-                            <input
-                              type="number"
-                              matInput
-                              placeholder="Radio"
-                              formControlName="radiusCtrl"
-                            />
+                            <input type="number" matInput placeholder="Radio" formControlName="radiusCtrl" [(ngModel)]="newCoordinate.radius"/>
                           </mat-form-field>
                         </div>
                       </div>
@@ -217,66 +152,24 @@
 
                   <br />
                   <div class="container">
-                    <div class="row">
-                      <div class="col-md-1">
-                        <i class="material-icons">
-                          location_on
-                        </i>
-                      </div>
-                      <div class="col-md-8">
-                        <p class="text-success">
-                          {{
-                            true
-                              ? "Selecciona mediante un click la ubicacion geografica que deseas como lugar de competencia."
-                              : "Selecciona mediante un click cada ubicacion geografica perteneciente a los test y ejercicios de programacion. "
-                          }}
-                        </p>
-                      </div>
-                    </div>
+                  
                   </div>
                   <br />
-                  <app-map></app-map>
+                  <app-map (coordinateChange)="getCoordinate($event)"></app-map>
                   <br />
+               
                   <br />
-
-                  <div class="container">
-                    <div class="row">
-                      <div class="col-md-1">
-                        <i class="material-icons">
-                          location_on
-                        </i>
-                      </div>
-                      <div class="col-md-8">
-                        <p class="text-success">
-                          Debes especificar el radio que quieres abarcar en la
-                          ubicacion deseada
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                  <br />Datos de
 
                   <mat-card class="">
                     <div class="row">
                       <div class="col-md-10">
-                        <mat-slider
-                          thumbLabel
-                          matTooltip="Desliza para generar un radio de competencia"
-                          [displayWith]="formatLabel"
-                          tickInterval="100"
-                          min="1"
-                          max="10000"
-                        ></mat-slider>
+                        <mat-slider thumbLabel matTooltip="Desliza para generar un radio de competencia"
+                          [displayWith]="formatLabel" tickInterval="100" min="1" max="10000"></mat-slider>
                       </div>
 
                       <div class="col-md-2">
-                        <button
-                          mat-raised-button
-                          matTooltip="Crear Coordenada"
-                          [matTooltipPosition]="'above'"
-                          type="button"
-                          class="btn btn-default pull-right  btn-just-icon card-button"
-                        >
+                        <button mat-raised-button matTooltip="Crear Coordenada" [matTooltipPosition]="'above'"
+                          type="button" class="btn btn-default pull-right  btn-just-icon card-button">
                           <i class="material-icons">
                             add_box
                           </i>
@@ -285,8 +178,7 @@
                     </div>
                   </mat-card>
                   <br />
-                  Datos de
-                  <mat-card>
+                  <!-- <mat-card>
                     <div class="table-responsive">
                       <table class="table">
                         <thead class=" text-primary">
@@ -313,22 +205,12 @@
                             </td>
 
                             <td class="td-actions text-right">
-                              <button
-                                mat-raised-button
-                                type="button"
-                                matTooltip="Edit Task"
-                                [matTooltipPosition]="'above'"
-                                class="btn btn-primary btn-link btn-sm btn-just-icon"
-                              >
+                              <button mat-raised-button type="button" matTooltip="Edit Task"
+                                [matTooltipPosition]="'above'" class="btn btn-primary btn-link btn-sm btn-just-icon">
                                 <i class="material-icons">edit</i>
                               </button>
-                              <button
-                                mat-raised-button
-                                type="button"
-                                matTooltip="Remove"
-                                [matTooltipPosition]="'above'"
-                                class="btn btn-danger btn-link btn-sm btn-just-icon"
-                              >
+                              <button mat-raised-button type="button" matTooltip="Remove" [matTooltipPosition]="'above'"
+                                class="btn btn-danger btn-link btn-sm btn-just-icon">
                                 <i class="material-icons">close</i>
                               </button>
                             </td>
@@ -336,7 +218,7 @@
                         </tbody>
                       </table>
                     </div>
-                  </mat-card>
+                  </mat-card> -->
                   <div>
                     <button mat-button matStepperPrevious>Atras</button>
                     <button mat-button matStepperNext>Siguiente</button>
@@ -349,10 +231,7 @@
                 <mat-card>
                   <div class="row">
                     <div class="col-md-2 text-center ">
-                      <img
-                        class="image-step1"
-                        src="../../../../../assets/img/programmer.png"
-                      />
+                      <img class="image-step1" src="../../../../../assets/img/programmer.png" />
                     </div>
 
                     <div class="col-10">
@@ -363,14 +242,8 @@
                       </div>
                       <div class="col-8">
                         <mat-form-field>
-                          <mat-select
-                            placeholder="Tipo de evaluacion"
-                            [(value)]="selectType"
-                          >
-                            <mat-option
-                              *ngFor="let type of typestest"
-                              [value]="type.value"
-                            >
+                          <mat-select placeholder="Tipo de evaluacion" [(value)]="selectType">
+                            <mat-option *ngFor="let type of typestest" [value]="type.value">
                               {{ type.viewValue }}
                             </mat-option>
                           </mat-select>
@@ -379,7 +252,7 @@
                     </div>
                     <br />
 
-                  <!--   <div class="container " [hidden]="selectType !== '0'">
+                    <!--   <div class="container " [hidden]="selectType !== '0'">
                       <div class="row d-flex justify-content-center">
                         <div class="col" *ngFor="let item of testQuestions">
                           <app-card [item]="item" type="'test'"></app-card>

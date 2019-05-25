@@ -6,6 +6,7 @@ export interface ITheme{
   description: string;
   content?: string;
   image?: string;
+  imageFile?: File;
   idLanguage?: number;
 }
 

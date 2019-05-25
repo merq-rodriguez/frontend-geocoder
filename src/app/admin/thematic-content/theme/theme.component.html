@@ -16,32 +16,15 @@
 <br />
 <mat-card>
   <div class="container">
-    <!--   <div class="row">
-      <div class="col-md-8">
-        <mat-form-field class="example-full-width">
-          <input [(ngModel)]="newTheme.name"  matInput
-            placeholder="Nombre del tema" required />
-        </mat-form-field>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-md-10">
-        <mat-form-field class="example-full-width">
-          <textarea matInput  [(ngModel)]="newTheme.description"
-            placeholder="Descripcion" rows="3" required></textarea>
-        </mat-form-field>
-      </div>
-    </div> -->
 
 
     <div class="row">
       <div class="col-12">
         <mat-form-field>
-          <input [(ngModel)]="newTheme.name" matInput placeholder="Nombre del tema" required />
+          <input [(ngModel)]="newTheme.name" matInput placeholder="Nombre del tema" />
         </mat-form-field>
         <mat-form-field>
-          <textarea [(ngModel)]="newTheme.description" matInput placeholder="Descripcion" rows="3" required></textarea>
+          <textarea [(ngModel)]="newTheme.description" matInput placeholder="Descripcion" rows="3" ></textarea>
         </mat-form-field>
       </div>
 

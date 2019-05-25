@@ -42,10 +42,8 @@ export class CreateLanguageComponent implements OnInit {
     });
   }
 
-  getFile(event){
-    console.log(event);
-    
-
+  getFile(file: File){
+    this.language.imageFile = file;
   }
 
   private emptyTextfieldLanguage() {

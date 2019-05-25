@@ -7,36 +7,25 @@
       <div class="col-9">
         <div class="col-12">
           <mat-form-field>
-            <input 
-                  matInput 
-                  [(ngModel)]="data.name" 
-                  placeholder="Nombre del contenido tematico" 
-                  
-            >
+            <input matInput [(ngModel)]="data.name" placeholder="Nombre del contenido tematico">
           </mat-form-field>
         </div>
         <div class="col-12">
           <mat-form-field>
-            <textarea 
-                matInput 
-                [(ngModel)]="data.description"
-                placeholder="Descripcion" 
-                rows="3"
-                
-                ></textarea>
+            <textarea matInput [(ngModel)]="data.description" placeholder="Descripcion" rows="3"></textarea>
           </mat-form-field>
         </div>
       </div>
-    
+
     </div>
 
     <br>
     <br>
 
-       <!-- IMAGE-PREVIE  -->
-       <image-preview (onChange)="getFile($event)"></image-preview>
-       <!-- END IMAGE-PREVIE  -->
-   
+    <!-- IMAGE-PREVIE  -->
+    <image-preview (onChange)="getFile($event)"></image-preview>
+    <!-- END IMAGE-PREVIE  -->
+
 
 
     <div class="row">
@@ -65,8 +54,8 @@
       </div>
     </div>
 
-<br>
-<br>
+    <br>
+    <br>
     <div class="row">
       <div class="col-10">
         <div class="row">
@@ -84,13 +73,13 @@
       <div class="col-12" *ngIf="data.addVideo">
         <div class="col-9">
           <mat-form-field>
-            <input type="text" [(ngModel)]="data.url_video"
-             matInput placeholder="Pega aqui la url del video de youtube" (change)="getDestroy()">
+            <input type="text" [(ngModel)]="data.url_video" matInput placeholder="Pega aqui la url del video de youtube"
+              (change)="getDestroy()">
           </mat-form-field>
         </div>
 
         <div class="col-12 d-flex justify-content-center" *ngIf="data.url_video.length > 0">
-            <app-video [id]="data.url_video" *ngIf="_destroy" ></app-video>
+          <app-video [id]="data.url_video" *ngIf="_destroy"></app-video>
         </div>
       </div>
     </div>
@@ -101,5 +90,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial  (click)="validatorData()">Aceptar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial (click)="validatorData()">Aceptar</button>
 </div>

@@ -13,6 +13,7 @@ export interface ISubthemeDialog{
   contentEditor?: string;
   contentCode?: string;
   image?: string;
+  imageFile?: File;
   addVideo?: boolean;
   url_video: string;
   addCode?: boolean;
@@ -44,16 +45,16 @@ export class CreateSubthemeDialog {
       this.subscribeEditor$ = this.editorService.content$.subscribe(content => this.contentEditor = content );
     }
 
-    getFile(event){
-      console.log(event)
+    getFile(file: File){
+      this.data.imageFile = file;
     }
 
-    onFileSelected(event){
+    /* onFileSelected(event){
       console.log(event)
       console.log(<File>event.target.files[0])
         this.selectedFile = <File>event.target.files[0];
         console.log(this.selectedFile)
-    }
+    } */
 
     onNoClick(): void {
       this.dialogRef.close();

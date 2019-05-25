@@ -6,6 +6,7 @@ export interface ILanguage{
   name: string;
   description: string;
   image: string;
+  imageFile?: File;
   idUser?: number;
 }
 

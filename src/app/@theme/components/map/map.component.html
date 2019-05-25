@@ -1,7 +1,13 @@
-
-  <div
-    class="map"
-    leaflet
-    [leafletOptions]="options"
+<div 
+    leaflet 
+    class="map" 
+    [leafletOptions]="options" 
     [leafletLayers]="layers"
-  ></div>
+    [leafletLayersControl]="layersControl"
+    (leafletMapReady)="onMapReady($event)">
+</div>
+
+
+<!-- (leafletClick)="onclick($event)"
+
+ -->

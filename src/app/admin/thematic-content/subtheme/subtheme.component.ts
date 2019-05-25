@@ -164,7 +164,8 @@ export class SubthemeComponent implements OnInit {
       image: this.data.image,
       contentEditor: this.data.contentEditor,
       contentCode: this.data.contentCode,
-      url_video: this.data.url_video
+      url_video: this.data.url_video,
+
   }
 
 //Se procede a insertar el subthema en en el tema al que pertenece 
@@ -224,9 +225,6 @@ export class SubthemeComponent implements OnInit {
 
         }
 
-     
-       
-      
       console.log(this.arrayThemes)
     });
   }

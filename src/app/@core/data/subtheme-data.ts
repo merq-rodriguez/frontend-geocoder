@@ -7,6 +7,7 @@ export interface ISubtheme{
   contentEditor?: string;
   contentCode?: string;
   image?: string;
+  imageFile?: File;
   url_video?: string;
   idTheme?: number;
 }

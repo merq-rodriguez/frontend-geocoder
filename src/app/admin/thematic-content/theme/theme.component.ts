@@ -20,13 +20,13 @@ export class ThemeComponent implements OnInit {
   public observerEditor: Observable<any>
   isUpdated: boolean = false;
   arrayTheme: ICardTheme[] = [];
-  image = "";
+
   public newTheme: ITheme = {
     id: '',
     name: '',
     content: '',
     description: '',
-    image: '../../../../assets/img/image-default.png'
+    image: ''
   };
 
   constructor(
@@ -41,13 +41,13 @@ export class ThemeComponent implements OnInit {
     });
   }
 
-  getFile(event){
-    console.log(event);
+  getFile(file: File){
+    this.newTheme.imageFile = file;
   }
 
 
   private emptyTextfieldTheme() {
-    return (this.newTheme.name.trim() === '' || this.newTheme.description.trim() === '' || this.newTheme.image === '') ? true : false;
+    return (this.newTheme.name.trim() === '' || this.newTheme.description.trim() === '') ? true : false;
   }
 
 
@@ -58,7 +58,8 @@ export class ThemeComponent implements OnInit {
       name: '',
       content: '',
       description: '',
-      image: ''
+      image: '',
+      imageFile : null
     };
     this.editorService.setBehaviorContent(null);
   }
