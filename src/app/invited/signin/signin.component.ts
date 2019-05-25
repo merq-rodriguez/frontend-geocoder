@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/@core/services/user.service';
 import { SnackBarService } from 'src/app/@core/services/snackbar.service';
+import { LocalstorageService } from 'src/app/@core/services/localstorage.service';
 
 @Component({
   selector: 'signIn',
@@ -15,6 +16,7 @@ export class SignIn implements OnInit {
 
   constructor(
     private snackService: SnackBarService,
+    private localstorageService: LocalstorageService, 
     private  userService: UserService,
     private router: Router
     ) { }
@@ -22,26 +24,21 @@ export class SignIn implements OnInit {
   ngOnInit() {
   }
 
-  validateEmpty(){
-    if(this.username.trim() === '' || this.password.trim() === ''){
-      return  true;
-    }else{
-      
-      return false;
-    }
-  }
+  
   
   public login(){
-    if(this.validateEmpty){
-      console.log("campos vacios");
-      /* this.userService.signIn(this.username, this.password).subscribe(res => {
-        console.log(res);
-      }) */
+    if(this.password.trim() === '' || this.username.trim() === ''){
+      this.snackService.openSnackBar('Campos vacios', 'Aceptar');
     }else{
-      console.log("Todoo okay!");
-      //this.snackService.openSnackBar('Campos vacios', 'Aceptar');
+      this.userService.signIn(this.username, this.password).subscribe(user => {
+        if(user.accessTocken){
+          this.userService.setUser(user); //Guardamos el usuario autenticado en el behaviorSubject
+          this.localstorageService.saveLocalstorage('user', user); //Guardamos el usuario el localstoraje por si las moscas XD
+          this.router.navigate(['/admin/thematic-content/menu-language'])
+        }else 
+          this.snackService.openSnackBar('Hiugston Tenemos un problema', 'Joder todo el sistema');
+      }) 
     }
-    //this.router.navigate(['/admin/thematic-content/menu-language'])
   }
 
 }

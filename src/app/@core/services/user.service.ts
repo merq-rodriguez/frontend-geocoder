@@ -1,19 +1,24 @@
 import { Injectable } from '@angular/core';
-import { of as observableOf,  Observable  } from 'rxjs';
+import { of as observableOf,  Observable, BehaviorSubject  } from 'rxjs';
 import { UserData, IUser, ERole } from '../data/user.data';
 import { Api } from './api.service';
 
 @Injectable()
 export class UserService  extends UserData{
   private controller: string = "users";
-  private users: IUser[] = [
-    {idUser: 1, username: 'Pepa', email: 'judro@gmail.com', names: 'xx', lastnames: 'yyy', idRole: ERole.STUDENT},
-    {idUser: 2, username: 'Luisa', email: 'judro@gmail.com', names: 'xx', lastnames: 'yyy', idRole: ERole.STUDENT},
-    {idUser: 3, username: 'Jonh', email: 'judro@gmail.com', names: 'x', lastnames: 'yyy', idRole: ERole.ADMIN},
-    {idUser: 4, username: 'Arya', email: 'judro@gmail.com', names: 'x', lastnames: 'yy', idRole: ERole.STUDENT}
-  ];
+  private userSource = new BehaviorSubject<any>(null);
+  public  userAuth$ = this.userSource.asObservable();
+  private users: IUser[] = [];
   
   constructor(private apiService: Api){ super() }
+
+  getUser() :Observable<any>{
+    return this.userAuth$;
+  }
+
+  setUser(user):void{
+    this.userSource.next(user);
+  }
 
   getUsers(): Observable<any> {
     return this.apiService.get(this.controller);

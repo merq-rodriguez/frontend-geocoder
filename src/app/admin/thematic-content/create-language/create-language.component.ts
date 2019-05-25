@@ -29,7 +29,7 @@ export class CreateLanguageComponent implements OnInit {
     name: '',
     description: '',
     image: '../../../../assets/img/image-default.png',
-    idUser: 4
+    idUser: null
   }
   constructor( private _formBuilder: FormBuilder, private snackBar: MatSnackBar) {}
 
@@ -56,6 +56,9 @@ export class CreateLanguageComponent implements OnInit {
 
 
   ngOnInit() {
+
+    
+
     this.firstFormGroup = this._formBuilder.group({
       nameLanguageCtrl: [this.language.name, Validators.required],
       descriptionLanguageCtrl: [this.language.description, Validators.required],

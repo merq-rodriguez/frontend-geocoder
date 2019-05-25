@@ -3,6 +3,7 @@ import { UserService } from 'src/app/@core/services/user.service';
 import { IUser } from 'src/app/@core/data/user.data';
 import { SnackBarService } from 'src/app/@core/services/snackbar.service';
 import { Router } from '@angular/router';
+import { LocalstorageService } from 'src/app/@core/services/localstorage.service';
 
 @Component({
   selector: 'signUp',
@@ -27,7 +28,8 @@ export class SignUp implements OnInit {
   constructor(
     private userService: UserService,
     private snackService: SnackBarService,
-    private router: Router
+    private router: Router,
+    private localstorageService: LocalstorageService
   ) { }
 
   ngOnInit() { }
@@ -65,6 +67,7 @@ export class SignUp implements OnInit {
               this.snackService.openSnackBar('Ohhh Ohhh verifica tu correo o nombre de usuario', 'Aceptar');
             }
           }else{
+            this.localstorageService.saveLocalstorage('user', {})
             this.router.navigate(['admin/thematic-content/menu-language'])
           }
         });

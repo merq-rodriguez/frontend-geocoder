@@ -18,15 +18,12 @@ export class ThematicComponent implements OnInit, AfterViewInit  {
   
   @ViewChild(CreateLanguageComponent) childRefCreateLanguage;
   isLinear = false;
-  private subscribeTheme: any;
   private language: ILanguage;
   private listThemes: ICardTheme[]
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   
-//SI NOS COMPLICAMOS MUCHO HACIENDO FORKJOIN MANDAMOS TODO EL HPTA ARRAY CON EL TEMA
-// Y QUE EL BACKEND SE ENCARGUE DE TODO
-//(DECIDIDO) TODO PAL BACKEND
+
   constructor(  
     private _formBuilder: FormBuilder, 
     public themeListService: ThemeListService,

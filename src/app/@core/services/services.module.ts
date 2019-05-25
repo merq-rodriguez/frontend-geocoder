@@ -9,6 +9,7 @@ import { Api } from './api.service';
 import { ThemeService } from './theme.service';
 import { SubthemeService } from './subtheme.service';
 import { SnackBarService } from './snackbar.service';
+import { LocalstorageService } from './localstorage.service';
 
 
 const SERVICES = [
@@ -20,7 +21,8 @@ const SERVICES = [
   LanguageService,
   ThemeService,
   SubthemeService,
-  SnackBarService
+  SnackBarService,
+  LocalstorageService
 ];
 
 @NgModule({
