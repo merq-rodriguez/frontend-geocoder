@@ -93,7 +93,16 @@ export class CreateExerciseComponent implements OnInit {
   }
   
   getAction(e){
-    console.log(e);
+    let exerci: IExercise = e.item; 
+    switch(e.action){
+      case 'delete':
+          _.remove(this.exerciseList, (ex) =>  ex.idExercise === exerci.idExercise ); //Eliminamos el ejercicio
+          console.log(this.exerciseList);
+          
+          break;
+      case 'update':
+        break;
+    }
     
   }
 
