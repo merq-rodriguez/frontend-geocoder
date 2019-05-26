@@ -27,10 +27,15 @@ export class CreateExerciseComponent implements OnInit {
     private monacoService: MonacoService,
     private editorService: ContentEditorService,  
     private localstorageService: LocalstorageService, 
-    ) {
+    ) {}
 
-  }
-
+    ngOnInit() {
+      let user = this.localstorageService.getLocalstorage('user');
+      this.exercise.idUser = user.idUser;    
+      this.subscribeMonaco$ = this.monacoService.content$.subscribe(content => this.exercise.contentCode = content );
+      this.subscribeEditorHTML$ = this.editorService.content$.subscribe(content => this.exercise.contentEditor = content );
+     
+    }
 
   public exercise: IExercise = {
     contentEditor: '',
@@ -51,7 +56,20 @@ export class CreateExerciseComponent implements OnInit {
     this.exercise.image = file;
   }
 
-  
+  clearExercise(){
+    this.exercise = {
+      idExercise: '',
+      description: '',
+      name: '',
+      input: '',
+      output: '',
+      image: null
+    };
+    this.monacoService.reset();
+    this.editorService.reset();
+    
+    
+  }
 
   addExercise(){
     let validate = false;
@@ -87,6 +105,7 @@ export class CreateExerciseComponent implements OnInit {
         image: this.exercise.image
       } 
       this.exerciseList.push(exer);
+      this.clearExercise();
       this.snackService.openSnackBar('¡Han agregado un nuevo ejercicio!', 'Aceptar')
     }
     
@@ -98,21 +117,15 @@ export class CreateExerciseComponent implements OnInit {
       case 'delete':
           _.remove(this.exerciseList, (ex) =>  ex.idExercise === exerci.idExercise ); //Eliminamos el ejercicio
           console.log(this.exerciseList);
-          
           break;
       case 'update':
+
         break;
     }
     
   }
 
-  ngOnInit() {
-    let user = this.localstorageService.getLocalstorage('user');
-    this.exercise.idUser = user.idUser;    
-    this.subscribeMonaco$ = this.monacoService.content$.subscribe(content => this.exercise.contentCode = content );
-    this.subscribeEditorHTML$ = this.editorService.content$.subscribe(content => this.exercise.contentEditor = content );
-   
-  }
+
   
 
 

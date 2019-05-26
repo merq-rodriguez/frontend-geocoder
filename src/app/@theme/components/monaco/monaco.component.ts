@@ -1,7 +1,8 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
-import { MonacoFile } from "ngx-monaco";
+import { MonacoFile, MonacoEditorDirective } from "ngx-monaco";
 import { MonacoService } from 'src/app/@core/services/monaco.service';
+import { Observable, Subject } from 'rxjs';
 
 
 
@@ -11,29 +12,24 @@ import { MonacoService } from 'src/app/@core/services/monaco.service';
   styleUrls: ["./monaco.component.css"]
 })
 export class MonacoComponent implements OnInit {
+	@ViewChild(MonacoEditorDirective) editor: MonacoEditorDirective;
 
-  @Input('code') _code
-  file: MonacoFile = {
-    uri: "index.js",
-    language: "javascript",
-    content: `console.log('Escribe aqui tu codigo...)`
-  };
+  public observerEditor: Observable<any>;
+	fileChange = new Subject<MonacoFile>();
+    file: MonacoFile = null;
+ 
 
-
-  constructor(private monacoService: MonacoService) { }
+  constructor(public monacoService: MonacoService) { }
 
   ngOnInit() {
-    if (this._code) {
-      this.file.content = this._code
-    } else {
-      this.monacoService.content$.subscribe(content => this.file.content = content);
-    }
+    this.observerEditor = this.monacoService.getMonacoFile();
+    this.observerEditor.subscribe(res => this.file = res);
   }
 
 
   //Emite todos los cambios en monaco
   onFileChange(file: MonacoFile) {
     console.log(file.content)
-    this.monacoService.setContentMonaco(file.content);
+    this.monacoService.setMonacoContent(file.content);
   }
 }

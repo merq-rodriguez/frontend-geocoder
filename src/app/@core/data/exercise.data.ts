@@ -1,14 +1,14 @@
 import { Observable } from 'rxjs';
 
 export interface IExercise{
-  idExercise?: number;
+  idExercise?: string;
   name: string;
   description: string;
-  contentEditor: string;
+  contentEditor?: string;
   contentCode?: string;
   output: string;
   input: string;
-  idUser: number;
+  idUser?: number;
   image: File;
 }
 

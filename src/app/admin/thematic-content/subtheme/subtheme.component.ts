@@ -26,9 +26,27 @@ import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.compone
 export class SubthemeComponent implements OnInit {
   public idThemeSelected: string;
   public subscriberArrayTheme: any;
-  public subscriberContendEditor: any;
-  public subscriberContentCode: any;
+  public subscriberEditor$: any;
+  public subscribeMonaco$: any;
   public arrayThemes: ICardTheme[] = []
+
+
+  constructor(
+    private snackBar: MatSnackBar,
+    private editorService: ContentEditorService,
+    private monacoService: MonacoService,
+    private themeListService: ThemeListService,
+    public dialog: MatDialog
+  ) {}
+
+
+  ngOnInit() {
+    
+    this.subscriberArrayTheme = this.themeListService.themesObservable$.subscribe(themes => this.arrayThemes = themes);
+    this.subscriberEditor$ = this.editorService.content$.subscribe(content => this.data.contentEditor = content);
+    this.subscribeMonaco$ = this.monacoService.content$.subscribe(content => this.data.contentCode = content );
+
+   }
 
   data: ISubthemeDialog = {
     id: '',
@@ -60,8 +78,8 @@ export class SubthemeComponent implements OnInit {
 
   //Limpiamos los observables de monaco editor y el editor de html
   clearObservables(){
-    this.monacoService.setContentMonaco('');
-    this.editorService.setBehaviorContent('');
+    this.monacoService.reset();
+    this.editorService.reset();
   }
 
   //Metodo para eliminar un subtheme
@@ -112,7 +130,7 @@ export class SubthemeComponent implements OnInit {
           
        };
        if(this.data.contentCode){
-        this.monacoService.setContentMonaco(this.data.contentCode);
+        this.monacoService.setMonacoContent(this.data.contentCode);
        }
 
        if(this.data.contentEditor){
@@ -236,22 +254,7 @@ export class SubthemeComponent implements OnInit {
     });
   }
 
-  constructor(
-    private snackBar: MatSnackBar,
-    private editorService: ContentEditorService,
-    private monacoService: MonacoService,
-    private themeListService: ThemeListService,
-    public dialog: MatDialog
-  ) {}
 
-
-  ngOnInit() {
-    
-    this.subscriberArrayTheme = this.themeListService.themesObservable$.subscribe(themes => this.arrayThemes = themes);
-    this.subscriberContendEditor = this.editorService.content$.subscribe(content => this.data.contentEditor = content);
-    this.monacoService.content$.subscribe(content => this.data.contentCode = content);
-  
-   }
    public getRoutesItem(){
     return ROUTES_SUBTHEME; 
   }

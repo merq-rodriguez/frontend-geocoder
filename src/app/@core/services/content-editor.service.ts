@@ -10,6 +10,11 @@ export class ContentEditorService implements ContentEditorData {
 
     constructor() { }
 
+    reset(){
+        this.content = '';
+        this.contentSource.next(null); 
+
+    }
 
     setBehaviorContent(content: string) { 
         this.content = content;

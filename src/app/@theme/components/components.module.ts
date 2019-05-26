@@ -18,7 +18,7 @@ import {CdkTreeModule} from '@angular/cdk/tree';
 
 import { DialogContentExampleDialog } from 'src/app/admin/competence/competitionlist/competence-list.component';
 import { MdePopoverModule } from '@material-extended/mde';
-import { MonacoEditorModule } from 'ngx-monaco';
+import { MonacoEditorModule, COMPLETION_PROVIDERS } from 'ngx-monaco';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 import { CKEditorModule } from 'ng2-ckeditor';
@@ -71,7 +71,8 @@ import { ShowSubthemeDialog } from 'src/app/admin/modal/show-subtheme/show-subth
 import { NavRoutesComponent } from './navroutes/navroutes.component';
 import { CardMenuComponent } from './card-menu/card-menu.component';
 import { MtImagePreviewComponent } from './image-preview/image-preview.component';
-
+import { TravisCompletionProvider } from './editor/travis-completation.provider';
+ 
 
 const BASE_MODULES = [CommonModule, FormsModule, ReactiveFormsModule];
 
@@ -153,12 +154,12 @@ const MODULES_FOR_ROOT = [
     ...MODULES_FOR_ROOT,
     RouterModule,
     CKEditorModule,
-  
-    
-    
   ],
   entryComponents: [ DialogContentExampleDialog, BottomSheetOverviewExampleSheet ], 
   declarations: [ ...COMPONENTS ],
+  providers: [
+    { provide: COMPLETION_PROVIDERS, useClass: TravisCompletionProvider, multi: true }
+  ],
   exports: [ 
     ...COMPONENTS, 
     ...BASE_MODULES, 

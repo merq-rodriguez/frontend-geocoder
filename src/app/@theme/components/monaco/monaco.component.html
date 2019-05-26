@@ -1,5 +1,9 @@
 <div class="monaco">
-  <monaco-editor theme="vs-dark" [file]="file" (fileChange)="onFileChange($event)">
+  <monaco-editor 
+    #editor
+    theme="vs-dark" 
+    [file]="file" 
+    (fileChange)="onFileChange($event)">
   </monaco-editor>
 </div>
 
