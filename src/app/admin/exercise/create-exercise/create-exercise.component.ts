@@ -92,6 +92,10 @@ export class CreateExerciseComponent implements OnInit {
     
   }
   
+  getAction(e){
+    console.log(e);
+    
+  }
 
   ngOnInit() {
     let user = this.localstorageService.getLocalstorage('user');

@@ -121,7 +121,10 @@
          <div class="container">
             <div class="row">
               <div *ngFor="let item of exerciseList">
-                <app-card [item]="item" [type]="'exercise'"></app-card>
+                <app-card 
+                    (action)="getAction($event)"
+                    [item]="item" 
+                    [type]="'exercise'"></app-card>
               </div>
             </div>
           </div> 
