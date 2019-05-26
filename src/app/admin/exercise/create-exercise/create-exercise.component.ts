@@ -9,6 +9,7 @@ import { LocalstorageService } from 'src/app/@core/services/localstorage.service
 import * as _ from 'lodash';
 import { v4 as uuid } from 'uuid';
 import { SnackBarService } from 'src/app/@core/services/snackbar.service';
+import { ExerciseService } from 'src/app/@core/services/exercise.service';
 
 
 @Component({
@@ -18,12 +19,12 @@ import { SnackBarService } from 'src/app/@core/services/snackbar.service';
   animations: fuseAnimations
 })
 export class CreateExerciseComponent implements OnInit {
-
+  idUser: number;
   subscribeMonaco$: any;
   subscribeEditorHTML$: any;
-
   constructor(
     private snackService: SnackBarService,
+    private exerciseService: ExerciseService,
     private monacoService: MonacoService,
     private editorService: ContentEditorService,  
     private localstorageService: LocalstorageService, 
@@ -31,7 +32,7 @@ export class CreateExerciseComponent implements OnInit {
 
     ngOnInit() {
       let user = this.localstorageService.getLocalstorage('user');
-      this.exercise.idUser = user.idUser;   
+      this.idUser = user.idUser;   
       this.subscribeMonaco$ = this.monacoService.content$.subscribe(content => this.exercise.contentCode = content );
       this.subscribeEditorHTML$ = this.editorService.content$.subscribe(content => this.exercise.contentEditor = content );
      
@@ -67,9 +68,32 @@ export class CreateExerciseComponent implements OnInit {
     };
     this.monacoService.reset();
     this.editorService.reset();
+    console.log("Ejercicio limpiado");
+    console.log(this.exercise);
+    
     
     
   }
+
+  createExercise(exercise: IExercise){
+    if(exercise.contentCode !== null){
+      if(exercise.contentCode.trim() === ''){
+        exercise.contentCode = null;
+      }
+    }
+    this.exerciseService.createExercise(exercise).subscribe(res => {
+      console.log(res);
+      
+      if(res.createexercise){
+        this.exerciseList.push(exercise);
+        this.clearExercise();
+        this.snackService.openSnackBar('¡Has agregado un nuevo ejercicio!', 'Aceptar');
+      }else{
+        this.snackService.openSnackBar('¡Ocurrio un problema al guardar el ejercicio!', 'Aceptar');        
+      }
+    })
+  }
+
 
   addExercise(){
     let validate = false;
@@ -88,6 +112,7 @@ export class CreateExerciseComponent implements OnInit {
       validate = false;
     }
 
+
     if(!validate){
       this.snackService.openSnackBar('Hay campos obligatorios sin completar *', 'De acuerdo');
     }else{
@@ -98,14 +123,12 @@ export class CreateExerciseComponent implements OnInit {
         description: this.exercise.description,
         contentCode: this.exercise.contentCode,
         contentEditor: this.exercise.contentEditor,
-        idUser: this.exercise.idUser,
+        idUser: this.idUser,
         input: this.exercise.input,
         output: this.exercise.output,
         image: this.exercise.image
       } 
-      this.exerciseList.push(exer);
-      this.clearExercise();
-      this.snackService.openSnackBar('¡Han agregado un nuevo ejercicio!', 'Aceptar')
+      this.createExercise(exer);
     }
     
   }

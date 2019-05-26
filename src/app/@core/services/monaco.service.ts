@@ -6,7 +6,7 @@ import { MonacoFile } from 'ngx-monaco';
 @Injectable()
 export class MonacoService implements MonacoData {
     private content = '';
-    private contentSource = new BehaviorSubject<any>(null);    
+    private contentSource = new BehaviorSubject<string>('');    
     public  content$ = this.contentSource.asObservable();
     private fileSource = new BehaviorSubject<MonacoFile>(null);    
     public  file$ = this.fileSource.asObservable();
@@ -18,7 +18,7 @@ export class MonacoService implements MonacoData {
     file: MonacoFile = {
         uri: "index.js",
         language: "javascript",
-        content: `console.log('Escribe aqui tu codigo...')`
+        content: ``
     };
 
     setMonacoContent(content):void{
@@ -35,7 +35,7 @@ export class MonacoService implements MonacoData {
         let file = {
             uri: "index.js",
             language: "javascript",
-            content: `console.log('Escribe aqui tu codigo...')`
+            content: ``
         };
         this.fileSource.next(file);
     }

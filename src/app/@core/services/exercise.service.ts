@@ -18,23 +18,23 @@ export class ExerciseService extends ExerciseData {
  
 
   getExercises(idUser: number): Observable<any> {
-    return this.api.get(this.controller + '/getAll/' + idUser)
+    return this.api.get(this.controller + '/getAll' + idUser)
   }
 
   findExercise(idExercise: number): Observable<any> {
-    return this.api.get(this.controller + '/findExercise/' + idExercise)
+    return this.api.get(this.controller + 'findExercise' + idExercise)
   }
   
   createExercise(exercise: IExercise): Observable<any> {
-    return this.api.post(this.controller, '/createExercise', exercise)
+    return this.api.post(this.controller, 'createExercise', exercise)
   }
 
   updateExercise(exercise: IExercise): Observable<any> {
-    return this.api.post(this.controller, '/updateExercise', exercise)    
+    return this.api.post(this.controller, 'updateExercise', exercise)    
   }
   
   deleteExercise(idExercise: number): Observable<any> {
-    return this.api.delete(this.controller, '/deleteExercise/', idExercise);       
+    return this.api.delete(this.controller, 'deleteExercise', idExercise);       
   }
 
 

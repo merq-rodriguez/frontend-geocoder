@@ -16,6 +16,8 @@ import { ThemeService } from './services/theme.service';
 import { ThemeData } from './data/theme.data';
 import { SubthemeService } from './services/subtheme.service';
 import { SubthemeData } from './data/subtheme-data';
+import { ExerciseService } from './services/exercise.service';
+import { ExerciseData } from './data/exercise.data';
 
 
 
@@ -28,6 +30,7 @@ const DATA_SERVICES = [
   { provide:  ThemeData, useClass: ThemeService },
   { provide:  SubthemeData, useClass: SubthemeService },
   { provide:  LanguageData, useClass: LanguageService },
+  { provide:  ExerciseData, useClass: ExerciseService },
   
 ];
 

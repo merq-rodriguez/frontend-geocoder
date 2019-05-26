@@ -11,6 +11,7 @@ import { SubthemeService } from './subtheme.service';
 import { SnackBarService } from './snackbar.service';
 import { LocalstorageService } from './localstorage.service';
 import { UploadService } from './upload-file.service';
+import { ExerciseService } from './exercise.service';
 
 
 const SERVICES = [
@@ -24,7 +25,8 @@ const SERVICES = [
   SubthemeService,
   SnackBarService,
   LocalstorageService,
-  UploadService
+  UploadService,
+  ExerciseService
 ];
 
 @NgModule({
