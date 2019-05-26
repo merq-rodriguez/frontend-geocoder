@@ -31,7 +31,7 @@ export class CreateExerciseComponent implements OnInit {
 
     ngOnInit() {
       let user = this.localstorageService.getLocalstorage('user');
-      this.exercise.idUser = user.idUser;    
+      this.exercise.idUser = user.idUser;   
       this.subscribeMonaco$ = this.monacoService.content$.subscribe(content => this.exercise.contentCode = content );
       this.subscribeEditorHTML$ = this.editorService.content$.subscribe(content => this.exercise.contentEditor = content );
      
@@ -73,7 +73,6 @@ export class CreateExerciseComponent implements OnInit {
 
   addExercise(){
     let validate = false;
-
     if(this.exercise.contentEditor){
       if(
         this.exercise.contentEditor.trim() === '' || 

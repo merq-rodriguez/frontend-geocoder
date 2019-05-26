@@ -13,7 +13,7 @@ export interface IExercise{
 }
 
 export abstract class ExerciseData {
-    abstract getExercises():   Observable<any[]>;
+    abstract getExercises(idUser: number):   Observable<any[]>;
     abstract findExercise(idExercise: number):   Observable<any>;
     abstract createExercise(exercise: IExercise): Observable<any>;
     abstract updateExercise(exercise: IExercise): Observable<any>;

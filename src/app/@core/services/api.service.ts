@@ -8,15 +8,13 @@ export class Api {
 
 	constructor(private http: HttpClient) { }
 
-	public get(controller: string, params?:Array<any>) {
+	public get(controller: string, params?:any) {
 		return this.http.get( 
-			`${environment.api + controller}`
+			`${environment.api + controller + params ? '/'+params : ''  }`
 		);
 	}
 
- 
-
-	public delete(controller: string, path: string) {
+	public delete(controller: string, path: string, params: any) {
 		return this.http.delete(
 			`${environment.api + controller + path}`
 		);
