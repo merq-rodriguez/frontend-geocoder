@@ -12,11 +12,12 @@
 
   </mat-card-title>
   <mat-card-subtitle>
-    {{ data.subtitle }}
+    {{ data.subtitle ? data.subtitle : '' }}
   </mat-card-subtitle>
   <hr>
   <mat-card-content>
-    <img class="img-card" mat-card-lg-image [src]="data.image" />
+    <img class="img-card" *ngIf="data.image" mat-card-lg-image [src]="image" />
+    <img class="img-card" mat-card-lg-image *ngIf="!data.image" [src]="imageDefault" />
     <div class="description-card">
       <p>
         {{ 

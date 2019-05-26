@@ -18,8 +18,8 @@ export class MtImagePreviewComponent {
 
   constructor() { }
 
-  
-// Si la entrada ha cambiado (archivo seleccionado), proyectamos el archivo en la vista previa de img
+
+  // Si la entrada ha cambiado (archivo seleccionado), proyectamos el archivo en la vista previa de img
   updateSource($event: Event) {
     // Accedemos al archivo con $event.target['files'][0]
     this.projectImage($event.target['files'][0]);

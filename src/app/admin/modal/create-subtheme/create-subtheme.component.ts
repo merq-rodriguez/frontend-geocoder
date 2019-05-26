@@ -45,6 +45,8 @@ export class CreateSubthemeDialog {
       this.subscribeEditor$ = this.editorService.content$.subscribe(content => this.contentEditor = content );
     }
 
+    
+
     getFile(file: File){
       this.data.imageFile = file;
     }

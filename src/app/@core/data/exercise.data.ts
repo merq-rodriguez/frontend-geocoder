@@ -4,10 +4,12 @@ export interface IExercise{
   idExercise?: number;
   name: string;
   description: string;
-  content: string;
+  contentEditor: string;
+  contentCode?: string;
   output: string;
   input: string;
   idUser: number;
+  image: File;
 }
 
 export abstract class ExerciseData {

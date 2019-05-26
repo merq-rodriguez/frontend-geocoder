@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { ICardTest, ICardTheme, ICardSubTheme, ICardExercise } from './ICard.interface';
+import { ICardTest, ICardTheme, ICardSubTheme } from './ICard.interface';
+import { IExercise } from 'src/app/@core/data/exercise.data';
 
 
 @Component({
@@ -9,10 +10,11 @@ import { ICardTest, ICardTheme, ICardSubTheme, ICardExercise } from './ICard.int
 })
 export class CardComponent implements OnInit {
   @Output() action = new EventEmitter<any>();
-  @Input('item') item: ICardTheme | ICardTest | ICardSubTheme | ICardExercise;
+  @Input('item') item: ICardTheme | ICardTest | ICardSubTheme | IExercise;
   @Input('type') type:string
   public data;
- 
+  public image: string ;
+  imageDefault: string = '../../../../assets/img/image-default.png';
 
   constructor() {
   //  this.action.emit('action')
@@ -31,20 +33,41 @@ export class CardComponent implements OnInit {
         break;
         case 'exercise':
           this.data = this.item;
+          if(this.data.image !== null){
+            this.projectImage(this.data.image);
+          }else{
+            this.image = this.imageDefault;
+          }
       break;
       }
-      console.log("==================================")
+      
       console.log(this.data)
   }
+
+
+
+   // ABRE LA IMAGEN DESDE UN ARCHIVO.
+    projectImage(file: File) {
+      let reader = new FileReader;
+      // TODO: Define type of 'e'
+      reader.onload = (e: any) => {
+        // Simplemente configure e.target.result como nuestro <img> src en el diseño
+        this.image = e.target.result;
+        console.log(e.target.result);
+      };
+      // Esto procesará nuestro archivo y obtendrá sus atributos / datos
+      reader.readAsDataURL(file);
+    }
+
+
+
 
   deleteItem(){
     this.action.emit({action: 'delete', item: this.data})
   }
+  
   updateItem(){
     this.action.emit({action: 'update', item: this.data})
   }
-/*   showItem(){
-    this.action.emit({action: 'show', item: this.data})
-  }
- */
+
 }

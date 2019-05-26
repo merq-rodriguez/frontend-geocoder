@@ -1,9 +1,14 @@
 
 <div class="container">
             <img class="image-upload" *ngIf="source" [src]="source" src="">
+
             <input hidden type="file" #fileInput accept="image/*" (change)="updateSource($event)" />
-            <button mat-fab class="add-file-button mat-warn" (click)="fileInput.click()" aria-label="Add file"
-              [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
+
+            <button 
+                    mat-fab class="add-file-button mat-warn" 
+                    (click)="fileInput.click()" 
+                    aria-label="Add file"
+                    [@animate]="{value:'*', params:{delay:'300ms',scale:'0.2'}}">
               <mat-icon>cloud_upload</mat-icon>
             </button>
 </div>
