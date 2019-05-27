@@ -32,4 +32,5 @@ export class Api {
 			`${environment.api + controller +'/'+ path}`, params
 		);
 	}
+	
 }

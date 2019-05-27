@@ -76,11 +76,7 @@ export class CreateExerciseComponent implements OnInit {
   }
 
   createExercise(exercise: IExercise){
-    if(exercise.contentCode !== null){
-      if(exercise.contentCode.trim() === ''){
-        exercise.contentCode = null;
-      }
-    }
+   
     this.exerciseService.createExercise(exercise).subscribe(res => {
       console.log(res);
       
@@ -98,6 +94,8 @@ export class CreateExerciseComponent implements OnInit {
   addExercise(){
     let validate = false;
     if(this.exercise.contentEditor){
+      console.log("El editor no es nulo");
+      
       if(
         this.exercise.contentEditor.trim() === '' || 
         this.exercise.name === '' ||
@@ -112,6 +110,7 @@ export class CreateExerciseComponent implements OnInit {
       validate = false;
     }
 
+    console.log(this.exercise)
 
     if(!validate){
       this.snackService.openSnackBar('Hay campos obligatorios sin completar *', 'De acuerdo');

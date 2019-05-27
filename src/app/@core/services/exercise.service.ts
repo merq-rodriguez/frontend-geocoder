@@ -26,7 +26,20 @@ export class ExerciseService extends ExerciseData {
   }
   
   createExercise(exercise: IExercise): Observable<any> {
-    return this.api.post(this.controller, 'createExercise', exercise)
+    const form = new FormData();
+    if(exercise.image){
+        form.append('image', exercise.image, exercise.image.name);
+    }
+    if(exercise.contentCode.trim() !== ''){
+      form.append('contentCode', exercise.contentCode);
+    }
+    form.append('name', exercise.name);
+    form.append('description', exercise.description);
+    form.append('input', exercise.input);
+    form.append('output', exercise.output);
+    form.append('contentEditor', exercise.contentEditor);
+    form.append('idUser', String(exercise.idUser));
+    return this.api.post(this.controller, 'createExercise', form);
   }
 
   updateExercise(exercise: IExercise): Observable<any> {
