@@ -33,7 +33,7 @@ export class CardComponent implements OnInit {
         break;
         case 'exercise':
           this.data = this.item;
-          if(this.data.image !== null){
+          if( this.data.image){
             this.projectImage(this.data.image);
           }else{
             this.image = this.imageDefault;

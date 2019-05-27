@@ -10,6 +10,7 @@ export interface IExercise{
   input: string;
   idUser?: number;
   image: File;
+  imageSrc?: string;
 }
 
 export abstract class ExerciseData {

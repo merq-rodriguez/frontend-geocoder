@@ -22,6 +22,8 @@ export class CreateExerciseComponent implements OnInit {
   idUser: number;
   subscribeMonaco$: any;
   subscribeEditorHTML$: any;
+  exerciseList:IExercise[] = []
+
   constructor(
     private snackService: SnackBarService,
     private exerciseService: ExerciseService,
@@ -33,6 +35,7 @@ export class CreateExerciseComponent implements OnInit {
     ngOnInit() {
       let user = this.localstorageService.getLocalstorage('user');
       this.idUser = user.idUser;   
+      this.getAllExercises(this.idUser);
       this.subscribeMonaco$ = this.monacoService.content$.subscribe(content => this.exercise.contentCode = content );
       this.subscribeEditorHTML$ = this.editorService.content$.subscribe(content => this.exercise.contentEditor = content );
      
@@ -51,12 +54,9 @@ export class CreateExerciseComponent implements OnInit {
   };
 
 
-  exerciseList:IExercise[] = []
+ 
 
-  getFile(file: File){
-    this.exercise.image = file;
-  }
-
+ 
   clearExercise(){
     this.exercise = {
       idExercise: '',
@@ -75,6 +75,11 @@ export class CreateExerciseComponent implements OnInit {
     
   }
 
+  getFile(file: File){
+    this.exercise.image = file;
+  }
+
+
   createExercise(exercise: IExercise){
    
     this.exerciseService.createExercise(exercise).subscribe(res => {
@@ -91,10 +96,28 @@ export class CreateExerciseComponent implements OnInit {
   }
 
 
+  getAllExercises(idUser: number){
+    this.exerciseService.getExercises(idUser).subscribe(exersices => {
+      console.log(exersices.name);
+      for (const exer of exersices) {
+          console.log(exer);
+          this.exerciseList.push({
+            idExercise: exer.idExercise,
+            name: exer.name,
+            description: exer.description,
+            input: exer.input,
+            output: exer.output,
+            idUser: exer.idUser,
+            imageSrc: exer.image
+          } as IExercise)
+      }
+    
+    })
+  }
+
   addExercise(){
     let validate = false;
     if(this.exercise.contentEditor){
-      console.log("El editor no es nulo");
       
       if(
         this.exercise.contentEditor.trim() === '' || 
@@ -140,6 +163,7 @@ export class CreateExerciseComponent implements OnInit {
           console.log(this.exerciseList);
           break;
       case 'update':
+          console.log("Actualizando ejercicio... equisde equisde")
 
         break;
     }

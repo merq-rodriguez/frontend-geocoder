@@ -18,7 +18,7 @@ export class ExerciseService extends ExerciseData {
  
 
   getExercises(idUser: number): Observable<any> {
-    return this.api.get(this.controller + '/getAll' + idUser)
+    return this.api.get(this.controller+'/getAll', idUser)
   }
 
   findExercise(idExercise: number): Observable<any> {

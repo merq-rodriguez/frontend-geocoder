@@ -10,19 +10,19 @@ export class Api {
 
 	public get(controller: string, params?:any) {
 		return this.http.get( 
-			`${environment.api + controller + params ? '/'+params : ''  }`
+			`${environment.api + controller +'/'+params }`
 		);
 	}
 
 	public delete(controller: string, path: string, params: any) {
 		return this.http.delete(
-			`${environment.api + controller + path}`
+			`${environment.api + controller +'/'+ path}`
 		);
 	}
 
 	public put(controller: string, path: string, params: any) {
 		return this.http.put(
-			`${environment.api + controller + path}`,
+			`${environment.api + controller +'/'+ path}`,
 			params
 		);
 	}
