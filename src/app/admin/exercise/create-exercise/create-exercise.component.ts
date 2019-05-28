@@ -102,12 +102,12 @@ export class CreateExerciseComponent implements OnInit {
       for (const exer of exersices) {
           console.log(exer);
           this.exerciseList.push({
-            idExercise: exer.idExercise,
+            idExercise: exer.idexercise,
             name: exer.name,
             description: exer.description,
             input: exer.input,
             output: exer.output,
-            idUser: exer.idUser,
+            idUser: exer.fkuser,
             imageSrc: exer.image
           } as IExercise)
       }
@@ -155,12 +155,26 @@ export class CreateExerciseComponent implements OnInit {
     
   }
   
+  deleteExercise(idExercise: number){
+    this.exerciseService.deleteExercise(idExercise).subscribe(res => {
+      console.log(res)
+      if(res.status){
+        if(res.status === 'OK'){
+          _.remove(this.exerciseList, (ex) =>  Number(ex.idExercise) === idExercise ); //Eliminamos el ejercicio
+          this.snackService.openSnackBar("Has eliminado un ejercicio", "Aceptar");
+          console.log(this.exerciseList);
+        }
+      }
+    });
+  }
+
   getAction(e){
     let exerci: IExercise = e.item; 
+    console.log(exerci)
     switch(e.action){
       case 'delete':
-          _.remove(this.exerciseList, (ex) =>  ex.idExercise === exerci.idExercise ); //Eliminamos el ejercicio
-          console.log(this.exerciseList);
+          this.deleteExercise(Number(exerci.idExercise));
+          
           break;
       case 'update':
           console.log("Actualizando ejercicio... equisde equisde")

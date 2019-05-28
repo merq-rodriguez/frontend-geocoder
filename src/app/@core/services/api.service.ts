@@ -16,7 +16,7 @@ export class Api {
 
 	public delete(controller: string, path: string, params: any) {
 		return this.http.delete(
-			`${environment.api + controller +'/'+ path}`
+			`${environment.api + controller +'/'+ path +'/'+ params}`
 		);
 	}
 
