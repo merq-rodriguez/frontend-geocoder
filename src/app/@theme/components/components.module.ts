@@ -1,3 +1,4 @@
+import { InfoDialogComponent } from './../../admin/modal/info/info-dialog.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -121,6 +122,13 @@ const CDK_MODULES = [
   CdkTableModule,
   CdkTreeModule,
 ]
+
+const DIALOG_COMPONENT = [
+  DialogContentExampleDialog,
+  BottomSheetOverviewExampleSheet,
+  InfoDialogComponent,
+]
+
 const COMPONENTS = [
   FooterComponent,
   NavbarComponent,
@@ -130,15 +138,16 @@ const COMPONENTS = [
   MapComponent,
   CardComponent,
   EditorComponent,
-  DialogContentExampleDialog,
-  BottomSheetOverviewExampleSheet,
   CardMiniComponent,
   VideoComponent,
   NavRoutesComponent,
   AdminLayoutComponent,
   CardMenuComponent,
-  MtImagePreviewComponent
+  MtImagePreviewComponent,
+  ...DIALOG_COMPONENT
 ];
+
+
 
 const MODULES_FOR_ROOT = [
   MonacoEditorModule.forRoot(),
@@ -155,7 +164,7 @@ const MODULES_FOR_ROOT = [
     RouterModule,
     CKEditorModule,
   ],
-  entryComponents: [ DialogContentExampleDialog, BottomSheetOverviewExampleSheet ], 
+  entryComponents: [ DialogContentExampleDialog, BottomSheetOverviewExampleSheet, InfoDialogComponent ], 
   declarations: [ ...COMPONENTS ],
   providers: [
     { provide: COMPLETION_PROVIDERS, useClass: TravisCompletionProvider, multi: true }

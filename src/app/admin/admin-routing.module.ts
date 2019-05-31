@@ -1,3 +1,4 @@
+import { InfoDialogComponent } from './modal/info/info-dialog.component';
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 import { AdminComponent } from './admin.component';
@@ -34,5 +35,5 @@ export const routedComponents = [
    AdminComponent, 
    DashboardComponent,
    CreateSubthemeDialog,
-   ShowSubthemeDialog
+   ShowSubthemeDialog,
   ];

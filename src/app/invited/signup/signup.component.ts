@@ -15,10 +15,9 @@ export class SignUp implements OnInit {
 
 
   public user: IUser = {
-    names: '',
+    name: '',
     email: '',
     password: '',
-    lastnames: '',
     phone: '',
     username: '',
     idRole: 2
@@ -37,7 +36,7 @@ export class SignUp implements OnInit {
 
   public validate() {
     if (
-      this.user.names.trim() === '' ||
+      this.user.name.trim() === '' ||
       this.user.email.trim() === '' ||
       this.user.password.trim() === '' ||
       this.user.username.trim() === ''
@@ -61,13 +60,14 @@ export class SignUp implements OnInit {
   public signUp() {
     if (this.validate()) {
       if (this.validateEmail()) { //Se envia el usuario al backend
-        this.userService.createUser(this.user).subscribe(res => {
+        this.userService.signUp(this.user).subscribe(res => {
+          console.log(res)
           if (res.status) {
             if (res.status === 400) {
-              this.snackService.openSnackBar('Ohhh Ohhh verifica tu correo o nombre de usuario', 'Aceptar');
+              this.snackService.openSnackBar('Ohhh Ohhh HIUGSTON tenemos un problema :(', 'Aceptar');
             }
           }else{
-            this.localstorageService.saveLocalstorage('user', {})
+            this.localstorageService.saveLocalstorage('user', res)
             this.router.navigate(['admin/thematic-content/menu-language'])
           }
         });

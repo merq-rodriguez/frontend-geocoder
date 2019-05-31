@@ -6,6 +6,7 @@ export interface IExercise{
   description: string;
   contentEditor?: string;
   contentCode?: string;
+  idCode?: string;
   output: string;
   input: string;
   idUser?: number;

@@ -14,7 +14,7 @@ export class CardComponent implements OnInit {
   @Input('type') type:string
   public data;
   public image: string ;
-  imageDefault: string = '../../../../assets/img/image-default.png';
+  imageDefault: string = 'http://localhost:3001/uploads/images/image-default.png';
 
   constructor() {
   //  this.action.emit('action')
@@ -33,8 +33,10 @@ export class CardComponent implements OnInit {
         break;
         case 'exercise':
           this.data = this.item;
-          if( this.data.image){
-            this.projectImage(this.data.image);
+          console.log("ANtes de agregar  datos a una card")
+          console.log(this.data)
+          if(this.data.imageSrc){
+            this.image = this.data.imageSrc;
           }else{
             this.image = this.imageDefault;
           }

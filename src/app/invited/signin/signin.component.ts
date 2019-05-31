@@ -31,6 +31,7 @@ export class SignIn implements OnInit {
       this.snackService.openSnackBar('Campos vacios', 'Aceptar');
     }else{
       this.userService.signIn(this.username, this.password).subscribe(user => {
+        console.log(user);
         if(user.accessTocken){
           this.userService.setUser(user); //Guardamos el usuario autenticado en el behaviorSubject
           this.localstorageService.saveLocalstorage('user', user); //Guardamos el usuario el localstoraje por si las moscas XD

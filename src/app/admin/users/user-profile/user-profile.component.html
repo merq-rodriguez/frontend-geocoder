@@ -9,13 +9,13 @@
               <div class="card card-profile ">
                 <div class="card-avatar avatar">
                   <a>
-                    <img class="img" src="./assets/img/default.jpg" />
+                    <img class="img" src="http://localhost:3001/uploads/images/image-user-default.jpg" />
                   </a>
                 </div>
                 <div class="card-body">
                   <i class="material-icons">edit</i>
                   <h6 class="card-category text-gray">Rol {{ user.role }}</h6>
-                  <h4 class="card-title">{{ user.names }}</h4>
+                  <h4 class="card-title">{{ user.name }}</h4>
 
                   <p class="card-description">
                     {{ user.about }}
@@ -56,7 +56,7 @@
 
                       <div class="col-md-8">
                         <mat-form-field class="example-full-width">
-                          <input matInput placeholder="Nombres" type="text" [(ngModel)]="user.names" name='names' />
+                          <input matInput placeholder="Nombres" type="text" [(ngModel)]="user.name" name='name' />
                         </mat-form-field>
                       </div>
                     </div>

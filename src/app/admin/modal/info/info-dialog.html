@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>Notificacion</h1>
+<div mat-dialog-content>
+  
+  <div class="container">
+      <div class="row d-flex justify-content-center">
+          <p>{{ data.title }}</p>
+      </div>
+    </div>
+  
+  <div class="container">
+        {{ data.message }}
+  </div>
+
+  <div class="container">
+    <div class="row d-flex justify-content-center">
+      <img [src]="data.image" style="width: 200px; height: 200px;;">
+    </div>
+  </div>
+</div>
+
+<div class="container">
+    <div class="row d-flex justify-content-center">
+        <div mat-dialog-actions>
+            <!-- <button mat-button (click)="onNoClick()">Cancelar</button> -->
+            <button mat-button [mat-dialog-close]="data" cdkFocusInitial>De acuerdo</button>
+          </div>
+          
+    </div>
+  </div>

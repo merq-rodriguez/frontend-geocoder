@@ -58,7 +58,6 @@
             </div>
           </div>
 
-
           <br>
           <image-preview (onChange)="getFile($event)"></image-preview>
 
@@ -85,13 +84,19 @@
          </div>
          <hr>
          <div class="container">
-          <div class="row">
-            <div class="col-6">
+          <div class="row ">
+            <div class="col-4">
               <mat-form-field>
                 <textarea matInput placeholder="Estradas del ejercicio" [(ngModel)]="exercise.input" rows="6"></textarea>
               </mat-form-field>
             </div>
-            <div class="col-6">
+
+            <div class="col-4">
+                <button class="btn btn-success center"  (click)="submissionCode()" >ENVIAR</button>
+                <button class="btn btn-success center"  (click)="getDetailSubmission()" >PROBAR</button>
+            </div>
+
+            <div class="col-4">
               <mat-form-field>
                 <textarea matInput placeholder="Salidas del ejercicio" [(ngModel)]="exercise.output" rows="6"></textarea>
               </mat-form-field>
@@ -119,8 +124,8 @@
 
 
          <div class="container">
-            <div class="row">
-              <div *ngFor="let item of exerciseList">
+            <div class="row d-flex justify-content-center">
+              <div *ngFor="let item of exerciseList" >
                 <app-card 
                     (action)="getAction($event)"
                     [item]="item" 

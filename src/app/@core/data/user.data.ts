@@ -4,8 +4,7 @@ export interface IUser{
   idUser?: number;
   username: string;
   password?: string;
-  names: string;
-  lastnames?: string;
+  name: string;
   email: string;
   nick?: string;
   phone?: string;

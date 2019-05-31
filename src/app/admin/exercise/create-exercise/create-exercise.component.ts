@@ -1,3 +1,5 @@
+import { Judge0Service } from './../../../@core/services/judge0.service';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Component, OnInit } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
@@ -10,6 +12,8 @@ import * as _ from 'lodash';
 import { v4 as uuid } from 'uuid';
 import { SnackBarService } from 'src/app/@core/services/snackbar.service';
 import { ExerciseService } from 'src/app/@core/services/exercise.service';
+import { InfoDialogComponent } from '../../modal/info/info-dialog.component';
+import { PayloadJudge0 } from 'src/app/@core/data/payload-judge0';
 
 
 @Component({
@@ -23,13 +27,15 @@ export class CreateExerciseComponent implements OnInit {
   subscribeMonaco$: any;
   subscribeEditorHTML$: any;
   exerciseList:IExercise[] = []
-
+  token:string = '';
   constructor(
     private snackService: SnackBarService,
     private exerciseService: ExerciseService,
     private monacoService: MonacoService,
     private editorService: ContentEditorService,  
     private localstorageService: LocalstorageService, 
+    public dialog: MatDialog,
+    private judgle0Service: Judge0Service
     ) {}
 
     ngOnInit() {
@@ -54,7 +60,18 @@ export class CreateExerciseComponent implements OnInit {
   };
 
 
- 
+  openDialog(option: number): void {
+    this.submissionCode();
+    const dialogRef = this.dialog.open(InfoDialogComponent, {
+      width: '250px',
+      data: MESSAGES_DIALOG[option]
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
+  }
 
  
   clearExercise(){
@@ -79,16 +96,59 @@ export class CreateExerciseComponent implements OnInit {
     this.exercise.image = file;
   }
 
+  submissionCode(){
+    this.judgle0Service.submission(
+        { 
+          source_code: this.exercise.contentCode,  
+          language_id: 30,
+          expected_output: this.exercise.output          
+        } as PayloadJudge0).subscribe(res => {
+         // console.log(res)
+          if(!res['token']){
+              this.openDialog(3);
+          }else{
+            this.token = res['token'];
+           console.log(this.token); 
+           
+          }
+        });  
+  }
+
+  getDetailSubmission():void{
+    console.log("--------TOKEN----------")
+    console.log(this.token)
+    this.judgle0Service.detailSubmission(this.token).subscribe(res => {
+      console.log(res);
+      console.log("--------STATUS----------")
+      let status = res['status'];
+      console.log(status);
+      if(!status){
+        console.log("NO hay status")
+        this.openDialog(2);
+      }else{
+        if(status.id == 3 ){
+          console.log("Es aceptado XD")
+          this.openDialog(0);
+        }else{
+          this.openDialog(1);
+        }
+      }
+    });
+  }
 
   createExercise(exercise: IExercise){
-   
     this.exerciseService.createExercise(exercise).subscribe(res => {
+      console.log("Response add exercise")
       console.log(res);
       
-      if(res.createexercise){
+      if(res['result']){
+        exercise.idExercise   = res['result'].idExercise;
+        exercise.idCode       = res['result'].idCode;
+        exercise.imageSrc     = res['result'].image;
         this.exerciseList.push(exercise);
         this.clearExercise();
         this.snackService.openSnackBar('¡Has agregado un nuevo ejercicio!', 'Aceptar');
+        console.log(this.exerciseList)
       }else{
         this.snackService.openSnackBar('¡Ocurrio un problema al guardar el ejercicio!', 'Aceptar');        
       }
@@ -123,7 +183,6 @@ export class CreateExerciseComponent implements OnInit {
         this.exercise.contentEditor.trim() === '' || 
         this.exercise.name === '' ||
         this.exercise.description === '',
-        this.exercise.input === '',
         this.exercise.output === ''){
         validate = false;
       }else{
@@ -198,3 +257,28 @@ const ROUTES_COMPETENCE: RouteInfo[] = [
   { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
   { path: '', icon: "school", title: "Ejercicios", class: "", active: false },
 ];
+
+const MESSAGES_DIALOG = [
+
+  {
+    id: 1, 
+    title: '¡Compilacion exitosa!',
+    message: '', 
+    image: "http://localhost:3001/uploads/images/fine.png"
+  },
+  {
+    id: 2, 
+    title: '¡Compilacion fallida!',
+    message: '', 
+    image: "http://localhost:3001/uploads/images/bad.png"
+  },
+  {
+    id: 3, 
+    title: '¡El servidor no responde!',
+    message: '', 
+    image: "http://localhost:3001/uploads/images/alert.png"
+  }
+
+
+
+]
