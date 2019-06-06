@@ -14,7 +14,8 @@ import { SnackBarService } from 'src/app/@core/services/snackbar.service';
 import { ExerciseService } from 'src/app/@core/services/exercise.service';
 import { InfoDialogComponent } from '../../modal/info/info-dialog.component';
 import { PayloadJudge0 } from 'src/app/@core/data/payload-judge0';
-
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Coordinate } from 'src/app/@theme/components/map/map.component';
 
 @Component({
   selector: "create-exercise",
@@ -28,7 +29,36 @@ export class CreateExerciseComponent implements OnInit {
   subscribeEditorHTML$: any;
   exerciseList:IExercise[] = []
   token:string = '';
+
+  isLinear = false;
+  firstFormGroup: FormGroup;
+  secondFormGroup: FormGroup;
+  threeFormGroup: FormGroup;
+  fourFormGroup: FormGroup;
+
+
+  public exercise: IExercise = {
+    contentEditor: '',
+    contentCode: '',
+    description: '',
+    idExercise: null,
+    idUser: null,
+    name: '',
+    input: '',
+    output: '',
+    image: null,
+    location: {
+      latitude: 0,
+      longitude: 0
+    },
+    radius: 0
+  };
+
+
+
+
   constructor(
+    private _formBuilder: FormBuilder,
     private snackService: SnackBarService,
     private exerciseService: ExerciseService,
     private monacoService: MonacoService,
@@ -44,21 +74,40 @@ export class CreateExerciseComponent implements OnInit {
       this.getAllExercises(this.idUser);
       this.subscribeMonaco$ = this.monacoService.content$.subscribe(content => this.exercise.contentCode = content );
       this.subscribeEditorHTML$ = this.editorService.content$.subscribe(content => this.exercise.contentEditor = content );
-     
+      this.firstFormGroup = this._formBuilder.group({
+        nameCtrl: ['', Validators.required],
+        descriptionCtrl: ['', Validators.required]
+      });
+      this.secondFormGroup = this._formBuilder.group({
+        
+      });
+      this.threeFormGroup = this._formBuilder.group({
+        inputCtrl: ['', Validators.required],
+        outputCtrl: ['', Validators.required]
+      });
+      this.fourFormGroup = this._formBuilder.group({
+        latitudeCtrl: ['', Validators.required],
+        longitudeCtrl: ['', Validators.required],
+        radiusCtrl: ['', Validators.required]
+      });
     }
 
-  public exercise: IExercise = {
-    contentEditor: '',
-    contentCode: '',
-    description: '',
-    idExercise: null,
-    idUser: null,
-    name: '',
-    input: '',
-    output: '',
-    image: null
-  };
+  
 
+  getCoordinate(e : Coordinate){
+    console.log(e);
+    this.exercise.location.latitude = e.lat;
+    this.exercise.location.longitude = e.lng;
+  }
+
+    // Da formato de texto a la barra de radio 
+    formatLabel(value: number | null) {
+    
+     // this.exercise.radius = 0;
+      if (!value) {return 0}
+      if (value >= 1000) {return Math.round(value / 1000) + "k"}
+      return value;
+    }
 
   openDialog(option: number): void {
     this.submissionCode();
@@ -81,7 +130,9 @@ export class CreateExerciseComponent implements OnInit {
       name: '',
       input: '',
       output: '',
-      image: null
+      image: null,
+      location: null,
+      radius: 0
     };
     this.monacoService.reset();
     this.editorService.reset();
@@ -207,7 +258,12 @@ export class CreateExerciseComponent implements OnInit {
         idUser: this.idUser,
         input: this.exercise.input,
         output: this.exercise.output,
-        image: this.exercise.image
+        image: this.exercise.image,
+        location: {
+          latitude: this.exercise.location.latitude,
+          longitude: this.exercise.location.longitude
+        },
+        radius: this.exercise.radius
       } 
       this.createExercise(exer);
     }

@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs';
+import { ILocation } from './location.data';
 
 export interface IExercise{
   idExercise?: string;
@@ -12,6 +13,8 @@ export interface IExercise{
   idUser?: number;
   image: File;
   imageSrc?: string;
+  location: ILocation;
+  radius: number;
 }
 
 export abstract class ExerciseData {

@@ -1,5 +1,16 @@
+mat-slider {
+  width: 100%;
+}
+
+
 .card-blue{
     background: linear-gradient(to right, #1ea7a0, #0b4e5a) no-repeat 0 0 / cover ;
+  }
+.button-blue{
+    background: linear-gradient(to right, #1ea7a0, #0b4e5a) no-repeat 0 0 / cover ;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
   }
 
   .info{
