@@ -29,7 +29,7 @@ export interface Coordinate {
 export class MapComponent implements OnInit {
   @Output() coordinateChange = new EventEmitter<any>();
 
-  private coordinate: Coordinate = { lat: 1.62347586, lng: -75.6066663, radius: 0 };
+  private coordinate: Coordinate = { lat: 1.6199338, lng: -75.605993, radius: 0 };
 
   circle = circle([46.95, -122], { radius: 5000 });
   markers = []
@@ -43,7 +43,7 @@ export class MapComponent implements OnInit {
     })
   })
 
-  route = polyline([[ 46.78465227596462,-121.74141269177198 ],
+/*   route = polyline([[ 46.78465227596462,-121.74141269177198 ],
     [ 46.80047278292477, -121.73470708541572 ],
     [ 46.815471360459924, -121.72521826811135 ],
     [ 46.8360239546746, -121.7323131300509 ],
@@ -57,7 +57,7 @@ export class MapComponent implements OnInit {
     [ 46.85140013694763, -121.75727385096252 ],
     [ 46.8525277543813, -121.75995212048292 ],
     [ 46.85290292836726, -121.76049157977104 ],
-    [ 46.8528160918504, -121.76042997278273 ]]);
+    [ 46.8528160918504, -121.76042997278273 ]]); */
 
   addMarker(latlng: LatLng = latLng(46.879966 + 0.1 * (Math.random() - 0.5), -121.726909 + 0.1 * (Math.random() - 0.5))) {
     const newMarker = marker(
@@ -75,27 +75,26 @@ export class MapComponent implements OnInit {
       this.markers = this.markers.slice();
   }
 
-  onMapReady (map: Map) { 
+  /* onMapReady (map: Map) { 
     console.log("===============================================================");
     console.log(map);
-    
+    //this.coordinateChange.emit(this.coordinate); //Emitimos las coordenadas
+
     map.fitBounds (this.route.getBounds(), { 
       padding: point (24, 24), 
       maxZoom: 12, 
       animate: true 
     }); 
-  } 
+  }  */
 
-  /* onMapReady(map: Map) { 
+  onMapReady(map: Map) { 
     map.on('click', (e : LeafletMouseEvent) => { 
-      this.addMarker(e.latlng); 
+      this.coordinateChange.emit(e.latlng); //Emitimos las coordenadas
     }); 
-    console.log(this.markers);
-    
-  } */
+  } 
  
 
-  public onclick(e) {
+/*   public onclick(e) {
     this.coordinate = e.latlng; //Obtenemos las coordenadas
     this.coordinateChange.emit(this.coordinate); //Emitimos las coordenadas
     this.point = marker(e.latlng, {
@@ -107,7 +106,7 @@ export class MapComponent implements OnInit {
       })
     })
   }
-
+ */
 
 
   public streetMaps = tileLayer(
@@ -120,7 +119,7 @@ export class MapComponent implements OnInit {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   });
 
-  layers = [this.streetMaps,  this.route];
+  layers = [this.streetMaps];
 
    layersControl = {
     baseLayers: {
@@ -129,16 +128,15 @@ export class MapComponent implements OnInit {
     },
     overlays: {
       'Mt. Rainier Point': this.point,
-      'Mt. Rainier Circle': this.circle,
-      ' Mt. Rainier Climb Route ': this.route
+     
 
     }
   };
 
 
   options = {
-    zoom: 7,
-    center: latLng(46.879966, -121.726909)
+    zoom: 16,
+    center: latLng(1.6177422155380778, -75.60314588906364)
   };
 /* 
     layers = [

@@ -38,6 +38,9 @@ export class ExerciseService extends ExerciseData {
     form.append('input', exercise.input);
     form.append('output', exercise.output);
     form.append('contentEditor', exercise.contentEditor);
+    form.append('latitude', String(exercise.location.latitude));
+    form.append('longitude', String(exercise.location.longitude));
+    form.append('radius', String(exercise.radius));
     form.append('idUser', String(exercise.idUser));
     return this.api.post(this.controller, 'createExercise', form);
   }

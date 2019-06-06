@@ -16,6 +16,7 @@ import { InfoDialogComponent } from '../../modal/info/info-dialog.component';
 import { PayloadJudge0 } from 'src/app/@core/data/payload-judge0';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Coordinate } from 'src/app/@theme/components/map/map.component';
+import { LatLng } from 'leaflet';
 
 @Component({
   selector: "create-exercise",
@@ -94,7 +95,7 @@ export class CreateExerciseComponent implements OnInit {
 
   
 
-  getCoordinate(e : Coordinate){
+  getCoordinate(e : LatLng){
     console.log(e);
     this.exercise.location.latitude = e.lat;
     this.exercise.location.longitude = e.lng;
@@ -131,7 +132,10 @@ export class CreateExerciseComponent implements OnInit {
       input: '',
       output: '',
       image: null,
-      location: null,
+      location: {
+        latitude: 0,
+        longitude: 0
+      },
       radius: 0
     };
     this.monacoService.reset();
@@ -188,7 +192,8 @@ export class CreateExerciseComponent implements OnInit {
   }
 
   createExercise(exercise: IExercise){
-    this.exerciseService.createExercise(exercise).subscribe(res => {
+    console.log(exercise)
+     this.exerciseService.createExercise(exercise).subscribe(res => {
       console.log("Response add exercise")
       console.log(res);
       
@@ -203,7 +208,7 @@ export class CreateExerciseComponent implements OnInit {
       }else{
         this.snackService.openSnackBar('¡Ocurrio un problema al guardar el ejercicio!', 'Aceptar');        
       }
-    })
+    }) 
   }
 
 

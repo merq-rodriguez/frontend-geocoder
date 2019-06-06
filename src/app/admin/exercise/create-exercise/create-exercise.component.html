@@ -187,10 +187,11 @@
                           <div class="col-md-4">
                             <mat-form-field >
                               <input 
-                                  matInput 
-                                  placeholder="Latitud" 
-                                  type="number" 
-                                  formControlName="latitudeCtrl"  />
+                              matInput 
+                              placeholder="Latitud" 
+                              type="number" 
+                              [(ngModel)]="exercise.location.latitude"
+                              formControlName="latitudeCtrl"  />
                             </mat-form-field>
                           </div>
   
@@ -200,7 +201,8 @@
                                   matInput 
                                   placeholder="Longitud" 
                                   type="number" 
-                                  formControlName="longitudeCtrl"/>
+                                  formControlName="longitudeCtrl"
+                                  [(ngModel)]="exercise.location.longitude" />
                             </mat-form-field>
                           </div>
   
@@ -210,7 +212,8 @@
                                   type="number" 
                                   matInput 
                                   placeholder="Radio" 
-                                  formControlName="radiusCtrl" />
+                                  formControlName="radiusCtrl"
+                                  [(ngModel)]="exercise.radius" />
                             </mat-form-field>
                           </div>
                         </div>
@@ -272,13 +275,13 @@
 
 
 
-      <!--     <div class="container">
+    <div class="container">
             <div class="row d-flex justify-content-center">
               <div *ngFor="let item of exerciseList">
                 <app-card (action)="getAction($event)" [item]="item" [type]="'exercise'"></app-card>
               </div>
             </div>
-          </div> -->
+          </div> 
 
         </div>
       </div>
