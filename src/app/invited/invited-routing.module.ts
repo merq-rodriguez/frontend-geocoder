@@ -3,6 +3,7 @@ import { Routes, RouterModule } from "@angular/router";
 import { SignIn } from './signin/signin.component';
 import { InvitedComponent } from './invited.component';
 import { SignUp } from './signup/signup.component';
+import { FormCode } from './form-code/form-code.component';
 
 const routes: Routes = [
   {
@@ -11,6 +12,7 @@ const routes: Routes = [
     children: [
       { path: 'signin', component: SignIn },
       { path: 'signup', component: SignUp },
+      { path: 'form-code', component: FormCode },
       { path: '', redirectTo: '/', pathMatch: 'full' },
       { path: '**', redirectTo: '/' }
     ]
@@ -27,5 +29,6 @@ export class InvitedRoutingModule { }
 export const routedComponents = [
   InvitedComponent,
   SignIn,
-  SignUp
+  SignUp,
+  FormCode
 ];

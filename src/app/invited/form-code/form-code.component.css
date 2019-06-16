@@ -1,0 +1,10 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500);
+.content-signin{
+  height: 100%;
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: 100% 100%; 
+  background-position: center center;
+  position: absolute;
+}
+
