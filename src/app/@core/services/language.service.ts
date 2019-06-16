@@ -35,17 +35,38 @@ export class LanguageService extends LanguageData {
   findLanguage(): Observable<any> {
     return observableOf(this.languages);
   }
-  createLanguage(): Observable<any> {
-    return observableOf(this.languages);
+
+
+  createLanguage(language: ILanguage): Observable<any> {
+    const form = new FormData();
+    if(language.image)
+        form.append('image', language.image, language.image.name);
+    
+    form.append('name', language.name);
+    form.append('description', language.description);
+    form.append('idUser', String(language.idUser));
+    return this.api.post(this.controller, 'createLanguage', form);
   }
+
+
+  updateLanguage(language: ILanguage): Observable<any> {
+    const form = new FormData();
+    if(language.image)
+        form.append('image', language.image, language.image.name);
+    
+    form.append('idLanguage', String(language.idLanguage));
+    form.append('name', language.name);
+    form.append('description', language.description);
+    form.append('idUser', String(language.idUser));
+    return this.api.put(this.controller, 'updateLanguage', form);
+  }
+
 
   saveLanguageAndThemes(language): Observable<any> {
     return this.api.post(this.controller, 'saveLanguageAndThemes', language);
   }
 
-  updateLanguage(): Observable<any> {
-    return observableOf(this.languages);
-  }
+ 
   
   deleteLanguage(): Observable<any> {
     return observableOf(this.languages);

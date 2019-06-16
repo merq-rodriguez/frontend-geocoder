@@ -5,9 +5,10 @@ export interface ILanguage{
   idLanguage?: number;
   name: string;
   description: string;
-  image: string;
-  imageFile?: File;
+  image?: File;
+  imageSrc?: string;
   idUser?: number;
+  state?: string;
 }
 
 export abstract class LanguageData {

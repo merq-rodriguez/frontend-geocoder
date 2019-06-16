@@ -4,12 +4,6 @@
     <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
 
 
-
-
-
-
-
-
     <div class="row">
       <div class="col-md-12">
         <div class="card">
@@ -21,9 +15,10 @@
             <mat-horizontal-stepper linear #stepper>
               <mat-step [stepControl]="firstFormGroup" [optional]="true">
                 <form [formGroup]="firstFormGroup">
-                  <ng-template matStepLabel>Datos del lenguaje</ng-template>
+                  <ng-template matStepLabel> Datos del lenguaje </ng-template>
                   <app-create-language></app-create-language>
-                  <button mat-button matStepperNext> Guardar y continuar
+                  <button (click)="saveLanguage()" mat-button matStepperNext>
+                    Guardar y continuar
                   </button>
                 </form>
               </mat-step>
@@ -52,16 +47,14 @@
               </mat-step>
 
               <mat-step>
-                <ng-template matStepLabel >Terminar</ng-template>
+                <ng-template matStepLabel>Terminar</ng-template>
                 <div class="container">
                   <div class="row d-flex justify-content-center">
                     <img class="image-finish" src="../../../../assets/img/thanos.gif">
                   </div>
                   <br>
                   <div class="row d-flex justify-content-center">
-                      <button  
-                      (click)="getData()"
-                      mat-raised-button matTooltip="Terminar la creacion del lenguaje" 
+                    <button  mat-raised-button matTooltip="Terminar la creacion del lenguaje"
                       [matTooltipPosition]="'above'" type="button" class="btn btn-default pull-right button-add">
                       Terminar
                     </button>

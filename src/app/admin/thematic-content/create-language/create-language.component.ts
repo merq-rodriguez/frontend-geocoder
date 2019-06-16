@@ -31,7 +31,7 @@ export class CreateLanguageComponent implements OnInit {
     idLanguage: null,
     name: '',
     description: '',
-    image: '../../../../assets/img/image-default.png',
+    imageSrc: '../../../../assets/img/image-default.png',
     idUser: null
   }
   constructor( private _formBuilder: FormBuilder, private snackBar: MatSnackBar) {}
@@ -43,11 +43,11 @@ export class CreateLanguageComponent implements OnInit {
   }
 
   getFile(file: File){
-    this.language.imageFile = file;
+    this.language.image = file;
   }
 
   private emptyTextfieldLanguage() {
-    return (this.language.name.trim() === '' || this.language.description.trim() === '' || this.language.image === '') ? true : false;
+    return (this.language.name.trim() === '' || this.language.description.trim() === '' ) ? true : false;
   }
 
 

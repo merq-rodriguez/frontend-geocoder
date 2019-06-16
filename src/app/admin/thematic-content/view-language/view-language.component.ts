@@ -129,7 +129,7 @@ export class ViewLanguageComponent implements OnInit {
     idLanguage: null,
     name: 'Python',
     description: 'Python es un lenguaje de programación interpretado cuya filosofía hace hincapié en una sintaxis que favorezca un código legible. Se trata de un lenguaje de programación multiparadigma, ya que soporta orientación a objetos, programación imperativa y, en menor medida, ',
-    image: 'https://cdn-images-1.medium.com/max/1600/1*F1oFCwu6_4ork7pWE__IIg.jpeg',
+    imageSrc: 'https://cdn-images-1.medium.com/max/1600/1*F1oFCwu6_4ork7pWE__IIg.jpeg',
   }
   public showSubtheme: boolean = false;
   public subthemeSelected: ISubtheme = {
