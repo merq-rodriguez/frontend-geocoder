@@ -4,7 +4,11 @@
 }
 
 monaco-editor {
-  height: 300px;
+  height: 200px;
+  display: block;
+}
+monaco-editor {
+  height: 300vh;
   display: block;
 }
 

@@ -1,5 +1,16 @@
-<div class="monaco">
+<div class="monaco" *ngIf="context">
   <monaco-editor 
+   style="height: 200px; display: block;"
+    #editor
+    theme="vs-dark" 
+    [file]="file" 
+    (fileChange)="onFileChange($event)">
+  </monaco-editor>
+</div>
+
+<div class="monaco" *ngIf="!context">
+  <monaco-editor 
+    style="height: 300vh; display: block;"
     #editor
     theme="vs-dark" 
     [file]="file" 

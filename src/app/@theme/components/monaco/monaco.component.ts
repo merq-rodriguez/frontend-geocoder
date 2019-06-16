@@ -13,13 +13,15 @@ import { Observable, Subject } from 'rxjs';
 })
 export class MonacoComponent implements OnInit {
 	@ViewChild(MonacoEditorDirective) editor: MonacoEditorDirective;
-
+  @Input('context') context;
   public observerEditor: Observable<any>;
 	fileChange = new Subject<MonacoFile>();
     file: MonacoFile = null;
  
 
-  constructor(public monacoService: MonacoService) { }
+  constructor(public monacoService: MonacoService) {
+    
+   }
 
   ngOnInit() {
     this.observerEditor = this.monacoService.getMonacoFile();

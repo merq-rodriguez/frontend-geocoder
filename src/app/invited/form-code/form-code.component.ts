@@ -17,7 +17,6 @@ export class FormCode implements OnInit {
   constructor(
     private localstorageService: LocalstorageService, 
     private  userService: UserService,
-    private router: Router,
     private monacoService: MonacoService,
 
     ) { }
