@@ -11,11 +11,7 @@ import { AuthService } from './auth.service';
 
 @Injectable()
 export class ThemathicService implements ThemathicData  {
-    /* private arrayTheme: ITheme[] = [];
-    private themesObservableSource = new BehaviorSubject<any>(null);    
-    public  themesObservable$ = this.themesObservableSource.asObservable();
-     */
-    //Language
+  
     public language: ILanguage = {
         idLanguage: null,
         name: '',

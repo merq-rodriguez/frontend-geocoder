@@ -14,6 +14,7 @@ import { ThemathicService } from 'src/app/@core/services/themathic.service';
 import { environment } from 'src/environments/environment';
 import { LanguageService } from 'src/app/@core/services/language.service';
 import { isNull } from 'util';
+import { SnackBarService } from 'src/app/@core/services/snackbar.service';
 
 
 
@@ -35,16 +36,12 @@ export class CreateLanguageComponent implements OnInit {
   public language: ILanguage = null;
   constructor( 
     private _formBuilder: FormBuilder, 
-    private snackBar: MatSnackBar,
     private themathicService: ThemathicService,
-    private languageService: LanguageService
+    private languageService: LanguageService,
+    private snackService: SnackBarService 
   ) {}
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 3000,
-    });
-  }
+ 
 
   getFile(file: File){
     this.language.image = file;
@@ -60,15 +57,20 @@ export class CreateLanguageComponent implements OnInit {
     console.log("Create language");
     console.log(this.language);
     this.languageService.createLanguage(this.language).subscribe(res => {
-      console.log(res['result']);
-      this.language.idLanguage = res['result'].id;
-      this.language.imageSrc   = res['result'].image;
+      if(res['result']){
+        this.snackService.openSnackBar("Has guardado tu lenguaje","Aceptar")
+        console.log(res['result']);
+        this.language.idLanguage = res['result'].id;
+        this.language.imageSrc   = res['result'].image;
+      }else{
+        this.snackService.openSnackBar("Hubo un problema guardando el lenguaje","Aceptar")
+      }
     })
   }
 
   saveLanguage(){ // Si el id del lenguaje es diferente de null, quiere decir que ya se guardo en base de datos, de lo contrario seria nulo
     if (this.emptyTextfieldLanguage()) {
-      this.openSnackBar("Existen campos vacios", "Aceptar");
+      this.snackService.openSnackBar("Aun existen campos vacios","Aceptar")
     }else{
       if(!isNull(this.language.idLanguage)){
         this.updateLanguage();
@@ -84,6 +86,13 @@ export class CreateLanguageComponent implements OnInit {
  updateLanguage(){
   console.log("Update language")
   this.languageService.updateLanguage(this.language).subscribe(res => {
+    if(res['result']){
+      this.language.imageSrc = res['result'].image;
+      this.snackService.openSnackBar("Has modificado tu lenguaje","Aceptar");
+    }else{
+      this.snackService.openSnackBar("Hubo un problema actualizando el lenguaje","Aceptar")
+    }
+
     console.log(res);
   })
 }

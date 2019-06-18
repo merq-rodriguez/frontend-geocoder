@@ -32,7 +32,8 @@
 
     </div>
     <!-- IMAGE-PREVIE  -->
-    <image-preview (onChange)="getFile($event)"></image-preview>
+    <image-preview *ngIf='isUpdated' [image]="newTheme.imageSrc" (onChange)="getFile($event)"></image-preview>
+    <image-preview *ngIf='!isUpdated' (onChange)="getFile($event)"></image-preview>
     <!-- END IMAGE-PREVIE  -->
 
 

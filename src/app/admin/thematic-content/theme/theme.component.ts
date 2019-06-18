@@ -22,7 +22,9 @@ export class ThemeComponent implements OnInit {
 
  
   public observerEditor: Observable<any>
+
   isUpdated: boolean = false;
+  
   public language: ILanguage = null;
 
   public newTheme: ITheme = {
@@ -112,8 +114,6 @@ export class ThemeComponent implements OnInit {
 
     switch (action) {
       case 'update':
-        this.isUpdated = true;
-
         this.newTheme = {
           id: data.id,
           name: data.name,
@@ -121,14 +121,14 @@ export class ThemeComponent implements OnInit {
           content: data.description,
           imageSrc: data.imageSrc
         }
+        this.isUpdated = true;
         console.log("THEME updated");
         console.log(this.newTheme)
         this.editorService.setContent(this.newTheme.content);
         break;
       case 'delete':
-        this.deleteTheme(Number(data.id));
-        
-        break;
+        this.deleteTheme(Number(data.id));  
+      break;
 
       default:
         console.log("No existe esa opcion")
