@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import {  ICardSubTheme } from './ICard.interface';
 import { IExercise } from 'src/app/@core/data/exercise.data';
 import { ITheme } from 'src/app/@core/data/theme.data';
+import { environment } from 'src/environments/environment';
 
 
 @Component({
@@ -15,7 +16,7 @@ export class CardComponent implements OnInit {
   @Input('type') type:string
   public data;
   public image: string ;
-  imageDefault: string = 'http://localhost:3001/uploads/images/image-default.png';
+  imageDefault: string = `${environment.api + 'uploads/images/image-default.png'}`;
 
   constructor() {
   //  this.action.emit('action')
@@ -27,7 +28,13 @@ export class CardComponent implements OnInit {
             this.data = this.item;
         break;
         case 'theme':
-            this.data = this.item;        
+            this.data = this.item; 
+            console.log(this.data)
+          if(this.data.imageSrc){
+            this.image = this.data.imageSrc;
+          }else{
+            this.image = this.imageDefault;
+          }       
         break;
         case 'subtheme':
             this.data = this.item;

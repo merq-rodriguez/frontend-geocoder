@@ -59,7 +59,7 @@
 
 <div class="container">
   <div class="row">
-    <div *ngFor="let item of arrayTheme">
+    <div *ngFor="let item of language.themes">
       <app-card [item]="item" [type]="'theme'" (action)="getAction($event)"></app-card>
     </div>
   </div>

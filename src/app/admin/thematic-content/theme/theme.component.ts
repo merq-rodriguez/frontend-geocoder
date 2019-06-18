@@ -9,6 +9,8 @@ import { ContentEditorService } from 'src/app/@core/services/content-editor.serv
 import { ThemathicService } from 'src/app/@core/services/themathic.service';
 import {  Observable } from 'rxjs';
 import { ThemeService } from 'src/app/@core/services/theme.service';
+import { ILanguage } from 'src/app/@core/data/language.data';
+import { isNull } from 'util';
 
 @Component({
   selector: 'app-theme',
@@ -21,7 +23,7 @@ export class ThemeComponent implements OnInit {
  
   public observerEditor: Observable<any>
   isUpdated: boolean = false;
-  arrayTheme: ITheme[] = [];
+  public language: ILanguage = null;
 
   public newTheme: ITheme = {
     id: '',
@@ -63,6 +65,7 @@ export class ThemeComponent implements OnInit {
       name: '',
       content: '',
       description: '',
+      subtitle: '',
       image: null,
     };
     this.editorService.reset();
@@ -74,24 +77,32 @@ export class ThemeComponent implements OnInit {
     if (this.emptyTextfieldTheme()) {
       this.openSnackBar("Existen campos vacios", "Aceptar")
     } else {
-      let _theme: ITheme = {
-        id: uuid(),
-        name: this.newTheme.name,
-        subtitle: 'Tema del lenguaje',
-        description: this.newTheme.description,
-        content: this.newTheme.content,
-        imageSrc: '',
-        image: this.newTheme.image,
-        subthemes: []
+      if(isNull(this.language.idLanguage)){ // SI el id del lenguaje es null, quiere decir que no se ha guardado en base de datos.
+         this.openSnackBar("Debe diligenciar los datos del lenguaje para proseguir", "Aceptar")
+      }else{
+        console.log("Si se puede guardar...") 
+        let _theme: ITheme = {
+          id: uuid(),
+          name: this.newTheme.name,
+          subtitle: 'Tema del lenguaje',
+          description: this.newTheme.description,
+          content: this.newTheme.content,
+          image: this.newTheme.image,
+          subthemes: []
+        }
+        Object.assign(_theme, { idLanguage: Number(this.language.idLanguage) }) //Agregamos el idLanguage
+         this.themeService.createTheme(_theme, this.language.idLanguage).subscribe(res => {
+          console.log(res);
+          _theme.id = res['result'].id;
+          _theme.imageSrc = res['result'].image;
+          this.themathicService.addTheme(_theme);
+          this.openSnackBar("Has creado un nuevo tema", "Aceptar");
+          this.clearTheme();
+        }) 
       }
-      this.themeService.createTheme(_theme, 0).subscribe(res => {
-        console.log(res);
-      })
+      
 
-      this.arrayTheme.push(_theme);
-      this.themathicService.addTheme(_theme);
-      this.openSnackBar("Has creado un nuevo tema", "Aceptar");
-      this.clearTheme();
+      
     }
   }
 
@@ -108,14 +119,14 @@ export class ThemeComponent implements OnInit {
           name: data.name,
           description: data.description,
           content: data.description,
-          //  image: data.image
+          image: data.image
         }
 
         console.log(data.content);
         this.editorService.setContent(this.newTheme.content);
         break;
       case 'delete':
-        _.remove(this.arrayTheme, (n) => n.id === data.id);
+        _.remove(this.language.themes, (n:ITheme) => n.id === data.id);
         this.themathicService.deleteTheme(data.id);
         break;
 
@@ -136,12 +147,12 @@ export class ThemeComponent implements OnInit {
         subtitle: 'Tema',
         description: this.newTheme.description,
         content: this.newTheme.content,
-        imageSrc: '../../../../assets/img/funciones-en-python-t1.jpg',
+        imageSrc: this.newTheme.imageSrc,
         image: this.newTheme.image
       }
       console.log(_themeUpdated);
       //this.arrayTheme.map(theme => theme.id === _themeUpdated.id ? (theme = _themeUpdated): theme ); 
-      this.arrayTheme.map(theme => {
+      this.language.themes.map(theme => {
         if (theme.id === _themeUpdated.id) {
             theme.id = _themeUpdated.id;
             theme.image = _themeUpdated.image;
@@ -151,7 +162,7 @@ export class ThemeComponent implements OnInit {
             theme.subtitle = _themeUpdated.subtitle;
         }
       });
-      console.log(this.arrayTheme);
+      console.log(this.language.themes);
       this.themathicService.updateTheme(_themeUpdated);
       this.isUpdated = false;
       this.openSnackBar("Has actualizado un tema", "Aceptar");
@@ -164,10 +175,7 @@ export class ThemeComponent implements OnInit {
 
 
   ngOnInit() {
-    this.editorService.getContent().subscribe(content => {
-      this.newTheme.content = content;
-    });
-      
-   
+    this.editorService.getContent().subscribe(content => this.newTheme.content = content);
+    this.themathicService.getLanguage().subscribe((language: ILanguage) => this.language = language);
   }
 }

@@ -51,11 +51,13 @@ export class CreateLanguageComponent implements OnInit {
   }
 
   private emptyTextfieldLanguage() {
-    return (this.language.name.trim() === '' || this.language.description.trim() === '' ) ? true : false;
+    return (
+      this.language.name.trim() === '' || 
+      this.language.description.trim() === '' ) ? true : false;
   }
 
   createLanguage(){
-    console.log("Create language")
+    console.log("Create language");
     console.log(this.language);
     this.languageService.createLanguage(this.language).subscribe(res => {
       console.log(res['result']);
