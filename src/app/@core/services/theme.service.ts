@@ -35,12 +35,20 @@ export class ThemeService extends ThemeData{
     return this.api.post(this.controller, 'createTheme', form);
   }
     
-      updateTheme(): Observable<any> {
-        return observableOf(this.themes);
+      updateTheme(theme: ITheme): Observable<any> {
+        const form = new FormData();
+        if(theme.image)
+            form.append('image', theme.image, theme.image.name);
+        
+        form.append('idTheme', theme.id);
+        form.append('name', theme.name);
+        form.append('description', theme.description);
+        form.append('content', theme.content);
+        return this.api.put(this.controller, 'updateTheme', form);
     }
 
-    deleteTheme(): Observable<any> {
-        return observableOf(this.themes);
+    deleteTheme(idTheme: number): Observable<any> {
+        return this.api.delete(this.controller, 'deleteTheme', idTheme)
       }
       
     

@@ -119,15 +119,15 @@ export class ThemeComponent implements OnInit {
           name: data.name,
           description: data.description,
           content: data.description,
-          image: data.image
+          imageSrc: data.imageSrc
         }
-
-        console.log(data.content);
+        console.log("THEME updated");
+        console.log(this.newTheme)
         this.editorService.setContent(this.newTheme.content);
         break;
       case 'delete':
-        _.remove(this.language.themes, (n:ITheme) => n.id === data.id);
-        this.themathicService.deleteTheme(data.id);
+        this.deleteTheme(Number(data.id));
+        
         break;
 
       default:
@@ -136,37 +136,55 @@ export class ThemeComponent implements OnInit {
 
   }
 
+  deleteTheme(idTheme: number){
+    this.themeService.deleteTheme(idTheme).subscribe(res => {
+      console.log(res);
+      if(res['result']){
+        if(res['result'] === 'OK'){
+          _.remove(this.language.themes, (n:ITheme) => n.id === String(idTheme));
+          this.themathicService.deleteTheme(String(idTheme));
+          this.openSnackBar("Has eliminado un tema", "Aceptar");
+
+        }
+      }
+      
+    })
+  }
+
   public updateTheme() {
     if (this.emptyTextfieldTheme()) {
       this.openSnackBar("Existen campos vacios", "Aceptar")
     } else {
-      
       let _themeUpdated: ITheme = {
         id: this.newTheme.id,
         name: this.newTheme.name,
-        subtitle: 'Tema',
+        subtitle: 'Tema del lenguaje',
         description: this.newTheme.description,
         content: this.newTheme.content,
         imageSrc: this.newTheme.imageSrc,
         image: this.newTheme.image
       }
       console.log(_themeUpdated);
-      //this.arrayTheme.map(theme => theme.id === _themeUpdated.id ? (theme = _themeUpdated): theme ); 
-      this.language.themes.map(theme => {
-        if (theme.id === _themeUpdated.id) {
-            theme.id = _themeUpdated.id;
-            theme.image = _themeUpdated.image;
-            theme.content = _themeUpdated.content;
-            theme.description = _themeUpdated.description;
-            theme.name = _themeUpdated.name;
-            theme.subtitle = _themeUpdated.subtitle;
-        }
-      });
-      console.log(this.language.themes);
-      this.themathicService.updateTheme(_themeUpdated);
-      this.isUpdated = false;
-      this.openSnackBar("Has actualizado un tema", "Aceptar");
-      this.clearTheme();
+
+      this.themeService.updateTheme(_themeUpdated).subscribe(res => {
+        console.log(res);
+         if(res['result']){
+           if(res['result'].image){ //Si enviamos una imagen la va a devolver, si ese es el caso la recibimos y la asignamos antes de actializar el dato en pantalla
+            _themeUpdated.imageSrc = res['result'].image;
+           }
+          this.themathicService.updateTheme(_themeUpdated);
+          this.isUpdated = false;
+          this.clearTheme();
+          console.log(this.language.themes);
+          this.openSnackBar("¡Has actualizado el tema con exito!", "Aceptar")
+        }else{
+          this.openSnackBar("¡Paila socio, hubo un problema actualizando los datos!", "Aceptar")          
+        } 
+      }) 
+      
+     
+        
+      
     }
   }
 

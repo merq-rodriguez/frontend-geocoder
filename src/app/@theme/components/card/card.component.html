@@ -22,7 +22,7 @@
         {{ 
           (data.description.length > 90) 
               ? (data.description | slice:0:90) + '...' 
-              :(data.description)  }}
+              : (data.description)  }}
       </p>
     </div>
     <hr>

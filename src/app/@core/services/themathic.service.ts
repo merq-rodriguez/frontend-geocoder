@@ -39,22 +39,15 @@ export class ThemathicService implements ThemathicData  {
     }
 
     deleteTheme(id: string):void{
-        _.remove(this.language.themes, (n) => n.id === id);        //this.arrayTheme.push(theme);
+        _.remove(this.language.themes, (n) => n.id === id);        
         this.languageSource.next(this.language);
     }
 
     updateTheme(_themeUpdated: ITheme):void{
-        this.language.themes.map(theme => {
-            if (theme.id === _themeUpdated.id) {
-              theme.id = _themeUpdated.id,
-                theme.image = _themeUpdated.image,
-                theme.content = _themeUpdated.content,
-                theme.description = _themeUpdated.description,
-                theme.name = _themeUpdated.name,
-                theme.subtitle = _themeUpdated.subtitle
-            }
-          });
-          this.languageSource.next(this.language);
+        this.language.themes.map(theme =>  (theme.id === _themeUpdated.id) 
+              ? Object.assign(theme, _themeUpdated) 
+              : theme);
+        this.languageSource.next(this.language);
     }
 
    

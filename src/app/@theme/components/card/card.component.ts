@@ -18,11 +18,11 @@ export class CardComponent implements OnInit {
   public image: string ;
   imageDefault: string = `${environment.api + 'uploads/images/image-default.png'}`;
 
-  constructor() {
-  //  this.action.emit('action')
-  }
+  constructor() {}
 
   ngOnInit() {
+    console.log("Antes de agregar  datos a una card...")
+
     switch(this.type){
         case 'test':
             this.data = this.item;
@@ -41,14 +41,13 @@ export class CardComponent implements OnInit {
         break;
         case 'exercise':
           this.data = this.item;
-          console.log("ANtes de agregar  datos a una card")
           console.log(this.data)
           if(this.data.imageSrc){
             this.image = this.data.imageSrc;
           }else{
             this.image = this.imageDefault;
           }
-      break;
+        break;
       }
       
       console.log(this.data)
@@ -57,7 +56,7 @@ export class CardComponent implements OnInit {
 
 
    // ABRE LA IMAGEN DESDE UN ARCHIVO.
-    projectImage(file: File) {
+   /*  projectImage(file: File) {
       let reader = new FileReader;
       // TODO: Define type of 'e'
       reader.onload = (e: any) => {
@@ -67,7 +66,7 @@ export class CardComponent implements OnInit {
       };
       // Esto procesará nuestro archivo y obtendrá sus atributos / datos
       reader.readAsDataURL(file);
-    }
+    } */
 
 
 
