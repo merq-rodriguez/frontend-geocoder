@@ -12,6 +12,8 @@ import { fuseAnimations } from 'src/app/@theme/animations';
 import { ILanguage } from 'src/app/@core/data/language.data';
 import { ThemathicService } from 'src/app/@core/services/themathic.service';
 import { environment } from 'src/environments/environment';
+import { LanguageService } from 'src/app/@core/services/language.service';
+import { isNull } from 'util';
 
 
 
@@ -34,7 +36,8 @@ export class CreateLanguageComponent implements OnInit {
   constructor( 
     private _formBuilder: FormBuilder, 
     private snackBar: MatSnackBar,
-    private themathicService: ThemathicService
+    private themathicService: ThemathicService,
+    private languageService: LanguageService
   ) {}
 
   openSnackBar(message: string, action: string) {
@@ -51,16 +54,37 @@ export class CreateLanguageComponent implements OnInit {
     return (this.language.name.trim() === '' || this.language.description.trim() === '' ) ? true : false;
   }
 
-
-
-  saveLanguage() {
-    if (this.emptyTextfieldLanguage()) {
-      this.openSnackBar("Existen campos vacios", "Aceptar");
-    }
-    console.log(this.language)
+  createLanguage(){
+    console.log("Create language")
+    console.log(this.language);
+    this.languageService.createLanguage(this.language).subscribe(res => {
+      console.log(res['result']);
+      this.language.idLanguage = res['result'].id;
+      this.language.imageSrc   = res['result'].image;
+    })
   }
 
+  saveLanguage(){ // Si el id del lenguaje es diferente de null, quiere decir que ya se guardo en base de datos, de lo contrario seria nulo
+    if (this.emptyTextfieldLanguage()) {
+      this.openSnackBar("Existen campos vacios", "Aceptar");
+    }else{
+      if(!isNull(this.language.idLanguage)){
+        this.updateLanguage();
+      }else{
+        this.createLanguage();
+      } 
+    }
+  }
 
+  
+
+ //Guardamos los cambios despues de que se ha creado (el usuario aun no ha terminado de ingresar todo el contneido tematico)
+ updateLanguage(){
+  console.log("Update language")
+  this.languageService.updateLanguage(this.language).subscribe(res => {
+    console.log(res);
+  })
+}
 
   ngOnInit() {
     //Asociamos la variable lenguage con el lenguage del servicio: (thematicLanguage)
