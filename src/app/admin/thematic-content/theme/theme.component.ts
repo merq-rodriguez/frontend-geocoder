@@ -1,14 +1,14 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit,  } from "@angular/core";
 import * as _ from 'lodash';
 
 import { v4 as uuid } from 'uuid';
 import { MatSnackBar } from '@angular/material';
 import { fuseAnimations } from 'src/app/@theme/animations';
-import { ICardTheme } from 'src/app/@theme/components/card/ICard.interface';
 import { ITheme } from 'src/app/@core/data/theme.data';
 import { ContentEditorService } from 'src/app/@core/services/content-editor.service';
-import { ThemeListService } from 'src/app/@core/services/themeList.service';
-import { Subscriber, Subscription, Observable } from 'rxjs';
+import { ThemathicService } from 'src/app/@core/services/themathic.service';
+import {  Observable } from 'rxjs';
+import { ThemeService } from 'src/app/@core/services/theme.service';
 
 @Component({
   selector: 'app-theme',
@@ -17,23 +17,28 @@ import { Subscriber, Subscription, Observable } from 'rxjs';
   animations: fuseAnimations
 })
 export class ThemeComponent implements OnInit {
+
+ 
   public observerEditor: Observable<any>
   isUpdated: boolean = false;
-  arrayTheme: ICardTheme[] = [];
+  arrayTheme: ITheme[] = [];
 
   public newTheme: ITheme = {
     id: '',
     name: '',
     content: '',
     description: '',
-    image: ''
+    image: null
   };
 
   constructor(
     private snackBar: MatSnackBar,
     private editorService: ContentEditorService,
-    private themeListService: ThemeListService
+    private themeService: ThemeService,
+    private themathicService: ThemathicService
   ) {}
+
+ 
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -42,7 +47,7 @@ export class ThemeComponent implements OnInit {
   }
 
   getFile(file: File){
-    this.newTheme.imageFile = file;
+    this.newTheme.image = file;
   }
 
 
@@ -58,10 +63,9 @@ export class ThemeComponent implements OnInit {
       name: '',
       content: '',
       description: '',
-      image: '',
-      imageFile : null
+      image: null,
     };
-    this.editorService.setBehaviorContent(null);
+    this.editorService.reset();
   }
 
 
@@ -70,19 +74,22 @@ export class ThemeComponent implements OnInit {
     if (this.emptyTextfieldTheme()) {
       this.openSnackBar("Existen campos vacios", "Aceptar")
     } else {
-      this.observerEditor.subscribe(content => this.newTheme.content = content);
-      let _theme: ICardTheme = {
+      let _theme: ITheme = {
         id: uuid(),
         name: this.newTheme.name,
         subtitle: 'Tema del lenguaje',
         description: this.newTheme.description,
         content: this.newTheme.content,
-        image: '../../../../assets/img/funciones-en-python-t1.jpg',
+        imageSrc: '',
+        image: this.newTheme.image,
         subthemes: []
-        //  image: this.newTheme.image
       }
+      this.themeService.createTheme(_theme, 0).subscribe(res => {
+        console.log(res);
+      })
+
       this.arrayTheme.push(_theme);
-      this.themeListService.addTheme(_theme);
+      this.themathicService.addTheme(_theme);
       this.openSnackBar("Has creado un nuevo tema", "Aceptar");
       this.clearTheme();
     }
@@ -90,7 +97,7 @@ export class ThemeComponent implements OnInit {
 
   getAction(event) {
     let action: string = event['action'];
-    let data: ICardTheme = event['item'];
+    let data: ITheme = event['item'];
 
     switch (action) {
       case 'update':
@@ -105,11 +112,11 @@ export class ThemeComponent implements OnInit {
         }
 
         console.log(data.content);
-        this.editorService.setBehaviorContent(this.newTheme.content);
+        this.editorService.setContent(this.newTheme.content);
         break;
       case 'delete':
         _.remove(this.arrayTheme, (n) => n.id === data.id);
-        this.themeListService.deleteTheme(data.id);
+        this.themathicService.deleteTheme(data.id);
         break;
 
       default:
@@ -122,31 +129,30 @@ export class ThemeComponent implements OnInit {
     if (this.emptyTextfieldTheme()) {
       this.openSnackBar("Existen campos vacios", "Aceptar")
     } else {
-      this.editorService.getBehaviorContent()
-        .subscribe(content => this.newTheme.content = content);
-      let _themeUpdated: ICardTheme = {
+      
+      let _themeUpdated: ITheme = {
         id: this.newTheme.id,
         name: this.newTheme.name,
         subtitle: 'Tema',
         description: this.newTheme.description,
         content: this.newTheme.content,
-        image: '../../../../assets/img/funciones-en-python-t1.jpg'
-        //  image: this.newTheme.image
+        imageSrc: '../../../../assets/img/funciones-en-python-t1.jpg',
+        image: this.newTheme.image
       }
       console.log(_themeUpdated);
       //this.arrayTheme.map(theme => theme.id === _themeUpdated.id ? (theme = _themeUpdated): theme ); 
       this.arrayTheme.map(theme => {
         if (theme.id === _themeUpdated.id) {
-          theme.id = _themeUpdated.id,
-            theme.image = _themeUpdated.image,
-            theme.content = _themeUpdated.content,
-            theme.description = _themeUpdated.description,
-            theme.name = _themeUpdated.name,
-            theme.subtitle = _themeUpdated.subtitle
+            theme.id = _themeUpdated.id;
+            theme.image = _themeUpdated.image;
+            theme.content = _themeUpdated.content;
+            theme.description = _themeUpdated.description;
+            theme.name = _themeUpdated.name;
+            theme.subtitle = _themeUpdated.subtitle;
         }
       });
       console.log(this.arrayTheme);
-      this.themeListService.updateTheme(_themeUpdated);
+      this.themathicService.updateTheme(_themeUpdated);
       this.isUpdated = false;
       this.openSnackBar("Has actualizado un tema", "Aceptar");
       this.clearTheme();
@@ -158,7 +164,10 @@ export class ThemeComponent implements OnInit {
 
 
   ngOnInit() {
-    this.observerEditor = this.editorService.getBehaviorContent();
-
+    this.editorService.getContent().subscribe(content => {
+      this.newTheme.content = content;
+    });
+      
+   
   }
 }

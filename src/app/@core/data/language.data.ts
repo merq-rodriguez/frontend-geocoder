@@ -1,4 +1,5 @@
 import { Observable } from 'rxjs';
+import { ITheme } from './theme.data';
 
 
 export interface ILanguage{
@@ -8,6 +9,7 @@ export interface ILanguage{
   image?: File;
   imageSrc?: string;
   idUser?: number;
+  themes?: ITheme[];
   state?: string;
 }
 

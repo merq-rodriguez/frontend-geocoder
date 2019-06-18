@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from "@angular/core";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import { ILanguage } from 'src/app/@core/data/language.data';
-import { ICardTheme } from 'src/app/@theme/components/card/ICard.interface';
 import { MatDialog } from '@angular/material';
 import { ISubthemeDialog, CreateSubthemeDialog } from '../../modal/create-subtheme/create-subtheme.component';
 import { ShowSubthemeDialog } from '../../modal/show-subtheme/show-subtheme.component';
 import { ISubtheme } from 'src/app/@core/data/subtheme-data';
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
+import { ITheme } from 'src/app/@core/data/theme.data';
 
 
 
@@ -19,14 +19,14 @@ export class ViewLanguageComponent implements OnInit {
   
   public subscriberArrayTheme: any;
 
-  public arrayThemes: ICardTheme[] = [
+  public arrayThemes: ITheme[] = [
     {
       id: '1',
       subtitle: 'Temas',
       name: 'Operadores logicos',
       content: 'x',
       description: '',
-      image: '',
+      image: null,
       subthemes:  [
         {
           idSubtheme: '1',
@@ -62,7 +62,7 @@ export class ViewLanguageComponent implements OnInit {
       name: 'Operadores logicos',
       content: 'x',
       description: '',
-      image: '',
+      image: null,
       subthemes:  [
         {
           idSubtheme: '1',
@@ -98,7 +98,7 @@ export class ViewLanguageComponent implements OnInit {
       name: 'Operadores logicos',
       content: 'x',
       description: '',
-      image: '',
+      image: null,
       subthemes:  [
       
         {

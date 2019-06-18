@@ -2,24 +2,20 @@ import { Component, OnInit, Input, ViewChild, AfterViewInit } from '@angular/cor
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { CreateLanguageComponent } from '../create-language/create-language.component';
 import { ILanguage } from 'src/app/@core/data/language.data';
-import { ThemeListService } from 'src/app/@core/services/themeList.service';
+import { ThemathicService } from 'src/app/@core/services/themathic.service';
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
-import { ICardTheme } from 'src/app/@theme/components/card/ICard.interface';
-import { Observable } from 'rxjs';
 import { LanguageService } from 'src/app/@core/services/language.service';
-import { ThemeService } from 'src/app/@core/services/theme.service';
-import { UserService } from 'src/app/@core/services/user.service';
 import { LocalstorageService } from 'src/app/@core/services/localstorage.service';
-import { isNumber, isNull } from 'util';
+import {  isNull } from 'util';
+import { ITheme } from 'src/app/@core/data/theme.data';
 
 @Component({
   selector: 'app-thematic',
   templateUrl: './thematic.component.html',
   styleUrls: ['./thematic.component.css']
 })
-export class ThematicComponent implements OnInit, AfterViewInit  {
+export class ThematicComponent implements OnInit {
   
-  @ViewChild(CreateLanguageComponent) childRefCreateLanguage;
   isLinear = false;
   private language: ILanguage = {
     name: '',
@@ -29,28 +25,25 @@ export class ThematicComponent implements OnInit, AfterViewInit  {
     image: null,
     imageSrc: ''
   };
-  private listThemes: ICardTheme[]
+  private listThemes: ITheme[]
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   
 
   constructor(  
     private _formBuilder: FormBuilder, 
-    public themeListService: ThemeListService,
+    public themathicService: ThemathicService,
     private languageService: LanguageService,
     private localService: LocalstorageService
     ) {}
 
-  ngAfterViewInit(){
-    this.language = this.childRefCreateLanguage.language;
-  }
+ 
 
   //Guardamos los cambios despues de que se ha creado (el usuario aun no ha terminado de ingresar todo el contneido tematico)
   updateLanguage(){
     console.log("Actualizando language")
     this.languageService.updateLanguage(this.language).subscribe(res => {
       console.log(res);
-
     })
   }
 
@@ -90,8 +83,8 @@ export class ThematicComponent implements OnInit, AfterViewInit  {
 
 
   getThemesArray(){
-    this.themeListService.getListTheme().subscribe(themes => {
-      this.listThemes = themes;
+    this.themathicService.getLanguage().subscribe((language: ILanguage )=> {
+      this.listThemes = language.themes;
     })
   }
 

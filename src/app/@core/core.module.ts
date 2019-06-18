@@ -6,8 +6,8 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 import { UserData } from './data/user.data';
 import { ContentEditorData } from './data/content-editor.data';
 import { ContentEditorService } from './services/content-editor.service';
-import { ThemeListData } from './data/theme-list.data';
-import { ThemeListService } from './services/themeList.service';
+import { ThemathicData } from './data/theme-list.data';
+import { ThemathicService } from './services/themathic.service';
 import { MonacoService } from './services/monaco.service';
 import { MonacoData } from './data/monaco.data';
 import { LanguageService } from './services/language.service';
@@ -26,7 +26,7 @@ const DATA_SERVICES = [
   { provide: UserData, useClass: UserService },
   { provide:  ContentEditorData, useClass: ContentEditorService},
   { provide:  MonacoData, useClass: MonacoService },
-  { provide:  ThemeListData, useClass: ThemeListService },
+  { provide:  ThemathicData, useClass: ThemathicService },
   { provide:  ThemeData, useClass: ThemeService },
   { provide:  SubthemeData, useClass: SubthemeService },
   { provide:  LanguageData, useClass: LanguageService },

@@ -5,11 +5,10 @@ import * as _ from 'lodash';
 import { v4 as uuid } from 'uuid';
 import { MatSnackBar } from '@angular/material';
 import { fuseAnimations } from 'src/app/@theme/animations';
-import { ICardTheme } from 'src/app/@theme/components/card/ICard.interface';
 import { ITheme } from 'src/app/@core/data/theme.data';
 import { ContentEditorService } from 'src/app/@core/services/content-editor.service';
 import { Observable } from 'rxjs';
-import { ThemeListService } from 'src/app/@core/services/themeList.service';
+import { ThemathicService} from 'src/app/@core/services/themathic.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { CreateSubthemeDialog } from '../../modal/create-subtheme/create-subtheme.component';
 import { ISubthemeDialog } from '../../modal/create-subtheme/create-subtheme.component'
@@ -17,6 +16,7 @@ import { MonacoService } from 'src/app/@core/services/monaco.service';
 import { ICardSubTheme } from 'src/app/@theme/components/card-mini/ICard.interface';
 import { ISubtheme } from 'src/app/@core/data/subtheme-data';
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
+import { ILanguage } from 'src/app/@core/data/language.data';
 
 @Component({
   selector: 'app-subthemes',
@@ -28,21 +28,21 @@ export class SubthemeComponent implements OnInit {
   public subscriberArrayTheme: any;
   public subscriberEditor$: any;
   public subscribeMonaco$: any;
-  public arrayThemes: ICardTheme[] = []
+  public arrayThemes: ITheme[] = []
 
 
   constructor(
     private snackBar: MatSnackBar,
     private editorService: ContentEditorService,
     private monacoService: MonacoService,
-    private themeListService: ThemeListService,
+    private themathicService: ThemathicService,
     public dialog: MatDialog
   ) {}
 
 
   ngOnInit() {
     
-    this.subscriberArrayTheme = this.themeListService.themesObservable$.subscribe(themes => this.arrayThemes = themes);
+    this.subscriberArrayTheme = this.themathicService.getLanguage().subscribe((language: ILanguage) => this.arrayThemes = language.themes);
     this.subscriberEditor$ = this.editorService.content$.subscribe(content => this.data.contentEditor = content);
     this.subscribeMonaco$ = this.monacoService.content$.subscribe(content => this.data.contentCode = content );
 
@@ -134,7 +134,7 @@ export class SubthemeComponent implements OnInit {
        }
 
        if(this.data.contentEditor){
-         this.editorService.setBehaviorContent(this.data.contentEditor);
+         this.editorService.setContent(this.data.contentEditor);
       }
 
        this.openDialog(item.idTheme, 'update');
@@ -149,7 +149,7 @@ export class SubthemeComponent implements OnInit {
   // Esta vaina va a traer lo que hay en el editor HTML y monaco
   this.editorService.content$.subscribe(content => this.data.contentEditor = content);
   this.monacoService.content$.subscribe(content => this.data.contentCode = content);
-  this.arrayThemes.forEach((theme: ICardTheme ) => {
+  this.arrayThemes.forEach((theme: ITheme ) => {
     if(theme.id === this.idThemeSelected){
       theme.subthemes.forEach((subtheme: ISubtheme) => {
         if(subtheme.idSubtheme === this.data.id){

@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
-import { ICardTest, ICardTheme, ICardSubTheme } from './ICard.interface';
+import {  ICardSubTheme } from './ICard.interface';
 import { IExercise } from 'src/app/@core/data/exercise.data';
+import { ITheme } from 'src/app/@core/data/theme.data';
 
 
 @Component({
@@ -10,7 +11,7 @@ import { IExercise } from 'src/app/@core/data/exercise.data';
 })
 export class CardComponent implements OnInit {
   @Output() action = new EventEmitter<any>();
-  @Input('item') item: ICardTheme | ICardTest | ICardSubTheme | IExercise;
+  @Input('item') item: ITheme  | ICardSubTheme | IExercise;
   @Input('type') type:string
   public data;
   public image: string ;

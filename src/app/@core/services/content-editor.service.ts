@@ -16,12 +16,12 @@ export class ContentEditorService implements ContentEditorData {
 
     }
 
-    setBehaviorContent(content: string) { 
+    setContent(content: string) { 
         this.content = content;
         this.contentSource.next(this.content); 
     } 
 
-    getBehaviorContent(): Observable<any> { 
+    getContent(): Observable<any> { 
         return this.content$; 
     }
 }

@@ -10,6 +10,8 @@ import { v4 as uuid } from 'uuid';
 import { MatSnackBar } from '@angular/material';
 import { fuseAnimations } from 'src/app/@theme/animations';
 import { ILanguage } from 'src/app/@core/data/language.data';
+import { ThemathicService } from 'src/app/@core/services/themathic.service';
+import { environment } from 'src/environments/environment';
 
 
 
@@ -27,14 +29,13 @@ export class CreateLanguageComponent implements OnInit {
   isUpdated: boolean = false;
   firstFormGroup: FormGroup;
   image: string = "";
-  public language: ILanguage = {
-    idLanguage: null,
-    name: '',
-    description: '',
-    imageSrc: '../../../../assets/img/image-default.png',
-    idUser: null
-  }
-  constructor( private _formBuilder: FormBuilder, private snackBar: MatSnackBar) {}
+
+  public language: ILanguage = null;
+  constructor( 
+    private _formBuilder: FormBuilder, 
+    private snackBar: MatSnackBar,
+    private themathicService: ThemathicService
+  ) {}
 
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
@@ -62,8 +63,9 @@ export class CreateLanguageComponent implements OnInit {
 
 
   ngOnInit() {
-
-    
+    //Asociamos la variable lenguage con el lenguage del servicio: (thematicLanguage)
+    // En este servicio se gestionaran las cosas
+    this.themathicService.getLanguage().subscribe(language => this.language = language);
 
     this.firstFormGroup = this._formBuilder.group({
       nameLanguageCtrl: [this.language.name, Validators.required],

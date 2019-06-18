@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { of as observableOf ,Observable, of } from 'rxjs';
 import { Api } from './api.service';
-import { ThemeData } from '../data/theme.data';
+import { ThemeData, ITheme } from '../data/theme.data';
 
 @Injectable()
 export class ThemeService extends ThemeData{
@@ -22,9 +22,18 @@ export class ThemeService extends ThemeData{
         return observableOf(this.themes);
     }
     
-      createTheme(): Observable<any> {
-        return observableOf(this.themes);
-    }
+    
+  createTheme(theme: ITheme, idLanguage: number): Observable<any> {
+    const form = new FormData();
+    if(theme.image)
+        form.append('image', theme.image, theme.image.name);
+    
+    form.append('name', theme.name);
+    form.append('description', theme.description);
+    form.append('content', theme.content);
+    form.append('idLanguage', String(idLanguage));
+    return this.api.post(this.controller, 'createTheme', form);
+  }
     
       updateTheme(): Observable<any> {
         return observableOf(this.themes);

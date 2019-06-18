@@ -2,7 +2,7 @@ import { NgModule, ModuleWithProviders } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UserService } from './user.service';
 import { ContentEditorService } from './content-editor.service';
-import { ThemeListService } from './themeList.service';
+import { ThemathicService } from './themathic.service';
 import { MonacoService } from './monaco.service';
 import { LanguageService } from './language.service';
 import { Api } from './api.service';
@@ -13,13 +13,15 @@ import { LocalstorageService } from './localstorage.service';
 import { UploadService } from './upload-file.service';
 import { ExerciseService } from './exercise.service';
 import { Judge0Service } from './judge0.service';
+import { AuthService } from './auth.service';
 
 
 const SERVICES = [
   Api,
   UserService,
+  AuthService,
   ContentEditorService,
-  ThemeListService,
+  ThemathicService,
   MonacoService,
   LanguageService,
   ThemeService,

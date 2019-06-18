@@ -20,7 +20,7 @@ export class EditorComponent implements OnInit {
   constructor(private readonly  editorService:ContentEditorService ) { }
 
   ngOnInit() {
-    this.observerEditor =  this.editorService.getBehaviorContent();
+    this.observerEditor =  this.editorService.getContent();
     this.observerEditor.subscribe(res => this.content = res);
     this.ckeConfig = {
       allowedContent: true,
@@ -32,6 +32,6 @@ export class EditorComponent implements OnInit {
 
   onChange($event: any): void {
     console.log(this.content);
-    this.editorService.setBehaviorContent(this.content);
+    this.editorService.setContent(this.content);
   }
 }

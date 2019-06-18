@@ -32,5 +32,17 @@
 
     <image-preview (onChange)="getFile($event)"></image-preview>
     <br>
+
+    <div class="row">
+      <button  
+        (click)="saveLanguage()"
+        mat-raised-button 
+        matTooltip="Guardar lenguaje" 
+        [matTooltipPosition]="'above'" 
+        type="button" 
+        class="btn btn-default card-header">
+        Guardar
+      </button>
+    </div>
   </div>
 </mat-card>

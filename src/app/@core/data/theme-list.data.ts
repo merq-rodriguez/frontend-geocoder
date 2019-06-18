@@ -1,8 +1,8 @@
 import { Observable } from 'rxjs';
-import { ICardTheme } from 'src/app/@theme/components/card/ICard.interface';
+import { ITheme } from './theme.data';
 
 
-export abstract class ThemeListData {
-    abstract addTheme(theme: ICardTheme):void;
-    abstract getListTheme(): Observable<any>;
+export abstract class ThemathicData {
+    abstract addTheme(theme: ITheme):void;
+    abstract getLanguage(): Observable<any>;
   }
