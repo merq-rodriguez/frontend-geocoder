@@ -20,6 +20,8 @@ const routes: Routes = [{
     { path: 'language-list',    component: LanguageListComponent   },
     { path: 'create-thematic',  component: ThematicComponent },
     { path: 'language',         component: ViewLanguageComponent },
+    { path: '', redirectTo: 'menu-language', pathMatch: 'full' },
+    { path: '**', redirectTo: 'menu-language' }
   ],
 }];
 

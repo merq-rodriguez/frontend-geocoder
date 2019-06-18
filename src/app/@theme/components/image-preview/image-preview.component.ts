@@ -15,7 +15,7 @@ import { fuseAnimations } from '../../animations';
 export class MtImagePreviewComponent {
   @Input('image') image;
   // Uso FileReader para leer el archivo desde la entrada
-  source: string = '../../../../assets/img/image-default.png';
+  default: string = '../../../../assets/img/image-default.png';
 
   // Emitir un evento cuando un archivo ha sido elegido. Aquí devolvemos el archivo en sí.
   @Output() onChange: EventEmitter<File> = new EventEmitter<File>();
@@ -24,7 +24,7 @@ export class MtImagePreviewComponent {
     if(this.image){
       console.log("----------------- image view")
       console.log(this.image)
-      this.source = this.image;
+     // this.source = this.image;
     }
   }
 
@@ -40,7 +40,7 @@ export class MtImagePreviewComponent {
     // TODO: Define type of 'e'
     reader.onload = (e: any) => {
       // Simply set e.target.result as our <img> src in the layout
-      this.source = e.target.result;
+      this.image = e.target.result;
       this.onChange.emit(file);
     };
     // This will process our file and get it's attributes/data

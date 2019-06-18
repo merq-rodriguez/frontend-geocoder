@@ -121,9 +121,10 @@ export class ThemeComponent implements OnInit {
           content: data.description,
           imageSrc: data.imageSrc
         }
+        console.log("DATOS DE THEME (ACTION) update antes de actualizarse");
+        console.log(this.newTheme);
         this.isUpdated = true;
-        console.log("THEME updated");
-        console.log(this.newTheme)
+
         this.editorService.setContent(this.newTheme.content);
         break;
       case 'delete':
@@ -164,13 +165,15 @@ export class ThemeComponent implements OnInit {
         imageSrc: this.newTheme.imageSrc,
         image: this.newTheme.image
       }
+      //Tema apunto de ser actualizado
+      console.log("Tema apunto de ser actualizado");
       console.log(_themeUpdated);
 
       this.themeService.updateTheme(_themeUpdated).subscribe(res => {
         console.log(res);
          if(res['result']){
            if(res['result'].image){ //Si enviamos una imagen la va a devolver, si ese es el caso la recibimos y la asignamos antes de actializar el dato en pantalla
-            _themeUpdated.imageSrc = res['result'].image;
+              _themeUpdated.imageSrc = res['result'].image;
            }
           this.themathicService.updateTheme(_themeUpdated);
           this.isUpdated = false;
@@ -181,10 +184,6 @@ export class ThemeComponent implements OnInit {
           this.openSnackBar("¡Paila socio, hubo un problema actualizando los datos!", "Aceptar")          
         } 
       }) 
-      
-     
-        
-      
     }
   }
 

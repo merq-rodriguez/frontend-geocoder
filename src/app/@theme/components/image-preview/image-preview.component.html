@@ -1,6 +1,7 @@
 
 <div class="container">
-            <img class="image-upload" *ngIf="source" [src]="source" src="">
+            <img class="image-upload" *ngIf="image" [src]="image" src="">
+            <img class="image-upload" *ngIf="!image" [src]="default" src="">
 
             <input hidden type="file" #fileInput accept="image/*" (change)="updateSource($event)" />
 
