@@ -32,7 +32,8 @@ export class ThemeComponent implements OnInit {
     name: '',
     content: '',
     description: '',
-    image: null
+    image: null,
+    subthemes: []
   };
 
   constructor(
@@ -76,7 +77,8 @@ export class ThemeComponent implements OnInit {
           name: data.name,
           description: data.description,
           content: data.description,
-          imageSrc: data.imageSrc
+          imageSrc: data.imageSrc,
+          subthemes: data.subthemes
         }
         console.log("DATOS DE THEME (ACTION) update antes de actualizarse");
         console.log(this.newTheme);
@@ -108,14 +110,15 @@ export class ThemeComponent implements OnInit {
         description: this.newTheme.description,
         content: this.newTheme.content,
         imageSrc: this.newTheme.imageSrc,
-        image: this.newTheme.image
+        image: this.newTheme.image,
+        subthemes: this.newTheme.subthemes
       }
       //Tema apunto de ser actualizado
       console.log("Tema apunto de ser actualizado");
       console.log(_themeUpdated);
 
       this.themeService.updateTheme(_themeUpdated).subscribe(res => {
-        console.log("RESPONSE")
+        console.log("-------------------- RESPONSE --------------------")
         console.log(res);
          if(res['result']){
            if(res['result'].image){ //Si enviamos una imagen la va a devolver, si ese es el caso la recibimos y la asignamos antes de actializar el dato en pantalla
@@ -123,8 +126,7 @@ export class ThemeComponent implements OnInit {
            }
            this.themathicService.deleteTheme(_themeUpdated.id)
            this.themathicService.addTheme(_themeUpdated);
-          //this.themathicService.updateTheme(_themeUpdated);
-          this.isUpdated = false;
+           this.isUpdated = false;
 
           this.clearTheme();
           console.log(this.language.themes);

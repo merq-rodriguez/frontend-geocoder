@@ -2,21 +2,18 @@ import { Component, OnInit } from "@angular/core";
 import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
 import * as _ from 'lodash';
 
-import { v4 as uuid } from 'uuid';
-import { MatSnackBar } from '@angular/material';
-import { fuseAnimations } from 'src/app/@theme/animations';
 import { ITheme } from 'src/app/@core/data/theme.data';
 import { ContentEditorService } from 'src/app/@core/services/content-editor.service';
-import { Observable } from 'rxjs';
 import { ThemathicService} from 'src/app/@core/services/themathic.service';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { CreateSubthemeDialog } from '../../modal/create-subtheme/create-subtheme.component';
 import { ISubthemeDialog } from '../../modal/create-subtheme/create-subtheme.component'
 import { MonacoService } from 'src/app/@core/services/monaco.service';
-import { ICardSubTheme } from 'src/app/@theme/components/card-mini/ICard.interface';
 import { ISubtheme } from 'src/app/@core/data/subtheme-data';
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 import { ILanguage } from 'src/app/@core/data/language.data';
+import { SubthemeService } from 'src/app/@core/services/subtheme.service';
+import { SnackBarService } from 'src/app/@core/services/snackbar.service';
 
 @Component({
   selector: 'app-subthemes',
@@ -25,41 +22,45 @@ import { ILanguage } from 'src/app/@core/data/language.data';
 })
 export class SubthemeComponent implements OnInit {
   public idThemeSelected: string;
-  public subscriberArrayTheme: any;
-  public subscriberEditor$: any;
-  public subscribeMonaco$: any;
-  public arrayThemes: ITheme[] = []
+
+  public language: ILanguage = null;
 
 
-  constructor(
-    private snackBar: MatSnackBar,
-    private editorService: ContentEditorService,
-    private monacoService: MonacoService,
-    private themathicService: ThemathicService,
-    public dialog: MatDialog
-  ) {}
-
-
-  ngOnInit() {
-    
-    this.subscriberArrayTheme = this.themathicService.getLanguage().subscribe((language: ILanguage) => this.arrayThemes = language.themes);
-    this.subscriberEditor$ = this.editorService.content$.subscribe(content => this.data.contentEditor = content);
-    this.subscribeMonaco$ = this.monacoService.content$.subscribe(content => this.data.contentCode = content );
-
-   }
-
-  data: ISubthemeDialog = {
+  public data: ISubthemeDialog = {
     id: '',
     name: '',
     description: '',
     contentEditor: '',
     contentCode: '',
-    image: '',
+    image: null,
+    imageSrc: '',
     addVideo: false,
     url_video: '',
     addCode: false,
     action: ''
   }
+
+  constructor(
+    private subthemeService: SubthemeService,
+    private editorService: ContentEditorService,
+    private monacoService: MonacoService,
+    private themathicService: ThemathicService,
+    public dialog: MatDialog,
+    private snackService: SnackBarService
+  ) {}
+
+
+  ngOnInit() {
+    this.themathicService.getLanguage().subscribe((language: ILanguage) => this.language = language);
+    this.monacoService.content$.subscribe(content => this.data.contentCode = content );
+    this.editorService.getContent().subscribe(content => {
+      console.log("NG_ON_INIT EDITOR")
+      this.data.contentEditor = content;
+      console.log(content);
+    });
+   }
+
+  
  
   clearDataDialog(){
     this.data = {
@@ -68,7 +69,8 @@ export class SubthemeComponent implements OnInit {
       description: '',
       contentEditor: '',
       contentCode: '',
-      image: '',
+      imageSrc: '',
+      image: null,
       url_video: '',
       addVideo: false,
       addCode: false,
@@ -84,17 +86,25 @@ export class SubthemeComponent implements OnInit {
 
   //Metodo para eliminar un subtheme
   deleteSubtheme(idTheme: string, idSubTheme: string){
-    this.arrayThemes.forEach( theme => (theme.id === idTheme) 
-            ? _.remove(theme.subthemes, (sub: ICardSubTheme ) => sub.id === idSubTheme)
-            : theme        
-    )
-    //
+    this.subthemeService.deleteSubtheme(Number(idSubTheme)).subscribe(res => {
+      console.log(res)
+      if(res.status === 'OK'){
+        this.language.themes.forEach( theme => (theme.id === idTheme) 
+            ? _.remove(theme.subthemes, (sub: ISubtheme ) => sub.id == idSubTheme)
+            : theme
+        )
+        this.snackService.openSnackBar("Has eliminado un subtema", "Aceptar");
+
+      }else{
+        this.snackService.openSnackBar("Hubo un problema eliminando el subtema", "Aceptar");
+      }  
+    })
   }
 
   //Metodo que interactua con el emisor de card-mi (elimina, actualiza)
   getActionCardMini(event){
     const {item, action} = event;
-    console.log("Esto viene de la card mini")
+    console.log("Esto viene de la card mini (CUANDO ACTUALIZA O ELIMINA)")
     console.log(item)
      switch(action){
       case 'update':  
@@ -119,7 +129,7 @@ export class SubthemeComponent implements OnInit {
         this.data.addVideo = false;
       }
        this.data = {
-         id: item.idSubtheme,
+         id: item.id,
          name: item.name,
          contentCode: item.contentCode,
          description: item.description,
@@ -127,8 +137,10 @@ export class SubthemeComponent implements OnInit {
          url_video: item.url_video,
          contentEditor: item.contentEditor,
          action: 'update'
-          
        };
+
+       console.log("==================== CAMBIAMOS LOS DATOS DE DATA ====================");
+       console.log(this.data)
        if(this.data.contentCode){
         this.monacoService.setMonacoContent(this.data.contentCode);
        }
@@ -147,25 +159,41 @@ export class SubthemeComponent implements OnInit {
   
   updateSubtheme(){
   // Esta vaina va a traer lo que hay en el editor HTML y monaco
-  this.editorService.content$.subscribe(content => this.data.contentEditor = content);
-  this.monacoService.content$.subscribe(content => this.data.contentCode = content);
-  this.arrayThemes.forEach((theme: ITheme ) => {
-    if(theme.id === this.idThemeSelected){
-      theme.subthemes.forEach((subtheme: ISubtheme) => {
-        if(subtheme.idSubtheme === this.data.id){
-          
-          subtheme.idSubtheme = this.data.id;
-          subtheme.name = this.data.name;
-          subtheme.description = this.data.description;
-          subtheme.image = this.data.image;
-          subtheme.contentEditor = this.data.contentEditor;
-          subtheme.contentCode = this.data.contentCode;
-          subtheme.url_video = this.data.url_video;
-          console.log("Encontrado y actualizado");
-        }
-      })
+    console.log("ANTES DE ACTUALIZAR");
+    console.log(this.data);
+    let _subtheme:ISubtheme = { 
+      id: this.data.id,
+      name: this.data.name,
+      description: this.data.description ,
+      contentCode: this.data.contentCode,
+      contentEditor: this.data.contentEditor,
+      image: this.data.image,
+      url_video: this.data.url_video
     }
-  })
+  this.subthemeService.updateSubtheme( _subtheme, Number(this.idThemeSelected)).subscribe( res => {
+      console.log("=================== UPDATE SUBTHEME RESPONSE =====================");
+      console.log(res);
+      if(res.result){
+        if(res.result.image){ // Si se envio una imagen nueva, nos la devuelve 
+          _subtheme.imageSrc = res.result.image;
+          console.log("ID THEME SELECTEC")
+          console.log(this.idThemeSelected);
+          console.log("SUBTHEME ID")
+          console.log(_subtheme.id);
+          this.language.themes.forEach( theme => (theme.id === this.idThemeSelected) 
+            ? _.remove(theme.subthemes, (sub: ISubtheme ) => sub.id == _subtheme.id)
+            : theme
+          )
+          //Hago esta trampa porque me mame de trasnochar haciendo esto .l.
+          this.language.themes.forEach(theme => (theme.id === this.idThemeSelected) 
+            ? theme.subthemes.push(_subtheme)
+            : theme);
+          console.log(this.language.themes)
+        }
+      }
+    })
+
+  
             
   this.clearObservables();
   this.clearDataDialog();
@@ -176,21 +204,31 @@ export class SubthemeComponent implements OnInit {
 
   addSubtheme(){
     let _subtheme: ISubtheme = {
-      idSubtheme: uuid(),
       name: this.data.name,
       description: this.data.description,
       image: this.data.image,
+      imageSrc: this.data.imageSrc,
       contentEditor: this.data.contentEditor,
       contentCode: this.data.contentCode,
-      url_video: this.data.url_video,
-
+      url_video: this.data.url_video
   }
 
-//Se procede a insertar el subthema en en el tema al que pertenece 
-//haciendo uso del id para encontrarlo.
-  this.arrayThemes.forEach(theme => (theme.id === this.idThemeSelected) 
+  this.subthemeService.createSubtheme(_subtheme, Number(this.idThemeSelected)).subscribe(res => {
+        console.log("============================== RESPONSE CREATE SUBTHEME ==============================")
+        console.info(res)
+        if(res.result){
+          _subtheme.imageSrc = res.result.image;
+          _subtheme.id = res.result.id;
+        }
+        console.log(_subtheme)
+  });
+
+  //Se procede a insertar el subthema en en el tema al que pertenece 
+  //haciendo uso del id para encontrarlo.
+  this.language.themes.forEach(theme => (theme.id === this.idThemeSelected) 
             ? theme.subthemes.push(_subtheme)
             : theme);
+  console.log(this.language.themes)
   this.clearObservables();
   this.clearDataDialog();
   }
@@ -224,7 +262,7 @@ export class SubthemeComponent implements OnInit {
 
     //Despues de cerrar el dialog
     dialogRef.afterClosed().subscribe((result:ISubthemeDialog) => {
-      console.log('Dialog cerrado');
+      console.log('======================== Dialog cerrado ========================');
     //if(this.data.name.trim() !== '' || this.data.description.trim() !== ''){
         console.log("DATOS:")
         console.log(this.data);
@@ -243,16 +281,12 @@ export class SubthemeComponent implements OnInit {
 
         }
 
-      console.log(this.arrayThemes)
+      console.log(this.language.themes)
     });
   }
 
 
-  openSnackBar(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 3000,
-    });
-  }
+  
 
 
    public getRoutesItem(){

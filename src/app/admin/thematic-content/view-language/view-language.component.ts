@@ -29,28 +29,28 @@ export class ViewLanguageComponent implements OnInit {
       image: null,
       subthemes:  [
         {
-          idSubtheme: '1',
+          id: '1',
           name: 'Nombre del subtheme',
           description: 'Description of the subthemexxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxssssssssssssssssssssssssssssssxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
           contentEditor: '<h1> Titulo... </h1> <p>Holaxxxxxxxsssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssssxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx</p>'
         },
         {
-          idSubtheme: '1',
+          id: '1',
           name: '',
           description: ''
         },
         {
-          idSubtheme: '1',
+          id: '1',
           name: '',
           description: ''
         },
         {
-          idSubtheme: '1',
+          id: '1',
           name: '',
           description: ''
         },
         {
-          idSubtheme: '1',
+          id: '1',
           name: '',
           description: ''
         },
@@ -65,27 +65,27 @@ export class ViewLanguageComponent implements OnInit {
       image: null,
       subthemes:  [
         {
-          idSubtheme: '1',
+          id: '1',
           name: '',
           description: ''
         },
         {
-          idSubtheme: '1',
+          id: '1',
           name: '',
           description: ''
         },
         {
-          idSubtheme: '1',
+          id: '1',
           name: '',
           description: ''
         },
         {
-          idSubtheme: '1',
+          id: '1',
           name: '',
           description: ''
         },
         {
-          idSubtheme: '1',
+          id: '1',
           name: '',
           description: ''
         },
@@ -102,22 +102,22 @@ export class ViewLanguageComponent implements OnInit {
       subthemes:  [
       
         {
-          idSubtheme: '1',
+          id: '1',
           name: '',
           description: ''
         },
         {
-          idSubtheme: '1',
+          id: '1',
           name: '',
           description: ''
         },
         {
-          idSubtheme: '1',
+          id: '1',
           name: '',
           description: ''
         },
         {
-          idSubtheme: '1',
+          id: '1',
           name: '',
           description: ''
         },
@@ -133,12 +133,12 @@ export class ViewLanguageComponent implements OnInit {
   }
   public showSubtheme: boolean = false;
   public subthemeSelected: ISubtheme = {
-    idSubtheme: '',
+    id: '',
     name: '',
     description: '',
     contentEditor: '',
     contentCode: '',
-    image: 'https://www.eff.org/files/banner_library/coder-cat-2.png',
+    imageSrc: 'https://www.eff.org/files/banner_library/coder-cat-2.png',
     url_video: '',
   
   }

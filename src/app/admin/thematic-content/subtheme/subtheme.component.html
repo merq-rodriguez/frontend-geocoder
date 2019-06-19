@@ -38,7 +38,7 @@
 
 
   <div class="row ">
-    <div class="col-md-4" *ngFor="let theme of arrayThemes; let i=index">
+    <div class="col-md-4" *ngFor="let theme of language.themes; let i=index">
 
       <div class="drag-container">
         <!--    -->
@@ -66,7 +66,11 @@
           <div *ngFor="let subtheme of theme.subthemes" cdkDrag>
 
 
-            <app-card-mini (action)="getActionCardMini($event)" [item]="subtheme" [idTheme]="theme.id">
+            <app-card-mini 
+                (action)="getActionCardMini($event)" 
+                [item]="subtheme" 
+                [idTheme]="theme.id"
+            >
             </app-card-mini>
 
           </div>

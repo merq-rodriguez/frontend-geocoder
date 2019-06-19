@@ -1,13 +1,14 @@
 import { Observable } from 'rxjs';
 
 export interface ISubtheme{
-  idSubtheme?: string;
+  id?: string;
   name: string;
   description: string;
+  subtitle?: string;
   contentEditor?: string;
   contentCode?: string;
-  image?: string;
-  imageFile?: File;
+  image?: File;
+  imageSrc?: string;
   url_video?: string;
   idTheme?: number;
 }
@@ -15,9 +16,9 @@ export interface ISubtheme{
 
 
 export abstract class SubthemeData {
-    abstract getSubthemes():   Observable<any[]>;
+    abstract getSubthemes(idTheme: number):   Observable<any[]>;
     abstract findSubtheme(idSubtheme: number):   Observable<any>;
-    abstract createSubtheme(subtheme: number): Observable<any>;
-    abstract updateSubtheme(subtheme: number): Observable<any>;
+    abstract createSubtheme(subtheme: ISubtheme, idTheme: number): Observable<any>;
+    abstract updateSubtheme(subtheme: ISubtheme, idTheme: number): Observable<any>;
     abstract deleteSubtheme(idSubtheme: number): Observable<any>;
   }

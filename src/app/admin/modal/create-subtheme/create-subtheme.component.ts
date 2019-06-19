@@ -5,6 +5,7 @@ import { MonacoService } from 'src/app/@core/services/monaco.service';
 import { ContentEditorService } from 'src/app/@core/services/content-editor.service';
 import {MatSnackBar} from '@angular/material';
 import { Observable } from 'rxjs';
+import { SnackBarService } from 'src/app/@core/services/snackbar.service';
 
 export interface ISubthemeDialog{
   id?: string;
@@ -12,8 +13,8 @@ export interface ISubthemeDialog{
   description: string;
   contentEditor?: string;
   contentCode?: string;
-  image?: string;
-  imageFile?: File;
+  imageSrc?: string;
+  image?: File;
   addVideo?: boolean;
   url_video: string;
   addCode?: boolean;
@@ -36,7 +37,7 @@ export class CreateSubthemeDialog {
   contentEditor: string = '';
 
   constructor(
-    private snackBar: MatSnackBar,
+    private snackService: SnackBarService,
     private monacoService: MonacoService,
     private editorService: ContentEditorService,
     public dialogRef: MatDialogRef<CreateSubthemeDialog>,
@@ -45,30 +46,14 @@ export class CreateSubthemeDialog {
       this.subscribeEditor$ = this.editorService.content$.subscribe(content => this.contentEditor = content );
     }
 
-    
-
+  
     getFile(file: File){
-      this.data.imageFile = file;
+      this.data.image = file;
     }
-
-    /* onFileSelected(event){
-      console.log(event)
-      console.log(<File>event.target.files[0])
-        this.selectedFile = <File>event.target.files[0];
-        console.log(this.selectedFile)
-    } */
 
     onNoClick(): void {
       this.dialogRef.close();
     }
-
-    openSnackBar(message: string, action: string) {
-      this.snackBar.open(message, action, {
-        duration: 2000,
-      });
-    }
-
-
 
     getDestroy(){
       this._destroy = !this._destroy;
@@ -77,7 +62,7 @@ export class CreateSubthemeDialog {
 
     validatorData():void{
       if(this.textfieldRequired()){
-       this.openSnackBar('El nombre y la descripcion son obligatorios','Aceptar');
+       this.snackService.openSnackBar('El nombre y la descripcion son obligatorios','Aceptar');
        this._saveData = false;
       }else{
         this._saveData = true;
@@ -85,7 +70,7 @@ export class CreateSubthemeDialog {
 
      if(this.contentEditor){
       if(this.contentEditor.trim() === ''){
-        this.openSnackBar('Debes construir el contenido en el editor','Aceptar');
+        this.snackService.openSnackBar('Debes construir el contenido en el editor','Aceptar');
         this._saveData = false;
       }else{
         this._saveData = true;
@@ -94,7 +79,7 @@ export class CreateSubthemeDialog {
 
       if(this.data.addCode){ //Primero verificamos que la persona haya anexado codigo (Esto es opcional, no es obligatorio añadir codigo para un subtema)
         if(this.contentMonaco.trim() === ''){ // Si añadio codigo validamos que no esté vacio
-          this.openSnackBar('Debes ingresar codigo de programacion','Aceptar');
+          this.snackService.openSnackBar('Debes ingresar codigo de programacion','Aceptar');
           this._saveData = false;
         }else{
           this._saveData = true;
@@ -103,20 +88,13 @@ export class CreateSubthemeDialog {
       
       if(this.data.addVideo){
         if(this.data.url_video.trim() === ''){
-          this.openSnackBar('Debes ingresar la url de un video o desabilita la opcion','Aceptar');
+          this.snackService.openSnackBar('Debes ingresar la url de un video o desabilita la opcion','Aceptar');
           this._saveData = false;
         }else{
           this._saveData = true;
         }
       }
-          
-        //if(this.validatorMonaco()){
-        //this._saveData = true;
-       // }
-       
-
-       // ? this._saveData = true 
-      // : this._saveData = false; 
+  
     }
 
 
