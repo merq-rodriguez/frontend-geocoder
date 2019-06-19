@@ -133,6 +133,7 @@ export class SubthemeComponent implements OnInit {
          name: item.name,
          contentCode: item.contentCode,
          description: item.description,
+         imageSrc: item.imageSrc,
          image: item.image,
          url_video: item.url_video,
          contentEditor: item.contentEditor,
@@ -167,6 +168,7 @@ export class SubthemeComponent implements OnInit {
       description: this.data.description ,
       contentCode: this.data.contentCode,
       contentEditor: this.data.contentEditor,
+      imageSrc: this.data.imageSrc,
       image: this.data.image,
       url_video: this.data.url_video
     }
