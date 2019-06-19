@@ -32,8 +32,11 @@
 
     </div>
     <!-- IMAGE-PREVIE  -->
-    <image-preview *ngIf='isUpdated' [image]="newTheme.imageSrc" (onChange)="getFile($event)"></image-preview>
-    <image-preview *ngIf='!isUpdated' (onChange)="getFile($event)"></image-preview>
+    <image-preview 
+          *ngIf='!isReset' 
+          [image]="newTheme.imageSrc" 
+          (onChange)="getFile($event)">
+    </image-preview>
     <!-- END IMAGE-PREVIE  -->
 
 
@@ -43,12 +46,22 @@
     <hr />
 
     <div class="row">
-      <button (click)="addTheme()" mat-raised-button matTooltip="Crear Tema" *ngIf="!isUpdated"
-        [matTooltipPosition]="'above'" type="button" class="btn btn-default pull-right button-add">
+      <button 
+          *ngIf="!isUpdated"
+          (click)="addTheme()" 
+          type="button" 
+          mat-raised-button matTooltip="Crear Tema" 
+          [matTooltipPosition]="'above'" 
+          class="btn btn-default pull-right button-add">
         Añadir
       </button>
-      <button (click)="updateTheme()" mat-raised-button matTooltip="Crear Tema" *ngIf="isUpdated"
-        [matTooltipPosition]="'above'" type="button" class="btn btn-default pull-right button-add">
+      <button 
+          (click)="updateTheme()" 
+          type="button" 
+          *ngIf="isUpdated"
+          mat-raised-button matTooltip="Crear Tema" 
+          [matTooltipPosition]="'above'" 
+          class="btn btn-default pull-right button-add">
         Actualizar
       </button>
     </div>

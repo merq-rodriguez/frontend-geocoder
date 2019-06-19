@@ -20,13 +20,7 @@ export class MtImagePreviewComponent {
   // Emitir un evento cuando un archivo ha sido elegido. Aquí devolvemos el archivo en sí.
   @Output() onChange: EventEmitter<File> = new EventEmitter<File>();
 
-  constructor() { 
-    if(this.image){
-      console.log("----------------- image view")
-      console.log(this.image)
-     // this.source = this.image;
-    }
-  }
+  constructor(){}
 
   // Si la entrada ha cambiado (archivo seleccionado), proyectamos el archivo en la vista previa de img
   updateSource($event: Event, type: string) {
