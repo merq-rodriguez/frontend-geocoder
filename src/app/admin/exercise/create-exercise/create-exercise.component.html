@@ -46,7 +46,7 @@
 
 
 
-         <!--  <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
+          <!--  <button mat-raised-button (click)="isLinear = !isLinear" id="toggle-linear">
             {{!isLinear ? 'Enable linear mode' : 'Disable linear mode'}}
           </button> -->
           <mat-vertical-stepper [linear]="isLinear" #stepper>
@@ -59,31 +59,41 @@
                   <div class="row">
                     <div class="col-12">
                       <mat-form-field>
-                        <input 
-                          matInput 
-                          placeholder="Nombre del ejercicio" 
-                          [(ngModel)]="exercise.name"
-                          name="name"
-                          formControlName="nameCtrl"/>
+                        <input matInput placeholder="Nombre del ejercicio" [(ngModel)]="exercise.name" name="name"
+                          formControlName="nameCtrl" />
                       </mat-form-field>
 
                       <mat-form-field>
-                        <textarea 
-                            matInput 
-                            placeholder="Descripcion" 
-                            [(ngModel)]="exercise.description"
-                            name="description"
-
-                          formControlName="descriptionCtrl"></textarea>
+                        <textarea matInput placeholder="Descripcion" [(ngModel)]="exercise.description"
+                          name="description" formControlName="descriptionCtrl"></textarea>
                       </mat-form-field>
 
                     </div>
                   </div>
                 </div>
+                <div class="container">
+                  <div class="row">
+                    <div class="col-12">
+                      <form>
+                        <mat-form-field>
+                          <mat-label>Selecciona una idioma</mat-label>
+                          <mat-select [(ngModel)]="selectedLanguage" name="language">
+                            <mat-option *ngFor="let lang of languages" [value]="lang.id">
+                              {{lang.name}}
+                            </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                        <p> Selected language: {{selectedLanguage}} </p>
+  
+                      </form>
+                    </div>
+
+                  </div>
+                </div>
 
                 <image-preview (onChange)="getFile($event)"></image-preview>
 
-               <!--  <div>
+                <!--  <div>
                   <button mat-button matStepperNext>Siguiente</button>
                 </div> -->
               </form>
@@ -93,7 +103,7 @@
             <mat-step [stepControl]="secondFormGroup">
               <form [formGroup]="secondFormGroup">
                 <ng-template matStepLabel>Planteamiento</ng-template>
-             
+
 
 
                 <div class="container">
@@ -104,7 +114,7 @@
                   </div>
                 </div>
 
-              <!--   <div>
+                <!--   <div>
                   <button mat-button matStepperPrevious>Atras</button>
                   <button mat-button matStepperNext>Siguiente</button>
                 </div> -->
@@ -116,8 +126,8 @@
             <mat-step [stepControl]="threeFormGroup">
               <form [formGroup]="threeFormGroup">
                 <ng-template matStepLabel>Solucion algoritmica</ng-template>
-               
-                
+
+
 
 
                 <div class="container">
@@ -133,13 +143,8 @@
                   <div class="row ">
                     <div class="col-4">
                       <mat-form-field>
-                        <textarea 
-                            matInput 
-                            placeholder="Estradas del ejercicio" 
-                            [(ngModel)]="exercise.input"
-                            formControlName="inputCtrl"
-                            name="input"
-                          rows="6"></textarea>
+                        <textarea matInput placeholder="Estradas del ejercicio" [(ngModel)]="exercise.input"
+                          formControlName="inputCtrl" name="input" rows="6"></textarea>
                       </mat-form-field>
                     </div>
 
@@ -150,14 +155,8 @@
 
                     <div class="col-4">
                       <mat-form-field>
-                        <textarea 
-                            matInput 
-                            placeholder="Salidas del ejercicio" 
-                            [(ngModel)]="exercise.output"
-                            formControlName="outputCtrl"
-                            name="output"
-
-                          rows="6"></textarea>
+                        <textarea matInput placeholder="Salidas del ejercicio" [(ngModel)]="exercise.output"
+                          formControlName="outputCtrl" name="output" rows="6"></textarea>
                       </mat-form-field>
                     </div>
                   </div>
@@ -167,7 +166,7 @@
 
 
 
-               <!--  <div>
+                <!--  <div>
                   <button mat-button matStepperPrevious>Atras</button>
                   <button mat-button matStepperNext>Siguiente</button>
                 </div> -->
@@ -178,54 +177,42 @@
             <mat-step [stepControl]="fourFormGroup">
               <form [formGroup]="fourFormGroup">
                 <ng-template matStepLabel>Ubicacion geografica</ng-template>
-               
 
-                    <br />
-                    <mat-card>
-                      <div class="col">
-                        <div class="row">
-                          <div class="col-md-4">
-                            <mat-form-field >
-                              <input 
-                              matInput 
-                              placeholder="Latitud" 
-                              type="number" 
-                              [(ngModel)]="exercise.location.latitude"
-                              formControlName="latitudeCtrl"  />
-                            </mat-form-field>
-                          </div>
-  
-                          <div class="col-md-4">
-                            <mat-form-field >
-                              <input 
-                                  matInput 
-                                  placeholder="Longitud" 
-                                  type="number" 
-                                  formControlName="longitudeCtrl"
-                                  [(ngModel)]="exercise.location.longitude" />
-                            </mat-form-field>
-                          </div>
-  
-                          <div class="col-md-4">
-                            <mat-form-field >
-                              <input 
-                                  type="number" 
-                                  matInput 
-                                  placeholder="Radio" 
-                                  formControlName="radiusCtrl"
-                                  [(ngModel)]="exercise.radius" />
-                            </mat-form-field>
-                          </div>
-                        </div>
+
+                <br />
+                <mat-card>
+                  <div class="col">
+                    <div class="row">
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <input matInput placeholder="Latitud" type="number" [(ngModel)]="exercise.location.latitude"
+                            formControlName="latitudeCtrl" />
+                        </mat-form-field>
                       </div>
-                    </mat-card>
-                    <br />
 
-                    <br />
-                    <app-map (coordinateChange)="getCoordinate($event)"></app-map>
-                    <br /> 
-                      
-              <!--       <mat-card class="">
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <input matInput placeholder="Longitud" type="number" formControlName="longitudeCtrl"
+                            [(ngModel)]="exercise.location.longitude" />
+                        </mat-form-field>
+                      </div>
+
+                      <div class="col-md-4">
+                        <mat-form-field>
+                          <input type="number" matInput placeholder="Radio" formControlName="radiusCtrl"
+                            [(ngModel)]="exercise.radius" />
+                        </mat-form-field>
+                      </div>
+                    </div>
+                  </div>
+                </mat-card>
+                <br />
+
+                <br />
+                <app-map (coordinateChange)="getCoordinate($event)"></app-map>
+                <br />
+
+                <!--       <mat-card class="">
                         <div class="row">
                           <div class="col-md-12">
                             <mat-slider thumbLabel matTooltip="Desliza para generar un radio de competencia"
@@ -237,7 +224,7 @@
                       </mat-card> -->
 
 
-                 <!--  <button mat-button matStepperPrevious>Atras</button>
+                <!--  <button mat-button matStepperPrevious>Atras</button>
                   <button mat-button matStepperNext>Siguiente</button> -->
               </form>
             </mat-step>
@@ -245,12 +232,9 @@
               <ng-template matStepLabel>Terminar</ng-template>
 
 
-                 
-                    <button 
-                          mat-raised-button 
-                          type="submit" 
-                          class="btn btn-default pull-right button-blue"
-                          (click)="addExercise()">Guardar</button>
+
+              <button mat-raised-button type="submit" class="btn btn-default pull-right button-blue"
+                (click)="addExercise()">Guardar</button>
 
 
             </mat-step>
@@ -275,13 +259,13 @@
 
 
 
-    <div class="container">
+          <div class="container">
             <div class="row d-flex justify-content-center">
               <div *ngFor="let item of exerciseList">
                 <app-card (action)="getAction($event)" [item]="item" [type]="'exercise'"></app-card>
               </div>
             </div>
-          </div> 
+          </div>
 
         </div>
       </div>
