@@ -51,6 +51,7 @@ export class SubthemeComponent implements OnInit {
 
 
   ngOnInit() {
+    this.editorService.setContent("");
     this.themathicService.getLanguage().subscribe((language: ILanguage) => this.language = language);
     this.monacoService.content$.subscribe(content => this.data.contentCode = content );
     this.editorService.getContent().subscribe(content => {
@@ -172,7 +173,7 @@ export class SubthemeComponent implements OnInit {
       image: this.data.image,
       url_video: this.data.url_video
     }
-  this.subthemeService.updateSubtheme( _subtheme, Number(this.idThemeSelected)).subscribe( res => {
+  this.subthemeService.updateSubtheme( _subtheme).subscribe( res => {
       console.log("=================== UPDATE SUBTHEME RESPONSE =====================");
       console.log(res);
       if(res.result){
@@ -221,18 +222,19 @@ export class SubthemeComponent implements OnInit {
         if(res.result){
           _subtheme.imageSrc = res.result.image;
           _subtheme.id = res.result.id;
+          //Se procede a insertar el subthema en en el tema al que pertenece 
+          //haciendo uso del id para encontrarlo.
+          this.language.themes.forEach(theme => (theme.id === this.idThemeSelected) 
+              ? theme.subthemes.push(_subtheme)
+              : theme);
+          console.log(this.language.themes)
+          this.clearObservables();
+          this.clearDataDialog();
         }
         console.log(_subtheme)
   });
 
-  //Se procede a insertar el subthema en en el tema al que pertenece 
-  //haciendo uso del id para encontrarlo.
-  this.language.themes.forEach(theme => (theme.id === this.idThemeSelected) 
-            ? theme.subthemes.push(_subtheme)
-            : theme);
-  console.log(this.language.themes)
-  this.clearObservables();
-  this.clearDataDialog();
+  
   }
 
 

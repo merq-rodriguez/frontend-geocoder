@@ -32,13 +32,13 @@ export class SubthemeService extends SubthemeData{
 
       form.append('name', subtheme.name);
       form.append('description', subtheme.description);
-      form.append('content', subtheme.contentEditor);
+      form.append('contentEditor', subtheme.contentEditor);
       form.append('idTheme', String(idTheme));
       return this.api.post(this.controller, 'createSubtheme', form);
     }
 
 
-    updateSubtheme(subtheme: ISubtheme, idTheme: number): Observable<any> {
+    updateSubtheme(subtheme: ISubtheme): Observable<any> {
       const form = new FormData();
       if(subtheme.image)
           form.append('image', subtheme.image, subtheme.image.name);
@@ -49,7 +49,7 @@ export class SubthemeService extends SubthemeData{
       form.append('idSubtheme', subtheme.id);
       form.append('name', subtheme.name);
       form.append('description', subtheme.description);
-      form.append('content', subtheme.contentEditor);
+      form.append('contentEditor', subtheme.contentEditor);
       return this.api.put(this.controller, 'updateSubtheme', form);
     }
     
