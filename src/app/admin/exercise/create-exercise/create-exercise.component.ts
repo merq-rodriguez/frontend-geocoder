@@ -16,6 +16,7 @@ import { PayloadJudge0 } from 'src/app/@core/data/payload-judge0';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LatLng } from 'leaflet';
 import { AuthService } from 'src/app/@core/services/auth.service';
+import { isArray } from 'util';
 
 
 export interface LanguageOption {
@@ -92,6 +93,7 @@ export class CreateExerciseComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.getAllLanguages();
     this.authService.userObservable$.subscribe(user => this.user = user);
     this.getAllExercises(this.user.idUser);
     this.subscribeMonaco$ = this.monacoService.content$.subscribe(content => this.exercise.contentCode = content);
@@ -168,6 +170,13 @@ export class CreateExerciseComponent implements OnInit {
 
   }
 
+  getAllLanguages(){
+    this.judgle0Service.getLanguages().subscribe(res => {
+      console.log("RESPONSE LANGUAGES JUDGE")
+      console.log(res);
+    })
+  }
+
   getFile(file: File) {
     this.exercise.image = file;
   }
@@ -235,7 +244,7 @@ export class CreateExerciseComponent implements OnInit {
 
   getAllExercises(idUser: number) {
     this.exerciseService.getExercises(idUser).subscribe(exersices => {
-      console.log(exersices.name);
+     
       for (const exer of exersices) {
         console.log(exer);
         this.exerciseList.push({

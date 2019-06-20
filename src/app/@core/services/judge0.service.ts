@@ -1,26 +1,26 @@
 import { PayloadJudge0 } from './../data/payload-judge0';
 import { Injectable } from '@angular/core';
 import { of as observableOf, Observable, of } from 'rxjs';
-import { Api } from './api.service';
+import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable()
 export class Judge0Service  {
 
-  constructor( private api: Api) {
+  constructor( private http: HttpClient) {
   }
 
-  private controller: string = "submissions"
 
   getLanguages(): Observable<any> {
-    return this.api.get('languages')
+    return this.http.get(environment.api.judge+'languages');
   }
 
   submission(payload: PayloadJudge0): Observable<any> {
-    return this.api.postSubmission(this.controller , '?base64_encoded=false&wait=false', payload);
+     return this.http.post('submissions/?base64_encoded=false&wait=false', payload);
   }
   
   detailSubmission(token: string): Observable<any> {
-    return this.api.getDetailSubmission(this.controller+ `${'/' + token + '?base64_encoded=false'}`);
+    return this.http.get(`${'submissions'+ '/' + token + '?base64_encoded=false'}`);
   }
   
 

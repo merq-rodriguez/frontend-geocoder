@@ -1,7 +1,9 @@
 
 export const environment = {
-  api: 'http://localhost:3001/',
-  apiJudge: 'https://api.judge0.com/',
+  api: { 
+    geoprogram: 'http://localhost:3001/', 
+    judge: 'https://api.judge0.com/' 
+  },
   production: false
 };
 

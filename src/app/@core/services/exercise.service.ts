@@ -10,7 +10,7 @@ import { ExerciseData, IExercise } from '../data/exercise.data';
 export class ExerciseService extends ExerciseData {
 
   constructor( private api: Api) {
-    super()
+    super();
   }
 
   private controller: string = "exercises"
