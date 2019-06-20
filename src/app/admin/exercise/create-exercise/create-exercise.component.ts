@@ -1,7 +1,6 @@
 import { Judge0Service } from './../../../@core/services/judge0.service';
-import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { Component, OnInit } from "@angular/core";
-import { ActivatedRoute } from "@angular/router";
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 import { fuseAnimations } from 'src/app/@theme/animations';
 import { IExercise } from 'src/app/@core/data/exercise.data';
@@ -16,6 +15,7 @@ import { InfoDialogComponent } from '../../modal/info/info-dialog.component';
 import { PayloadJudge0 } from 'src/app/@core/data/payload-judge0';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LatLng } from 'leaflet';
+import { AuthService } from 'src/app/@core/services/auth.service';
 
 
 export interface LanguageOption {
@@ -47,7 +47,7 @@ export class CreateExerciseComponent implements OnInit {
   ];
 
 
-  idUser: number;
+  user: any;
   subscribeMonaco$: any;
   subscribeEditorHTML$: any;
   exerciseList: IExercise[] = []
@@ -86,15 +86,14 @@ export class CreateExerciseComponent implements OnInit {
     private exerciseService: ExerciseService,
     private monacoService: MonacoService,
     private editorService: ContentEditorService,
-    private localstorageService: LocalstorageService,
+    private authService: AuthService,
     public dialog: MatDialog,
     private judgle0Service: Judge0Service
   ) { }
 
   ngOnInit() {
-    let user = this.localstorageService.getLocalstorage('user');
-    this.idUser = user.idUser;
-    this.getAllExercises(this.idUser);
+    this.authService.userObservable$.subscribe(user => this.user = user);
+    this.getAllExercises(this.user.idUser);
     this.subscribeMonaco$ = this.monacoService.content$.subscribe(content => this.exercise.contentCode = content);
     this.subscribeEditorHTML$ = this.editorService.content$.subscribe(content => this.exercise.contentEditor = content);
     this.firstFormGroup = this._formBuilder.group({
@@ -282,7 +281,7 @@ export class CreateExerciseComponent implements OnInit {
         description: this.exercise.description,
         contentCode: this.exercise.contentCode,
         contentEditor: this.exercise.contentEditor,
-        idUser: this.idUser,
+        idUser: this.user.idUser,
         input: this.exercise.input,
         output: this.exercise.output,
         image: this.exercise.image,

@@ -9,7 +9,7 @@ export class AuthService{
 
     user: any;
     private userSource = new BehaviorSubject<any>(null);
-    public userObservable = this.userSource.asObservable()
+    public userObservable$ = this.userSource.asObservable()
 
     constructor(private localService: LocalstorageService){
         try {

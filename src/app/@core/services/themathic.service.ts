@@ -24,7 +24,7 @@ export class ThemathicService implements ThemathicData  {
     public  languageObservable$ = this.languageSource.asObservable();
 
     constructor(private readonly authService: AuthService) {
-        this.authService.userObservable.subscribe(user => this.language.idUser = user.idUser)
+        this.authService.userObservable$.subscribe(user => this.language.idUser = user.idUser)
      }
 
    
