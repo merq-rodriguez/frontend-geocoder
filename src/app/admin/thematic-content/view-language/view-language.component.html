@@ -52,12 +52,10 @@
                       <div class="col-10">
                         <p class="title-card">{{ language.name }}</p>
                       </div>
-
                     </div>
-
                   </mat-card-title>
                   <mat-card-subtitle>
-
+                    <p>Lenguaje</p>
                   </mat-card-subtitle>
                   <hr>
                   <mat-card-content>
@@ -90,7 +88,7 @@
                               </div>
                               <div class="col-1">
                                 <button mat-icon-button color="primary" class="btn  btn-just-icon add-subtheme"
-                                  (click)="openDialog(theme.id)">
+                                  (click)="openDialogTheme(theme)">
                                   <i class="material-icons"> remove_red_eye </i>
                                 </button>
                               </div>
@@ -107,27 +105,12 @@
                           <div *ngFor="let subtheme of theme.subthemes" cdkDrag>
 
 
-                            <app-card-mini 
-                              (click)="openDialog(subtheme)" 
-                              [item]="subtheme" 
-                              [idTheme]="theme.id"
+                            <app-card-mini (click)="openDialog(subtheme)" [item]="subtheme" [idTheme]="theme.id"
                               [option]="'view'">
                             </app-card-mini>
 
                           </div>
                         </div>
-
-
-
-
-
-
-
-
-
-
-
-
                       </div>
                     </div>
                   </div>

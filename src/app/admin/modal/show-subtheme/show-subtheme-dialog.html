@@ -1,28 +1,27 @@
 <h1 mat-dialog-title>Crear contenido tematico</h1>
 <div mat-dialog-content>
   <div class="container">
-
+    <div class="row">
+      <div class="col-12">
+        <img [src]="data.image" style="
+                width: 100%;
+                height: 170px;
+                border-width: 3px; 
+                border-color: 660033;">
+      </div>
+    </div>
 
     <div class="row">
-      <div class="col-9">
-        <div class="col-auto">
-
-          <label> Nombre del lenguaje:</label>
-          <p> xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx </p>
-        
-        </div>
-        <div class="col-12">
-            <label> Descripcion:</label>
-            <p > {{ data.description }} </p>
-        </div>
+      <div class="col-12">
+        <label> Nombre del lenguaje:</label>
+        <p> xxxxxxxxxxxxxx </p>
       </div>
-      <div class="col-3">
-          <img [src]="data.image" 
-              style="
-                  width: 100%;
-                  height: 170px;
-  	              border-width: 3px; 
-  	              border-color: 660033;" >
+    </div>
+
+    <div class="row">
+      <div class="col-12">
+        <label> Descripcion:</label>
+        <p> xxxxxxxxxxxxxx </p>
       </div>
     </div>
 
@@ -34,60 +33,19 @@
 
     <div class="row">
       <div class="col-12">
-          <div [innerHTML]="data.contentEditor" >
-      </div>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-10">
-        <div class="row">
-          <div class="col-7">
-            <p> ¿Deseas agregar un codigo de programacion? </p>
-          </div>
-          <div class="col-2">
-            <mat-slide-toggle [(ngModel)]="data.addCode"> {{ data.addCode ? 'Si' : 'No' }} </mat-slide-toggle>
-          </div>
+        <div [innerHTML]="data.contentEditor">
         </div>
       </div>
     </div>
 
-    {{ data.addCode }}
-    <div class="row">
-      <div class="col-12" *ngIf="data.addCode">
-        <app-monaco-code></app-monaco-code>
-      </div>
-    </div>
+   
 
-<br>
-<br>
-    <div class="row">
-      <div class="col-10">
-        <div class="row">
-          <div class="col-5">
-            <p> ¿Deseas agregar un video? </p>
-          </div>
-          <div class="col-2">
-            <mat-slide-toggle [(ngModel)]="data.addVideo"> {{ data.addVideo ? 'Si' : 'No' }} </mat-slide-toggle>
-          </div>
-        </div>
-      </div>
-    </div>
+    
 
-    <div class="row">
-      <div class="col-12" *ngIf="data.addVideo">
-        <div class="col-9">
-          <mat-form-field>
-            <input type="text" [(ngModel)]="data.url_video"
-             matInput placeholder="Pega aqui la url del video de youtube" (change)="getDestroy()">
-          </mat-form-field>
-        </div>
+    <br>
+   
 
-        <div class="col-12 d-flex justify-content-center" *ngIf="data.url_video.length > 0">
-            <app-video [id]="data.url_video" *ngIf="_destroy" ></app-video>
-        </div>
-      </div>
-    </div>
+ 
 
 
 
@@ -95,5 +53,5 @@
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="onNoClick()">Cancelar</button>
-  <button mat-button [mat-dialog-close]="data" cdkFocusInitial  >Aceptar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Aceptar</button>
 </div>

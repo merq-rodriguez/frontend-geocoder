@@ -1,0 +1,61 @@
+<!-- <h1 mat-dialog-title>Tema</h1> -->
+<div mat-dialog-content>
+  <div class="container">
+    
+   
+    <br>
+    <div class="row">
+      <mat-card class="card-name">
+        <div class="col-12">
+          <label> Nombre del tema:</label>
+          <p> {{data.name }} </p>
+        </div>
+      </mat-card>
+    </div>
+    <br>
+    <div class="row d-flex justify-content-center">
+      <div class="col-5">
+        <img [src]="data.image" class="image">
+      </div>
+    </div>
+    <br>
+
+    <div class="row">
+        <mat-card class="card-name">
+          <div class="col-12">
+            <label> Descripcion:</label>
+            <p> {{ data.description }} </p>
+          </div>
+        </mat-card>
+    </div>
+
+    <br>
+    <br>
+
+
+
+
+    <div class="row">
+      <div class="col-12">
+        <div [innerHTML]="data.content">
+        </div>
+      </div>
+    </div>
+
+   
+
+    
+
+    <br>
+   
+
+ 
+
+
+
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onNoClick()">Cancelar</button>
+  <button mat-button [mat-dialog-close]="data" cdkFocusInitial>Aceptar</button>
+</div>

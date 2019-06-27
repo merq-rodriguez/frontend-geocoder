@@ -2,14 +2,14 @@ import { Component, OnInit, Input } from "@angular/core";
 import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ILanguage } from 'src/app/@core/data/language.data';
 import { MatDialog } from '@angular/material';
-import { ISubthemeDialog, CreateSubthemeDialog } from '../../modal/create-subtheme/create-subtheme.component';
+import { ISubthemeDialog, } from '../../modal/create-subtheme/create-subtheme.component';
 import { ShowSubthemeDialog } from '../../modal/show-subtheme/show-subtheme.component';
 import { ISubtheme } from 'src/app/@core/data/subtheme-data';
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 import { ITheme } from 'src/app/@core/data/theme.data';
 import { ActivatedRoute } from '@angular/router';
 import { ThemeService } from 'src/app/@core/services/theme.service';
-import { SubthemeService } from 'src/app/@core/services/subtheme.service';
+import { ShowThemeDialog } from '../../modal/show-theme/show-theme.component';
 
 
 
@@ -152,6 +152,7 @@ export class ViewLanguageComponent implements OnInit {
   constructor(
     private router: ActivatedRoute,
     private themeService: ThemeService,
+    public dialog: MatDialog
   ) { }
 
 
@@ -169,7 +170,19 @@ export class ViewLanguageComponent implements OnInit {
 
   }
 
-  async getThemes() {
+  openDialogTheme(theme): void {
+    const dialogRef = this.dialog.open(ShowThemeDialog, {
+      width: '1024px',
+      data: theme
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
+  }
+
+   getThemes() {
     this.themeService.getThemesWithSubthemes(this.language.idLanguage).subscribe( themes => {
       for (const theme of themes) {
         for (let subtheme of theme.subthemes) {

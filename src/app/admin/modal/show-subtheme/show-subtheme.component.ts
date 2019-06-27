@@ -13,10 +13,7 @@ export interface ISubthemeDialog{
   contentEditor?: string;
   contentCode?: string;
   image?: string;
-  addVideo?: boolean;
   url_video: string;
-  addCode?: boolean;
-  action?: string;
 }
 
 
@@ -33,30 +30,15 @@ export class ShowSubthemeDialog {
   contentMonaco: string = '';
 
   constructor(
-    private snackBar: MatSnackBar,
-    private monacoService: MonacoService,
-    private editorService: ContentEditorService,
     public dialogRef: MatDialogRef<ShowSubthemeDialog>,
     @Inject(MAT_DIALOG_DATA) public data: ISubthemeDialog) {
-      this.subscribeMonaco$ = this.monacoService.content$.subscribe(content => this.contentMonaco = content );
     }
 
-    onFileSelected(event){
-      console.log(event)
-      console.log(<File>event.target.files[0])
-        this.selectedFile = <File>event.target.files[0];
-        console.log(this.selectedFile)
-    }
-
+    
     onNoClick(): void {
       this.dialogRef.close();
     }
 
-    openSnackBar(message: string, action: string) {
-      this.snackBar.open(message, action, {
-        duration: 2000,
-      });
-    }
 
     getDestroy(){
       this._destroy = !this._destroy;
