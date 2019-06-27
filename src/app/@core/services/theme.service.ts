@@ -6,16 +6,19 @@ import { ThemeData, ITheme } from '../data/theme.data';
 @Injectable()
 export class ThemeService extends ThemeData{
 
-    constructor( private api: Api,
-      ){
-      super()
+    constructor( private api: Api){
+      super();
     }
 
     private controller: string = "themes"  
     themes = [];
 
-    getThemes():Observable<any>{
-        return this.api.get(this.controller+'/getAll')
+    getThemes(idLanguage: number):Observable<any>{
+        return this.api.get(this.controller+'/getAll', idLanguage);
+    }
+    
+    getThemesWithSubthemes(idLanguage: number):Observable<any>{
+        return this.api.get(this.controller+'/getThemesWithSubthemes', idLanguage);
     }
 
     findTheme(): Observable<any> {

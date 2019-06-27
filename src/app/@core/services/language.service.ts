@@ -18,17 +18,9 @@ export class LanguageService extends LanguageData {
   private controller: string = "languages"
   languages = [];
 
-  getLanguagesWithThematic(idUser: number) {
-    return forkJoin(
-      [
-        this.getLanguages(idUser),
-        this.themeService.getThemes()
-      ]
-    )
-  }
 
   getLanguages(idUser: number): Observable<any> {
-    return this.api.get(this.controller + '/getAll/' + idUser)
+    return this.api.get(this.controller + '/getAll', idUser)
 
   }
 

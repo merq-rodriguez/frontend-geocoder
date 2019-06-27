@@ -1,10 +1,6 @@
 import {Component, Inject} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
-import { fuseAnimations } from 'src/app/@theme/animations';
-import { MonacoService } from 'src/app/@core/services/monaco.service';
-import { ContentEditorService } from 'src/app/@core/services/content-editor.service';
-import {MatSnackBar} from '@angular/material';
-import { Observable } from 'rxjs';
+
 
 export interface InfoDialog{
   id: number;

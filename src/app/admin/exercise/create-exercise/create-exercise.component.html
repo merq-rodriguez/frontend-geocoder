@@ -76,14 +76,13 @@
                     <div class="col-12">
                       <form>
                         <mat-form-field>
-                          <mat-label>Selecciona una idioma</mat-label>
+                          <mat-label>Selecciona el lenguaje de programacion</mat-label>
                           <mat-select [(ngModel)]="selectedLanguage" name="language">
                             <mat-option *ngFor="let lang of languages" [value]="lang.id">
                               {{lang.name}}
                             </mat-option>
                           </mat-select>
                         </mat-form-field>
-                        <p> Selected language: {{selectedLanguage}} </p>
   
                       </form>
                     </div>
@@ -112,10 +111,7 @@
                   </div>
                 </div>
 
-                <!--   <div>
-                  <button mat-button matStepperPrevious>Atras</button>
-                  <button mat-button matStepperNext>Siguiente</button>
-                </div> -->
+              
               </form>
             </mat-step>
 
@@ -148,9 +144,8 @@
 
                     <div class="col-4">
                       <button class="btn btn-success center" (click)="submissionCode()">ENVIAR</button>
-                      <button class="btn btn-success center" (click)="getDetailSubmission()">PROBAR</button>
+                      <button class="btn btn-success center" (click)="getDetailSubmission()">VER STATUS</button>
                     </div>
-
                     <div class="col-4">
                       <mat-form-field>
                         <textarea matInput placeholder="Salidas del ejercicio" [(ngModel)]="exercise.output"
@@ -161,13 +156,6 @@
                 </div>
 
 
-
-
-
-                <!--  <div>
-                  <button mat-button matStepperPrevious>Atras</button>
-                  <button mat-button matStepperNext>Siguiente</button>
-                </div> -->
               </form>
             </mat-step>
 
@@ -222,8 +210,6 @@
                       </mat-card> -->
 
 
-                <!--  <button mat-button matStepperPrevious>Atras</button>
-                  <button mat-button matStepperNext>Siguiente</button> -->
               </form>
             </mat-step>
             <mat-step>

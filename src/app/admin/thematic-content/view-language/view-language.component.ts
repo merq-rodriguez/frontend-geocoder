@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from "@angular/core";
-import {CdkDragDrop, moveItemInArray, transferArrayItem} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ILanguage } from 'src/app/@core/data/language.data';
 import { MatDialog } from '@angular/material';
 import { ISubthemeDialog, CreateSubthemeDialog } from '../../modal/create-subtheme/create-subtheme.component';
@@ -7,6 +7,9 @@ import { ShowSubthemeDialog } from '../../modal/show-subtheme/show-subtheme.comp
 import { ISubtheme } from 'src/app/@core/data/subtheme-data';
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 import { ITheme } from 'src/app/@core/data/theme.data';
+import { ActivatedRoute } from '@angular/router';
+import { ThemeService } from 'src/app/@core/services/theme.service';
+import { SubthemeService } from 'src/app/@core/services/subtheme.service';
 
 
 
@@ -16,10 +19,10 @@ import { ITheme } from 'src/app/@core/data/theme.data';
   styleUrls: ["./view-language.component.css"],
 })
 export class ViewLanguageComponent implements OnInit {
-  
-  public subscriberArrayTheme: any;
 
-  public arrayThemes: ITheme[] = [
+  public subscriberArrayTheme: any;
+  public arrayThemes: ITheme[] = [];
+ /*  public arrayThemes: ITheme[] = [
     {
       id: '1',
       subtitle: 'Temas',
@@ -27,7 +30,7 @@ export class ViewLanguageComponent implements OnInit {
       content: 'x',
       description: '',
       image: null,
-      subthemes:  [
+      subthemes: [
         {
           id: '1',
           name: 'Nombre del subtheme',
@@ -63,7 +66,7 @@ export class ViewLanguageComponent implements OnInit {
       content: 'x',
       description: '',
       image: null,
-      subthemes:  [
+      subthemes: [
         {
           id: '1',
           name: '',
@@ -91,7 +94,7 @@ export class ViewLanguageComponent implements OnInit {
         },
       ]
     },
-   
+
     {
       id: '1',
       subtitle: 'Temas',
@@ -99,8 +102,8 @@ export class ViewLanguageComponent implements OnInit {
       content: 'x',
       description: '',
       image: null,
-      subthemes:  [
-      
+      subthemes: [
+
         {
           id: '1',
           name: '',
@@ -123,15 +126,17 @@ export class ViewLanguageComponent implements OnInit {
         },
       ]
     }
-    ]
-  
-   public language: ILanguage = {
+  ]
+ */
+  public language: ILanguage = {
     idLanguage: null,
-    name: 'Python',
-    description: 'Python es un lenguaje de programación interpretado cuya filosofía hace hincapié en una sintaxis que favorezca un código legible. Se trata de un lenguaje de programación multiparadigma, ya que soporta orientación a objetos, programación imperativa y, en menor medida, ',
-    imageSrc: 'https://cdn-images-1.medium.com/max/1600/1*F1oFCwu6_4ork7pWE__IIg.jpeg',
+    name: '',
+    description: '',
+    imageSrc: '',
+    themes: []
   }
   public showSubtheme: boolean = false;
+
   public subthemeSelected: ISubtheme = {
     id: '',
     name: '',
@@ -140,17 +145,49 @@ export class ViewLanguageComponent implements OnInit {
     contentCode: '',
     imageSrc: 'https://www.eff.org/files/banner_library/coder-cat-2.png',
     url_video: '',
-  
+
   }
 
 
-  constructor() {}
+  constructor(
+    private router: ActivatedRoute,
+    private themeService: ThemeService,
+  ) { }
 
- 
-  ngOnInit() {}
 
+  ngOnInit() {
+    this.router.queryParams.subscribe(params => {
+      console.log("========= CONTENIDO TEMATICO VIEW  ===========")
+      this.language = {
+        idLanguage: Number(params["idlanguage"]),
+        name: params["name"],
+        description: params["description"],
+        image: params["image"]
+      }
+      this.getThemes();
+    })
 
-   
+  }
+
+  async getThemes() {
+    this.themeService.getThemesWithSubthemes(this.language.idLanguage).subscribe( themes => {
+      for (const theme of themes) {
+        for (let subtheme of theme.subthemes) {
+          Object.assign(subtheme, { imageSrc: subtheme.image })
+          delete subtheme.image;
+        }
+         this.arrayThemes.push({
+          id: theme.idTheme,
+          name: theme.name,
+          image: theme.image,
+          description: theme.description,
+          content: theme.content,
+          subthemes: theme.subthemes
+        } as ITheme) 
+      }
+    })
+  }
+
 
   openDialog(subtheme: ISubtheme): void {
     const _subtheme = Object.assign(this.subthemeSelected, subtheme);
@@ -162,17 +199,16 @@ export class ViewLanguageComponent implements OnInit {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
     } else {
       transferArrayItem(
-          event.previousContainer.data,
-          event.container.data,
-          event.previousIndex,
-          event.currentIndex
+        event.previousContainer.data,
+        event.container.data,
+        event.previousIndex,
+        event.currentIndex
       );
     }
   }
 
-  public getRoutesItem(){
-    console.log(ROUTES_THEMATIC);
-     return ROUTES_THEMATIC; 
+  public getRoutesItem() {
+    return ROUTES_THEMATIC;
   }
 }
 

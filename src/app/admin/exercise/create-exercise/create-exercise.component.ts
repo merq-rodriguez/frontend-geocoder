@@ -16,8 +16,8 @@ import { PayloadJudge0 } from 'src/app/@core/data/payload-judge0';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { LatLng } from 'leaflet';
 import { AuthService } from 'src/app/@core/services/auth.service';
-import { isArray } from 'util';
-
+import { failed, accepted, warning, waiting, processing, internalError }  from './messages'
+import { Observable, Subscription, Subject } from 'rxjs';
 
 export interface LanguageOption {
   id: number;
@@ -37,22 +37,15 @@ export interface LanguageOption {
 
 export class CreateExerciseComponent implements OnInit {
 
-  selectedLanguage: string;
-
-  
-
-  languages: LanguageOption[] = [
-    { id: 1, name: 'Python' },
-    { id: 2, name: 'C++' },
-    { id: 3, name: 'Javascript' }
-  ];
+  selectedLanguage: number;
+  languages: LanguageOption[] = [];
 
 
   user: any;
   subscribeMonaco$: any;
   subscribeEditorHTML$: any;
   exerciseList: IExercise[] = []
-  token: string = '';
+  token: string;
 
   isLinear = false;
   firstFormGroup: FormGroup;
@@ -93,6 +86,7 @@ export class CreateExerciseComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.subscriptionToken();
     this.getAllLanguages();
     this.authService.userObservable$.subscribe(user => this.user = user);
     this.getAllExercises(this.user.idUser);
@@ -102,9 +96,7 @@ export class CreateExerciseComponent implements OnInit {
       nameCtrl: ['', Validators.required],
       descriptionCtrl: ['', Validators.required]
     });
-    this.secondFormGroup = this._formBuilder.group({
-
-    });
+    this.secondFormGroup = this._formBuilder.group({});
     this.threeFormGroup = this._formBuilder.group({
       inputCtrl: ['', Validators.required],
       outputCtrl: ['', Validators.required]
@@ -117,6 +109,9 @@ export class CreateExerciseComponent implements OnInit {
   }
 
 
+  subscriptionToken(){
+    this.judgle0Service.token$.subscribe(token => this.token = token);
+  }
 
   getCoordinate(e: LatLng) {
     console.log(e);
@@ -133,11 +128,11 @@ export class CreateExerciseComponent implements OnInit {
     return value;
   }
 
-  openDialog(option: number): void {
+  openDialog(data: any): void {
     this.submissionCode();
     const dialogRef = this.dialog.open(InfoDialogComponent, {
       width: '250px',
-      data: MESSAGES_DIALOG[option]
+      data: data
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -166,14 +161,16 @@ export class CreateExerciseComponent implements OnInit {
     console.log("Ejercicio limpiado");
     console.log(this.exercise);
 
-
-
   }
 
   getAllLanguages(){
     this.judgle0Service.getLanguages().subscribe(res => {
       console.log("RESPONSE LANGUAGES JUDGE")
       console.log(res);
+      for (const lang of res) {
+      this.languages.push(lang)
+        
+      }
     })
   }
 
@@ -182,43 +179,85 @@ export class CreateExerciseComponent implements OnInit {
   }
 
   submissionCode() {
-    this.judgle0Service.submission(
-      {
-        source_code: this.exercise.contentCode,
-        language_id: 30,
-        expected_output: this.exercise.output
-      } as PayloadJudge0).subscribe(res => {
-        // console.log(res)
-        if (!res['token']) {
-          this.openDialog(3);
-        } else {
-          this.token = res['token'];
-          console.log(this.token);
+    console.log(this.exercise.contentCode)
+    if(this.selectedLanguage){
+      if(this.exercise.contentCode.trim() !== ''){
+        this.judgle0Service.submission(
+          {
+            source_code: this.exercise.contentCode,
+            language_id: this.selectedLanguage,
+            expected_output: this.exercise.output
+          } as PayloadJudge0).subscribe(res => {
+            // console.log(res)
+            if (!res.token) {
+              this.openDialog(warning);
+            } else {
+                this.judgle0Service.setToken(res.token); 
+                this.subscriptionToken();
+                console.log("Ya hay token: ")
+                console.log(this.token);
+                this.sleep(2000)
+                this.getDetailSubmission();           
+            }
 
-        }
-      });
+            
+            
+          });
+      }else{
+        this.snackService.openSnackBar("No has ingresado codigo de programacion", "Aceptar")        
+      }
+      
+    }else{
+      this.snackService.openSnackBar("No has seleccionado un lenguage", "Aceptar")
+    }
   }
+   sleep(milliseconds) {
+    var start = new Date().getTime();
+    for (var i = 0; i < 1e7; i++) {
+     if ((new Date().getTime() - start) > milliseconds) {
+      break;
+     }
+    }
+   }
 
   getDetailSubmission(): void {
-    console.log("--------TOKEN----------")
-    console.log(this.token)
     this.judgle0Service.detailSubmission(this.token).subscribe(res => {
-      console.log(res);
       console.log("--------STATUS----------")
-      let status = res['status'];
+      let status = res.status;
       console.log(status);
       if (!status) {
-        console.log("NO hay status")
-        this.openDialog(2);
-      } else {
-        if (status.id == 3) {
-          console.log("Es aceptado XD")
-          this.openDialog(0);
-        } else {
-          this.openDialog(1);
+        this.openDialog(waiting);
+      }else{
+
+        switch(status.id){
+          case 1:
+            console.info("Esperando ...") 
+            //this.openDialog(waiting);
+          break;
+          case 2:
+              console.info("Procesando ...") 
+            //this.openDialog(processing);
+          break;
+          case 3:
+            this.openDialog(accepted);
+
+          break;
+          case 4:
+            this.openDialog(failed);
+          break;
+          case 13:
+            this.openDialog(internalError);
+          break;
+          default :
+            this.openDialog(failed);
+
         }
       }
-    });
+      this.judgle0Service.unsubscribe();
+      
+     
+      }
+    );
   }
 
   createExercise(exercise: IExercise) {
@@ -349,27 +388,6 @@ const ROUTES_COMPETENCE: RouteInfo[] = [
   { path: '', icon: "school", title: "Ejercicios", class: "", active: false },
 ];
 
-const MESSAGES_DIALOG = [
-
-  {
-    id: 1,
-    title: '¡Compilacion exitosa!',
-    message: '',
-    image: "http://localhost:3001/uploads/images/fine.png"
-  },
-  {
-    id: 2,
-    title: '¡Compilacion fallida!',
-    message: '',
-    image: "http://localhost:3001/uploads/images/bad.png"
-  },
-  {
-    id: 3,
-    title: '¡El servidor no responde!',
-    message: '',
-    image: "http://localhost:3001/uploads/images/alert.png"
-  }
 
 
 
-]

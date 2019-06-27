@@ -7,7 +7,7 @@ import { LocalstorageService } from './localstorage.service';
 @Injectable()
 export class AuthService{
 
-    user: any;
+    private user: any;
     private userSource = new BehaviorSubject<any>(null);
     public userObservable$ = this.userSource.asObservable()
 

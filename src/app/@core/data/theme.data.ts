@@ -17,7 +17,7 @@ export interface ITheme{
 
 
 export abstract class ThemeData {
-    abstract getThemes():   Observable<any[]>;
+    abstract getThemes(idLanguage: number):   Observable<any[]>;
     abstract findTheme(idTheme: number):   Observable<any>;
     abstract createTheme(theme: ITheme, idLanguage: number): Observable<any>;
     abstract updateTheme(theme: ITheme): Observable<any>;
