@@ -4,6 +4,7 @@ import { IUser } from 'src/app/@core/data/user.data';
 import { SnackBarService } from 'src/app/@core/services/snackbar.service';
 import { Router } from '@angular/router';
 import { LocalstorageService } from 'src/app/@core/services/localstorage.service';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'signUp',
@@ -12,7 +13,7 @@ import { LocalstorageService } from 'src/app/@core/services/localstorage.service
 })
 export class SignUp implements OnInit {
 
-
+  public logo = environment.api.geoprogram+"uploads/images/logo.png"
 
   public user: IUser = {
     name: '',
