@@ -170,6 +170,18 @@ export class ViewLanguageComponent implements OnInit {
 
   }
 
+  openDialogSubtheme(subtheme): void {
+    console.log(subtheme);
+    const dialogRef = this.dialog.open(ShowSubthemeDialog, {
+      width: '1024px',
+      data: subtheme
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log('The dialog was closed');
+      console.log(result);
+    });
+  }
   openDialogTheme(theme): void {
     const dialogRef = this.dialog.open(ShowThemeDialog, {
       width: '1024px',
@@ -202,10 +214,10 @@ export class ViewLanguageComponent implements OnInit {
   }
 
 
-  openDialog(subtheme: ISubtheme): void {
+/*   openDialog(subtheme: ISubtheme): void {
     const _subtheme = Object.assign(this.subthemeSelected, subtheme);
     console.log(_subtheme);
-  }
+  } */
 
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {

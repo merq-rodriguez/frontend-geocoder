@@ -105,7 +105,7 @@
                           <div *ngFor="let subtheme of theme.subthemes" cdkDrag>
 
 
-                            <app-card-mini (click)="openDialog(subtheme)" [item]="subtheme" [idTheme]="theme.id"
+                            <app-card-mini (click)="openDialogSubtheme(subtheme)" [item]="subtheme" [idTheme]="theme.id"
                               [option]="'view'">
                             </app-card-mini>
 

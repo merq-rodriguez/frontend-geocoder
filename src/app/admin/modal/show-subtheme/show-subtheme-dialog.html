@@ -1,28 +1,32 @@
-<h1 mat-dialog-title>Crear contenido tematico</h1>
+<!-- <h1 mat-dialog-title>Tema</h1> -->
 <div mat-dialog-content>
   <div class="container">
+
+
+    <br>
     <div class="row">
-      <div class="col-12">
-        <img [src]="data.image" style="
-                width: 100%;
-                height: 170px;
-                border-width: 3px; 
-                border-color: 660033;">
+      <mat-card class="card-name">
+        <div class="col-12">
+          <label> Nombre del tema:</label>
+          <p> {{data.name }} </p>
+        </div>
+      </mat-card>
+    </div>
+    <br>
+    <div class="row d-flex justify-content-center">
+      <div class="col-5">
+        <img [src]="data.imageSrc" class="image">
       </div>
     </div>
+    <br> 
 
     <div class="row">
-      <div class="col-12">
-        <label> Nombre del lenguaje:</label>
-        <p> xxxxxxxxxxxxxx </p>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="col-12">
-        <label> Descripcion:</label>
-        <p> xxxxxxxxxxxxxx </p>
-      </div>
+      <mat-card class="card-name">
+        <div class="col-12">
+          <label> Descripcion:</label>
+          <p> {{ data.description }} </p>
+        </div>
+      </mat-card>
     </div>
 
     <br>
@@ -33,19 +37,19 @@
 
     <div class="row">
       <div class="col-12">
-        <div [innerHTML]="data.contentEditor">
+        <div [innerHTML]="data.content">
         </div>
       </div>
     </div>
 
-   
 
-    
+
+
 
     <br>
-   
 
- 
+
+
 
 
 

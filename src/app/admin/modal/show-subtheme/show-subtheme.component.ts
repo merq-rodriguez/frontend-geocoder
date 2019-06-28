@@ -1,18 +1,14 @@
 import {Component, Inject} from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import { fuseAnimations } from 'src/app/@theme/animations';
-import { MonacoService } from 'src/app/@core/services/monaco.service';
-import { ContentEditorService } from 'src/app/@core/services/content-editor.service';
-import {MatSnackBar} from '@angular/material';
-import { Observable } from 'rxjs';
+
 
 export interface ISubthemeDialog{
   id?: string;
   name: string;
   description: string;
-  contentEditor?: string;
-  contentCode?: string;
-  image?: string;
+  content?: string;
+  imageSrc?: string;
   url_video: string;
 }
 
@@ -20,7 +16,7 @@ export interface ISubthemeDialog{
 @Component({
   selector: 'show-subtheme-dialog',
   templateUrl: 'show-subtheme-dialog.html',
-  animations: fuseAnimations
+  styleUrls: ['show-subtheme.component.css']
 })
 export class ShowSubthemeDialog {
   _saveData= true;
