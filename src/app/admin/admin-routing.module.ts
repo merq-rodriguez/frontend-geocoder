@@ -7,6 +7,7 @@ import { CreateSubthemeDialog } from './modal/create-subtheme/create-subtheme.co
 import { ShowSubthemeDialog } from './modal/show-subtheme/show-subtheme.component';
 import { ShowThemeDialog } from './modal/show-theme/show-theme.component';
 
+
 const routes: Routes = [
   {
     path: '',

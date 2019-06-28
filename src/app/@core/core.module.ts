@@ -18,6 +18,7 @@ import { SubthemeService } from './services/subtheme.service';
 import { SubthemeData } from './data/subtheme-data';
 import { ExerciseService } from './services/exercise.service';
 import { ExerciseData } from './data/exercise.data';
+import { AuthGuard } from './guards/auth.guard';
 
 
 
@@ -31,14 +32,16 @@ const DATA_SERVICES = [
   { provide:  SubthemeData, useClass: SubthemeService },
   { provide:  LanguageData, useClass: LanguageService },
   { provide:  ExerciseData, useClass: ExerciseService },
-  
 ];
 
-
+const GUARDS = [
+  AuthGuard
+]
 
 export const CORE_PROVIDERS = [
   ...ServiceDataModule.forRoot().providers,
-  ...DATA_SERVICES
+  ...DATA_SERVICES,
+  ...GUARDS
 ];
 
 @NgModule({
