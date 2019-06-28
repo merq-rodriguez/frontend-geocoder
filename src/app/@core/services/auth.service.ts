@@ -22,7 +22,10 @@ export class AuthService{
         }
     }
     
-   
+   logout(){
+       this.setUser(null);
+       this.localService.deleteLocalstore('user');
+   }
     
     setUser(user){
         this.user = user;

@@ -14,6 +14,10 @@ export class LocalstorageService {
         
     }
 
+    deleteLocalstore(key: string){
+        localStorage.removeItem(key);
+    }
+
     getLocalstorage(key: string){
         if(this.isCompatible()){
             return JSON.parse(localStorage.getItem(key));
