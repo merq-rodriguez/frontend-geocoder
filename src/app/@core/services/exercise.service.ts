@@ -1,14 +1,34 @@
 import { Injectable } from '@angular/core';
-import { LanguageData, ILanguage } from '../data/language.data';
 import { of as observableOf, Observable, of } from 'rxjs';
 import { Api } from './api.service';
-import { ThemeService } from './theme.service';
-import { forkJoin } from 'rxjs/observable/forkJoin';
+
 import { ExerciseData, IExercise } from '../data/exercise.data';
+import { LatLngExpression } from 'leaflet';
+
+export class Marker {
+  id: number;
+  name: String;
+  description: String;
+  position: LatLngExpression
+}
+
 
 @Injectable()
 export class ExerciseService extends ExerciseData {
-
+  markers: Marker[] = [
+    {
+      id: 1,
+      name: 'Marker name 1',
+      description: 'descr 1',
+      position: [ 46.879966, -121.726909 ]
+    },
+    {
+      id: 2,
+      name: 'Marker name 2',
+      description: 'descr 2',
+      position: [ 46.000966, -123.726909 ]
+    }
+  ];
   constructor( private api: Api) {
     super();
   }
@@ -16,6 +36,20 @@ export class ExerciseService extends ExerciseData {
   private controller: string = "exercises"
 
  
+  getMarkers() {
+    return this.markers;
+  }
+
+  getMarkerById(id) {
+    return this.markers.filter((entry) => entry.id === id)[0];
+  }
+
+  changeMarkerData() {
+    for(let marker of this.markers) {
+      // just add a random number at the end
+      marker.description = `Some random value ${Math.random() * 100}`;
+    }
+  }
 
   getExercises(idUser: number): Observable<any> {
     return this.api.get(this.controller+'/getAll', idUser)

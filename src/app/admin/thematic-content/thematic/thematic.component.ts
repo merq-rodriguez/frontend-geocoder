@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { ThemathicService } from 'src/app/@core/services/themathic.service';
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
+import { SnackBarService } from 'src/app/@core/services/snackbar.service';
 
 @Component({
   selector: 'app-thematic',
@@ -15,22 +16,13 @@ export class ThematicComponent implements OnInit {
   firstFormGroup: FormGroup;
   secondFormGroup: FormGroup;
   
-
   constructor(  
     private _formBuilder: FormBuilder, 
     public themathicService: ThemathicService,
+    private snackBar: SnackBarService
     ) {}
 
- 
-
- 
-
-
-
-
-
   ngOnInit() {
-      
     this.firstFormGroup = this._formBuilder.group({
       firstCtrl: ['', Validators.required]
     });
@@ -39,26 +31,12 @@ export class ThematicComponent implements OnInit {
     });
   }
 
-
-
-
-
-
- /*  saveData(){
-    Object.assign(this.language, { themes:  this.listThemes});
-    console.log(this.language);
-    
-    this.languageService.saveLanguageAndThemes(this.language).subscribe(res => console.log(res));
-  } */
-
-/*   getData(){
-    console.log("================= languaje ================");
-    console.log(this.language);
-    console.log("================= Lista de temas con subtemas ================");
-    console.log(this.listThemes);
-    this.saveData()
-    
-  } */
+  //Se termino la guachafita, perdon perdon, quise decir que se termino de crear el lenguaje con los temas y subthemas
+  public endGame(){
+   /*  this.themathicService.reset(); */
+   location.reload();
+    this.snackBar.openSnackBar("En hora buena, ¡acabaste de crear un lenguaje tio!","Aceptar")
+  }
 
   public getRoutesItem(){
     return ROUTES_THEMATIC; 

@@ -128,8 +128,6 @@ export class MapComponent implements OnInit {
     },
     overlays: {
       'Mt. Rainier Point': this.point,
-     
-
     }
   };
 
@@ -138,23 +136,7 @@ export class MapComponent implements OnInit {
     zoom: 16,
     center: latLng(1.6177422155380778, -75.60314588906364)
   };
-/* 
-    layers = [
-     circle([1.6197586, -75.6055663], { radius: 150 }),
-     circle([1.6193453, -75.6052223], { radius: 250 }),
-     circle([1.6193453, -75.6152223], { radius: 250 }),
-     circle([1.6293453, -75.6252223], { radius: 100 }),
-     circle([1.6293453, -75.6252223], { radius: 100 }),
-     circle([1.6293453, -75.6252223], { radius: 100 }),
-   ];  */
-  //1.6197586,-75.6055663122
-
-
-
 
   constructor() { }
-
-  ngOnInit() {
-
-  }
+  ngOnInit() {}
 }

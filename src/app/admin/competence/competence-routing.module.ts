@@ -6,6 +6,7 @@ import { CreateCompetenceComponent } from './create-competition/create-competenc
 import { CompetenceComponent } from './competence.component';
 import { CompetenceListComponent } from './competitionlist/competence-list.component';
 import { MapCompetenceComponent } from './map-competence/map-competence.component';
+import { HTMLMarkerComponent } from './map-competence/html-marker.component';
 
 
 const routes: Routes = [{
@@ -32,5 +33,6 @@ export const routedComponents = [
   ChampionListComponent,
   CreateCompetenceComponent,
   CompetenceListComponent,
-  MapCompetenceComponent
+  MapCompetenceComponent,
+  HTMLMarkerComponent
 ];

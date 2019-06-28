@@ -27,7 +27,10 @@ export class ThemathicService implements ThemathicData  {
         this.authService.userObservable$.subscribe(user => this.language.idUser = user.idUser)
      }
 
-   
+    reset(){
+        this.language = null;
+        this.languageSource.next(this.language);
+    }
 
     addTheme(theme: ITheme):void{
        this.language.themes.push(theme);

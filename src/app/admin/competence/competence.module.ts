@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import {  routedComponents,CompetenceRoutingModule } from './competence-routing.module';
 import { ComponentsModule } from 'src/app/@theme/components/components.module';
+import { HTMLMarkerComponent } from './map-competence/html-marker.component';
 
 
 @NgModule({
@@ -8,8 +9,7 @@ import { ComponentsModule } from 'src/app/@theme/components/components.module';
     ComponentsModule,
     CompetenceRoutingModule
   ],
-  declarations: [
-    ...routedComponents
-  ],
+  declarations: [ ...routedComponents],
+  entryComponents: [ HTMLMarkerComponent ]
 })
 export class CompetenceModule { }

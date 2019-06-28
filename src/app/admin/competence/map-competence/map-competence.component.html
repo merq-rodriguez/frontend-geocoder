@@ -1,11 +1,9 @@
 <div class="main-content">
   <div class="container-fluid">
-      <div
-      class="map"
-      leaflet
-      [leafletOptions]="options"
-      [leafletLayers]="layers"
-    ></div>
-  
+    <div 
+    leaflet 
+    class="map" 
+    [leafletOptions]="options" 
+    (leafletMapReady)="onMapReady($event)"></div>
   </div>
 </div>
