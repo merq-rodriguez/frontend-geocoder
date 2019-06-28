@@ -59,6 +59,7 @@ export class SignUp implements OnInit {
   }
 
   public signUp() {
+    console.log(this.logo)
     if (this.validate()) {
       if (this.validateEmail()) { //Se envia el usuario al backend
         this.userService.signUp(this.user).subscribe(res => {

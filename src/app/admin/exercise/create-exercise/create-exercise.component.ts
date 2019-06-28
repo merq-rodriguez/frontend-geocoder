@@ -282,6 +282,7 @@ export class CreateExerciseComponent implements OnInit {
 
 
   getAllExercises(idUser: number) {
+    console.log("idUser: "+ idUser)
     this.exerciseService.getExercises(idUser).subscribe(exersices => {
      
       for (const exer of exersices) {
