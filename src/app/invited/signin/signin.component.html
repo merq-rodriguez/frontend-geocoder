@@ -1,48 +1,46 @@
-<div class="content-signin">
 
-<div class="box">
-    <div id="header">
-      <div id="cont-lock"><i class="material-icons lock">lock</i></div>
-      <div id="bottom-head">
-        <h1 id="logintoregister">Login</h1>
-      </div>
-    </div>
-    <form >
-  
-      <div class="container">
-        <div class="row d-flex justify-content-center">
-          <div class="col-10">
-            <mat-form-field >
-              <input 
-                    required
-                    matInput 
-                    placeholder="Nombre de usuario" 
-                    [(ngModel)]="username" 
-                    name="username"> 
-            </mat-form-field>
-          </div>
-  
-          <div class="col-10">
-            <mat-form-field class="">
-              <input  
-                  required
-                  matInput 
-                  type="password" 
-                  placeholder="Contraseña" 
-                  [(ngModel)]="password" 
-                  name="password"> 
-            </mat-form-field>
-          </div>
+<div class="padre">
+  <div class="container" id="container">
+    <div class="form-container sign-up-container">
+        <h1> Registrate </h1>
+        <div class="social-container">
+          <a href="#" class="social"> <i class="fab fa-facebook-f"></i> </a>
+          <a href="#" class="social"> <i class="fab fa-google-plus-g"></i> </a>
+          <a href="#" class="social"> <i class="fab fa-linkedin-in"></i> </a>
         </div>
-      </div>
+  
+       
+        <button> Geoprograming </button>
+    </div>
+  
+    <div class="form-container sign-in-container">
+      <form action="#">
+          <img  style="width: 300px;" [src]="logo">
+
+        <h1> ¡Geoprograming! </h1>
+       
+        <span> Acompañanos en este mundo de aventura </span>
+        <input type="text" placeholder="Nombre de usuario" [(ngModel)]="username" name="username" />
+        <input type="password" placeholder="Contraseña" [(ngModel)]="password" name="password"/>
+        <button (click)="signIn()">Iniciar Sesion </button>
+  
+      </form>
+    </div>
+  
+    <div class="overlay-container">
+      <div class="overlay">
      
-      <button id="buttonlogintoregister"  (click)="login()">Iniciar Sesion</button>
-    </form>
-    <div id="footer-box">
-      <p class="footer-text">
-        ¿No tienes una cuenta?
-        <span class="sign-up" [routerLink]="['/home/signup']"> Registrate ahora</span></p>
+  
+        <div class="overlay-panel overlay-right">
+
+          <h1> ¡Bienvenidos! </h1>
+          <p> ¿No tienes una cuenta? </p>
+          <button class="ghost" id="signUp" [routerLink]="['/home/signup']">Registrate</button>
+        </div>
+  
+      </div>
     </div>
   </div>
 </div>
+
 

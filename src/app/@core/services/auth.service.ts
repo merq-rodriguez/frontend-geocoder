@@ -13,9 +13,9 @@ export class AuthService{
 
     constructor(private localService: LocalstorageService){
         try {
-            let user = this.localService.getLocalstorage('user');
-        if(user){
-            this.setUser(user);
+            this.user = this.localService.getLocalstorage('user');
+        if(this.user){
+            this.setUser(this.user);
         }
         } catch (error) {
             console.error("No existe el usuario en el storage")
@@ -30,6 +30,7 @@ export class AuthService{
     setUser(user){
         this.user = user;
         this.userSource.next(this.user);
+        this.localService.saveLocalstorage('user', user);
     }
     
 }
