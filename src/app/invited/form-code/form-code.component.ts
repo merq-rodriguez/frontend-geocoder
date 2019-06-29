@@ -11,20 +11,25 @@ import { MonacoService } from 'src/app/@core/services/monaco.service';
   styleUrls: ['./form-code.component.css']
 })
 export class FormCode implements OnInit {
-
+  userId: string = "Texto"
   subscribeMonaco$: any;
   private code : string = '';
+
   constructor(
-    private localstorageService: LocalstorageService, 
-    private  userService: UserService,
     private monacoService: MonacoService,
+   // private codeService: 
 
     ) { }
+  setChange(){
+    this.userId = "Eooooooooooooooooooooooo"
+    
+  }
 
   ngOnInit() {
     this.subscribeMonaco$ = this.monacoService.content$.subscribe(content => this.code = content );
-
   }
+
+ 
 
   
   

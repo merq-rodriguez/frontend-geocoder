@@ -14,6 +14,7 @@ import { UploadService } from './upload-file.service';
 import { ExerciseService } from './exercise.service';
 import { Judge0Service } from './judge0.service';
 import { AuthService } from './auth.service';
+import { CodeService } from './code.service';
 
 
 const SERVICES = [
@@ -30,7 +31,8 @@ const SERVICES = [
   LocalstorageService,
   UploadService,
   ExerciseService,
-  Judge0Service
+  Judge0Service,
+  CodeService
 ];
 
 @NgModule({

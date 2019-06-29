@@ -19,6 +19,8 @@ import { SubthemeData } from './data/subtheme-data';
 import { ExerciseService } from './services/exercise.service';
 import { ExerciseData } from './data/exercise.data';
 import { AuthGuard } from './guards/auth.guard';
+import { CodeData } from './data/code.data';
+import { CodeService } from './services/code.service';
 
 
 
@@ -32,6 +34,7 @@ const DATA_SERVICES = [
   { provide:  SubthemeData, useClass: SubthemeService },
   { provide:  LanguageData, useClass: LanguageService },
   { provide:  ExerciseData, useClass: ExerciseService },
+  { provide:  CodeData, useClass: CodeService },
 ];
 
 const GUARDS = [
