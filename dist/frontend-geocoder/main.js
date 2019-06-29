@@ -2730,7 +2730,7 @@ module.exports = ".nav{\n    background: rgba(224, 83, 83, 0);\n}\n/*# sourceMap
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<mat-nav-list class=\"nav\">\n    <a  mat-list-item (click)=\"openLink($event)\" [routerLink]=\"['admin/users/user-profile']\">\n        <i class=\"material-icons\"> person </i>\n      <span mat-line>Perfil de Usuario</span>\n    </a>\n    \n    <a  mat-list-item (click)=\"openLink($event)\">\n        <i class=\"material-icons\"> exit_to_app </i>\n      <span mat-line>Salir</span>\n    </a>\n</mat-nav-list>\n  "
+module.exports = "<mat-nav-list class=\"nav\">\n    <a  mat-list-item  [routerLink]=\"['admin/users/user-profile']\">\n        <i class=\"material-icons\"> person </i>\n      <span mat-line>Perfil de Usuario</span>\n    </a>\n    \n    <a  mat-list-item (click)=\"openLink($event)\">\n        <i class=\"material-icons\"> exit_to_app </i>\n      <span mat-line>Salir</span>\n    </a>\n</mat-nav-list>\n  "
 
 /***/ }),
 
