@@ -8,3 +8,6 @@
   position: absolute;
 }
 
+.btn-blue{
+  background: linear-gradient(to right, #23cac2, #07353d) no-repeat 0 0 / cover ;
+}

@@ -1,10 +1,10 @@
 import { Observable } from 'rxjs';
 
 export interface ICode {
-    idCode?: number;
     idExercise: number;
     idUser: number;
     content: string;
+    solved: boolean;
 }
 
 

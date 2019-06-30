@@ -15,6 +15,7 @@ import { ExerciseService } from './exercise.service';
 import { Judge0Service } from './judge0.service';
 import { AuthService } from './auth.service';
 import { CodeService } from './code.service';
+import { AnswerExerciseService } from './answer-exercise.service';
 
 
 const SERVICES = [
@@ -32,7 +33,8 @@ const SERVICES = [
   UploadService,
   ExerciseService,
   Judge0Service,
-  CodeService
+  CodeService,
+  AnswerExerciseService
 ];
 
 @NgModule({
