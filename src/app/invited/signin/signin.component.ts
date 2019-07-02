@@ -33,8 +33,8 @@ export class SignIn implements OnInit {
       this.snackService.openSnackBar('Campos vacios', 'Aceptar');
     }else{
       console.log(this.username)
-      console.log(this.password)
       this.userService.signIn(this.username, this.password).subscribe(user => {
+        console.log("Respuesta del backend")
         console.log(user);
         if (user) {
           if(user.accessTocken){
