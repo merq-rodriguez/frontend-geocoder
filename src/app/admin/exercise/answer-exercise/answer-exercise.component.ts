@@ -3,11 +3,26 @@ import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {MatDialog} from '@angular/material';
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 import { IExercise } from 'src/app/@core/data/exercise.data';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, NavigationExtras } from '@angular/router';
 import { AnswerExerciseService } from 'src/app/@core/services/answer-exercise.service';
 
 
+export interface ElementAnswerUser{
+  content: string;
+  date_send: string;
+  exercise_image: string;
+  exercise_name: string;
+  idexercise: number;
+  idlevel: number;
+  idrecordexercise: number
+  iduser: number;
+  level: string;
+  name: string;
+  solved: boolean;
+  state: string;
+  user_nick: string;
 
+}
 
 @Component({
   selector: "app-answer-exercise",
@@ -17,47 +32,7 @@ import { AnswerExerciseService } from 'src/app/@core/services/answer-exercise.se
 export class AnswerExerciseComponent implements OnInit {
 
 
-  ELEMENT_DATA: ElementAnswerUser[] = [
-    {
-      idAnswer: 1,
-      idUser: null,
-      idExercise: null,
-      idCode: null,
-      names_user: "stringsssssssssssssss",
-      level: "string",
-      date: "string",
-      code: "string",
-      solved: "No resuelto",
-      state: "Sin revizar"
-    
-    },
-    {
-      idAnswer: 2,
-      idUser: null,
-      idExercise: null,
-      idCode: null,
-      names_user: "string",
-      level: "string",
-      date: "string",
-      code: "string",
-      solved: "No resuelto",
-      state: "Sin revizar"
-    
-    },
-    {
-      idAnswer: 3,
-      idUser: null,
-      idExercise: null,
-      idCode: null,
-      names_user: "stringsssssssss",
-      level: "string",
-      date: "string",
-      code: "string",
-      solved: "No resuelto",
-      state: "Sin revizar"
-    
-    }
-  ];
+  ELEMENT_DATA: ElementAnswerUser[] = [];
 
   public answerSelected: ElementAnswerUser = null;
 
@@ -70,9 +45,16 @@ export class AnswerExerciseComponent implements OnInit {
 
 
   getDetailAnswer(exer){
+    console.log("RESPUESTA SELECCIONADA")
     this.answerSelected = exer;
     console.log(this.answerSelected);
-    this.router.navigate(['/admin/exercises/detail-answer'])
+
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+          "answer-exercise": JSON.stringify(exer),
+      } 
+  };
+    this.router.navigate(['/admin/exercises/detail-answer'], navigationExtras)
   }
 
   public getRoutesItem(){
@@ -93,26 +75,15 @@ export class AnswerExerciseComponent implements OnInit {
     console.log(id)
     this.answerService.getHistoricalExercise(id).subscribe(res => {
       console.log("HISTORICAL EXERCISE")
-      console.log(res);
+      this.ELEMENT_DATA = res;
+      this.dataSource = new MatTableDataSource<ElementAnswerUser>(this.ELEMENT_DATA);
     })
     
   }
 
 }
 
-export interface ElementAnswerUser{
-  idAnswer: number;
-  idUser: number;
-  idExercise: number;
-  idCode: number;
-  names_user: string;
-  level: string;
-  date: string;
-  code: string;
-  solved: string;
-  state: string;
 
-}
 
 
 const ROUTES: RouteInfo[] = [

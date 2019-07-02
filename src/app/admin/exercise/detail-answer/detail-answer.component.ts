@@ -2,7 +2,8 @@ import {Component, OnInit, ViewChild, Input} from '@angular/core';
 import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {MatDialog} from '@angular/material';
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { MonacoService } from 'src/app/@core/services/monaco.service';
 
 
 
@@ -14,10 +15,25 @@ import { Router } from '@angular/router';
 })
 export class DetailAnswerComponent implements OnInit {
 
-
-  ngOnInit() {}
+  public answer: any = {};
+  public calification;
+  public observations;
+  codigo: string = "xxx cdcdcd"
+  ngOnInit() {
+   
+  }
  
-  constructor() {}
+  constructor(
+    private route: ActivatedRoute,
+    private monacoService: MonacoService
+  ) {
+    this.route.queryParams.subscribe(params => {
+      this.answer = JSON.parse(params["answer-exercise"])
+      console.log("EN EL DETALLE RESPUESTA")
+      console.log(this.answer)
+      this.monacoService.setMonacoContent("HOliiiiii")
+  });
+  }
 
   getRoutesItem(){
     return ROUTES;

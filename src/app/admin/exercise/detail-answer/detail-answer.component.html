@@ -15,30 +15,30 @@
               <div class="row">
                 <div class="col-4">
                     <div class="col-12">
-                        <img class="image-user" src="https://www.eljueves.es/medio/2017/05/04/whatsapp-guru_4513f7e1.jpg">
+                        <img class="image-user" [src]="answer.nick">
                       </div>
                       
                 </div>
                 
                 <div class="col-6">
                     <div class="col-12">
-                          <p>Nombres: </p>
+                          <p><b>Nombres:</b> {{ answer.name }}</p>
                        
                       </div>
 
                     <div class="col-12 ">
-                        <p>Nivel: </p>
+                        <p><b>Nivel:</b> {{ answer.level}}</p>
                       </div>
                    
                       <div class="col-6 ">
                         
-                          <p>Puntuacion acumulada: </p>
+                          <p><b>Puntuacion acumulada:</b> {{ answer.points }} </p>
                           <!-- <input matInput placeholder="Puntuacion acumulada"> -->
                         
                       </div>
                       <div class="col-8">
                           <mat-form-field >
-                            <input matInput placeholder="Calificacion">
+                            <input matInput placeholder="Calificacion" name="Calificacion" type="number" [(ngModel)]="calification">
                           </mat-form-field>
                       </div>
                 </div>
@@ -50,7 +50,9 @@
         </mat-card>
         <br>
         <mat-card>
-            <app-monaco-code [context]="'no se que poner aqui XD'"></app-monaco-code>
+            <app-monaco-code
+                [context]="'no se que poner aqui XD'">
+            </app-monaco-code>
 
           </mat-card>
       
@@ -63,7 +65,7 @@
                 </div>
                   <div class="col-10">
                       <mat-form-field>
-                          <textarea matInput placeholder="Observaciones" name="input" name="input" rows="7"></textarea>
+                          <textarea matInput placeholder="Observaciones" [(ngModel)]="observations" name="observations" name="input" rows="7"></textarea>
                       </mat-form-field>
                   </div>
                </div>

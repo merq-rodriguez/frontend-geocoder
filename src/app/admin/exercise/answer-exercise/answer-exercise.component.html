@@ -9,28 +9,7 @@
         <p class="card-category">Listado de respuestas</p>
       </div>
       <div class="card-body">
-   <!--      <mat-card>
-          <form class="example-form">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-2 pull-right">
-                  <img class="image" src="../../../../../assets/img/compe2.png">
-                </div>
-                <div class="col-md-8 search">
-                  <mat-form-field class="example-full-width">
-                    <input matInput placeholder="Ingresa el nombre del ejercicio..">
-                  </mat-form-field>
-                </div>
-                <div class="col-md-2 search">
-                  <button class="btn btn-default card-button pull-right">
-                    Buscar
-                  </button>
-                </div>
-
-              </div>
-            </div>
-          </form>
-        </mat-card> -->
+ 
         <br>
         <div class="mat-elevation-z8">
           <table mat-table [dataSource]="dataSource">
@@ -45,7 +24,7 @@
             <!-- Name Column -->
             <ng-container matColumnDef="names_user">
               <th mat-header-cell *matHeaderCellDef>Nombre</th>
-              <td mat-cell *matCellDef="let element">{{ element.names_user  }}</td>
+              <td mat-cell *matCellDef="let element">{{ element.name  }}</td>
 
             </ng-container>
             <!-- Description Column -->
@@ -59,18 +38,18 @@
             <!-- Radius Column -->
             <ng-container matColumnDef="date">
               <th mat-header-cell *matHeaderCellDef>Fecha</th>
-              <td mat-cell *matCellDef="let element">{{ element.date }}</td>
+              <td mat-cell *matCellDef="let element">{{ element.date_send | date:'medium'}}</td>
             </ng-container>
 
             <!-- Radius Column -->
             <ng-container matColumnDef="state">
               <th mat-header-cell *matHeaderCellDef>Estado</th>
-              <td mat-cell *matCellDef="let element">{{ element.state }}</td>
+              <td mat-cell *matCellDef="let element">{{ (element.state == 'A') ? 'Revisado': 'Sin revisar' }}</td>
             </ng-container>
             <!-- Radius Column -->
             <ng-container matColumnDef="solved">
               <th mat-header-cell *matHeaderCellDef>Solucionado</th>
-              <td mat-cell *matCellDef="let element">{{ element.solved }}</td>
+              <td mat-cell *matCellDef="let element">{{ (element.solved) ? 'Si': 'No' }}</td>
             </ng-container>
 
           <!-- Radius Column -->
