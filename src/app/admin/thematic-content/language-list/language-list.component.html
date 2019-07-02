@@ -4,13 +4,20 @@
     <div class="row">
       <div class="col-md-4" *ngFor="let lang of languageList">
         <div class="card">
+            
           <div class="card-header card-header-default card-button">
+              <button mat-icon-button color="success" (click)="deleteLanguage(lang.idlanguage)"
+              class="btn-default  pull-right  btn-just-icon">
+              <i class="material-icons"> delete_forever </i>
+            </button>
             <h4 class="card-title">{{ lang.name }}</h4>
             <p class="card-category">Lenguaje de Programacion</p>
           </div>
           <div class="card-body">
-            <img class="image" [src]="lang.image" alt="" />
+            <div class="container-image">
+                <img class="image" [src]="lang.image" alt="" />
 
+            </div>
             <p class="card-category">
               <span class="text-success"><i class="fa fa-long-arrow-up"></i>
               </span>

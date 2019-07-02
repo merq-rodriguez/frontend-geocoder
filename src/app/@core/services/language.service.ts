@@ -60,8 +60,8 @@ export class LanguageService extends LanguageData {
 
  
   
-  deleteLanguage(): Observable<any> {
-    return observableOf(this.languages);
+  deleteLanguage(idLanguage: number): Observable<any> {
+    return this.api.delete(this.controller, 'deleteLanguage',idLanguage);
   }
 
 
