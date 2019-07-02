@@ -19,7 +19,7 @@ export class ExerciseListComponent implements OnInit {
   user:any;
 
   ELEMENT_DATA = [
-    {
+  /*   {
       idExercise: "1",
       name: "stringstringstringstringstringstringstringstringstring",
       description: "stringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstringstring",
@@ -63,10 +63,10 @@ export class ExerciseListComponent implements OnInit {
       imageSrc: "http://s3.amazonaws.com/37assets/svn/765-default-avatar.png",
       location: null,
       radius: 0
-    }
+    } */
   ];
 
-  public exerciseSelected: IExercise = {
+  public exerciseSelected = {
     idExercise: "",
     name: "",
     description: "",
@@ -94,20 +94,18 @@ export class ExerciseListComponent implements OnInit {
   }
     
   public openAnswerExercise(){
-    console.log(this.exerciseSelected.idExercise )
-    this.router.navigate(
-      [
-        '/admin/exercises/answer-exercise' 
-       
-      ])
-}
-
-
+    console.log("ID:")
+    let idExercise = this.exerciseSelected['idexercise']
+    this.router.navigate( [ '/admin/exercises/answer-exercise',  { idExercise }]);
+  }
+  
+  
   public detailExercise(){
     console.log("detail: "+this.exerciseSelected.idExercise);
   }
-
+  
   public selectExer(exer){
+    console.log("EJERCICIO SELECCIONADO")
     this.exerciseSelected = exer;
     console.log(this.exerciseSelected);
   }

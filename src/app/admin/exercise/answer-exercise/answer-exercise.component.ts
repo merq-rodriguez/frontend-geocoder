@@ -3,7 +3,8 @@ import {MatPaginator, MatTableDataSource} from '@angular/material';
 import {MatDialog} from '@angular/material';
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 import { IExercise } from 'src/app/@core/data/exercise.data';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
+import { AnswerExerciseService } from 'src/app/@core/services/answer-exercise.service';
 
 
 
@@ -74,24 +75,28 @@ export class AnswerExerciseComponent implements OnInit {
     this.router.navigate(['/admin/exercises/detail-answer'])
   }
 
+  public getRoutesItem(){
+    return ROUTES; 
+  }
 
+  constructor(
+    public dialog: MatDialog,
+    private routerActive: ActivatedRoute,
+    private router: Router,
+    private answerService: AnswerExerciseService
+  ) {}
 
   ngOnInit() {
     this.dataSource.paginator = this.paginator;
+    let id = this.routerActive.snapshot.params.idExercise;
+    console.log("ID PARAMETRO")
+    console.log(id)
+    this.answerService.getHistoricalExercise(id).subscribe(res => {
+      console.log("HISTORICAL EXERCISE")
+      console.log(res);
+    })
     
   }
-    public getRoutesItem(){
-      return ROUTES; 
-    }
-  
-  
-  
- 
-  constructor(
-    public dialog: MatDialog,
-    public router: Router
-  ) {}
-
 
 }
 

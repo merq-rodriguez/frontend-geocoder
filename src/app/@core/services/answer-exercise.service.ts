@@ -6,12 +6,13 @@ import { CodeData, ICode } from '../data/code.data';
 @Injectable()
 export class AnswerExerciseService {
 
-    constructor( private readonly api: Api){
-     /*  super(); */
-    }
+    constructor( private readonly api: Api){}
 
     private controller: string = "answer-exercises"  
 
+    getHistoricalExercise(idExercise: number):Observable<any>{
+        return this.api.get(this.controller+'/getHistoricalExercise', idExercise);
+    }
     getExercisesSolved(idUser: number):Observable<any>{
         return this.api.get(this.controller+'/getExercisesSolved', idUser);
     }
