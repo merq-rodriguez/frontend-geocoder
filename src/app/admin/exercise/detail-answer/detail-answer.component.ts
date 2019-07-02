@@ -98,6 +98,6 @@ const ROUTES: RouteInfo[] = [
 /*   { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true }, */
   { path: '/admin/exercises/menu-exercises', icon: "school", title: "Menu de Ejercicios", class: "", active: true },
   { path: '/admin/exercises/list-exercise', icon: "school", title: "Listado de ejercicios", class: "", active: true },
-  { path: '/admin/exercises/answer-exercise', icon: "school", title: "Listado de respuestas", class: "", active: true },
+ /*  { path: '/admin/exercises/answer-exercise', icon: "school", title: "Listado de respuestas", class: "", active: true }, */
   { icon: "", title: "Respuesta", class: "", active: false },
 ];

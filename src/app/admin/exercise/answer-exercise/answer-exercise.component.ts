@@ -36,7 +36,7 @@ export class AnswerExerciseComponent implements OnInit {
 
   public answerSelected: ElementAnswerUser = null;
 
-  displayedColumns: string[] = ['id','names_user', 'level','date', 'state','solved', 'action'];
+  displayedColumns: string[] = ['id','nick' ,'names_user', 'level','date', 'state','solved', 'action'];
   
   dataSource = new MatTableDataSource<ElementAnswerUser>(this.ELEMENT_DATA);
 

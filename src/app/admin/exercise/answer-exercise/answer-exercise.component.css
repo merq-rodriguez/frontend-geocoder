@@ -4,11 +4,15 @@
   display: block;
   margin: auto;
 }
-
-
 .image-item{
   width: 70px;
+  margin: 5px;
+  padding: 5px;
 }
+
+/* .image-item{
+  width: 70px;
+} */
 .search{
   display: block;
   margin: auto;
