@@ -5,6 +5,7 @@ import { CreateExerciseComponent } from './create-exercise/create-exercise.compo
 import { DialogOption, ExerciseListComponent } from './exercise-list/exercise-list.component';
 import { AnswerExerciseComponent } from './answer-exercise/answer-exercise.component';
 import { ExerciseMenuComponent } from './exercise-menu/exercise-menu.component';
+import { DetailAnswerComponent } from './detail-answer/detail-answer.component';
 
 
 const routes: Routes = [{
@@ -15,6 +16,7 @@ const routes: Routes = [{
     { path: 'create-exercise', component: CreateExerciseComponent },
     { path: 'list-exercise', component: ExerciseListComponent },
     { path: 'answer-exercise', component: AnswerExerciseComponent },
+    { path: 'detail-answer', component: DetailAnswerComponent },
 
   ],
 }];
@@ -31,5 +33,6 @@ export const routedComponents = [
   ExerciseListComponent,
   AnswerExerciseComponent,
   ExerciseMenuComponent,
+  DetailAnswerComponent,
   DialogOption
 ];

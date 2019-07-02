@@ -1,15 +1,26 @@
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 .image{
-  width: 70px;
+  width: 100%;
   display: block;
   margin: auto;
+  border-radius: 5%;
 }
 
+.image-user{
+  width: 50%;
+  display: block;
+  margin: auto;
+  border-radius: 5%;
+}
+
+.info-observaciones{
+  display: block;
+  margin-top: auto;
+  margin-bottom: auto;
+}
 
 .image-item{
   width: 70px;
-  margin: 5px;
-  padding: 5px;
 }
 .search{
   display: block;

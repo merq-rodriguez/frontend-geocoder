@@ -22,12 +22,12 @@ export class AnswerExerciseComponent implements OnInit {
       idUser: null,
       idExercise: null,
       idCode: null,
-      names_user: "string",
+      names_user: "stringsssssssssssssss",
       level: "string",
       date: "string",
       code: "string",
-      solved: "string",
-      state: "string"
+      solved: "No resuelto",
+      state: "Sin revizar"
     
     },
     {
@@ -39,8 +39,8 @@ export class AnswerExerciseComponent implements OnInit {
       level: "string",
       date: "string",
       code: "string",
-      solved: "string",
-      state: "string"
+      solved: "No resuelto",
+      state: "Sin revizar"
     
     },
     {
@@ -48,19 +48,19 @@ export class AnswerExerciseComponent implements OnInit {
       idUser: null,
       idExercise: null,
       idCode: null,
-      names_user: "string",
+      names_user: "stringsssssssss",
       level: "string",
       date: "string",
       code: "string",
-      solved: "string",
-      state: "string"
+      solved: "No resuelto",
+      state: "Sin revizar"
     
     }
   ];
 
   public answerSelected: ElementAnswerUser = null;
 
-  displayedColumns: string[] = ['idAnswer','names_user', 'level','date', 'state',];
+  displayedColumns: string[] = ['id','names_user', 'level','date', 'state','solved', 'action'];
   
   dataSource = new MatTableDataSource<ElementAnswerUser>(this.ELEMENT_DATA);
 
@@ -68,12 +68,12 @@ export class AnswerExerciseComponent implements OnInit {
 
 
 
-
-
-  public selectExer(exer){
+  getDetailAnswer(exer){
     this.answerSelected = exer;
     console.log(this.answerSelected);
+    this.router.navigate(['/admin/exercises/detail-answer'])
   }
+
 
 
   ngOnInit() {

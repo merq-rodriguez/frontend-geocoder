@@ -1,0 +1,80 @@
+<div class="main-content">
+  <div class="container-fluid">
+
+    <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
+
+    <div class="card">
+      <div class="card-header card-header-default card-header">
+        <h4 class="card-title">Respuestas enviadas</h4>
+        <p class="card-category">Listado de respuestas</p>
+      </div>
+      <div class="card-body">
+        <mat-card>
+          <form class="example-form">
+            <div class="container">
+              <div class="row">
+                <div class="col-4">
+                    <div class="col-12">
+                        <img class="image-user" src="https://kermoonshop.com/wp-content/uploads/2019/01/306473.png">
+                      </div>
+                      
+                </div>
+                
+                <div class="col-6">
+                    <div class="col-12">
+                          <p>Nombres: </p>
+                       
+                      </div>
+
+                    <div class="col-12 ">
+                        <p>Nivel: </p>
+                      </div>
+                   
+                      <div class="col-6 ">
+                        
+                          <p>Puntuacion acumulada: </p>
+                          <!-- <input matInput placeholder="Puntuacion acumulada"> -->
+                        
+                      </div>
+                      <div class="col-8">
+                          <mat-form-field >
+                            <input matInput placeholder="Calificacion">
+                          </mat-form-field>
+                      </div>
+                </div>
+
+              </div>
+           
+            </div>
+          </form>
+        </mat-card>
+        <br>
+        <mat-card>
+            <app-monaco-code [context]="'no se que poner aqui XD'"></app-monaco-code>
+
+          </mat-card>
+      
+          <br>
+          <mat-card>
+            <div class="row d-flex justify-content-center">
+                <div class="col-2 info-observaciones">
+                  <img class="image" src="http://coachfarmacia.com/wp-content/uploads/2018/09/observar2.png">
+                   <!--  <label>Pon aqui tus observaciones del codigo de programacion.</label> -->
+                </div>
+                  <div class="col-10">
+                      <mat-form-field>
+                          <textarea matInput placeholder="Observaciones" name="input" name="input" rows="7"></textarea>
+                      </mat-form-field>
+                  </div>
+               </div>
+          </mat-card>
+          <br>
+        <div class="card-footer">
+          <div class="card-stats"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
