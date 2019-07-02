@@ -1,0 +1,36 @@
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+.image{
+  width: 70px;
+  display: block;
+  margin: auto;
+}
+
+
+.image-item{
+  width: 70px;
+}
+.search{
+  display: block;
+  margin: auto;
+}
+
+.example-header-image {
+  background-image: url("https://www.google.com/url?sa=i&source=images&cd=&cad=rja&uact=8&ved=2ahUKEwjFpfL-1NHgAhWGg-AKHakUB7gQjRx6BAgBEAU&url=https%3A%2F%2Fkeepcoding.io%2Fes%2Fblog%2Fcaracteristicas-lenguaje-de-programacion-go%2F&psig=AOvVaw13mB9gzQ_hVrPboMd_oX99&ust=1551004693168616");
+  background-size: cover;
+}
+
+table {
+  width: 100%;
+}
+
+
+
+.card-header{
+  background: linear-gradient(to right, #1ea7a0, #0b4e5a) no-repeat 0 0 / cover ;
+}
+
+.card-button{
+  background: linear-gradient(to right, #1ea7a0, #0b4e5a) no-repeat 0 0 / cover ;
+}
+
+
