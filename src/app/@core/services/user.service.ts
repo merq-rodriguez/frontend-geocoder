@@ -44,6 +44,10 @@ export class UserService  extends UserData{
   deleteUser(idUser: number): Observable<any> {
     return observableOf(this.users);
   }
+
+  addScoreToUser(idScore: number, points: number): Observable<any> {
+    return this.apiService.put(this.controller,'addScore',{idScore, points})
+  }
   
 }
 

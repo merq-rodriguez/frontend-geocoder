@@ -21,8 +21,7 @@ export class Api {
 
 	public put(controller: string, path: string, params: any) {
 		return this.http.put(
-			`${environment.api.geoprogram + controller +'/'+ path}`,
-			params
+			`${environment.api.geoprogram + controller +'/'+ path }`, params
 		);
 	}
 

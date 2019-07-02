@@ -13,64 +13,83 @@
           <form class="example-form">
             <div class="container">
               <div class="row">
-                <div class="col-4">
-                    <div class="col-12">
-                        <img class="image-user" [src]="answer.nick">
-                      </div>
-                      
-                </div>
-                
-                <div class="col-6">
-                    <div class="col-12">
-                          <p><b>Nombres:</b> {{ answer.name }}</p>
-                       
-                      </div>
+                <div class="col-3">
+                  <div class="col-12">
+                    <img class="image-user" [src]="answer.nick">
+                  </div>
 
-                    <div class="col-12 ">
-                        <p><b>Nivel:</b> {{ answer.level}}</p>
-                      </div>
-                   
-                      <div class="col-6 ">
-                        
-                          <p><b>Puntuacion acumulada:</b> {{ answer.points }} </p>
-                          <!-- <input matInput placeholder="Puntuacion acumulada"> -->
-                        
-                      </div>
-                      <div class="col-8">
-                          <mat-form-field >
-                            <input matInput placeholder="Calificacion" name="Calificacion" type="number" [(ngModel)]="calification">
-                          </mat-form-field>
-                      </div>
                 </div>
+
+                <div class="col-8">
+                  <div class="col-12">
+                    <p><b>Ejercicio:</b> {{ answer.exercise_name }}</p>
+                  </div>
+
+                  <div class="col-12">
+                    <p><b>Nombres:</b> {{ answer.name }}</p>
+                  </div>
+
+                  <div class="col-12 ">
+                    <p><b>Nivel:</b> {{ answer.level}}</p>
+                  </div>
+
+                  <div class="col-6 ">
+                    <p><b>Puntuacion acumulada:</b> {{ answer.points }} </p>
+                  </div>
+
+                  <div class="col-8">
+                    <mat-form-field>
+                      <input matInput placeholder="Calificacion" name="Calificacion" type="number"
+                        [(ngModel)]="calification">
+                    </mat-form-field>
+                  </div>
+                  <div class="col-8">
+                    <mat-form-field>
+                      <mat-select [(value)]="selected">
+                        <mat-option *ngFor="let op of options" [value]="op">
+                          {{op.name}}
+                        </mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                </div>
+                <!--  <div class="col-1">
+                    <button class="btn btn-success pull-rigth" (click)="saveCalificacion()"> Guardar </button>
+                </div> -->
 
               </div>
-           
+
             </div>
           </form>
         </mat-card>
         <br>
         <mat-card>
-            <app-monaco-code
-                [context]="'no se que poner aqui XD'">
-            </app-monaco-code>
+          <app-monaco-code [context]="'no se que poner aqui XD'">
+          </app-monaco-code>
 
-          </mat-card>
-      
-          <br>
-          <mat-card>
-            <div class="row d-flex justify-content-center">
-                <div class="col-2 info-observaciones">
-                  <img class="image" src="http://coachfarmacia.com/wp-content/uploads/2018/09/observar2.png">
-                   <!--  <label>Pon aqui tus observaciones del codigo de programacion.</label> -->
-                </div>
-                  <div class="col-10">
-                      <mat-form-field>
-                          <textarea matInput placeholder="Observaciones" [(ngModel)]="observations" name="observations" name="input" rows="7"></textarea>
-                      </mat-form-field>
-                  </div>
-               </div>
-          </mat-card>
-          <br>
+        </mat-card>
+
+        <br>
+        <mat-card>
+          <div class="row d-flex justify-content-center">
+            <div class="col-2 info-observaciones">
+              <img class="image"
+                src="https://www.editorialrenacimiento.com/themes/renacimiento2016/images/no-autor.png">
+              <!--  <label>Pon aqui tus observaciones del codigo de programacion.</label> -->
+            </div>
+            <div class="col-8">
+              <mat-form-field>
+                <textarea matInput placeholder="Observaciones" [(ngModel)]="observations" name="observations"
+                  name="input" rows="7"></textarea>
+              </mat-form-field>
+            </div>
+            <div class="col-2">
+              <button class="btn btn-success pull-right card-button" (click)="saveCalificacion()"> Guardar </button>
+            </div>
+
+          </div>
+        </mat-card>
+        <br>
         <div class="card-footer">
           <div class="card-stats"></div>
         </div>
@@ -79,4 +98,3 @@
 
   </div>
 </div>
-

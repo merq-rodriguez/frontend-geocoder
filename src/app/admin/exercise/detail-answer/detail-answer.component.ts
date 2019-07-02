@@ -4,8 +4,14 @@ import {MatDialog} from '@angular/material';
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MonacoService } from 'src/app/@core/services/monaco.service';
+import { UserService } from 'src/app/@core/services/user.service';
+import { SnackBarService } from 'src/app/@core/services/snackbar.service';
+import { AnswerExerciseService, IAnswerCalification } from 'src/app/@core/services/answer-exercise.service';
 
-
+export interface Option {
+  id: number;
+  name: string;
+}
 
 
 @Component({
@@ -16,16 +22,63 @@ import { MonacoService } from 'src/app/@core/services/monaco.service';
 export class DetailAnswerComponent implements OnInit {
 
   public answer: any = {};
-  public calification;
-  public observations;
-  codigo: string = "xxx cdcdcd"
+  public calification = 0;
+  public observations = "";
+  selected: Option = null;
+  public options:Option[] = [
+    {
+      id: 1,
+      name: "Respuesta correcta"
+    },
+    {
+      id: 2,
+      name: "Respuesta incorrecta"
+    }
+  ]
+
+
   ngOnInit() {
    
   }
  
+  saveCalificacion(){
+    if(!this.selected){
+      this.snackService.openSnackBar("No has especificado si la respuesta es correcta", "Aceptar");      
+    }else{
+      let solved = (this.selected.id === 1) ? true : false;
+
+      let calification: IAnswerCalification = {
+        idAnswer: this.answer.idrecordexercise,
+        idScore: this.answer.idScore,
+        observation: this.observations,
+        points: this.calification,
+        solved: solved
+      }
+
+      this.answerService.sendCalificationAnswer(calification).subscribe( res => {
+        console.log(res)
+        if(res){
+          if(!res.status){
+            this.snackService.openSnackBar("Ocurrio un problema guardando la calificacion", "Aceptar");
+          }else{
+            this.answer.points = this.answer.points + this.calification;
+            this.snackService.openSnackBar("Has guardado la calificacion", "Aceptar");
+          }
+        }
+      })
+
+    }
+   
+  }
+
+  
+
   constructor(
     private route: ActivatedRoute,
-    private monacoService: MonacoService
+    private monacoService: MonacoService,
+    private userService: UserService,
+    private snackService: SnackBarService,
+    private answerService: AnswerExerciseService
   ) {
     this.route.queryParams.subscribe(params => {
       this.answer = JSON.parse(params["answer-exercise"])
