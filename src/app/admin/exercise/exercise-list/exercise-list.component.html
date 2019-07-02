@@ -47,7 +47,7 @@
                   <th mat-header-cell *matHeaderCellDef>Image</th>
                   <td mat-cell *matCellDef="let element">
                       <ng-container>
-                          <img class="image-item" src="http://www.techlabs.com.mx/wp-content/uploads/2016/11/software.png" alt="">
+                          <img class="image-item" [src]="element.image" alt="">
                       </ng-container>
                   </td>
                 </ng-container>

@@ -4,6 +4,8 @@ import {MatDialog} from '@angular/material';
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 import { IExercise } from 'src/app/@core/data/exercise.data';
 import { Router } from '@angular/router';
+import { ExerciseService } from 'src/app/@core/services/exercise.service';
+import { AuthService } from 'src/app/@core/services/auth.service';
 
 
 
@@ -14,9 +16,9 @@ import { Router } from '@angular/router';
   styleUrls: ["./exercise-list.component.css"]
 })
 export class ExerciseListComponent implements OnInit {
+  user:any;
 
-
-  ELEMENT_DATA: IExercise[] = [
+  ELEMENT_DATA = [
     {
       idExercise: "1",
       name: "stringstringstringstringstringstringstringstringstring",
@@ -85,7 +87,7 @@ export class ExerciseListComponent implements OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   public deleteExercise(){
-    let list:IExercise[] = this.ELEMENT_DATA.filter((exer: IExercise) => exer.idExercise !== this.exerciseSelected.idExercise)
+    let list = this.ELEMENT_DATA.filter((exer: IExercise) => exer.idExercise !== this.exerciseSelected.idExercise)
     this.ELEMENT_DATA = list;
     this.dataSource = new MatTableDataSource<IExercise>(this.ELEMENT_DATA);
     console.log(this.ELEMENT_DATA);
@@ -110,15 +112,6 @@ export class ExerciseListComponent implements OnInit {
     console.log(this.exerciseSelected);
   }
 
-
-  ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    
-  }
-    public getRoutesItem(){
-      return ROUTES; 
-    }
-  
   
   
   openDialog() {
@@ -132,9 +125,27 @@ export class ExerciseListComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private router: Router
+    private router: Router,
+    private exerciseService: ExerciseService,
+    private authService: AuthService
   ) {}
 
+  ngOnInit() {
+    this.authService.userObservable$.subscribe( user =>{ 
+      this.user = user;
+      this.exerciseService.getExercises(this.user.idUser).subscribe(exercises => {
+        this.ELEMENT_DATA = exercises;
+        this.dataSource = new MatTableDataSource<IExercise>(this.ELEMENT_DATA);
+      })
+    });
+    this.dataSource.paginator = this.paginator;
+    
+  }
+  
+    public getRoutesItem(){
+      return ROUTES; 
+    }
+  
 
 }
 
