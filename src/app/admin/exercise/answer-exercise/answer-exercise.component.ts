@@ -113,5 +113,6 @@ export interface ElementAnswerUser{
 const ROUTES: RouteInfo[] = [
 /*   { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true }, */
   { path: '/admin/exercises/menu-exercises', icon: "school", title: "Menu de Ejercicios", class: "", active: true },
+  { path: '/admin/exercises/list-exercise', icon: "school", title: "Listado de ejercicios", class: "", active: true },
   { icon: "", title: "Listado de respuestas", class: "", active: false },
 ];

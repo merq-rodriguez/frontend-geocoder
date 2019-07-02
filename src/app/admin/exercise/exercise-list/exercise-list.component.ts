@@ -149,6 +149,6 @@ export class DialogOption {}
 
 const ROUTES: RouteInfo[] = [
 /*   { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true }, */
-  { path: '/admin/exercises/menu-exercises', icon: "school", title: "Menu de Ejercicios", class: "", active: true },
+  { path: '/admin/exercises/exercise-menu', icon: "school", title: "Menu de Ejercicios", class: "", active: true },
   { icon: "", title: "Listado de ejercicios", class: "", active: false },
 ];
