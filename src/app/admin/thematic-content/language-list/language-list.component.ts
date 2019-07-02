@@ -17,7 +17,6 @@ export class LanguageListComponent implements OnInit {
   constructor(
     private router: Router,
     private languageService: LanguageService,
-    private themeService: ThemeService,
     private authUser: AuthService  
   ) {
            
@@ -35,7 +34,16 @@ export class LanguageListComponent implements OnInit {
      }); 
   }
 
-
+deleteLanguage(id: number){
+  console.log(id);
+ this.languageService.deleteLanguage(id).subscribe(res => {
+   console.log(res);
+    if(res.status){
+      let langs = this.languageList.filter(lang => lang.idlanguage !== id);
+      this.languageList = langs; 
+    }
+ })
+}
   getRouteTheme(language: any) {
       let extras: NavigationExtras = {
         queryParams: {

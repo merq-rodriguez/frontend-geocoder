@@ -14,6 +14,7 @@ import { Observable, Subject } from 'rxjs';
 export class MonacoComponent implements OnInit {
 	@ViewChild(MonacoEditorDirective) editor: MonacoEditorDirective;
   @Input('context') context;
+  @Input('code') code;
   public observerEditor: Observable<any>;
 	fileChange = new Subject<MonacoFile>();
     file: MonacoFile = null;

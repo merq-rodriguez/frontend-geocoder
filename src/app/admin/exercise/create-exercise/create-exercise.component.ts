@@ -385,7 +385,8 @@ export class CreateExerciseComponent implements OnInit {
 
 }
 const ROUTES_COMPETENCE: RouteInfo[] = [
-  { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true },
+ /*  { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true }, */
+  { path: '/admin/exercises/exercise-menu', icon: "school", title: "Menu Ejercicios", class: "", active: true },
   { path: '', icon: "school", title: "Ejercicios", class: "", active: false },
 ];
 
