@@ -23,8 +23,9 @@ export class AuthService{
     }
     
    logout(){
-       this.setUser(null);
-       this.localService.deleteLocalstore('user');
+        this.user = null;
+        this.userSource.next(this.user);
+        this.localService.deleteLocalstore('user');
    }
     
     setUser(user){
