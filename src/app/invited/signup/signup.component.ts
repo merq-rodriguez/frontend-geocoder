@@ -18,6 +18,8 @@ export interface Role {
 })
 export class SignUp implements OnInit {
 
+  public isSignUp = false;
+
   public logo = environment.api.geoprogram+"uploads/images/logo.png"
 
   public user: IUser = {
@@ -53,13 +55,24 @@ export class SignUp implements OnInit {
 
   ngOnInit() { }
 
+  public crearField(){
+    this.user = {
+      name: '',
+      email: '',
+      password: '',
+      phone: '',
+      username: '',
+      idRole: 0
+    }
+  }
 
   public validate() {
     if (
       this.user.name.trim() === '' ||
       this.user.email.trim() === '' ||
       this.user.password.trim() === '' ||
-      this.user.username.trim() === ''
+      this.user.username.trim() === '' ||
+      this.user.idRole === 0
     ) {
       return false;
     }
@@ -88,8 +101,14 @@ export class SignUp implements OnInit {
               this.snackService.openSnackBar('Ohhh Ohhh HIUGSTON tenemos un problema :(', 'Aceptar');
             }
           }else{
-            this.localstorageService.saveLocalstorage('user', res)
-            this.router.navigate(['admin/thematic-content/menu-language'])
+            if(this.user.idRole !== 2){
+              this.crearField();
+              this.localstorageService.saveLocalstorage('user', res)
+              this.router.navigate(['admin/thematic-content/menu-language'])
+            }else{
+              this.crearField();
+              this.snackService.openSnackBar('¡Felicidades, te has registrado con exito!', 'Aceptar');
+            }
           }
         });
       } else {
