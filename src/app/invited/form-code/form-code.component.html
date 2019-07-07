@@ -1,10 +1,13 @@
 <div class="container">
   <div class="row d-flex justify-content-center">
-    <button class="btn btn-success" (click)="sendCode()" [disabled]="hiddenSubmission">Enviar</button>
+    <button class="btn btn-default btn-blue " (click)="sendCode()" [disabled]="hiddenSubmission">
+      <i class="material-icons">
+      fingerprint
+      </i> Enviar</button>
     <input type="text" id="data" name="data" [hidden]="true" />
-    <button class="btn btn-default"  [disabled]="!hiddenStatus" [hidden]="!hiddenStatus">Status</button>
+   <!--  <button class="btn btn-default"  [disabled]="!hiddenStatus" [hidden]="!hiddenStatus">Status</button>
     <button class="btn btn-default btn-blue" (click)="getStatusCode()" [disabled]="hiddenStatus" [hidden]="hiddenStatus">Status</button>
-  
+   -->
   </div>
 </div>
   <app-monaco-code ></app-monaco-code>

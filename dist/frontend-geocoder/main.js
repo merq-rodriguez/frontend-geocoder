@@ -550,7 +550,8 @@ var AuthService = /** @class */ (function () {
         }
     }
     AuthService.prototype.logout = function () {
-        this.setUser(null);
+        this.user = null;
+        this.userSource.next(this.user);
         this.localService.deleteLocalstore('user');
     };
     AuthService.prototype.setUser = function (user) {
@@ -3673,7 +3674,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
 var environment = {
     api: {
-        geoprogram: 'http://space-innovations.tk:3001/',
+        geoprogram: 'http://localhost:3001/',
         judge: 'https://api.judge0.com/'
     },
     production: false

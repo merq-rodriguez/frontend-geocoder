@@ -4,7 +4,6 @@ export interface ICode {
     idExercise: number;
     idUser: number;
     content: string;
-    solved: boolean;
 }
 
 

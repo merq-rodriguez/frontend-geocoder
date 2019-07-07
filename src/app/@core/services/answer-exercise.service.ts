@@ -21,6 +21,7 @@ export class AnswerExerciseService {
     getHistoricalExercise(idExercise: number):Observable<any>{
         return this.api.get(this.controller+'/getHistoricalExercise', idExercise);
     }
+    
     getExercisesSolved(idUser: number):Observable<any>{
         return this.api.get(this.controller+'/getExercisesSolved', idUser);
     }
@@ -28,6 +29,7 @@ export class AnswerExerciseService {
     sendAnswerExercise(code: ICode): Observable<any> {
       return this.api.post(this.controller, 'sendAnswerExercise', code);
     }
+
     sendCalificationAnswer(calification: IAnswerCalification): Observable<any> {
       return this.api.put(this.controller, 'sendCalificationAnswer', calification);
     }

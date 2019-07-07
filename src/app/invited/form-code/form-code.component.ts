@@ -21,12 +21,7 @@ export class FormCode implements OnInit {
   subscribeMonaco$: any;
   private code: string = '';
   public token;
-  answer: ICode = {
-    idUser: 29,
-    idExercise: 9,
-    content: "xxxxxxxxxxxxxxxxxx",
-    solved: false
-  }
+  
 
   constructor(
     private monacoService: MonacoService,
@@ -41,15 +36,46 @@ export class FormCode implements OnInit {
   };
 
   sendCode() {
+    let json;
+    let idUser;
+    let idExercise;
     if (this.isMobileDevice()) {
       let data = (<HTMLInputElement>document.getElementById("data")).value;
-      let json = JSON.parse(data);
-      this.snackService.openSnackBar(json.idExercise, "Aceptar");
+      json = JSON.parse(data);
+      idUser     = Number(json['idUser']);
+      idExercise = Number(json['idExercise']);
+    }else{
+      idUser     = 34;
+      idExercise = 12;
+      console.log("No es un telefono movil")
     }
-    console.log("Antes de enviar el codigo a api judge0");
-    console.log(this.code);
+    //this.snackService.openSnackBar(idExercise, "Aceptar");
+
     if (this.code.trim() !== '') {
-      try {
+      this.answerService.sendAnswerExercise({ idUser, idExercise, content: this.code }as ICode).toPromise()
+      .then(res => {
+        if(!res.response){
+          this.snackService.openSnackBar("Se ha enviado tu respuesta correctamente", "Aceptar");
+        }else{
+          this.snackService.openSnackBar("Ocurrio un problema guardando tu respuesta", "Aceptar");
+        }
+        console.log(res)
+      }).catch(error => {
+        console.log(error);
+         this.snackService.openSnackBar("Ocurrio un error, probablemente de red.", "Aceptar");
+      })
+      
+    } else {
+      this.snackService.openSnackBar("No has ingresado ningun codigo", "Aceptar");
+    }
+   
+  }
+
+//idUser: 2
+//idExercise:12
+
+
+/**try {
         this.judgeService.submission(
           {
             source_code: this.code,
@@ -69,14 +95,12 @@ export class FormCode implements OnInit {
       } catch (error) {
         console.error(error);
         this.snackService.openSnackBar("Ha un problema (llama a la policia :c)", "Aceptar");
+      } */
 
-      }
-    } else {
-      this.snackService.openSnackBar("No has ingresado ningun codigo", "Aceptar");
-    }
-  }
-  // 
-  //
+
+
+
+
   getStatusCode() {
     if (this.token) {
       try {
@@ -127,12 +151,7 @@ export class FormCode implements OnInit {
 
 
 
-  saveCode() {
-    this.answerService.sendAnswerExercise(this.answer).subscribe(res => {
-      "=========== SAVE CODE ==========="
-      console.log(res)
-    })
-  }
+
 
   ngOnInit() {
     this.subscribeMonaco$ = this.monacoService.content$.subscribe(content => this.code = content);
