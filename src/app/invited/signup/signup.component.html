@@ -23,6 +23,14 @@
         <input type="number" placeholder="Telefono"  [(ngModel)]="user.phone" name="phone"/>      
         <input type="email" placeholder="Correo"  [(ngModel)]="user.email" name="email"/>
         <input type="password" placeholder="Contraseña" [(ngModel)]="user.password" name="password"/>
+        <div class="form-select" >
+          <mat-select [(value)]="user.idRole" >
+            
+            <mat-option *ngFor="let role of roles" [value]="role.id" >
+              {{role.name}}
+            </mat-option>
+          </mat-select>
+        </div>
         <button (click)="signUp()">Registrarme </button>
   
       </form>

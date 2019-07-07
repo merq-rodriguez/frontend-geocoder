@@ -90,6 +90,18 @@ a {
   
 }
 
+
+.form-select {
+  background: #eee;
+  border:none;
+  padding:12px 15px;
+  margin: 8px 0;
+  width: 80%;
+  border-radius: 20px;
+  
+}
+
+
 button {
   border-radius: 20px;
   border: 1px solid #2bffe3;

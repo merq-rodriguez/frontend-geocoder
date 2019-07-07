@@ -6,6 +6,11 @@ import { Router } from '@angular/router';
 import { LocalstorageService } from 'src/app/@core/services/localstorage.service';
 import { environment } from 'src/environments/environment';
 
+export interface Role {
+  id: number;
+  name: string;
+}
+
 @Component({
   selector: 'signUp',
   templateUrl: './signup.component.html',
@@ -21,9 +26,23 @@ export class SignUp implements OnInit {
     password: '',
     phone: '',
     username: '',
-    idRole: 2
+    idRole: 0
   }
-
+  
+  public roles:Array<Role> = [
+    {
+      id: 0,
+      name: '¿De que lado quieres jugar?'
+    },
+    {
+      id: 2,
+      name: 'Quiero ser estudiante'
+    },
+    {
+      id: 3,
+      name: 'Quiero ser profesor'
+    }
+  ]
 
   constructor(
     private userService: UserService,
