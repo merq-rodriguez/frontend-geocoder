@@ -18,7 +18,7 @@ module.exports = "@import url(https://fonts.googleapis.com/css?family=Roboto:300
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row d-flex justify-content-center\">\n    <button class=\"btn btn-success\" (click)=\"sendCode()\" [disabled]=\"hiddenSubmission\">Enviar</button>\n    <input type=\"text\" id=\"data\" name=\"data\" [hidden]=\"true\" />\n    <button class=\"btn btn-default\"  [disabled]=\"!hiddenStatus\" [hidden]=\"!hiddenStatus\">Status</button>\n    <button class=\"btn btn-default btn-blue\" (click)=\"getStatusCode()\" [disabled]=\"hiddenStatus\" [hidden]=\"hiddenStatus\">Status</button>\n  \n  </div>\n</div>\n  <app-monaco-code ></app-monaco-code>\n\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row d-flex justify-content-center\">\n    <button class=\"btn btn-default btn-blue \" (click)=\"sendCode()\" [disabled]=\"hiddenSubmission\">\n      <i class=\"material-icons\">\n      fingerprint\n      </i> Enviar</button>\n    <input type=\"text\" id=\"data\" name=\"data\" [hidden]=\"true\" />\n   <!--  <button class=\"btn btn-default\"  [disabled]=\"!hiddenStatus\" [hidden]=\"!hiddenStatus\">Status</button>\n    <button class=\"btn btn-default btn-blue\" (click)=\"getStatusCode()\" [disabled]=\"hiddenStatus\" [hidden]=\"hiddenStatus\">Status</button>\n   -->\n  </div>\n</div>\n  <app-monaco-code ></app-monaco-code>\n\n"
 
 /***/ }),
 
@@ -53,12 +53,6 @@ var FormCode = /** @class */ (function () {
         this.hiddenSubmission = false;
         this.hiddenStatus = true;
         this.code = '';
-        this.answer = {
-            idUser: 29,
-            idExercise: 9,
-            content: "xxxxxxxxxxxxxxxxxx",
-            solved: false
-        };
     }
     FormCode.prototype.isMobileDevice = function () {
         return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
@@ -66,41 +60,63 @@ var FormCode = /** @class */ (function () {
     ;
     FormCode.prototype.sendCode = function () {
         var _this = this;
+        var json;
+        var idUser;
+        var idExercise;
         if (this.isMobileDevice()) {
             var data = document.getElementById("data").value;
-            var json = JSON.parse(data);
-            this.snackService.openSnackBar(json.idExercise, "Aceptar");
+            json = JSON.parse(data);
+            idUser = Number(json['idUser']);
+            idExercise = Number(json['idExercise']);
         }
-        console.log("Antes de enviar el codigo a api judge0");
-        console.log(this.code);
+        else {
+            idUser = 34;
+            idExercise = 12;
+            console.log("No es un telefono movil");
+        }
+        //this.snackService.openSnackBar(idExercise, "Aceptar");
         if (this.code.trim() !== '') {
-            try {
-                this.judgeService.submission({
-                    source_code: this.code,
-                    language_id: 43,
-                    stdin: '*'
-                })
-                    .subscribe(function (res) {
-                    _this.snackService.openSnackBar("Has enviado tu codigo", "Aceptar");
-                    if (res.token) {
-                        _this.token = res.token;
-                        _this.hiddenSubmission = true;
-                        _this.hiddenStatus = false;
-                        console.log(_this.token);
-                    }
-                });
-            }
-            catch (error) {
-                console.error(error);
-                this.snackService.openSnackBar("Ha un problema (llama a la policia :c)", "Aceptar");
-            }
+            this.answerService.sendAnswerExercise({ idUser: idUser, idExercise: idExercise, content: this.code }).toPromise()
+                .then(function (res) {
+                if (!res.response) {
+                    _this.snackService.openSnackBar("Se ha enviado tu respuesta correctamente", "Aceptar");
+                }
+                else {
+                    _this.snackService.openSnackBar("Ocurrio un problema guardando tu respuesta", "Aceptar");
+                }
+                console.log(res);
+            }).catch(function (error) {
+                console.log(error);
+                _this.snackService.openSnackBar("Ocurrio un error, probablemente de red.", "Aceptar");
+            });
         }
         else {
             this.snackService.openSnackBar("No has ingresado ningun codigo", "Aceptar");
         }
     };
-    // 
-    //
+    //idUser: 2
+    //idExercise:12
+    /**try {
+            this.judgeService.submission(
+              {
+                source_code: this.code,
+                language_id: 43,
+                stdin: '*'
+              } as PayloadJudge0)
+              .subscribe(res => {
+                this.snackService.openSnackBar("Has enviado tu codigo", "Aceptar");
+    
+                if (res.token) {
+                  this.token = res.token;
+                  this.hiddenSubmission = true;
+                  this.hiddenStatus = false;
+                  console.log(this.token)
+                }
+              })
+          } catch (error) {
+            console.error(error);
+            this.snackService.openSnackBar("Ha un problema (llama a la policia :c)", "Aceptar");
+          } */
     FormCode.prototype.getStatusCode = function () {
         var _this = this;
         if (this.token) {
@@ -148,12 +164,6 @@ var FormCode = /** @class */ (function () {
                 this.snackService.openSnackBar("A ocurrido un problema inesperado (llama a la policia)", "Aceptar");
             }
         }
-    };
-    FormCode.prototype.saveCode = function () {
-        this.answerService.sendAnswerExercise(this.answer).subscribe(function (res) {
-            "=========== SAVE CODE ===========";
-            console.log(res);
-        });
     };
     FormCode.prototype.ngOnInit = function () {
         var _this = this;

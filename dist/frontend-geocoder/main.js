@@ -3674,7 +3674,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "environment", function() { return environment; });
 var environment = {
     api: {
-        geoprogram: 'http://localhost:3001/',
+        geoprogram: 'http://space-innovations.tk:3001/',
         judge: 'https://api.judge0.com/'
     },
     production: false
