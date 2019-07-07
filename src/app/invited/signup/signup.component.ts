@@ -6,12 +6,19 @@ import { Router } from '@angular/router';
 import { LocalstorageService } from 'src/app/@core/services/localstorage.service';
 import { environment } from 'src/environments/environment';
 
+export interface Role {
+  id: number;
+  name: string;
+}
+
 @Component({
   selector: 'signUp',
   templateUrl: './signup.component.html',
   styleUrls: ['./signup.component.css']
 })
 export class SignUp implements OnInit {
+
+  public isSignUp = false;
 
   public logo = environment.api.geoprogram+"uploads/images/logo.png"
 
@@ -21,9 +28,23 @@ export class SignUp implements OnInit {
     password: '',
     phone: '',
     username: '',
-    idRole: 2
+    idRole: 0
   }
-
+  
+  public roles:Array<Role> = [
+    {
+      id: 0,
+      name: '¿De que lado quieres jugar?'
+    },
+    {
+      id: 2,
+      name: 'Quiero ser estudiante'
+    },
+    {
+      id: 3,
+      name: 'Quiero ser profesor'
+    }
+  ]
 
   constructor(
     private userService: UserService,
@@ -34,13 +55,24 @@ export class SignUp implements OnInit {
 
   ngOnInit() { }
 
+  public crearField(){
+    this.user = {
+      name: '',
+      email: '',
+      password: '',
+      phone: '',
+      username: '',
+      idRole: 0
+    }
+  }
 
   public validate() {
     if (
       this.user.name.trim() === '' ||
       this.user.email.trim() === '' ||
       this.user.password.trim() === '' ||
-      this.user.username.trim() === ''
+      this.user.username.trim() === '' ||
+      this.user.idRole === 0
     ) {
       return false;
     }
@@ -69,8 +101,14 @@ export class SignUp implements OnInit {
               this.snackService.openSnackBar('Ohhh Ohhh HIUGSTON tenemos un problema :(', 'Aceptar');
             }
           }else{
-            this.localstorageService.saveLocalstorage('user', res)
-            this.router.navigate(['admin/thematic-content/menu-language'])
+            if(this.user.idRole !== 2){
+              this.crearField();
+              this.localstorageService.saveLocalstorage('user', res)
+              this.router.navigate(['admin/thematic-content/menu-language'])
+            }else{
+              this.crearField();
+              this.snackService.openSnackBar('¡Felicidades, te has registrado con exito!', 'Aceptar');
+            }
           }
         });
       } else {

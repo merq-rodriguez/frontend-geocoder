@@ -13,7 +13,7 @@ import { AuthService } from 'src/app/@core/services/auth.service';
 export class SignIn implements OnInit {
 
   public logo = environment.api.geoprogram+"uploads/images/logo.png"
-
+  
 
   public username: string = '';
   public password: string = '';
@@ -32,15 +32,19 @@ export class SignIn implements OnInit {
     if(this.username.trim() === '' || this.password.trim() === ''){
       this.snackService.openSnackBar('Campos vacios', 'Aceptar');
     }else{
-      console.log(this.username)
       this.userService.signIn(this.username, this.password).subscribe(user => {
         console.log("Respuesta del backend")
-        console.log(user);
+        console.log(user)
         if (user) {
-          if(user.accessTocken){
+          if(user.accessTocken && user.role !== 'Student'){
             this.userService.setUser(user); //Guardamos el usuario autenticado en el behaviorSubject
             this.authService.setUser(user);//Guardamos el usuario el localstoraje 
             this.router.navigate(['/admin/thematic-content/menu-language']); //Redireccionar a menu-language
+          }else if(user.response){
+              this.snackService.openSnackBar(user.response.message, 'Aceptar');
+            
+          }else if (user.role === 'Student'){
+            this.snackService.openSnackBar('No puedes iniciar sesion mientras seas estudiante.', 'Aceptar');
           }
           
         } else
