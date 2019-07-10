@@ -15,6 +15,7 @@ const routes: Routes = [
     children: [
       { path: 'dashboard', component: DashboardComponent },
       { path: 'exercises',    loadChildren: './exercise/exercise.module#ExerciseModule' },
+      { path: 'answer-exercises',    loadChildren: './answer-exercise/answer.module#AnswerExerciseModule' },
       { path: 'users',       loadChildren: './users/users.module#UsersModule' },
       { path: 'competences', loadChildren: './competence/competence.module#CompetenceModule' },
       { path: 'thematic-content',   loadChildren: './thematic-content/thematic-content.module#ThematicModule' },

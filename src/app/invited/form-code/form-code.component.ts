@@ -21,15 +21,24 @@ export class FormCode implements OnInit {
   subscribeMonaco$: any;
   private code: string = '';
   public token;
-  
+  public users = []
 
   constructor(
     private monacoService: MonacoService,
     private answerService: AnswerExerciseService,
     private judgeService: Judge0Service,
-    private snackService: SnackBarService
+    private snackService: SnackBarService,
+    private userService: UserService
 
   ) { }
+
+  getUser(){
+    window.postMessage('Holiiiii', '*', [])
+
+   /*  this.userService.getUsers().subscribe(res => {
+      this.users = res;
+    }) */
+  }
 
   isMobileDevice() {
     return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
@@ -52,7 +61,7 @@ export class FormCode implements OnInit {
     //this.snackService.openSnackBar(idExercise, "Aceptar");
 
     if (this.code.trim() !== '') {
-      this.answerService.sendAnswerExercise({ idUser, idExercise, content: this.code }as ICode).toPromise()
+      this.answerService.sendAnswerExercise({ idUser, idExercise, content: this.code } as ICode).toPromise()
       .then(res => {
         if(!res.response){
           this.snackService.openSnackBar("Se ha enviado tu respuesta correctamente", "Aceptar");

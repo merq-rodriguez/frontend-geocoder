@@ -36,15 +36,17 @@ export class SignIn implements OnInit {
         console.log("Respuesta del backend")
         console.log(user)
         if (user) {
-          if(user.accessTocken && user.role !== 'Student'){
+          if(user.role !== 'Student'){
             this.userService.setUser(user); //Guardamos el usuario autenticado en el behaviorSubject
             this.authService.setUser(user);//Guardamos el usuario el localstoraje 
             this.router.navigate(['/admin/thematic-content/menu-language']); //Redireccionar a menu-language
           }else if(user.response){
-              this.snackService.openSnackBar(user.response.message, 'Aceptar');
+            this.snackService.openSnackBar(user.response.message, 'Aceptar');
             
           }else if (user.role === 'Student'){
-            this.snackService.openSnackBar('No puedes iniciar sesion mientras seas estudiante.', 'Aceptar');
+            this.userService.setUser(user); //Guardamos el usuario autenticado en el behaviorSubject
+            this.authService.setUser(user);//Guardamos el usuario el localstoraje 
+            this.router.navigate(['/admin/answer-exercises/answer-exercise']); 
           }
           
         } else

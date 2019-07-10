@@ -21,7 +21,7 @@ export class UserService  extends UserData{
   }
 
   getUsers(): Observable<any> {
-    return this.apiService.get(this.controller);
+    return this.apiService.get(this.controller, 'getAll');
   }
   
   findUser(idUser: number): Observable<any> {

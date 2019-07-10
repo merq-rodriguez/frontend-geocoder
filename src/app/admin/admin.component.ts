@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from '../@core/services/auth.service';
 
 
 @Component({
@@ -6,4 +7,17 @@ import { Component } from '@angular/core';
   styleUrls: ['admin.component.scss'],
   templateUrl: './admin.component.html',
 })
-export class AdminComponent {}
+export class AdminComponent {
+
+  public user:any;
+
+  constructor(private authService: AuthService){
+    this.authService.userObservable$.subscribe(res => {
+      this.user = res;
+      console.log(res);
+    })
+  }
+
+}
+
+

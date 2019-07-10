@@ -13,7 +13,9 @@ export class AuthGuard implements CanActivate {
     canActivate() {
         this.authService.userObservable$.subscribe(user => this.user = user);
         if(this.user){
+            
             return true;
+
         }else{
             this.router.navigate(['/home/signin'])
             return false;

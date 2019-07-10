@@ -1,0 +1,143 @@
+<div class="main-content">
+  <div class="container-fluid">
+
+    <app-navroutes [itemsRoutes]="getRoutesItem()"></app-navroutes>
+
+    <div class="card">
+      <div class="card-header card-header-default card-header">
+        <h4 class="card-title">Respuestas enviadas</h4>
+        <p class="card-category">Listado de respuestas</p>
+      </div>
+      <div class="card-body">
+ 
+        <br>
+        <div class="mat-elevation-z8">
+          <table mat-table [dataSource]="dataSource">
+            <!-- id Column -->
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef>No.</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.idAnswer }}
+              </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="nick">
+              <th mat-header-cell *matHeaderCellDef></th>
+              <td mat-cell *matCellDef="let element">
+                  <ng-container>
+                      <img class="image-item" [src]="element.nick" alt="">
+                  </ng-container>
+              </td>
+            </ng-container>
+            
+            <!-- Name Column -->
+            <ng-container matColumnDef="names_user">
+              <th mat-header-cell *matHeaderCellDef>Nombre</th>
+              <td mat-cell *matCellDef="let element">{{ element.name  }}</td>
+            </ng-container>
+
+            <!-- Description Column -->
+            <ng-container matColumnDef="level">
+              <th mat-header-cell *matHeaderCellDef>Nivel</th>
+              <td mat-cell *matCellDef="let element">{{ element.level }}</td>
+            </ng-container>
+
+         
+
+            <!-- Radius Column -->
+            <ng-container matColumnDef="date">
+              <th mat-header-cell *matHeaderCellDef>Fecha de envio</th>
+              <td mat-cell *matCellDef="let element">{{ element.date_send | date:'medium'}}</td>
+            </ng-container>
+
+            <!-- Radius Column -->
+            <ng-container matColumnDef="state">
+              <th mat-header-cell *matHeaderCellDef>Estado</th>
+              <td mat-cell *matCellDef="let element">{{ (element.state == 'A') ? 'Revisado': 'Sin revisar' }}</td>
+            </ng-container>
+            <!-- Radius Column -->
+            <ng-container matColumnDef="solved">
+              <th mat-header-cell *matHeaderCellDef>Solucionado</th>
+              <td mat-cell *matCellDef="let element">{{ (element.solved) ? 'Si': 'No' }}</td>
+            </ng-container>
+
+          <!-- Radius Column -->
+            <ng-container matColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef>Ver</th>
+              <td mat-cell *matCellDef="let element">
+                <ng-container>
+                    <button  mat-icon-button color="success" (click)="getDetailAnswer(element)"
+                    class="btn-default   btn-just-icon">
+                    <i class="material-icons"> fingerprint </i>
+                  </button>
+                </ng-container>
+              </td>
+            </ng-container>
+
+
+
+
+            <!--Actions Column -->
+<!-- 
+            <ng-container cdkColumnDef="action">
+              <th mat-header-cell *matHeaderCellDef> </th>
+              <td mat-cell *matCellDef="let element">
+
+                <button (click)="selectExer(element)" mat-raised-button color="primary"
+                  [mdePopoverTriggerFor]="appPopover" mdePopoverTriggerOn="click" class="btn pull-right  btn-just-icon">
+                  <i class="material-icons"> dns </i>
+                </button>
+            </ng-container>
+ -->
+
+
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          </table>
+
+          <mat-paginator [pageSizeOptions]="[10, 20]" showFirstLastButtons></mat-paginator>
+        </div>
+        <div class="card-footer">
+          <div class="card-stats"></div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+<!-- <mde-popover #appPopover="mdePopover" [mdePopoverOverlapTrigger]="false">
+  <mat-card style="max-width: 300px">
+    <div class="container">
+      <div class="row">
+
+
+
+        <div class="col-4">
+          <mat-card-content>
+            <button  mat-icon-button color="primary"
+              class="btn-default  pull-right  btn-just-icon">
+              <i class="material-icons"> room </i>
+            </button>
+          </mat-card-content>
+        </div>
+     
+
+        <div class="col-4">
+          <mat-card-content>
+            <button (click)="deleteExercise()" mat-icon-button color="primary"
+              class="btn-default  pull-right  btn-just-icon">
+              <i class="material-icons"> delete </i>
+            </button>
+          </mat-card-content>
+        </div>
+      </div>
+
+    </div>
+
+  </mat-card>
+</mde-popover> -->
