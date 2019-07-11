@@ -7,6 +7,7 @@ import { MonacoService } from 'src/app/@core/services/monaco.service';
 import { UserService } from 'src/app/@core/services/user.service';
 import { SnackBarService } from 'src/app/@core/services/snackbar.service';
 import { AnswerExerciseService, IAnswerCalification } from 'src/app/@core/services/answer-exercise.service';
+import { ThemathicService } from 'src/app/@core/services/themathic.service';
 
 export interface Option {
   id: number;
@@ -77,8 +78,11 @@ export class DetailAnswerComponent implements OnInit {
           if(!res.status){
             this.snackService.openSnackBar("Ocurrio un problema guardando la calificacion", "Aceptar");
           }else{
-            this.answer.points = this.answer.points + this.calification;
-            this.snackService.openSnackBar("Has guardado la calificacion", "Aceptar");
+            this.answer.points = this.answer.points + Number(this.selectedPoints.name)
+            this.userService.addScoreToUser(this.answer.idscore, Number(this.selectedPoints.name)).subscribe( res => {
+              console.log(res);
+              this.snackService.openSnackBar("Has guardado la calificacion", "Aceptar");
+            })
           }
         }
       })
