@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { Component, OnInit, ViewChild, Input, Inject } from '@angular/core';
+import { MatPaginator, MatTableDataSource, MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { MatDialog } from '@angular/material';
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 import { IExercise } from 'src/app/@core/data/exercise.data';
@@ -34,14 +34,20 @@ export class ExerciseFavoriteComponent implements OnInit {
     radius: 0
   }
 
-  displayedColumns: string[] = ['idExercise', 'image', 'name', 'description', 'radius', 'action'];
+  displayedColumns: string[] = ['image', 'name', 'description',  'action'];
 
   dataSource = new MatTableDataSource<IExercise>(this.ELEMENT_DATA);
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   public deleteExercise() {
-    let list = this.ELEMENT_DATA.filter((exer: IExercise) => exer.idExercise !== this.exerciseSelected.idExercise)
+    console.log("Ejercicio seleccionado")
+    console.log(this.exerciseSelected)
+    this.exerciseService.deleteFavoriteExercise(this.exerciseSelected['idexercise'], this.user.idUser)
+      .subscribe( res => {
+        console.log(res);
+      })
+    let list = this.ELEMENT_DATA.filter((exer) => exer.idexercise !== this.exerciseSelected['idexercise'])
     this.ELEMENT_DATA = list;
     this.dataSource = new MatTableDataSource<IExercise>(this.ELEMENT_DATA);
     console.log(this.ELEMENT_DATA);
@@ -50,7 +56,7 @@ export class ExerciseFavoriteComponent implements OnInit {
   public openAnswerExercise() {
     console.log("ID:")
     let idExercise = this.exerciseSelected['idexercise']
-    this.router.navigate(['/admin/exercises/answer-exercise', { idExercise }]);
+    this.router.navigate(['/admin/answer-exercises/detail-answer', { idExercise }]);
   }
 
 
@@ -67,7 +73,10 @@ export class ExerciseFavoriteComponent implements OnInit {
 
 
   openDialog() {
-    const dialogRef = this.dialog.open(DialogExerciseFavorite);
+    const dialogRef = this.dialog.open(DialogExerciseFavorite,{
+      width: '850px',
+      data: this.exerciseSelected
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -85,9 +94,11 @@ export class ExerciseFavoriteComponent implements OnInit {
   ngOnInit() {
     this.authService.userObservable$.subscribe(user => {
       this.user = user;
-      this.exerciseService.getExercises(this.user.idUser).subscribe(exercises => {
-        this.ELEMENT_DATA = exercises;
-        this.dataSource = new MatTableDataSource<IExercise>(this.ELEMENT_DATA);
+      this.exerciseService.getExercisesFavorites(this.user.idUser).subscribe(exercises => {
+        console.log("GET EXERCISE FAVORITE")
+        console.log(exercises);
+         this.ELEMENT_DATA = exercises;
+        this.dataSource = new MatTableDataSource<IExercise>(this.ELEMENT_DATA); 
       })
     });
     this.dataSource.paginator = this.paginator;
@@ -95,18 +106,35 @@ export class ExerciseFavoriteComponent implements OnInit {
   }
 
   public getRoutesItem() {
-    return ROUTES;
+    if(this.user.role === 'Student'){
+      return ROUTES_STUDENT;
+    }else{
+      return ROUTES;
+    }
   }
 
 
 }
 
+export interface DialogData {
+  name: string;
+  description: string;
+  content: string;
+}
 
 @Component({
   selector: 'dialog-options-favorite',
   templateUrl: 'dialog-content-example-dialog.html',
 })
-export class DialogExerciseFavorite { }
+export class DialogExerciseFavorite { 
+  constructor(
+    public dialogRef: MatDialogRef<DialogExerciseFavorite>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
 
 
 
@@ -114,4 +142,8 @@ const ROUTES: RouteInfo[] = [
   /*   { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true }, */
   { path: '/admin/exercises/exercise-menu', icon: "school", title: "Menu de Ejercicios", class: "", active: true },
   { icon: "", title: "Listado de ejercicios", class: "", active: false },
+];
+
+const ROUTES_STUDENT: RouteInfo[] = [
+  { icon: "", title: "Ejercicios favoritos", class: "", active: false },
 ];

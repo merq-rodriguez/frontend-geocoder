@@ -54,9 +54,13 @@ export class ExerciseService extends ExerciseData {
   getExercises(idUser: number): Observable<any> {
     return this.api.get(this.controller+'/getAll', idUser)
   }
+  
+  getExercisesFavorites(idUser: number): Observable<any> {
+    return this.api.get(this.controller+'/getExerciseFavorite', idUser)
+  }
 
   findExercise(idExercise: number): Observable<any> {
-    return this.api.get(this.controller + 'findExercise' + idExercise)
+    return this.api.get(this.controller + '/findExercise', idExercise)
   }
   
   createExercise(exercise: IExercise): Observable<any> {
@@ -85,6 +89,10 @@ export class ExerciseService extends ExerciseData {
   
   deleteExercise(idExercise: number): Observable<any> {
     return this.api.delete(this.controller, 'deleteExercise', idExercise);       
+  }
+
+  deleteFavoriteExercise(idExercise: number, idUser: number): Observable<any> {
+    return this.api.post(this.controller, 'deleteFavoriteExercise', {idExercise, idUser});       
   }
 
 

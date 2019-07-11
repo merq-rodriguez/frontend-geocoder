@@ -46,7 +46,7 @@ export class SignIn implements OnInit {
           }else if (user.role === 'Student'){
             this.userService.setUser(user); //Guardamos el usuario autenticado en el behaviorSubject
             this.authService.setUser(user);//Guardamos el usuario el localstoraje 
-            this.router.navigate(['/admin/answer-exercises/answer-exercise']); 
+            this.router.navigate(['/admin/answer-exercises/exercise-favorite']); 
           }
           
         } else

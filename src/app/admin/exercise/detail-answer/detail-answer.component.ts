@@ -24,7 +24,11 @@ export class DetailAnswerComponent implements OnInit {
   public answer: any = {};
   public calification = 0;
   public observations = "";
-  selected: Option = null;
+  selected: Option = {
+    id: 2,
+    name: ""
+  };
+  selectedPoints: Option = null;
   public options:Option[] = [
     {
       id: 1,
@@ -36,6 +40,18 @@ export class DetailAnswerComponent implements OnInit {
     }
   ]
 
+  public options_points:Option[] = [
+    { id: 1,  name: "10"  },
+    { id: 2,  name: "20"  },
+    { id: 3,  name: "30"  },
+    { id: 4,  name: "40"  },
+    { id: 5,  name: "50"  },
+    { id: 6,  name: "60"  },
+    { id: 7,  name: "70"  },
+    { id: 8,  name: "80"  },
+    { id: 9,  name: "90"  },
+    { id: 10, name: "100" },
+  ]
 
   ngOnInit() {
    
@@ -51,7 +67,7 @@ export class DetailAnswerComponent implements OnInit {
         idAnswer: this.answer.idrecordexercise,
         idScore: this.answer.idScore,
         observation: this.observations,
-        points: this.calification,
+        points: Number(this.selected.name),
         solved: solved
       }
 

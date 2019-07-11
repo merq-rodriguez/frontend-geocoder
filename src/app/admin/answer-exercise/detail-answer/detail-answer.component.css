@@ -6,6 +6,17 @@
   border-radius: 5%;
 }
 
+.imagegif{
+  width: 40%;
+  display: block;
+  margin: auto;
+}
+
+.detail{
+  display: block;
+  margin: auto;
+}
+
 .image-user{
   width: 80%;
   display: block;

@@ -75,6 +75,7 @@ export class AnswerExerciseComponent implements OnInit {
     console.log(id)
     this.answerService.getHistoricalExercise(id).subscribe(res => {
       console.log("HISTORICAL EXERCISE")
+      console.log(res);
       this.ELEMENT_DATA = res;
       this.dataSource = new MatTableDataSource<ElementAnswerUser>(this.ELEMENT_DATA);
     })

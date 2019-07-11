@@ -11,8 +11,8 @@ const routes: Routes = [{
   component: AnswerComponent,
   children: [
     { path: 'answer-exercise', component: AnswerExerciseStudentComponent },
-    { path: 'exercise-favorite', component: ExerciseFavoriteComponent }
-  /*   { path: 'detail-answer', component: DetailAnswerComponent }, */
+    { path: 'exercise-favorite', component: ExerciseFavoriteComponent },
+    { path: 'detail-answer', component: DetailAnswerComponent }, 
 
   ],
 }];
@@ -28,5 +28,5 @@ export const routedComponents = [
   AnswerComponent,
   ExerciseFavoriteComponent,
   AnswerExerciseStudentComponent,
-  /* DetailAnswerComponent, */
+ DetailAnswerComponent, 
 ];

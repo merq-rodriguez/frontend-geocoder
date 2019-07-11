@@ -7,6 +7,9 @@ import { MonacoService } from 'src/app/@core/services/monaco.service';
 import { UserService } from 'src/app/@core/services/user.service';
 import { SnackBarService } from 'src/app/@core/services/snackbar.service';
 import { AnswerExerciseService, IAnswerCalification } from 'src/app/@core/services/answer-exercise.service';
+import { ExerciseService } from 'src/app/@core/services/exercise.service';
+import { ICode } from 'src/app/@core/data/code.data';
+import { AuthService } from 'src/app/@core/services/auth.service';
 
 export interface Option {
   id: number;
@@ -21,71 +24,69 @@ export interface Option {
 })
 export class DetailAnswerComponent implements OnInit {
 
-  public answer: any = {};
-  public calification = 0;
-  public observations = "";
-  selected: Option = null;
-  public options:Option[] = [
-    {
-      id: 1,
-      name: "Respuesta correcta"
-    },
-    {
-      id: 2,
-      name: "Respuesta incorrecta"
-    }
-  ]
-
-
+  user: any;
+  exercise: any;
+  code:string = '';
   ngOnInit() {
    
   }
  
-  saveCalificacion(){
-    if(!this.selected){
-      this.snackService.openSnackBar("No has especificado si la respuesta es correcta", "Aceptar");      
-    }else{
-      let solved = (this.selected.id === 1) ? true : false;
 
-      let calification: IAnswerCalification = {
-        idAnswer: this.answer.idrecordexercise,
-        idScore: this.answer.idScore,
-        observation: this.observations,
-        points: this.calification,
-        solved: solved
-      }
-
-      this.answerService.sendCalificationAnswer(calification).subscribe( res => {
-        console.log(res)
-        if(res){
-          if(!res.status){
-            this.snackService.openSnackBar("Ocurrio un problema guardando la calificacion", "Aceptar");
-          }else{
-            this.answer.points = this.answer.points + this.calification;
-            this.snackService.openSnackBar("Has guardado la calificacion", "Aceptar");
-          }
-        }
-      })
-
-    }
-   
-  }
 
   
 
   constructor(
     private route: ActivatedRoute,
     private monacoService: MonacoService,
-    private userService: UserService,
     private snackService: SnackBarService,
-    private answerService: AnswerExerciseService
+    private answerService: AnswerExerciseService,
+    private exerciseService: ExerciseService,
+    private authService: AuthService
   ) {
-    this.route.queryParams.subscribe(params => {
-      this.answer = JSON.parse(params["answer-exercise"])
+  
+    this.authService.userObservable$.subscribe(user => {
+      this.user = user;
+    })
+
+    if(this.route.snapshot.params.idExercise){
       console.log("EN EL DETALLE RESPUESTA")
-      console.log(this.answer)
-      this.monacoService.setMonacoContent("HOliiiiii")
-  });
+      let id = this.route.snapshot.params.idExercise;
+      this.exerciseService.findExercise(id).subscribe( res => {
+        //console.log(res);
+        this.exercise = res;
+      })
+    }
+     this.monacoService.content$.subscribe(code => {
+        this.code = code;
+     })
+ 
+  }
+
+
+  sendAnswerExercise(){
+    console.log(this.code)
+    if(this.code.trim() === ''){
+      this.snackService.openSnackBar("Debes ingresar codigo antes de enviar","Aceptar")
+    }else{
+      let answer = { 
+        content: this.code, 
+        idExercise: this.exercise.idexercise,
+        idUser: this.user.idUser
+       } as ICode;
+        this.answerService.sendAnswerExercise(answer).subscribe(res => {
+          console.log("RESPONSE SEND ANSWER EXERCISE");
+          if(res){
+            if(res.status == 'OK'){
+                this.snackService.openSnackBar("Se envio tu respuesta exitosamente","Aceptar")
+            }else{
+              this.snackService.openSnackBar("Hubo un problema guardando tu respuesta","Aceptar")
+            }
+          }else{
+              this.snackService.openSnackBar("Hubo un problema guardando tu respuesta","Aceptar")
+          }
+          console.log(res);
+        })
+    }
   }
 
   getRoutesItem(){
@@ -96,8 +97,6 @@ export class DetailAnswerComponent implements OnInit {
 
 const ROUTES: RouteInfo[] = [
 /*   { path: '/admin/dashboard', icon: "dashboard", title: "Home", class: "", active: true }, */
-  { path: '/admin/exercises/menu-exercises', icon: "school", title: "Menu de Ejercicios", class: "", active: true },
-  { path: '/admin/exercises/list-exercise', icon: "school", title: "Listado de ejercicios", class: "", active: true },
- /*  { path: '/admin/exercises/answer-exercise', icon: "school", title: "Listado de respuestas", class: "", active: true }, */
-  { icon: "", title: "Respuesta", class: "", active: false },
+   { path: '/admin/answer-exercises/exercise-favorite', icon: "school", title: "Atras", class: "", active: true }, 
+ /*  { icon: "", title: "Respuesta", class: "", active: false }, */
 ];

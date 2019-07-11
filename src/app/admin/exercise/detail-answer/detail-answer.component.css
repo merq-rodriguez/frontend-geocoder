@@ -6,6 +6,11 @@
   border-radius: 5%;
 }
 
+.center{
+  display: block;
+  margin: auto;
+}
+
 .image-user{
   width: 80%;
   display: block;

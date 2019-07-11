@@ -4,7 +4,7 @@
     <ol class="breadcrumb ">
         <div *ngFor="let item of itemsRoutes">
             <li class="breadcrumb-item" *ngIf="item.active">
-                <a class="text" routerLink={{item.path}}>{{ item.title}} </a> / 
+                <a class="text" routerLink={{item.path}}>{{ item.title}} </a>/
             </li>
           
             <li class="breadcrumb-item active" aria-current="page" *ngIf="!item.active">
