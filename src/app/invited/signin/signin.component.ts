@@ -17,7 +17,7 @@ export class SignIn implements OnInit {
 
   public username: string = '';
   public password: string = '';
-
+  public qrdata: string = null;
 
   constructor(
     private snackService: SnackBarService,
@@ -26,7 +26,13 @@ export class SignIn implements OnInit {
     private router: Router,
   ) { }
 
-  ngOnInit() { }
+  ngOnInit() { 
+    this.qrdata = 'Initial QR code data string';
+  }
+
+  changeValue(newValue: string): void {
+    this.qrdata = newValue;
+  }
 
   public signIn() {
     if(this.username.trim() === '' || this.password.trim() === ''){

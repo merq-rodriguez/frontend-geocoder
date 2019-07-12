@@ -1,46 +1,44 @@
-
 <div class="padre">
   <div class="container" id="container">
     <div class="form-container sign-up-container">
-        <h1> Registrate </h1>
-        <div class="social-container">
-          <a href="#" class="social"> <i class="fab fa-facebook-f"></i> </a>
-          <a href="#" class="social"> <i class="fab fa-google-plus-g"></i> </a>
-          <a href="#" class="social"> <i class="fab fa-linkedin-in"></i> </a>
-        </div>
-  
-       
-        <button> Geoprograming </button>
+      <h1> Registrate </h1>
+      <div class="social-container">
+        <a href="#" class="social"> <i class="fab fa-facebook-f"></i> </a>
+        <a href="#" class="social"> <i class="fab fa-google-plus-g"></i> </a>
+        <a href="#" class="social"> <i class="fab fa-linkedin-in"></i> </a>
+      </div>
+
+
+      <button> Geoprograming </button>
     </div>
-  
+
     <div class="form-container sign-in-container">
       <form action="#">
-          <img  style="width: 300px;" [src]="logo">
-
+       <img style="width: 300px;" [src]="logo">
+       <!-- <qrcode [qrdata]="qrdata" [size]="200" [level]="'M'"></qrcode> -->
         <h1> ¡Geoprograming! </h1>
-       
+
         <span> Acompañanos en este mundo de aventura </span>
-        <input type="text" placeholder="Nombre de usuario" [(ngModel)]="username" name="username" autocomplete="off"/>
-        <input type="password" placeholder="Contraseña" [(ngModel)]="password" name="password" autocomplete="off"/>
+        <input type="text" placeholder="Nombre de usuario" [(ngModel)]="username" name="username" autocomplete="off" />
+        <input type="password" placeholder="Contraseña" [(ngModel)]="password" name="password" autocomplete="off" />
         <button (click)="signIn()">Iniciar Sesion </button>
-  
+
       </form>
     </div>
-  
+
     <div class="overlay-container">
       <div class="overlay">
-     
-  
+
+
         <div class="overlay-panel overlay-right">
+          
 
           <h1> ¡Bienvenidos! </h1>
           <p> Puedes descargar nuestra app <a href="#">aqui</a>... </p>
           <button class="ghost" id="signUp" [routerLink]="['/home/signup']">Registrate</button>
         </div>
-  
+
       </div>
     </div>
   </div>
 </div>
-
-

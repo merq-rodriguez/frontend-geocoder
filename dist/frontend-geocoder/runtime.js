@@ -63,7 +63,7 @@
 /******/
 /******/ 	// script path function
 /******/ 	function jsonpScriptSrc(chunkId) {
-/******/ 		return __webpack_require__.p + "" + ({"common":"common","exercise-exercise-module":"exercise-exercise-module","competence-competence-module":"competence-competence-module","default~admin-admin-module~thematic-content-thematic-content-module":"default~admin-admin-module~thematic-content-thematic-content-module","admin-admin-module":"admin-admin-module","thematic-content-thematic-content-module":"thematic-content-thematic-content-module","invited-invited-module":"invited-invited-module","test-test-module":"test-test-module","users-users-module":"users-users-module"}[chunkId]||chunkId) + ".js"
+/******/ 		return __webpack_require__.p + "" + ({"answer-exercise-answer-module":"answer-exercise-answer-module","common":"common","exercise-exercise-module":"exercise-exercise-module","competence-competence-module":"competence-competence-module","default~admin-admin-module~thematic-content-thematic-content-module":"default~admin-admin-module~thematic-content-thematic-content-module","admin-admin-module":"admin-admin-module","thematic-content-thematic-content-module":"thematic-content-thematic-content-module","invited-invited-module":"invited-invited-module","test-test-module":"test-test-module","users-users-module":"users-users-module"}[chunkId]||chunkId) + ".js"
 /******/ 	}
 /******/
 /******/ 	// The require function

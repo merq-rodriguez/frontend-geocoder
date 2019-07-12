@@ -18,7 +18,7 @@ module.exports = "@import url(https://fonts.googleapis.com/css?family=Roboto:300
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"container\">\n  <div class=\"row d-flex justify-content-center\">\n    <button class=\"btn btn-default btn-blue \" (click)=\"sendCode()\" [disabled]=\"hiddenSubmission\">\n      <i class=\"material-icons\">\n      fingerprint\n      </i> Enviar</button>\n    <input type=\"text\" id=\"data\" name=\"data\" [hidden]=\"true\" />\n   <!--  <button class=\"btn btn-default\"  [disabled]=\"!hiddenStatus\" [hidden]=\"!hiddenStatus\">Status</button>\n    <button class=\"btn btn-default btn-blue\" (click)=\"getStatusCode()\" [disabled]=\"hiddenStatus\" [hidden]=\"hiddenStatus\">Status</button>\n   -->\n  </div>\n</div>\n  <app-monaco-code ></app-monaco-code>\n\n"
+module.exports = "<div class=\"container\">\n  <div class=\"row d-flex justify-content-center\">\n    <button class=\"btn btn-default btn-blue \" (click)=\"getUser()\" [disabled]=\"hiddenSubmission\">\n      <i class=\"material-icons\">\n      fingerprint\n      </i> Enviar</button>\n    <input type=\"text\" id=\"data\" name=\"data\" [hidden]=\"true\" />\n \n      <ul>\n        <li *ngFor=\"let item of users\"> \n          {{item.username}}\n        </li>\n      </ul>\n    <!--  <button class=\"btn btn-default\"  [disabled]=\"!hiddenStatus\" [hidden]=\"!hiddenStatus\">Status</button>\n    <button class=\"btn btn-default btn-blue\" (click)=\"getStatusCode()\" [disabled]=\"hiddenStatus\" [hidden]=\"hiddenStatus\">Status</button>\n   -->\n  </div>\n</div>\n  <app-monaco-code ></app-monaco-code>\n\n"
 
 /***/ }),
 
@@ -34,10 +34,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "FormCode", function() { return FormCode; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var src_app_core_services_snackbar_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/@core/services/snackbar.service */ "./src/app/@core/services/snackbar.service.ts");
-/* harmony import */ var src_app_core_services_monaco_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/@core/services/monaco.service */ "./src/app/@core/services/monaco.service.ts");
-/* harmony import */ var src_app_core_services_answer_exercise_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/@core/services/answer-exercise.service */ "./src/app/@core/services/answer-exercise.service.ts");
-/* harmony import */ var src_app_core_services_judge0_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/@core/services/judge0.service */ "./src/app/@core/services/judge0.service.ts");
+/* harmony import */ var src_app_core_services_user_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/app/@core/services/user.service */ "./src/app/@core/services/user.service.ts");
+/* harmony import */ var src_app_core_services_snackbar_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! src/app/@core/services/snackbar.service */ "./src/app/@core/services/snackbar.service.ts");
+/* harmony import */ var src_app_core_services_monaco_service__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! src/app/@core/services/monaco.service */ "./src/app/@core/services/monaco.service.ts");
+/* harmony import */ var src_app_core_services_answer_exercise_service__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! src/app/@core/services/answer-exercise.service */ "./src/app/@core/services/answer-exercise.service.ts");
+/* harmony import */ var src_app_core_services_judge0_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! src/app/@core/services/judge0.service */ "./src/app/@core/services/judge0.service.ts");
+
 
 
 
@@ -45,15 +47,23 @@ __webpack_require__.r(__webpack_exports__);
 
 
 var FormCode = /** @class */ (function () {
-    function FormCode(monacoService, answerService, judgeService, snackService) {
+    function FormCode(monacoService, answerService, judgeService, snackService, userService) {
         this.monacoService = monacoService;
         this.answerService = answerService;
         this.judgeService = judgeService;
         this.snackService = snackService;
+        this.userService = userService;
         this.hiddenSubmission = false;
         this.hiddenStatus = true;
         this.code = '';
+        this.users = [];
     }
+    FormCode.prototype.getUser = function () {
+        window.postMessage('Holiiiii', '*', []);
+        /*  this.userService.getUsers().subscribe(res => {
+           this.users = res;
+         }) */
+    };
     FormCode.prototype.isMobileDevice = function () {
         return (typeof window.orientation !== "undefined") || (navigator.userAgent.indexOf('IEMobile') !== -1);
     };
@@ -175,10 +185,11 @@ var FormCode = /** @class */ (function () {
             template: __webpack_require__(/*! ./form-code.component.html */ "./src/app/invited/form-code/form-code.component.html"),
             styles: [__webpack_require__(/*! ./form-code.component.css */ "./src/app/invited/form-code/form-code.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_core_services_monaco_service__WEBPACK_IMPORTED_MODULE_3__["MonacoService"],
-            src_app_core_services_answer_exercise_service__WEBPACK_IMPORTED_MODULE_4__["AnswerExerciseService"],
-            src_app_core_services_judge0_service__WEBPACK_IMPORTED_MODULE_5__["Judge0Service"],
-            src_app_core_services_snackbar_service__WEBPACK_IMPORTED_MODULE_2__["SnackBarService"]])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [src_app_core_services_monaco_service__WEBPACK_IMPORTED_MODULE_4__["MonacoService"],
+            src_app_core_services_answer_exercise_service__WEBPACK_IMPORTED_MODULE_5__["AnswerExerciseService"],
+            src_app_core_services_judge0_service__WEBPACK_IMPORTED_MODULE_6__["Judge0Service"],
+            src_app_core_services_snackbar_service__WEBPACK_IMPORTED_MODULE_3__["SnackBarService"],
+            src_app_core_services_user_service__WEBPACK_IMPORTED_MODULE_2__["UserService"]])
     ], FormCode);
     return FormCode;
 }());
@@ -398,7 +409,7 @@ var SignIn = /** @class */ (function () {
                 console.log("Respuesta del backend");
                 console.log(user);
                 if (user) {
-                    if (user.accessTocken && user.role !== 'Student') {
+                    if (user.role !== 'Student') {
                         _this.userService.setUser(user); //Guardamos el usuario autenticado en el behaviorSubject
                         _this.authService.setUser(user); //Guardamos el usuario el localstoraje 
                         _this.router.navigate(['/admin/thematic-content/menu-language']); //Redireccionar a menu-language
@@ -407,7 +418,9 @@ var SignIn = /** @class */ (function () {
                         _this.snackService.openSnackBar(user.response.message, 'Aceptar');
                     }
                     else if (user.role === 'Student') {
-                        _this.snackService.openSnackBar('No puedes iniciar sesion mientras seas estudiante.', 'Aceptar');
+                        _this.userService.setUser(user); //Guardamos el usuario autenticado en el behaviorSubject
+                        _this.authService.setUser(user); //Guardamos el usuario el localstoraje 
+                        _this.router.navigate(['/admin/answer-exercises/exercise-favorite']);
                     }
                 }
                 else

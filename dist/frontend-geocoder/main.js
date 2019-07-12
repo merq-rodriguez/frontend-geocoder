@@ -14,6 +14,10 @@ var map = {
 		"common",
 		"admin-admin-module"
 	],
+	"./answer-exercise/answer.module": [
+		"./src/app/admin/answer-exercise/answer.module.ts",
+		"answer-exercise-answer-module"
+	],
 	"./competence/competence.module": [
 		"./src/app/admin/competence/competence.module.ts",
 		"competence-competence-module"
@@ -729,8 +733,11 @@ var ExerciseService = /** @class */ (function (_super) {
     ExerciseService.prototype.getExercises = function (idUser) {
         return this.api.get(this.controller + '/getAll', idUser);
     };
+    ExerciseService.prototype.getExercisesFavorites = function (idUser) {
+        return this.api.get(this.controller + '/getExerciseFavorite', idUser);
+    };
     ExerciseService.prototype.findExercise = function (idExercise) {
-        return this.api.get(this.controller + 'findExercise' + idExercise);
+        return this.api.get(this.controller + '/findExercise', idExercise);
     };
     ExerciseService.prototype.createExercise = function (exercise) {
         var form = new FormData();
@@ -756,6 +763,9 @@ var ExerciseService = /** @class */ (function (_super) {
     };
     ExerciseService.prototype.deleteExercise = function (idExercise) {
         return this.api.delete(this.controller, 'deleteExercise', idExercise);
+    };
+    ExerciseService.prototype.deleteFavoriteExercise = function (idExercise, idUser) {
+        return this.api.post(this.controller, 'deleteFavoriteExercise', { idExercise: idExercise, idUser: idUser });
     };
     ExerciseService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])(),
@@ -1430,7 +1440,7 @@ var UserService = /** @class */ (function (_super) {
         this.userSource.next(user);
     };
     UserService.prototype.getUsers = function () {
-        return this.apiService.get(this.controller);
+        return this.apiService.get(this.controller, 'getAll');
     };
     UserService.prototype.findUser = function (idUser) {
         return Object(rxjs__WEBPACK_IMPORTED_MODULE_2__["of"])(this.users);
@@ -2475,7 +2485,7 @@ var TravisCompletionProvider = /** @class */ (function () {
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "footer {\n    width: 100%;\n    height: 40px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: column;\n    position: fixed;\n    bottom: 0;\n    background: #0c7d99;\n    background: linear-gradient(to right, #23cac2, #07353d) no-repeat 0 0 / cover ;\n    color: #fff;\n    padding-bottom: -2px;\n    z-index: 999;\n\n  }\n  \n  footer a {\n    border-radius: 50%;\n    display: inline-flex;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n    margin: 10px 15px 5px 5px;\n    width: 40px;\n    height: 40px;\n    font-size: 25px;\n  }\n  \n  footer i {\n    color: #000000;\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvQHRoZW1lL2NvbXBvbmVudHMvZm9vdGVyL2Zvb3Rlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksV0FBVztJQUNYLFlBQVk7SUFDWixhQUFhO0lBQ2IsbUJBQW1CO0lBQ25CLHVCQUF1QjtJQUN2QixzQkFBc0I7SUFDdEIsZUFBZTtJQUNmLFNBQVM7SUFDVCxtQkFBbUI7SUFDbkIsOEVBQThFO0lBQzlFLFdBQVc7SUFDWCxvQkFBb0I7SUFDcEIsWUFBWTs7RUFFZDs7RUFFQTtJQUNFLGtCQUFrQjtJQUNsQixvQkFBb0I7SUFDcEIsdUJBQXVCO0lBQ3ZCLG1CQUFtQjtJQUNuQixrQkFBa0I7SUFDbEIseUJBQXlCO0lBQ3pCLFdBQVc7SUFDWCxZQUFZO0lBQ1osZUFBZTtFQUNqQjs7RUFFQTtJQUNFLGNBQWM7RUFDaEIiLCJmaWxlIjoic3JjL2FwcC9AdGhlbWUvY29tcG9uZW50cy9mb290ZXIvZm9vdGVyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJmb290ZXIge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogNDBweDtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgYm90dG9tOiAwO1xuICAgIGJhY2tncm91bmQ6ICMwYzdkOTk7XG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHRvIHJpZ2h0LCAjMjNjYWMyLCAjMDczNTNkKSBuby1yZXBlYXQgMCAwIC8gY292ZXIgO1xuICAgIGNvbG9yOiAjZmZmO1xuICAgIHBhZGRpbmctYm90dG9tOiAtMnB4O1xuICAgIHotaW5kZXg6IDk5OTtcblxuICB9XG4gIFxuICBmb290ZXIgYSB7XG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICAgIGRpc3BsYXk6IGlubGluZS1mbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIG1hcmdpbjogMTBweCAxNXB4IDVweCA1cHg7XG4gICAgd2lkdGg6IDQwcHg7XG4gICAgaGVpZ2h0OiA0MHB4O1xuICAgIGZvbnQtc2l6ZTogMjVweDtcbiAgfVxuXG4gIGZvb3RlciBpIHtcbiAgICBjb2xvcjogIzAwMDAwMDtcbiAgfSJdfQ== */"
+module.exports = "footer {\n    width: 100%;\n    height: 40px;\n    display: flex;\n    align-items: center;\n    justify-content: center;\n    flex-direction: column;\n    position: fixed;\n    bottom: 0;\n    background: #0c7d99;\n    background: linear-gradient(to right, #23cac2, #07353d) no-repeat 0 0 / cover ;\n    color: #fff;\n    padding-bottom: -2px;\n    z-index: 999;\n\n  }\n  \n  footer a {\n    border-radius: 50%;\n    display: inline-flex;\n    justify-content: center;\n    align-items: center;\n    text-align: center;\n    margin: 10px 15px 5px 5px;\n    width: 40px;\n    height: 40px;\n    font-size: 25px;\n  }\n  \n  footer i {\n    color: #ffffff;\n  }\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNyYy9hcHAvQHRoZW1lL2NvbXBvbmVudHMvZm9vdGVyL2Zvb3Rlci5jb21wb25lbnQuY3NzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBO0lBQ0ksV0FBVztJQUNYLFlBQVk7SUFDWixhQUFhO0lBQ2IsbUJBQW1CO0lBQ25CLHVCQUF1QjtJQUN2QixzQkFBc0I7SUFDdEIsZUFBZTtJQUNmLFNBQVM7SUFDVCxtQkFBbUI7SUFDbkIsOEVBQThFO0lBQzlFLFdBQVc7SUFDWCxvQkFBb0I7SUFDcEIsWUFBWTs7RUFFZDs7RUFFQTtJQUNFLGtCQUFrQjtJQUNsQixvQkFBb0I7SUFDcEIsdUJBQXVCO0lBQ3ZCLG1CQUFtQjtJQUNuQixrQkFBa0I7SUFDbEIseUJBQXlCO0lBQ3pCLFdBQVc7SUFDWCxZQUFZO0lBQ1osZUFBZTtFQUNqQjs7RUFFQTtJQUNFLGNBQWM7RUFDaEIiLCJmaWxlIjoic3JjL2FwcC9AdGhlbWUvY29tcG9uZW50cy9mb290ZXIvZm9vdGVyLmNvbXBvbmVudC5jc3MiLCJzb3VyY2VzQ29udGVudCI6WyJmb290ZXIge1xuICAgIHdpZHRoOiAxMDAlO1xuICAgIGhlaWdodDogNDBweDtcbiAgICBkaXNwbGF5OiBmbGV4O1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAganVzdGlmeS1jb250ZW50OiBjZW50ZXI7XG4gICAgZmxleC1kaXJlY3Rpb246IGNvbHVtbjtcbiAgICBwb3NpdGlvbjogZml4ZWQ7XG4gICAgYm90dG9tOiAwO1xuICAgIGJhY2tncm91bmQ6ICMwYzdkOTk7XG4gICAgYmFja2dyb3VuZDogbGluZWFyLWdyYWRpZW50KHRvIHJpZ2h0LCAjMjNjYWMyLCAjMDczNTNkKSBuby1yZXBlYXQgMCAwIC8gY292ZXIgO1xuICAgIGNvbG9yOiAjZmZmO1xuICAgIHBhZGRpbmctYm90dG9tOiAtMnB4O1xuICAgIHotaW5kZXg6IDk5OTtcblxuICB9XG4gIFxuICBmb290ZXIgYSB7XG4gICAgYm9yZGVyLXJhZGl1czogNTAlO1xuICAgIGRpc3BsYXk6IGlubGluZS1mbGV4O1xuICAgIGp1c3RpZnktY29udGVudDogY2VudGVyO1xuICAgIGFsaWduLWl0ZW1zOiBjZW50ZXI7XG4gICAgdGV4dC1hbGlnbjogY2VudGVyO1xuICAgIG1hcmdpbjogMTBweCAxNXB4IDVweCA1cHg7XG4gICAgd2lkdGg6IDQwcHg7XG4gICAgaGVpZ2h0OiA0MHB4O1xuICAgIGZvbnQtc2l6ZTogMjVweDtcbiAgfVxuXG4gIGZvb3RlciBpIHtcbiAgICBjb2xvcjogI2ZmZmZmZjtcbiAgfSJdfQ== */"
 
 /***/ }),
 
@@ -2978,7 +2988,7 @@ module.exports = ".large-nav{\n  width: 100%;\n}\n\n.text{\n  color: rgb(14, 120
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n\n<nav aria-label=\"breadcrumb \">\n    <ol class=\"breadcrumb \">\n        <div *ngFor=\"let item of itemsRoutes\">\n            <li class=\"breadcrumb-item\" *ngIf=\"item.active\">\n                <a class=\"text\" routerLink={{item.path}}>{{ item.title}} </a> / \n            </li>\n          \n            <li class=\"breadcrumb-item active\" aria-current=\"page\" *ngIf=\"!item.active\">\n                {{item.title}}\n            </li>\n        </div>\n    </ol>\n</nav>"
+module.exports = "\n\n<nav aria-label=\"breadcrumb \">\n    <ol class=\"breadcrumb \">\n        <div *ngFor=\"let item of itemsRoutes\">\n            <li class=\"breadcrumb-item\" *ngIf=\"item.active\">\n                <a class=\"text\" routerLink={{item.path}}>{{ item.title}} </a>/\n            </li>\n          \n            <li class=\"breadcrumb-item active\" aria-current=\"page\" *ngIf=\"!item.active\">\n                {{item.title}}\n            </li>\n        </div>\n    </ol>\n</nav>"
 
 /***/ }),
 

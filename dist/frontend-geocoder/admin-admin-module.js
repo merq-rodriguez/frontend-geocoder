@@ -34,6 +34,7 @@ var routes = [
         children: [
             { path: 'dashboard', component: _dashboard_dashboard_component__WEBPACK_IMPORTED_MODULE_4__["DashboardComponent"] },
             { path: 'exercises', loadChildren: './exercise/exercise.module#ExerciseModule' },
+            { path: 'answer-exercises', loadChildren: './answer-exercise/answer.module#AnswerExerciseModule' },
             { path: 'users', loadChildren: './users/users.module#UsersModule' },
             { path: 'competences', loadChildren: './competence/competence.module#CompetenceModule' },
             { path: 'thematic-content', loadChildren: './thematic-content/thematic-content.module#ThematicModule' },
@@ -73,7 +74,7 @@ var routedComponents = [
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div class=\"main\">\n  <header>\n    <app-navbar></app-navbar>\n  </header>\n  <div id='main'>\n    <article>\n      <router-outlet></router-outlet>\n    </article>\n    <nav>\n      <app-sidebar></app-sidebar>\n    </nav>\n    <!--  <aside>\n            <app-aside></app-aside>\n          </aside> -->\n  </div>\n    <app-footer></app-footer>\n</div>"
+module.exports = "<div class=\"main\">\n  <header>\n    <app-navbar></app-navbar>\n  </header>\n  <div id='main'>\n    <article>\n      <router-outlet></router-outlet>\n    </article>\n    <nav >\n      <app-sidebar *ngIf=\"user.role === 'Teacher'\"></app-sidebar>\n    </nav>\n    <!--  <aside>\n            <app-aside></app-aside>\n          </aside> -->\n  </div>\n    <app-footer></app-footer>\n</div>"
 
 /***/ }),
 
@@ -100,17 +101,26 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "AdminComponent", function() { return AdminComponent; });
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _core_services_auth_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../@core/services/auth.service */ "./src/app/@core/services/auth.service.ts");
+
 
 
 var AdminComponent = /** @class */ (function () {
-    function AdminComponent() {
+    function AdminComponent(authService) {
+        var _this = this;
+        this.authService = authService;
+        this.authService.userObservable$.subscribe(function (res) {
+            _this.user = res;
+            console.log(res);
+        });
     }
     AdminComponent = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Component"])({
             selector: 'ngx-admin',
             template: __webpack_require__(/*! ./admin.component.html */ "./src/app/admin/admin.component.html"),
             styles: [__webpack_require__(/*! ./admin.component.scss */ "./src/app/admin/admin.component.scss")]
-        })
+        }),
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_core_services_auth_service__WEBPACK_IMPORTED_MODULE_2__["AuthService"]])
     ], AdminComponent);
     return AdminComponent;
 }());
