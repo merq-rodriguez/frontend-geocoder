@@ -36,24 +36,29 @@ export class SignIn implements OnInit {
 
   public signIn() {
     if(this.username.trim() === '' || this.password.trim() === ''){
-      this.snackService.openSnackBar('Campos vacios', 'Aceptar');
+      this.snackService.openSnackBar('Existen campos vacios', 'Aceptar');
     }else{
       this.userService.signIn(this.username, this.password).subscribe(user => {
         console.log("Respuesta del backend")
         console.log(user)
         if (user) {
-          if(user.role !== 'Student'){
-            this.userService.setUser(user); //Guardamos el usuario autenticado en el behaviorSubject
-            this.authService.setUser(user);//Guardamos el usuario el localstoraje 
-            this.router.navigate(['/admin/thematic-content/menu-language']); //Redireccionar a menu-language
-          }else if(user.response){
-            this.snackService.openSnackBar(user.response.message, 'Aceptar');
+          if(user.response){
+            if(user.response.message){
+              this.snackService.openSnackBar(user.response.message, 'Aceptar');
+            }
+          }else{
+            if(user.role !== 'Student'){
+              this.userService.setUser(user); //Guardamos el usuario autenticado en el behaviorSubject
+              this.authService.setUser(user);//Guardamos el usuario el localstoraje 
+              this.router.navigate(['/admin/thematic-content/menu-language']); //Redireccionar a menu-language
             
-          }else if (user.role === 'Student'){
-            this.userService.setUser(user); //Guardamos el usuario autenticado en el behaviorSubject
-            this.authService.setUser(user);//Guardamos el usuario el localstoraje 
-            this.router.navigate(['/admin/answer-exercises/exercise-favorite']); 
+            }else if (user.role === 'Student'){
+              this.userService.setUser(user); //Guardamos el usuario autenticado en el behaviorSubject
+              this.authService.setUser(user);//Guardamos el usuario el localstoraje 
+              this.router.navigate(['/admin/answer-exercises/exercise-favorite']); 
+            }
           }
+          
           
         } else
           this.snackService.openSnackBar('Hiugston Tenemos un problema', 'Joder todo el sistema');

@@ -142,9 +142,9 @@
                       </mat-form-field>
                     </div>
 
-                    <div class="col-4">
-                      <button class="btn btn-success center" (click)="submissionCode()">ENVIAR</button>
-                      <button class="btn btn-success center" (click)="getDetailSubmission()">VER STATUS</button>
+                    <div class="col-4" >
+                      <button class="btn btn-success center" (click)="submissionCode()" [disabled]="true">ENVIAR</button>
+                      <button class="btn btn-success center" (click)="getDetailSubmission()" [disabled]="true">VER STATUS</button>
                     </div>
                     <div class="col-4">
                       <mat-form-field>

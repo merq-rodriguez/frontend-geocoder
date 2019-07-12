@@ -15,13 +15,13 @@
                 <div class="card-body">
                   <i class="material-icons">edit</i>
                   <h6 class="card-category text-gray">Rol {{ user.role }}</h6>
-                  <h4 class="card-title">{{ user.name }}</h4>
+                  <h4 class="card-title">{{ user.names }}</h4>
 
                   <p class="card-description">
                     {{ user.about }}
                   </p>
 
-                  <div>
+                  <div *ngIf="user.role === 'Student'">
                     <h2><b>PUNTOS</b></h2>
                     <h2> {{ user.points }} </h2>
                   </div>
@@ -56,7 +56,7 @@
 
                       <div class="col-md-8">
                         <mat-form-field class="example-full-width">
-                          <input matInput placeholder="Nombres" type="text" [(ngModel)]="user.name" name='name' />
+                          <input matInput placeholder="Nombres" type="text" [(ngModel)]="user.names" name='name' />
                         </mat-form-field>
                       </div>
                     </div>

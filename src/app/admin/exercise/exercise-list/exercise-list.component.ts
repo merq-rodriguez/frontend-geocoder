@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild, Input} from '@angular/core';
-import {MatPaginator, MatTableDataSource} from '@angular/material';
+import {Component, OnInit, ViewChild, Input, Inject} from '@angular/core';
+import {MatPaginator, MatTableDataSource, MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import {MatDialog} from '@angular/material';
 import { RouteInfo } from 'src/app/@theme/components/navroutes/navroutes.component';
 import { IExercise } from 'src/app/@core/data/exercise.data';
@@ -113,7 +113,10 @@ export class ExerciseListComponent implements OnInit {
   
   
   openDialog() {
-    const dialogRef = this.dialog.open(DialogOption);
+    const dialogRef = this.dialog.open(DialogOption, {
+      width: '950px',
+      data: this.exerciseSelected
+    });
 
     dialogRef.afterClosed().subscribe(result => {
       console.log(`Dialog result: ${result}`);
@@ -152,7 +155,15 @@ export class ExerciseListComponent implements OnInit {
   selector: 'dialog-options',
   templateUrl: 'dialog-content-example-dialog.html',
 })
-export class DialogOption {}
+export class DialogOption {
+  constructor(
+    public dialogRef: MatDialogRef<DialogOption>,
+    @Inject(MAT_DIALOG_DATA) public data: any) {}
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}
 
 
 

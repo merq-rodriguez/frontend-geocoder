@@ -8,6 +8,7 @@ import { UserService } from 'src/app/@core/services/user.service';
 import { SnackBarService } from 'src/app/@core/services/snackbar.service';
 import { AnswerExerciseService, IAnswerCalification } from 'src/app/@core/services/answer-exercise.service';
 import { ThemathicService } from 'src/app/@core/services/themathic.service';
+import { MonacoFile } from 'ngx-monaco';
 
 export interface Option {
   id: number;
@@ -40,7 +41,7 @@ export class DetailAnswerComponent implements OnInit {
       name: "Respuesta incorrecta"
     }
   ]
-
+ code: string;
   public options_points:Option[] = [
     { id: 1,  name: "10"  },
     { id: 2,  name: "20"  },
@@ -55,6 +56,14 @@ export class DetailAnswerComponent implements OnInit {
   ]
 
   ngOnInit() {
+   this.monacoService.content$.subscribe(res => {
+     this.code = res;
+   })
+   this.monacoService.setMonacoFile({
+      uri: "index.js",
+      language: "javascript",
+      content: `${this.answer.content}`
+   }as MonacoFile)
    
   }
  
@@ -78,11 +87,14 @@ export class DetailAnswerComponent implements OnInit {
           if(!res.status){
             this.snackService.openSnackBar("Ocurrio un problema guardando la calificacion", "Aceptar");
           }else{
-            this.answer.points = this.answer.points + Number(this.selectedPoints.name)
-            this.userService.addScoreToUser(this.answer.idscore, Number(this.selectedPoints.name)).subscribe( res => {
-              console.log(res);
+            if(this.selected.id === 1){
+              this.answer.points = this.answer.points + Number(this.selectedPoints.name)
+              this.userService.addScoreToUser(this.answer.idscore, Number(this.selectedPoints.name)).subscribe( res => {
+                console.log(res);
+              })
+
+            }
               this.snackService.openSnackBar("Has guardado la calificacion", "Aceptar");
-            })
           }
         }
       })
@@ -104,7 +116,7 @@ export class DetailAnswerComponent implements OnInit {
       this.answer = JSON.parse(params["answer-exercise"])
       console.log("EN EL DETALLE RESPUESTA")
       console.log(this.answer)
-      this.monacoService.setMonacoContent("HOliiiiii")
+      
   });
   }
 
